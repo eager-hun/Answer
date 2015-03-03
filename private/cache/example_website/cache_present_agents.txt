@@ -1,0 +1,14 @@
+article_full
+article_preview
+automatic_inventory
+block
+content_level_default
+dynamic_full
+generic_full
+image_display_full
+image_display_preview
+mosaic_homepage
+page_default
+page_homepage
+plain
+static_page_full

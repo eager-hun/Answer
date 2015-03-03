@@ -1,0 +1,6 @@
+All website instances and all themes can @import things from this directory,
+if they want.
+
+The "add_import_path '../../shared_assets/sass'" line in themes' config.rb
+allows SASS to find these partials even in this directory. See 'basic' theme's
+styles.scss file for an example implementation.

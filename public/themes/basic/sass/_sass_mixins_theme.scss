@@ -1,0 +1,301 @@
+/**
+ * @file
+ * Theme-specific custom mixins.
+ *
+ * Mixins vs Extending utility-role Placeholders?
+ *
+ * Mixins won, placeholders lost so badly that they will not be used. Repetition
+ * originating from using mixins will be mitigated by gzip serving the resulting
+ * files (gzip works well on repeated patterns, they say).
+ *
+ * @see
+ * http://www.sitepoint.com/avoid-sass-extend/
+ * http://csswizardry.com/2014/11/when-to-use-extend-when-to-use-a-mixin/
+ *
+ * NOTES on basic syntax:
+ * @code
+ *
+ * @mixin test-mixin--box($bg: gold, $padding: 1em) {
+ *   background: $bg;
+ *   padding: $padding;
+ *
+ *   @if $bg == (gold) and $padding == (1em) {
+ *     border: 1px solid red;
+ *   }
+ *   @else if $bg == (gold) and $padding != (1em) {
+ *     border: 5px solid red;
+ *   }
+ *   @else {
+ *     border: 3px solid black;
+ *   }
+ * }
+ *
+ * @endcode
+ */
+
+@mixin page-title-appearance {
+  font-size: 2em;
+  font-weight: 400;
+  line-height: 1.25;
+  margin: -0.2em 0 0.67em;
+}
+
+@mixin block-title-appearance {
+  font-size: 1.3em;
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 0 0 0.5em;
+}
+
+@mixin icon($sprite: main) {
+  background-image: image-url('icon-sprite-main--prod--4.svg');
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+
+  .mdz-no-svg & {
+    background-image: image-url('icon-sprite-main--prod--4.png');
+  }
+}
+
+@mixin link-inverted {
+  &,
+  &:hover {
+    color: color(link-invert);
+    border-color: color(link-invert);
+  }
+  strong {
+    color: color(link-invert);
+  }
+}
+
+@mixin link-no-hover-border {
+  &:hover,
+  &:focus {
+    border-bottom: none;
+  }
+}
+
+@mixin box($padding: $layout-pad) {
+  @include border-radius;
+
+  background: color(blockfill);
+  padding: $padding;
+}
+
+@mixin textbox-base {
+  @include box;
+
+  margin: $layout-pad*2 0;
+  position: relative;
+
+  &:first-child {
+    margin-top: $layout-pad*0.8;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+  // A prepared icon for the textbox.
+  // NOTE: it's not enabled, as it doesn't have 'content' set.
+  // It will be enabled only where 'content' is being set additionally.
+  &:before {
+    @include icon(main);
+    @include border-radius;
+
+    height: 24px;
+    left: $layout-pad*0.85;
+    position: absolute;
+    top: $layout-pad*0.85;
+    width: 24px;
+  }
+}
+
+@mixin textbox-variant($variant: default) {
+  @if $variant == (default) {
+
+  }
+  @else if $variant == (highlight) {
+
+  }
+  @else if $variant == (hero) {
+    p,
+    li {
+      color: lighten(color(text), 10%);
+      font-size: 1.1em;
+      line-height: 1.4;
+    }
+  }
+  @else if $variant == (note) {
+    padding-left: $layout-pad*4;
+
+    &:before {
+      background-color: lighten(color(text), 10%);
+      background-position: center -40px;
+      content: ' '; // Sprite icon will be there.
+    }
+  }
+  @else if $variant == (links) {
+    padding-left: $layout-pad*4;
+
+    &:before {
+      background-color: lighten(color(text), 10%);
+      background-position: center -100px;
+      content: ' '; // Sprite icon will be there.
+    }
+  }
+  @else if $variant == (blockquote) {
+    padding-left: $layout-pad*4;
+
+    &:before {
+      background-color: lighten(color(text), 10%);
+      background-position: center -70px;
+      content: ' '; // Sprite icon will be there.
+    }
+  }
+}
+
+/**
+ * Allow buttons to have distinct shadow effects in complex situations.
+ *
+ * Complex situations arise when we want to replace CSS outline (on focus) with
+ * outer box shadows, and then, upon focus event, alongside the new
+ * focus-indicating shadows, we want to keep the original inset box shadows too
+ * that were originally part of the standard button appearance.
+ */
+@mixin button-shadows($size: normal, $color: action, $focus: false) {
+  outline: none; // We will elaborate our own focus indication right below.
+
+  // Box shadow syntax: $color $hoff $voff $blur $spread $inset
+
+  @if $size == (small) or $size == (normal) {
+    @if $focus == (false) {
+      @include box-shadow(
+        rgba(white, 0.3) 0 3px 9px 1px inset,
+        rgba(50, 35, 60, 0.3) 0 -3px 9px 0px inset
+      );
+    }
+    @else {
+      @include box-shadow(
+        white 0 0 1px 1px,
+        color($color) 0 0 5px 2px,
+        rgba(white, 0.3) 0 4px 9px 0px inset,
+        rgba(50, 35, 60, 0.3) 0 -3px 9px 0px inset
+      );
+    }
+  }
+  @else if $size == (big) {
+    @if $focus == (false) {
+      @include box-shadow(
+        rgba(white, 0.3) 0 4px 12px 0px inset,
+        rgba(50, 35, 60, 0.3) 0 -3px 12px 0px inset
+      );
+    }
+    @else {
+      @include box-shadow(
+        white 0 0 1px 1px,
+        color($color) 0 0 5px 2px,
+        rgba(white, 0.3) 0 3px 12px 1px inset,
+        rgba(50, 35, 60, 0.3) 0 -3px 12px 0px inset
+      );
+    }
+  }
+}
+
+@mixin button($size: normal, $color: action) {
+  @include box-sizing(border-box);
+  @include transition-property(background-color);
+  @include transition-duration($transitspeed-fast);
+  @include link-no-hover-border;
+
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1em;
+  font-style: normal;
+  max-width: 100%;
+  overflow: visible;
+  text-align: center;
+  text-decoration: none;
+
+  // Sizes.
+  @if $size == (small) {
+    @include border-radius($default-border-radius*0.75);
+
+    font-size: 0.9em;
+    height: auto;
+    line-height: 1.25;
+    padding: $layout-pad*0.25 $layout-pad*0.5;
+  }
+  @else if $size == (normal) {
+    @include border-radius;
+
+    height: auto;
+    line-height: 1.25;
+    padding: $layout-pad*0.25 $layout-pad;
+  }
+  @else if $size == (big) {
+    @include border-radius;
+
+    height: auto;
+    line-height: 1.25;
+    padding: $layout-pad*0.5 $layout-pad*1.5;
+  }
+
+  // Theme variants.
+  @if $color == (action) or $color == (nav) {
+    @include button-shadows($size, $color, $focus: false);
+
+    background-color: color($color);
+    text-shadow: $default-text-shadow;
+
+    &,
+    &:visited,
+    &:hover {
+      color: color(text-invert);
+    }
+    &:hover {
+      background-color: darken(color($color), 5%);
+    }
+    &:focus {
+      @include button-shadows($size, $color, $focus: true);
+
+      border: none;
+    }
+  }
+  @else if $color == (plain-light) {
+    background-color: lighten(color(blockfill), 3%);
+    font-weight: 700;
+    text-shadow: 0 1px 1px white;
+
+    &,
+    &:visited {
+      color: darken(color(minor), 10%);
+    }
+    &:hover,
+    &:visited:hover,
+    &:focus {
+      background-color: color(nav);
+      border: none;
+      color: color(blockfill);
+      outline: none;
+      text-shadow: 0 1px 1px darken(color(shadow), 15%);
+    }
+  }
+}
+
+@mixin call-to-action() {
+
+}
+
+@mixin image-border() {
+  @include border-radius;
+
+  border: 1px solid color(border-light);
+  padding: $layout-pad*0.25;
+}
+
+@mixin image-fit() {
+  display: inline-block;
+  line-height: 1;
+  margin: 0;
+  vertical-align: text-bottom;
+}
+

@@ -1,0 +1,19 @@
+{
+  "name": "Answer-project-frontend-dependencies",
+  "version": "0.0.0",
+  "description": "Frontend packages for this app.",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~1.11.1",
+    "normalize.css": "~3.0.2",
+    "html5shiv": "~3.7.1",
+    "respond-minmax": "~1.4.2"
+  }
+}

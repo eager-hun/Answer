@@ -1,0 +1,35 @@
+/**
+ * @file
+ * Very simplistic output style.
+ *
+ * Being used for presenting deprecated content and maintenance messages.
+ */
+
+@import "sass_base";
+@import "sass_mixins_shared";
+@import "sys_notification_styles_shared";
+
+body {
+  color: #333;
+  font-family: sans-serif;
+  line-height: 1.5;
+  margin: 2em auto;
+  max-width: 800px;
+  padding: 0.5em;
+}
+h1 {
+  font-weight: normal;
+}
+.field__label {
+  font-weight: bold;
+  margin: 1em 0;
+}
+
+// -----------------------------------------------------------------------------
+// Growing screens.
+@include breakpoint($bkp-multi-min) {
+  .page-content {
+    border: 1px solid silver;
+    padding: 1em;
+  }
+}

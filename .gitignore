@@ -1,0 +1,45 @@
+# IDE
+nbproject
+
+# PHP libs handled by Composer.
+composer.lock
+/private/libraries_backend/*
+!/private/libraries_backend/README
+
+# Frontend libs handled by Bower.
+/public/libraries_frontend/*
+!/public/libraries_frontend/README
+
+# Ruby gems handled by Bundler.
+/public/themes/*/Gemfile.lock
+/public/themes/*/.bundle
+/public/themes/*/vendor/*
+!/public/themes/*/vendor/README
+
+# XML sitemaps.
+/sitemap_*.xml
+
+# Site instances other than the example_website instance.
+/private/cache/*
+!/private/cache/example_website
+/private/config/*
+!/private/config/example_website
+/private/definitions/*
+!/private/definitions/example_website
+/private/permanent_storage/*
+!/private/permanent_storage/example_website
+
+# SASS- and CSS-related.
+/public/themes/*/.sass-cache
+*.css.map
+
+# I don't know if I may include a generated modernizr.js instance, so I don't.
+# I'll put the custom-build's download link in the theme_settings.php where I declare it.
+/public/document_public_assets/modernizr.custom.25804.js
+
+# Content-related
+# (It's possible you wouldn't want to version-control large media-file blobs.)
+# (They are not ignored this time, for they are being needed in this demo.)
+# /public/document_files/*
+# !/public/document_files/.htaccess
+# !/public/document_files/README

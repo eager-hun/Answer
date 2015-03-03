@@ -1,0 +1,36 @@
+/**
+ * @file
+ * 'Master' stylesheet.
+ *
+ * Used for stitching the partials together.
+ */
+
+// NOTE: the files prefixed with 'shared' get included from the
+// public/shared_assets directory. Those files can be included in any of the
+// installed themes, so they should be handled with awareness of this fact.
+
+@import "sass_base";
+@import "sass_mixins_shared";
+@import "sass_mixins_theme";
+
+// normalize.css is being included via 'sass-css-importer' plugin.
+// (It originally resides in '../../../libraries_frontend/'.)
+// Gains are:
+// 1. We don't have to modify the workflow in any ways for this. Bower
+//    downloads the normalize.css package into the libraries_frontend dir, and
+//    straight away, it can get hooked up into our 'master' stylesheet.
+// 2. Thus, normalize's rules can be sent over in the request for styles.css
+// 3. It will get 'uglified' along with the rest of the styles when we set
+//    output_style = :compressed in config.rb.
+
+// @import "CSS:normalize"; // In the public repo, I link this .css separately.
+
+@import "sys_notification_styles_shared";
+@import "SMACCS_base";
+@import "SMACCS_layouts";
+@import "SMACCS_modules";
+@import "styles_page_things";
+@import "SMACCS_theme";
+@import "styles_specific_pages";
+@import "SMACCS_states";
+@import "shame";

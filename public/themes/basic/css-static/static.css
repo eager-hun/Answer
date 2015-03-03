@@ -1,0 +1,10 @@
+/**
+ * @file
+ * Compiler-free barefoot CSS.
+ */
+
+h1 {
+  /* So that we can see if it works. */
+  color: orange;
+  font-style: italic;
+}

@@ -1,0 +1,181 @@
+/**
+ * @file
+ * Rules for _reusable_ modules.
+ *
+ * NOTE to self: If it's not reusable at various places, then it should go
+ * elsewhere.
+ */
+
+
+// #############################################################################
+// Language switchers.
+
+.langswitch {
+  @include bare-list;
+
+  ul {
+    @include bare-list;
+  }
+  li {
+    display: inline-block;
+  }
+  li + li {
+    margin-left: $layout-pad*1.5;
+  }
+}
+.locale {
+  .flag {
+    display: inline-block;
+    height: 20px;
+    position: relative;
+    top: -0.05em;
+    vertical-align: middle;
+    width: 30px;
+
+    .langswitch--page & {
+      margin-right: $layout-pad / 2;
+    }
+  }
+}
+
+
+// #############################################################################
+// In-text features.
+
+.textbox,
+blockquote {
+  @include textbox-base;
+}
+.textbox--hero {
+  @include textbox-variant(hero);
+}
+.textbox--highlight {
+  @include textbox-variant(highlight);
+}
+.textbox--note {
+  @include textbox-variant(note);
+}
+.textbox--links {
+  @include textbox-variant(links);
+}
+blockquote {
+  @include textbox-variant(blockquote);
+}
+
+// Defintions-list-y style for Markdown-authored material.
+// 1. Default Markdown implementations don't handle <dl>'s at all.
+//    1a. I only want to use a default Markdown implementation, because to me,
+//        that's whose remaining maintained seems to be the most likely.
+// 2. I like <dl>'s a lot.
+// 3. I don't want to give up Markdown's help within manually declared <dl>
+//    items.
+// 4. So I came up with wrapping a regular (Markdown-supported) <ul> into a div
+//    that has a '.defs' class.
+//    4a. Yes, default Markdown implementations don't do much inside divs
+//        either.
+//    4b. That's why I use custom ==DEFS== and ==/DEFS== strings in the text
+//        that I preg_replace into the div.defs after parsing with Markdown.
+
+.defs {
+  // Making it look more definitions-list-y.
+  & > ul {
+    @include bare-list;
+
+    & > li {
+      & > p,
+      & > div {
+        margin-left: 1em;
+      }
+      // :first-of-type could have been favoured, but ie8.
+      & > p:first-child {
+        margin: 1em 0 0.5em;
+        padding: 0.25em 0;
+      }
+    }
+    ul {
+      list-style-type: disc;
+      padding-left: $layout-pad*2;
+
+      ul {
+        list-style-type: circle;
+        padding-left: $layout-pad*1.5;
+
+        ul {
+          list-style-type: square;
+        }
+      }
+    }
+  }
+}
+
+
+// #############################################################################
+// Flexilists.
+
+.fl-item + .fl-item {
+  margin-top: $layout-pad*1.25;
+}
+
+.fl--style-plain {
+  .field--field_title {
+    font-size: 1.4em;
+  }
+  .field--field_preview_text {
+    margin-top: $layout-pad*0.25;
+    padding-left: $layout-pad;
+
+    .field__content {
+      font-size: 0.9em;
+    }
+    p,
+    ul {
+      margin: 0 0 0.5em;
+    }
+    p:last-child,
+    ul:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+@include breakpoint($bkp-multi-min) {
+  .fl--style-plain .field--field_preview_text {
+    padding-left: 1.5em;
+  }
+}
+
+.fl--style-images-large {
+  .fl-item + .fl-item {
+    margin-top: $layout-pad*2.5;
+  }
+}
+
+// #############################################################################
+// Overlays and modals.
+
+[id="overlay--common"],
+[id="modal--common"] {
+  @include transition-property(opacity);
+  @include transition-duration($transitspeed-mid);
+
+  display: none;
+  opacity: 0;
+}
+[id="overlay--common"] {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+[id="modal--common"] {
+  left: 0;
+  height: 0;
+  overflow: visible;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 2000;
+}

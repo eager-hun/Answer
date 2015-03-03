@@ -1,0 +1,23 @@
+/**
+ * @file
+ * Quickfixes.
+ *
+ * @see
+ * http://csswizardry.com/2013/04/shame-css/
+ */
+
+// -----------------------------------------------------------------------------
+// .primary-content.entity has got a top padding that is used to provide some
+// gap when we jump there by its anchor (via the primary-content jump-link).
+// This top padding kills the collapsing of top/bottom margins, and there is too
+// big a whitespace present if the first child has a top margin.
+
+// Also, these additional wrappers should be stripped by templating options.
+
+.primary-content.entity .field--field_body .field__content {
+  & > h1:first-child,
+  & > h2:first-child,
+  & > h3:first-child {
+    margin-top: 0;
+  }
+}

@@ -1,0 +1,9 @@
+## NOTES:
+
+- "The most maintainable code is that hasn't been written."
+- "Tiny Bootstraps" from Dave Rupert:
+  http://daverupert.com/2013/04/responsive-deliverables/
+  Interpret it as _not_ a Twitter Bootstrap framework instance, but as a custom
+  set of rules that are custom-picked and developed for the current client/
+  website and work together as smart as Twitter Bootstrap does - except for for
+  the fraction of the code volume/complexity.

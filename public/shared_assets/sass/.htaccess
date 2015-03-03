@@ -1,0 +1,4 @@
+# .sass files are meant to be included and compiled by themes, their results
+# being available via themes' .css files. No-one will need to request these
+# .scss files in here.
+deny from all

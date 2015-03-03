@@ -1,0 +1,10 @@
+All website instances and all themes can link up things from this directory,
+if they want.
+
+I am not being very advanced with this one:
+- I don't want to install Sass/Compass globally.
+- I don't want to get into Grunt/Gulp on this project (I don't know them).
+- So I generate the .css files in a theme where I have Bundlerized Sass/Compass
+  set up, and then copy them over here manually. Until I find out if
+  Sass/Compass can be configured to put them here, or till I write a shell
+  script to do it...

@@ -1,0 +1,154 @@
+/**
+ * @file
+ * Custom mixins.
+ *
+ * Mixins vs Extending utility-role Placeholders?
+ *
+ * Mixins won, placeholders lost so badly that they will not be used. Repetition
+ * originating from using mixins will be mitigated by gzip serving the resulting
+ * files (gzip works well on repeated patterns, they say).
+ *
+ * @see
+ * http://www.sitepoint.com/avoid-sass-extend/
+ * http://csswizardry.com/2014/11/when-to-use-extend-when-to-use-a-mixin/
+ *
+ * Reminder on basic syntax:
+ * @code
+ *
+ * @mixin test-mixin--box($bg: gold, $padding: 1em) {
+ *   background: $bg;
+ *   padding: $padding;
+ *
+ *   @if $bg == (gold) and $padding == (1em) {
+ *     border: 1px solid red;
+ *   }
+ *   @else if $bg == (gold) and $padding != (1em) {
+ *     border: 5px solid red;
+ *   }
+ *   @else {
+ *     border: 3px solid black;
+ *   }
+ * }
+ *
+ * @endcode
+ */
+
+@mixin hidden {
+  // Hiding texts visually, but enabling screen readers to read them.
+  // See http://webaim.org/techniques/css/invisiblecontent/ .
+  height: 1px;
+  left: -9000em;
+  top: auto;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+}
+
+
+// #############################################################################
+// LAYOUT-RELATED.
+
+@mixin n-clearfix {
+  // 'n' stands for the name of the author, @necolas.
+  // See http://nicolasgallagher.com/micro-clearfix-hack/ .
+  &:before,
+  &:after {
+    content: ' ';
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+  // WARNING: This rule interferes with :before and :after pseudo-elements.
+  //          Take that into account when applying this anywhere.
+  // NOTE: The default Compass 'clearfix' mixin operates with overflow: hidden;
+  //       You can consider using that one where this pseudo-element hack is
+  //       interfering with your other interests.
+}
+
+
+// #############################################################################
+// TYPOGRAPHY-RELATED.
+
+// Sub- and superscripts.
+// See: http://stackoverflow.com/questions/501671/superscript-in-css-only
+// See: https://gist.github.com/unruthless/413930
+
+@mixin sub($implementation: standard) {
+  @if $implementation == (standard) {
+    font-size: 0.75em;
+    vertical-align: sub;
+  }
+  @else if $implementation == (something-else) {
+    // TODO.
+  }
+}
+
+@mixin sup($implementation: standard) {
+  @if $implementation == (standard) {
+    font-size: 0.75em;
+    vertical-align: super;
+  }
+  @else if $implementation == (something-else) {
+    // TODO.
+  }
+}
+
+
+// #############################################################################
+// RESETS.
+
+@mixin bare-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+@mixin strip-button {
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+// #############################################################################
+// BROWSER QUIRKS.
+
+// Fighting excessive font-oversizing of layout-critical elements in some
+// Android browser builds.
+// See https://bugs.webkit.org/show_bug.cgi?id=FontBoosting .
+@mixin disable-font-boost {
+  max-height: 1000000px
+}
+
+@mixin transition-color {
+  @include transition-property(
+    color,
+    background-color,
+    border-color,
+    background-image
+  );
+  @include transition-duration(
+    $transitspeed-fast,
+    $transitspeed-fast,
+    $transitspeed-fast,
+    $transitspeed-fast
+  );
+}
+
+
+// #############################################################################
+// DEBUG UTILS.
+
+// See http://www.sitepoint.com/debugging-sass-maps/ .
+@mixin debug-map($map) {
+  @at-root {
+    __properties__ {
+      @each $key, $value in $map {
+        #{$key}: inspect($value);
+      }
+    }
+  }
+}

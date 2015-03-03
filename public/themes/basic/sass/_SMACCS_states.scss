@@ -1,0 +1,113 @@
+/**
+ * @file
+ * SMACCS states.
+ */
+
+
+// #############################################################################
+// Jump-links and other focus-helpers focusing on custom targets.
+
+#navigation:focus,
+.primary-content:focus,
+#modal--common:focus
+{
+  outline: none;
+}
+
+
+// #############################################################################
+// Operation of mobile-menu-triggers and language switchers.
+
+[class*="header_widgets"] .langswitch {
+  display: none;
+}
+
+@include breakpoint($bkp-multi-min) {
+  [class*="header_widgets"] .langswitch {
+    display: block;
+  }
+  [class*="header_widgets"] .menu-button,
+  [class*="main-menu"] .langswitch {
+    display: none;
+  }
+}
+
+.menu-button {
+  [data-modal-show="true"] & {
+    opacity: 0;
+  }
+}
+.menu-button.fixed {
+  [data-scrolled-in="true"] & {
+    right: $layout-pad;
+    opacity: 1;
+  }
+  [data-modal-show="true"] & {
+
+    opacity: 0;
+  }
+}
+
+// #############################################################################
+// Mobile-menu vs. desktop-menu.
+
+.has-js [id="navigation"] {
+  display: none;
+}
+
+@include breakpoint($bkp-multi-min) {
+  .has-js [id="navigation"] {
+    display: block;
+  }
+  .overlay--nav,
+  .modal--nav {
+    display: none !important;
+  }
+}
+
+
+// #############################################################################
+// Operation of overlays and modals.
+
+[data-modal-init="true"] {
+  [id="overlay--common"],
+  [id="modal--common"] {
+    display: block;
+  }
+}
+[data-modal-show="true"] {
+  [id="overlay--common"],
+  [id="modal--common"] {
+    opacity: 1;
+  }
+}
+[data-modal-init="false"] {
+  [id="overlay--common"],
+  [id="modal--common"] {
+    display: none;
+  }
+}
+[data-modal-show="false"] {
+  [id="overlay--common"],
+  [id="modal--common"] {
+    opacity: 0;
+  }
+}
+[id="overlay--common"],
+[id="modal--common"] {
+  cursor: pointer;
+}
+[id="modal__content"] {
+  cursor: default;
+}
+
+// Throbber.
+[id="throbber--modal"][data-on="true"] {
+  opacity: 1;
+}
+[id="throbber--modal"][data-on="false"] {
+  opacity: 0;
+}
+[data-modal-init="false"] [id="throbber--modal"] {
+  display: none;
+}

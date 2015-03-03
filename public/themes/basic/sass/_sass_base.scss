@@ -1,0 +1,170 @@
+/**
+ * @file
+ * Definitions of variables + further Compass setup.
+ *
+ * On configuring Compass:
+ * @see
+ * http://compass-style.org/help/documentation/configuration-reference/
+ * http://compass-style.org/help/documentation/sass-based-configuration-options/
+ * http://compass-style.org/index/variables/
+ *
+ * On using Compass:
+ * @see
+ * http://compass-style.org/reference/compass/
+ * http://compass-style.org/index/mixins/
+ * http://compass-style.org/index/functions/
+ *
+ * On rgba() colors:
+ * @see
+ * http://thesassway.com/intermediate/mixins-for-semi-transparent-colors
+ *
+ *
+ * On further plugins:
+ * @see
+ * http://snugug.com/musings/introducing-breakpoint-media-queries-made-easy
+ * https://github.com/codingdesigner/breakpoint/blob/master/README.markdown
+ * https://github.com/at-import/breakpoint/wiki/Advanced-Media-Queries
+ *
+ * https://github.com/at-import/Singularity
+ *
+ * On everything:
+ * @see
+ * http://caniuse.com/
+ * http://mcdlr.com/8/ ('Useful UTF-8 Characters')
+ */
+
+// #############################################################################
+// Compass setup.
+
+// Compass modules.
+@import "compass/utilities";
+@import "compass/support";
+@import "compass/css3";
+@import "compass/layout";
+@import "breakpoint";
+@import "singularitygs";
+
+$debug-configuration: true; // I don't know what it does.
+
+
+// #############################################################################
+// Theme variables.
+
+// -----------------------------------------------------------------------------
+// Layout variables.
+
+$layout-page-min-width:     300px;
+$layout-page-max-width:    1100px;
+$layout-pad:                  1em;
+
+// Breakpoints.
+$breakpoint-to-ems: true;
+// $breakpoint-force-media-all: true;
+
+/* LEGEND for the breakpoint variables:
+| <- $layout-page-min-width                          $layout-page-max-width -> |
+|                                                                              |
+|            <- monocol ->              |            <- multicol ->            |
+|                                       |                                      |
+|  monocol   |  monocol   |  monocol    |  multicol  |  multicol  |  multicol  |
+|  lowthird  |  midthird  |  highthird  |  lowthird  |  midthird  |  highthird |
+| (mono-lt)  | (mono-mt)  | (mono-ht)   | (multi-lt) | (multi-mt) | (multi-ht) |
+*/
+
+$bkp-mono-lt-max:           419px;
+$bkp-mono-mt-min:           420px;
+$bkp-mono-mt-max:           579px;
+$bkp-mono-ht-min:           580px;
+
+$bkp-mono-max:              699px;
+$bkp-multi-min:             700px;
+
+$bkp-multi-lt-max:          859px;
+$bkp-multi-mt-min:          860px;
+$bkp-multi-mt-max:          919px;
+$bkp-multi-ht-min:          920px;
+
+$bkp-multi-ht-max: $layout-page-max-width - 1;
+// For above highthird max, you can use 'min-width: $layout-page-max-width';
+
+// -----------------------------------------------------------------------------
+// Typography.
+
+$default-font-size:          16px;
+$default-line-height:       1.5;
+
+$font-sans-1:  Arial, Helvetica, sans-serif;
+$font-serif-1: Georgia, "Times New Roman", serif;
+$font-mono-1:  "Courier New", monospace, sans-serif;
+
+// -----------------------------------------------------------------------------
+// Colors.
+
+// @see
+// http://html-color-codes.info/color-names/
+// https://color.adobe.com/create/color-wheel/
+// http://erskinedesign.com/blog/friendlier-colour-names-sass-maps/
+// http://webdesign.tutsplus.com/tutorials/all-you-ever-need-to-know-about-sass-interpolation--cms-21375
+
+// NOTE: Temp-colors are just a helper stage to set up the base colors in the
+// color-map below.
+
+// Palette 1.
+$temp-color-prim:        desaturate(lighten(navy, 25%), 70%);
+$temp-color-accent-1:    desaturate(magenta, 60%);
+$temp-color-accent-2:    desaturate(darken(cyan, 10%), 35%);
+$temp-color-blockfill:   #eee;
+$temp-color-border-base: #888;
+
+
+// Color map.
+// In the stylesheets, use only this map to refer to colors. It's awesome power.
+// In SASS, only with this one can you have 'variable variable names'.
+// NOTE: there is a debug-map() function in the _shared_sass_mixins.scss file.
+$colors: (
+  prim:                   $temp-color-prim,
+  accent-1:               $temp-color-accent-1,
+  accent-2:               $temp-color-accent-2,
+  nav:                    $temp-color-prim,
+  action:                 $temp-color-accent-1,
+  help:                   $temp-color-accent-2,
+  text:                   #333,
+  text-invert:            white,
+  bg:                     $temp-color-blockfill,
+  bg-sec:                 #333,
+  blockfill:              $temp-color-blockfill,
+  link:                   saturate($temp-color-prim, 15%),
+  link-hover:             saturate(darken($temp-color-prim, 10%), 15%),
+  link-invert:            desaturate(lighten($temp-color-accent-1, 40%), 20%),
+  border-mid:             $temp-color-border-base,
+  border-light:           #ccc,
+  border-dark:            darken($temp-color-border-base, 20%),
+  minor:                  #777,
+  shadow:                 rgba(50, 35, 60, 0.5)
+);
+
+// Color retriever function. Usage example:
+// .foo { background: color(bar); }
+@function color($key) {
+  @return map-get($colors, $key);
+}
+
+
+// -----------------------------------------------------------------------------
+// CSS effects defaults.
+
+// Box shadow syntax: $color $hoff $voff $blur $spread $inset.
+// NOTE: em units in shadows would result in inconsistent instances in Firefox.
+$default-box-shadow-color:     color(shadow);
+$default-box-shadow-h-offset:  0;
+$default-box-shadow-v-offset:  1px;
+$default-box-shadow-blur:      4px;
+$default-box-shadow-spread:    0;
+
+$default-border-radius:        3px;
+
+$default-text-shadow:          0 1px 4px darken(color(shadow), 15%);
+
+$transitspeed-fast:            0.1s;
+$transitspeed-mid:             0.4s;
+$transitspeed-slow:            0.7s;

@@ -1,0 +1,61 @@
+/**
+ * Sys notification styles.
+ */
+
+// TODO: this should be tidied up a bit.
+
+/* Messages layout. */
+.messages-container {
+  color: #333;
+}
+.messages {
+  padding: 0.5em;
+}
+.messages + .messages {
+  margin-top: 0.5em;
+}
+.messages-container ul {
+  margin: 0;
+  padding: 0 0 0 2em;
+}
+.messages pre {
+  margin-bottom: 2em;
+  overflow: visible;
+}
+.messages li:last-child pre {
+  margin-bottom: 1em;
+}
+
+/* Messages colors. */
+.messages-container .info {
+  background: #afa;
+  border: 1px solid green;
+}
+.messages-container .info a,
+.messages-container .info a:hover {
+  color: #090;
+}
+.messages-container .warning {
+  background: #ffa;
+  border: 1px solid orange;
+}
+.messages-container .warning a,
+.messages-container .warning a:hover {
+  color: #c80;
+}
+.messages-container .alert {
+  background: pink;
+  border: 1px solid red;
+}
+.messages-container .alert a,
+.messages-container .alert a:hover {
+  color: #b00;
+}
+.messages-container .debug {
+  background: #E7F1F5;
+  border: 1px solid cornflowerblue;
+}
+.messages-container .debug a,
+.messages-container .debug a:hover {
+  color: dodgerblue;
+}

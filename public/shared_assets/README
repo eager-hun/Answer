@@ -1,0 +1,6 @@
+I wanted to set up a config.rb for SASS/Compass here, then do compiling here
+too.
+
+But then I realized that I don't have SASS/Compass installed globally, and I
+neither want countless copies of Bundlerized SASS/Compass all over this project,
+so I gave that up, as for now.

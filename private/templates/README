@@ -1,0 +1,8 @@
+
+The system should have a basic set of templates here. You, however, can have
+your own set of templates in your theme.
+
+When creating a new theme, the recommended process is to copy this `templates`
+directory into your theme, then set the corresponding setting in config.php to
+signal for the app to use the instance located in the theme, then you can
+customize the theme-based `templates` instance.

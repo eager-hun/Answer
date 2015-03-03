@@ -1,0 +1,5 @@
+# It is possible to smuggle in php scripts disguised as images. We don't want
+# them to be executed.
+<IfModule mod_php5.c>
+  php_flag engine off
+</IfModule>

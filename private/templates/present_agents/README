@@ -1,0 +1,3 @@
+Present agents always deliver on their job as making adjustments to the
+templateutils_present()'s arguments, so that it can call the
+templateutils_templatize() with correctly prepared arguments.

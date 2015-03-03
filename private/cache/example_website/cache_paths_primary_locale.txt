@@ -1,0 +1,15 @@
+articles/:articles-all
+articles/article-one-path:article-1
+articles/article-two-path:article-2
+images/:images-all
+images/1:test-image-1
+images/2:test-image-2
+articles/article-three-path:deprecated-article-3
+articles:301-articles
+images:301-images
+example-gone-contents-path:gone-example
+operating-manual:operating-manual
+article-ideas:article-ideas
+site-structure-planning:site-structure-planning
+devel/blank-sheet:devel-blank-sheet
+for-example-this:admin-interface

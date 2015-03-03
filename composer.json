@@ -1,0 +1,9 @@
+{
+  "config": {
+    "vendor-dir": "private/libraries_backend/"
+  },
+  "require": {
+    "ezyang/htmlpurifier": "4.6.0",
+    "michelf/php-markdown": "1.4.1"
+  }
+}
