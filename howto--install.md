@@ -1,18 +1,18 @@
 # Howto: install
 
-## Dependencies and tools
 
-- **Required dependencies:**
+## System prerequisites
+
+- **Required prerequisite:**
   - [Apache webserver with php module][amp]
-  - [Htmlpurifier php library][pure]
-  - [Markdown php library][michelf]
-- **Recommended tools:**
-  - [Composer][composer]
-  - [Node.js][nodejs]
-      - [Bower][bower]
-- **Optional tools:**
-  - [Ruby][ruby]
-      - [Bundler][bundler]
+- **Recommended prerequisites:**
+  - [Composer package manager][composer] (for php libraries)
+  - [Node.js runtime environment][nodejs]
+      - [Bower package manager][bower] (for frontend libraries)
+- **Optional prerequisites:**
+  - [Ruby execution environment][ruby]
+      - [Bundler package manager][bundler] (for Ruby gems)
+
 
 ## Installation process
 
@@ -63,8 +63,6 @@ instruction, and guaranteeing your system's safety is out of its scope.
 
 
 [amp]: https://www.apachefriends.org/
-[pure]: http://htmlpurifier.org/
-[michelf]: https://michelf.ca/projects/php-markdown/
 [composer]: https://getcomposer.org/
 [nodejs]: http://nodejs.org/
 [bower]: http://bower.io/
