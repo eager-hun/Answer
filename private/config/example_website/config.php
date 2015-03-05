@@ -7,18 +7,24 @@
  */
 
 // #############################################################################
-// Presets.
+// Config Presets.
 
+// NOTE: you can get multiple domain names (alternative HTTP_HOSTs) by setting
+// up multiple virtual hosts to point to the directory of this installation.
+
+// Dev site presets.
 $config['presets']['dev'] = [
   'http_protocol'    => 'http',
   'domain' => [
-    'primary'   => 'delta',
-    'secondary' => 'delta-alt',
+    'primary'   => 'your-dev-envs-HTTP_HOST-here',
+    'secondary' => 'your-dev-envs-alternative-HTTP_HOST-here',
   ],
   'serve_bare_data'  => 1, // 0 || 1 .
   'dev_mode'         => 1, // 0 || 1 || 'verbose' .
   'admin_mode'       => 1, // 0 || 1 .
 ];
+
+// Stage site presets.
 $config['presets']['stage'] = [
   'http_protocol'    => 'http',
   'domain' => [
@@ -29,6 +35,8 @@ $config['presets']['stage'] = [
   'dev_mode'         => 0,
   'admin_mode'       => 0,
 ];
+
+// Live site presets.
 $config['presets']['live'] = [
   'http_protocol'    => 'http',
   'domain' => [
@@ -75,7 +83,7 @@ $config['document']['global_lastmod'] = '2015-03-01'; // (format: YYYY-MM-DD)
 
 
 // #############################################################################
-// App config.
+// Dependencies.
 
 // -----------------------------------------------------------------------------
 // Dependencies: external php libraries.
@@ -108,7 +116,10 @@ $config['app']['dependencies']['php-markdown'] =
 // $config['app']['suppress_warnings'][] = 'dependency_htmlpurifier';
 // $config['app']['suppress_warnings'][] = 'dependency_php-markdown';
 
-// -----------------------------------------------------------------------------
+
+// #############################################################################
+// Further app config.
+
 // Reserved/watched paths.
 
 // Admin path: choose a path for your admin interface.

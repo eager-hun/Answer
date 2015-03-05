@@ -4,17 +4,17 @@ nbproject
 # PHP libs handled by Composer.
 composer.lock
 /private/libraries_backend/*
-!/private/libraries_backend/README
+!/private/libraries_backend/README.md
 
 # Frontend libs handled by Bower.
 /public/libraries_frontend/*
-!/public/libraries_frontend/README
+!/public/libraries_frontend/README.md
 
 # Ruby gems handled by Bundler.
 /public/themes/*/Gemfile.lock
 /public/themes/*/.bundle
 /public/themes/*/vendor/*
-!/public/themes/*/vendor/README
+!/public/themes/*/vendor/README.md
 
 # XML sitemaps.
 /sitemap_*.xml
