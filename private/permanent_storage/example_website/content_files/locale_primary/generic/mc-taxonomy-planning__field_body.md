@@ -1,11 +1,4 @@
 
-## Sections planning
-
-Uninitiated.
-
-
-## Taxonomy planning
-
 <!--DEFS-->
 
 - Vocabulary: Vocabulary-one
@@ -19,13 +12,3 @@ Uninitiated.
       - term 3
 
 <!--/DEFS-->
-
-
-## URL path patterns planning
-
-Uninitiated.
-
-
-## Contexts planning
-
-Uninitiated.

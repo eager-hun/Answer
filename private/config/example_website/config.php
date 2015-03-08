@@ -79,7 +79,7 @@ $config['document']['locale']['secondary']['php_locale'] = 'hu-HU.utf8';
 // giving the visitor a hint on the 'abandonedness' of the website. IMO,
 // abandoned websites with outdated content can cause real inconvenience for
 // people in a number of situations.)
-$config['document']['global_lastmod'] = '2015-03-01'; // (format: YYYY-MM-DD)
+$config['document']['global_lastmod'] = '2015-03-08'; // (format: YYYY-MM-DD)
 
 
 // #############################################################################

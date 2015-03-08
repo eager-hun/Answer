@@ -47,7 +47,7 @@ $generic['operating-manual'] = [
 ];
 
 // -----------------------------------------------------------------------------
-$generic['article-ideas'] = [
+$generic['mc-article-ideas'] = [
   'meta' => [
     'is_published' => 0,
     'text_formats' => [
@@ -66,7 +66,7 @@ $generic['article-ideas'] = [
 ];
 
 // -----------------------------------------------------------------------------
-$generic['site-structure-planning'] = [
+$generic['mc-outline-planning'] = [
   'meta' => [
     'is_published' => 0,
     'text_formats' => [
@@ -76,7 +76,26 @@ $generic['site-structure-planning'] = [
   ],
   'data' => [
     'field_title' => [
-      'locale_primary'   => 'Site structure planning',
+      'locale_primary'   => 'Site outline planning',
+    ],
+    'field_body' => [
+      'locale_primary'   => '[[external-file]]',
+    ],
+  ],
+];
+
+// -----------------------------------------------------------------------------
+$generic['mc-taxonomy-planning'] = [
+  'meta' => [
+    'is_published' => 0,
+    'text_formats' => [
+      'field_title'      => 'html',
+      'field_body'       => 'md',
+    ],
+  ],
+  'data' => [
+    'field_title' => [
+      'locale_primary'   => 'Taxonomy planning',
     ],
     'field_body' => [
       'locale_primary'   => '[[external-file]]',

@@ -116,7 +116,7 @@ $menus['mission_control_menu'] = array(
       'depth'  => 1,
       'parent' => FALSE,
       'type'   => 'link',
-      'path'   => 'operating-manual',
+      'path'   => 'mission-control/operating-manual',
       'text'   => 'Operating manual',
     ),
     'admin-interface' => array(
@@ -129,15 +129,28 @@ $menus['mission_control_menu'] = array(
     'site-structure-planning' => array(
       'depth'  => 1,
       'parent' => FALSE,
-      'type'   => 'link',
-      'path'   => 'site-structure-planning',
+      'type'   => 'static',
       'text'   => 'Site structure planning',
     ),
-    'article-ideas' => array(
+        'mc-outline-planning' => array(
+          'depth'  => 2,
+          'parent' => 'site-structure-planning',
+          'type'   => 'link',
+          'path'   => 'mission-control/site-outline-planning',
+          'text'   => 'Site outline planning',
+        ),
+        'mc-taxonomy-planning' => array(
+          'depth'  => 2,
+          'parent' => 'site-structure-planning',
+          'type'   => 'link',
+          'path'   => 'mission-control/taxonomy-planning',
+          'text'   => 'Taxonomy planning',
+        ),
+    'mc-article-ideas' => array(
       'depth'  => 1,
       'parent' => FALSE,
       'type'   => 'link',
-      'path'   => 'article-ideas',
+      'path'   => 'mission-control/article-ideas',
       'text'   => 'Article ideas',
     ),
   ),

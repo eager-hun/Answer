@@ -28,6 +28,7 @@ composer.lock
 !/private/definitions/example_website
 /private/permanent_storage/*
 !/private/permanent_storage/example_website
+!/private/permanent_storage/README.md
 
 # SASS- and CSS-related.
 /public/themes/*/.sass-cache

@@ -1,28 +1,50 @@
 
-## Steps for initial deploy onto public server over FTP
+<!--HIGH-->
 
-1. place the unpacked installation into the _staging_ directory on server,
-2. check `director.php`:
-  - check the `@ingroup configuration` section,
-3. edit `config.php`:
-  - review your config presets,
-  - define 'staging' as `CONFIG_PRESET`,
-  - look at everything else,
-      - e.g. where do you want to serve jQuery from,
-4. make sure that the **admin data handler is inaccessible** to the script
-   (delete or rename its directory),
-5. manually test the staging site,
-6. edit again `config.php`, now setting `CONFIG_PRESET` to 'live'.
-7. swap `index.php` with `503_index.php`,
-  - check if the maintenance message is getting served,
-8. empty the live site's directory
-9. copy over the now-serving-503 `index.php`,
-  - optionally check the live site for the maintenance message,
-10. copy over everything else from the staging directory,
-11. swap back the `index.php`s so that the real one is being used,
-12. test live site.
+**_Basic tasks:_**
 
-## Adding new content
+- [Using the bare data mode](#anchor--bare-data-mode)
+- [Adding new content](#anchor--adding-new-content)
+- [Adding new website instance](#anchor--new-website)
+- [Initial deploy to public server](#anchor--initial-deploy)
+- [Deploying changes to public server](#anchor--deploying-changes)
+
+**_Advanced tasks:_**
+
+- [Working with dynamic entities](#anchor--dynamic-entities)
+- [Adding a new entity to pages](#anchor--new-entity-to-pages)
+
+
+<!--/HIGH-->
+
+## <span class="anchor" id="anchor--bare-data-mode"></span>Using the bare data mode
+
+Bare data mode can return a single entity or a binder (a set of entities) without the page and the theme around it. It is a potentially valuable capability for the future, but is also useful in checking/debugging the setup of binders/entities at their most core level.
+
+By default, bare data mode can be accessed on the `/bare-data` path (this value can be overridden from config).
+
+The bare data mode operates by and is expecting HTTP GET parameters:
+
+- `data_type` (mandatory)
+  - possible values are: `entity` or `binder`
+- `entity_type` (mandatory for entities)
+- `instance_id` (mandatory)
+- `present_as` (optional)
+  - The default `present_agent` is `automatic_inventory`. Note: not all entity
+    types and `present_agent`s are compatible.
+
+### Bare data mode examples:
+
+The following links will work on a site running on a server (not on GitHub), when serving the `example_website` site instance.
+
+Note that `bare_data` mode must be enabled for the specific environment you are running the site on (consult your config file's _Config Presets_ section). (`bare_data` mode can be disabled, because in the current code state, it cannot check for the authentication of requests.)
+
+- [a binder](/bare-data?data_type=binder&amp;instance_id=footer_default)
+- [an article with all of its defined data](/bare-data?data_type=entity&amp;entity_type=article&amp;instance_id=article-1)
+- [same article's preview presentation mode](/bare-data?data_type=entity&amp;entity_type=article&amp;instance_id=article-1&amp;present_as=article_preview)
+
+
+## <span class="anchor" id="anchor--adding-new-content"></span>Adding new content
 
 **NOTE:** _all_ changes _all_ the time should be made on an isolated development machine, then the new and updated files should be copied to the public server.
 
@@ -82,16 +104,60 @@ want just anybody to be able to access the admin tasks).
 values are changed, it is neccessary to **rebuild the path&nbsp;cache** (the task
 is accessible via the _admin interface_).
 
-## Deploy local changes onto public server using FTP
+
+## <span class="anchor" id="anchor--new-website"></span>Adding a new website instance to an installation
+
+1. Duplicate the `example_website`'s directories, renaming the duplicate
+   directories' names to the desired name of your new site instance (`cp -r example_website new_instance_name`), in the following locations:
+  - `private/cache/`
+  - `private/config/`
+  - `private/definitions/`
+  - `private/permanent_storage/`
+2. Update the new instance's `config.php` with the new site's configuration.
+3. Then set the active instance in `director.php`'s `@ingroup configuration`.
+4. Check if everything works, and you have a working 'clone' of the
+   `example_website`.
+5. You can start modifying the definition- and content-related files of your
+   instance to reflect your wishes.
+
+
+## <span class="anchor" id="anchor--initial-deploy"></span>Steps for initial deploy onto public server over FTP
+
+1. place the unpacked installation into the _staging_ directory on server,
+2. check `director.php`:
+  - check the `@ingroup configuration` section,
+3. edit `config.php`:
+  - review your config presets,
+  - define 'staging' as `CONFIG_PRESET`,
+  - look at everything else,
+      - e.g. where do you want to serve jQuery from,
+4. make sure that the **admin data handler is inaccessible** to the script
+   (delete or rename its directory),
+5. manually test the staging site,
+6. edit again `config.php`, now setting `CONFIG_PRESET` to 'live'.
+7. swap `index.php` with `503_index.php`,
+  - check if the maintenance message is getting served,
+8. empty the live site's directory
+9. copy over the now-serving-503 `index.php`,
+  - optionally check the live site for the maintenance message,
+10. copy over everything else from the staging directory,
+11. swap back the `index.php`s so that the real one is being used,
+12. test live site.
+13. Bonus: you can restore the stage site too so you will have a stage at hand:
+  - swap back its index.php for the real one,
+  - edit its config.php:
+      - re-define `CONFIG_PRESET` as 'stage',
+      - review other settings.
+      - test stage site.
+
+## <span class="anchor" id="anchor--deploying-changes"></span>Deploying local changes onto public server using FTP
 
 <!--DEFS-->
 
 - To update content and settings:
 
-  - Upload from **_public_** (start with this):
+  - Upload from **_public_** (if you have new items here, start with this):
       - `document_files`
-          - Note: if the qantities are large here, inspecting file attribute
-            `date created` might be useful for attempting a synchronization-like approach.
   - Upload from **_private_**:
       - `cache`
       - `definitions`
@@ -117,20 +183,23 @@ is accessible via the _admin interface_).
 
 <!--/DEFS-->
 
-## Adding a new website instance to an installation
+### Note: "what to do if I uploaded the local config.php"?
 
-1. Duplicate the `example_website`'s directories, renaming the duplicate
-   directories' names to the desired name of your new site instance (`cp -r example_website new_instance_name`), in the following locations:
-  - `private/cache/`
-  - `private/config/`
-  - `private/definitions/`
-  - `private/permanent_storage/`
-2. Update the new instance's `config.php` with the new site's configuration.
-3. Then set the active instance in `director.php`'s `@ingroup configuration`.
-4. Check if everything works, and you have a working 'clone' of the
-   `example_website`.
-  - Theoretically it shouldn't be neccessary, but you may also give a go to
-    visiting the _admin&nbsp;page_ (on the path you defined in the instance's
-    config.php) and having path- and theme caches re-generated.
-5. You can start modifying the definition- and content-related files of your
-   instance to reflect your wishes.
+- The good news is, your site remains safe.
+- The bad news is, an error message will take place of your site: "unrecognized domain name".
+- The steps to fix this:
+  - Edit the _remote_ config.php:
+      - the Config Presets are fine, just the wrong preset is active.
+      - Set the `CONFIG_PRESET` definition: it's likely you will find it being set to 'dev', while, likely again, it should be set to 'live',
+      - review all the other settings that are not governed by the presets,
+      - save, then test site.
+
+
+## <span class="anchor" id="anchor--dynamic-entities"></span>Working with dynamic entities
+
+TODO: documenting
+
+
+## <span class="anchor" id="anchor--new-entity-to-pages"></span>Adding a new entity to pages
+
+TODO: documenting

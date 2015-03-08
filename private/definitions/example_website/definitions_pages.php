@@ -238,35 +238,48 @@ $pages['operating-manual'] = [
   'instance_id'       => 'operating-manual',
   'has_translations'  => 0,
   'paths' => [
-    'primary'   => 'operating-manual',
+    'primary'   => 'mission-control/operating-manual',
   ],
-  'in_section'        => '',
+  'in_section'        => 'mission_control',
   'in_context'        => 'noindex,',
 ];
 
 // -----------------------------------------------------------------------------
-$pages['article-ideas'] = [
+$pages['mc-article-ideas'] = [
   'data_type'         => 'entity',
   'entity_type'       => 'generic',
-  'instance_id'       => 'article-ideas',
+  'instance_id'       => 'mc-article-ideas',
   'has_translations'  => 0,
   'paths' => [
-    'primary'   => 'article-ideas',
+    'primary'   => 'mission-control/article-ideas',
   ],
-  'in_section'        => '',
+  'in_section'        => 'mission_control',
   'in_context'        => 'noindex',
 ];
 
 // -----------------------------------------------------------------------------
-$pages['site-structure-planning'] = [
+$pages['mc-outline-planning'] = [
   'data_type'         => 'entity',
   'entity_type'       => 'generic',
-  'instance_id'       => 'site-structure-planning',
+  'instance_id'       => 'mc-outline-planning',
   'has_translations'  => 0,
   'paths' => [
-    'primary'   => 'site-structure-planning',
+    'primary'   => 'mission-control/site-outline-planning',
   ],
-  'in_section'        => '',
+  'in_section'        => 'mission_control',
+  'in_context'        => 'noindex',
+];
+
+// -----------------------------------------------------------------------------
+$pages['mc-taxonomy-planning'] = [
+  'data_type'         => 'entity',
+  'entity_type'       => 'generic',
+  'instance_id'       => 'mc-taxonomy-planning',
+  'has_translations'  => 0,
+  'paths' => [
+    'primary'   => 'mission-control/taxonomy-planning',
+  ],
+  'in_section'        => 'mission_control',
   'in_context'        => 'noindex',
 ];
 
@@ -284,6 +297,6 @@ $pages['devel-blank-sheet'] = [
     'primary'   => 'devel/blank-sheet',
     'secondary' => 'devel/ures-lap',
   ],
-  'in_section'        => '',
+  'in_section'        => 'devel',
   'in_context'        => 'noindex',
 ];

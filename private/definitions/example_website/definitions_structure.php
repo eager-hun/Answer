@@ -281,6 +281,7 @@ $structure['sections'] = array(
   ),
   // Key is main-section.
   'articles_all' => array(),
+  'images_all' => array(),
 );
 
 // -----------------------------------------------------------------------------
