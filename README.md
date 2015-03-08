@@ -31,7 +31,7 @@ development process that:
 ## Documentation
 
 - [Installation guide][doc-install]
-- [Operating manual][doc-ops]
+- [Operating manual][doc-ops] (Note that the jump-links to sections don't work here on GitHub.)
 
 ## About the name
 
