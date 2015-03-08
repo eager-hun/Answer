@@ -10,7 +10,7 @@
 
 // This will be appended as a query argument in the links for .css and .js
 // assets.
-$config['theme']['version'] = '20150302-1';
+$config['theme']['version'] = '20150308-1';
 
 
 // #############################################################################

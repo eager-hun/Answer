@@ -281,7 +281,7 @@ $_light-color: color(blockfill);
   }
   .menu__static {
     display: block;
-    padding: $layout-pad*0.4 $layout-pad*0.5;
+    padding: $layout-pad*0.5 $layout-pad*0.5;
 
     & > span {
       color: color(text-invert);
@@ -331,14 +331,27 @@ $_light-color: color(blockfill);
   &.variant--light {
     background: $_light-color;
 
+    ul {
+      // Each level of nested menu is darker by this much.
+      background: rgba(black,0.07);
+    }
+    .menu__static {
+      & > span {
+        color: color(minor);
+        color: rgba(color(text),0.7);
+      }
+    }
     .menu__button {
-      border: 1px solid $_light-color;
+      border: 1px solid transparent;
       border-top: 1px solid rgba(white,0.15);
       border-bottom: 1px solid rgba(black,0.07);
       color: darken(color(nav), 10%);
     }
     .menu__link {
       text-shadow: 0 0 4px rgba(white, 0.7);
+    }
+    .active-trail > .menu__button > span {
+      background: rgba(white,0.75);
     }
     .menu__link:focus > span {
       border-color: rgba(color(nav), 0.7);
