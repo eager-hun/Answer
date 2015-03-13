@@ -332,8 +332,10 @@ $_light-color: color(blockfill);
     background: $_light-color;
 
     ul {
-      // Each level of nested menu is darker by this much.
-      background: rgba(black,0.07);
+      // Overriding the nested menu levels' darkening, as it doesn't seem to
+      // look good here.
+      // NOTE: no substitute visual clue was invented in its place.
+      background: transparent;
     }
     .menu__static {
       & > span {
