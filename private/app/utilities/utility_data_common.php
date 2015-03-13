@@ -451,15 +451,9 @@ function datautils_prepare_menus($config, $request, $definitions, &$temp) {
 
   if (!empty($definitions['menus'])) {
     // Packaging all menu levels into the same block, nested.
-    if ($config['ui']['menu_type'] == 'mono') {
-      foreach ($definitions['menus'] as $menu_id => $menu_data) {
-        // Rendering and stashing the menu into the $temp array.
-        $temp['rendered_menus'][$menu_id] = _render_menu_level($menu_id, 1, $menu_data);
-      }
-    }
-    // Registering separate blocks for each level in each menu.
-    else {
-      sys_notify("Only monolithic menu structure is supported at the moment, please use 'mono' menu at UI config settings.", 'warning');
+    foreach ($definitions['menus'] as $menu_id => $menu_data) {
+      // Rendering and stashing the menu into the $temp array.
+      $temp['rendered_menus'][$menu_id] = _render_menu_level($menu_id, 1, $menu_data);
     }
   }
 }

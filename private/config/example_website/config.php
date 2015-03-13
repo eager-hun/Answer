@@ -145,11 +145,6 @@ $config['app']['fast_404'] = FALSE;
 // User interface.
 
 // -----------------------------------------------------------------------------
-// Navigation.
-// ATM, only 'mono' menu is supported; 'sectioned' still needs to be developed.
-$config['ui']['menu_type'] = 'mono'; // mono || sectioned.
-
-// -----------------------------------------------------------------------------
 // Theme-agnostic javascripts that the system counts/relies on.
 
 $config['ui']['js_settings_insertion'] = 'body'; // head || body.
