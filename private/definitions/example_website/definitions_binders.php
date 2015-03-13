@@ -244,6 +244,32 @@ $binders['footer_default'] = array(
 
 
 // #############################################################################
+// Binders for PAGE SUB-TYPES.
+
+// -----------------------------------------------------------------------------
+// Page template with plain look and contents.
+$binders['page_plain'] = array(
+  'items' => array(
+    array(
+      'data_type'   => 'entity',
+      'entity_type' => 'dynamic',
+      'instance_id' => 'sys_notifications',
+      'present_as'  => 'block',
+    ),
+    array(
+      'data_type'   => 'entity',
+      'entity_type' => 'dynamic',
+      'instance_id' => 'content_meta',
+      'present_as'  => 'block',
+    ),
+    array(
+      'data_type'   => 'current_page_primary_content',
+    ),
+  ),
+);
+
+
+// #############################################################################
 // Binders for SPECIFIC PAGES.
 
 // -----------------------------------------------------------------------------

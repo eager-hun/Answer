@@ -173,7 +173,7 @@ $pages['deprecated-article-3'] = [
     'secondary' => 'cikkek/cikk-harom-utvonal',
   ],
   'in_section'        => 'articles_all',
-  'in_context'        => '',
+  'in_context'        => 'deprecated',
   'xml_sitemap_include' => 1,
 ];
 

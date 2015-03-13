@@ -59,8 +59,7 @@ $str['primary']['http-404']              = 'The requested content cannot be foun
 $str['primary']['http-410']              = 'The requested content has ceased to exist on this website.';
 
 // Misc.
-$str['primary']['deprecated-title']       = '<h1>Deprecated content</h1>';
-$str['primary']['deprecated-description'] = '<p>This content is considered deprecated and is not being maintained.</p><p>The accuracy of the information within might be questionable.</p>';
+$str['primary']['deprecated-description'] = '<p>PLEASE NOTE:</p><p>This content is considered deprecated and is not being maintained.</p><p>The accuracy of the information within might be questionable.</p>';
 
 // -----------------------------------------------------------------------------
 // Secondary locale.
@@ -115,8 +114,7 @@ $str['secondary']['http-404']              = 'A kért tartalom nem található e
 $str['secondary']['http-410']              = 'A kért tartalom megszűnt létezni ezen a webhelyen.';
 
 // Misc.
-$str['secondary']['deprecated-title']       = '<h1>Elavult tartalom</h1>';
-$str['secondary']['deprecated-description'] = '<p>Az alábbi tartalom elavultnak tekintendő, további karbantartására már nem kerül sor.</p><p>A közölt információk pontossága és naprakészsége megkérdőjelezhető lehet.</p>';
+$str['secondary']['deprecated-description'] = '<p>KÉREM VEGYE FIGYELEMBE:</p><p>Az alábbi tartalom elavultnak tekintendő, további karbantartására már nem kerül sor.</p><p>A közölt információk pontossága és naprakészsége megkérdőjelezhető lehet.</p>';
 
 
 // #############################################################################

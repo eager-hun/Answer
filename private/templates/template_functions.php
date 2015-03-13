@@ -178,20 +178,3 @@ function draw_html_document($args) {
   $output .= '</html>';
   return $output;
 }
-
-/**
- * Draw deprecated document.
- */
-function draw_deprecated_document($args) {
-  $output = "<!DOCTYPE html>\n";
-  $output .= "<html>\n";
-  if (!empty($args['variables']['head_content'])) {
-    $output .= "<head>\n" . $args['variables']['head_content'] . "</head>\n";
-  }
-  if (!empty($args['variables']['body_content'])) {
-    $output .= "<body>\n<div class=\"page-content\">\n"
-      . $args['variables']['body_content'] . "</div>\n</body>\n";
-  }
-  $output .= '</html>';
-  return $output;
-}

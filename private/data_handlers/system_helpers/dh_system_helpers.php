@@ -213,10 +213,14 @@ function _content_meta($args) {
     $content_data = $GLOBALS['request']['page_data'];
     if ($content_data['data_type'] == 'entity') {
       if (!empty($GLOBALS['temp']['raw_entities'][$content_data['instance_id']])) {
+        $entity_meta = $GLOBALS['temp']['raw_entities'][$content_data['instance_id']]['meta'];
         $content_fields = $GLOBALS['temp']['raw_entities'][$content_data['instance_id']]['fields'];
       }
       else {
         $content_fields = array();
+      }
+      if (!empty($entity_meta['is_deprecated'])) {
+        sys_notify(loc('deprecated-description'), 'warning');
       }
     }
     elseif ($content_data['data_type'] == 'binder') {
@@ -306,43 +310,4 @@ function _page_jump_links($args) {
   $output .= '<a class="jump-link" href="#primary-content">' . loc('Jump to content') . '</a>';
   $output .= "</div>\n";
   return $output;
-}
-
-/**
- * Prepare deprecated content for delivery.
- */
-function _prepare_deprecated_content($args) {
-  global $config;
-
-  $page_data = $GLOBALS['request']['page_data'];
-  $page_data['present_as'] = 'automatic_inventory';
-  datautils_data_fetcher($page_data);
-  // Assemble the payload.
-  // TODO: it would be really nice to have templating functions for messages!
-  $body_content = loc('deprecated-title')
-    . '<div class="messages-container"><div class="messages warning"><ul><li>'
-    . loc('deprecated-description') . '</li></ul></div></div>';
-    // Wow ^^.
-  $body_content .= templateutils_data_dresser($page_data);
-  // TODO: another theme should be set here, instead of the following?
-
-  // HTML document preparations.
-  // Overwriting standard styles and scripts.
-  $config['ui'] = array(
-    'css_external' => array(
-      array(
-        'source' => 'theme_generated',
-        'file'   => 'styles_plain_output.css',
-      ),
-    ),
-  );
-  $head_content = pageutils_html_head();
-  // Render the whole HTML document.
-  $template_args = array(
-    'variables' => array(
-      'head_content' => $head_content,
-      'body_content' => $body_content,
-    ),
-  );
-  return draw_deprecated_document($template_args);
 }

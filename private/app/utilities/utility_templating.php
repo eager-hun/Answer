@@ -102,6 +102,11 @@ function _binder_render_recursive($args, &$items_buffer, &$result) {
           if (empty($content_data['present_as'])) {
             $content_data['present_as'] = 'automatic_inventory';
           }
+          // If the primary content is a binder, we store it with its instance
+          // name.
+          // TODO: finding out why I had to do this and why it wont't break.
+          $items_buffer[$content_data['instance_id']] =
+            templateutils_data_dresser($content_data);
         }
         elseif ($content_data['data_type'] == 'entity') {
           $content_data['wrapper_options']['attributes']['class'][] = 'entity';
@@ -118,10 +123,13 @@ function _binder_render_recursive($args, &$items_buffer, &$result) {
           else {
             $content_data['present_as'] = 'automatic_inventory';
           }
+          // If the primary content is an entity, we store it with an alias of
+          // 'page_primary_content'.
+          // TODO: finding out why I had to do this and why it wont't break.
+          $items_buffer['page_primary_content'] =
+            templateutils_data_dresser($content_data);
         }
         $content_data['this_is_primary_content'] = TRUE;
-        $items_buffer[$content_data['instance_id']] =
-          templateutils_data_dresser($content_data);
       }
     }
     else {

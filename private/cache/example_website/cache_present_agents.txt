@@ -10,5 +10,6 @@ image_display_preview
 mosaic_homepage
 page_default
 page_homepage
+page_plain
 plain
 static_page_full

@@ -83,15 +83,6 @@ if (is_admin($config)) {
 // Making the finally set page's properties available system-wide.
 $request['page_data'] = $definitions['pages'][$request['page_id']];
 
-// Response modifiers, 2: Deprecated content (gets a simplified process).
-if (!empty($temp['entity_metadata'][$request['page_id']]['meta']['is_deprecated'])) {
-  apputils_wake_resource('data_handler', 'system_helpers');
-  $content = dh_system_helpers(array('order_id' => 'prepare_deprecated_content'));
-  datautils_send_standard_headers($request);
-  print process_sys_notifications($sys_notifications_pool) . $content;
-  exit;
-}
-
 
 // #############################################################################
 // Identify section and context data.
@@ -116,6 +107,11 @@ if (!empty($request['page_data'])) {
   if (!empty($request['page_data']['in_context'])) {
     $contexts_by_page = explode(',', $request['page_data']['in_context']);
     $request['contexts'] = array_merge($contexts_by_page, $request['contexts']);
+
+    // TODO: we should find this and alike actions a better place.
+    if (in_array('deprecated', $contexts_by_page)) {
+      $request['page_data']['template_variant'] = 'page_plain';
+    }
   }
 }
 

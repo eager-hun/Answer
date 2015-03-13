@@ -292,3 +292,27 @@ function pageutils_html_head() {
 
   return $output;
 }
+
+/**
+ * Reset all CSS.
+ *
+ * NOTE: not much thought went into this yet.
+ */
+function pageutils_reset_styles($mode = 'all') {
+  if ($mode == 'all') {
+    $GLOBALS['config']['ui']['css_inline'] = array();
+    $GLOBALS['config']['ui']['css_external'] = array();
+  }
+}
+
+/**
+ * Reset all JS.
+ *
+ * NOTE: not much thought went into this yet.
+ */
+function pageutils_reset_javascripts($mode = 'all') {
+  if ($mode == 'all') {
+    $GLOBALS['config']['ui']['js_head'] = array();
+    $GLOBALS['config']['ui']['js_body'] = array();
+  }
+}
