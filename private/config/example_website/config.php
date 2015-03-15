@@ -236,8 +236,13 @@ $config['content']['short_tags'] = array(
 // #############################################################################
 // MISC.
 
-// Custom substring used in the XML sitemap filename.
+// Custom substring used for prefixing the XML sitemap filename.
 $config['xml_sitemap_generator']['sitemap_name'] = 'sitemap';
+
+// Custom substring for prefixing HTML id attributes that go through
+// htmlpurifier.
+// (See "Namespacing IDs" at http://htmlpurifier.org/docs/enduser-id.html .)
+$config['htmlpurifier']['id_prefix'] = 'anchor--';
 
 
 // #############################################################################

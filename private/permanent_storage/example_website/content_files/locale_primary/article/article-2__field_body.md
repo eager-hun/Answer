@@ -13,4 +13,8 @@ Proin elementum ex ante, sit amet blandit leo dictum et. Duis non ex iaculis, ti
 <!--/ITEM-->
 <!--/SPLITTER-->
 
-Nulla augue sapien, accumsan ut tincidunt sit amet, ullamcorper ut lorem. Etiam massa nisi, efficitur nec venenatis sed, ultricies malesuada metus. In non quam sollicitudin, varius ante a, egestas leo. Integer ac sodales odio. Mauris quis lorem ac libero consequat pharetra ut in ligula. Phasellus scelerisque consequat auctor. Donec eu pellentesque erat, eget ultricies erat. In hac habitasse platea dictumst. Proin quis lectus tempor, tristique sem elementum, fringilla risus. Integer posuere mauris vel porttitor porta. Fusce et porta urna. Nam a lobortis est. Maecenas laoreet vehicula finibus. Fusce blandit ante in nisl laoreet, a molestie risus tempus. Suspendisse eu fermentum nibh, pellentesque tempor risus. Ut vitae nulla feugiat, laoreet sem et, tincidunt justo.
+Nulla augue sapien, accumsan ut tincidunt sit amet, ullamcorper ut lorem. Etiam massa nisi, efficitur nec venenatis sed, ultricies malesuada metus. In non quam sollicitudin, varius ante a, egestas leo. Integer ac sodales odio. Mauris quis lorem ac libero consequat pharetra ut in ligula.
+
+<p id="id-test">HTML id test.</p>
+
+Phasellus scelerisque consequat auctor. Donec eu pellentesque erat, eget ultricies erat. In hac habitasse platea dictumst. Proin quis lectus tempor, tristique sem elementum, fringilla risus. Integer posuere mauris vel porttitor porta. Fusce et porta urna. Nam a lobortis est. Maecenas laoreet vehicula finibus. Fusce blandit ante in nisl laoreet, a molestie risus tempus. Suspendisse eu fermentum nibh, pellentesque tempor risus. Ut vitae nulla feugiat, laoreet sem et, tincidunt justo.

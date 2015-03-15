@@ -373,12 +373,15 @@ function _loader_failure($resource_type, $resource_id) {
  * http://htmlpurifier.org/docs/enduser-id.html
  */
 function _init_purifier() {
+  $appconfig_purifier = $GLOBALS['config']['htmlpurifier'];
+  $id_prefix = ensafe_string($appconfig_purifier['id_prefix'], 'attribute_value');
+
   $purifier_config = HTMLPurifier_Config::createDefault();
   $purifier_config->set('HTML.DefinitionID', 'answer-project-setup');
   $purifier_config->set('HTML.DefinitionRev', 1); // Cache-busting of a sort.
   // $purifier_config->set('Cache.DefinitionImpl', null); // Only while dev!
   $purifier_config->set('Attr.EnableID', true);
-  $purifier_config->set('Attr.IDPrefix', 'anchor--');
+  $purifier_config->set('Attr.IDPrefix', $id_prefix);
   if ($def = $purifier_config->maybeGetRawHTMLDefinition()) {
     $def->addAttribute('div', 'data-purify-test', 'Enum#foo,bar');
     $def->addAttribute('div', 'data-cols', 'Number');
