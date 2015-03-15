@@ -325,24 +325,29 @@
 // #############################################################################
 // Splitters.
 
-@include breakpoint($bkp-multi-mt-min) {
-  .splitter {
-    margin-left: -4%;
-    margin-right: -4%;
+.splitter > .item {
+  margin-top: $layout-pad;
+  margin-bottom: $layout-pad;
+}
 
-    .table {
-      display: table;
-      table-layout: fixed;
-      width: 100%;
-    }
-    .cell {
+@include breakpoint($bkp-multi-mt-min) {
+  .splitter__fit {
+    overflow-x: hidden;
+  }
+  .splitter__wrap {
+    margin-left: -$layout-pad*2;
+    margin-right: -$layout-pad*2;
+  }
+  .splitter {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+
+    & > .item {
       display: table-cell;
-      padding-left: 4%;
-      padding-right: 4%;
-    }
-    &.box {
-      margin-left: 0;
-      margin-right: 0;
+      margin: 0;
+      padding-left: $layout-pad*2;
+      padding-right: $layout-pad*2;
     }
   }
 }
