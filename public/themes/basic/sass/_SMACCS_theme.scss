@@ -142,11 +142,19 @@ a.menu-button { // Overqualifying because of link rules to be overridden.
   }
 
   &.fixed {
-    // WARNING: don't put box shadow on position: fixed elements! Even desktop
-    // Chrome stutters there.
+    @include box-shadow(
+      $default-box-shadow-color
+      0
+      1px
+      6px
+      $default-box-shadow-spread
+    );
     @include border-radius(4px);
     @include transition-property(opacity);
     @include transition-duration($transitspeed-mid);
+
+    // Fixing a Chrome bug of flickering fixed elements.
+    -webkit-transform: translateZ(0);
 
     background: color(nav);
     color: color(text-invert);

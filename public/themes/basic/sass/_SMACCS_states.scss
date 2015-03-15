@@ -27,6 +27,7 @@
     display: block;
   }
   [class*="header_widgets"] .menu-button,
+  .menu-button.fixed,
   [class*="main-menu"] .langswitch {
     display: none;
   }

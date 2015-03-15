@@ -81,9 +81,12 @@ function _header_branding($args) {
  * Header widgets.
  */
 function _header_widgets($args) {
+  // Preparing the widgets in the header.
   $output = '<a class="menu-button" href="#navigation">' . loc('Menu') . '</a>'
-            . '<a class="menu-button fixed" href="#navigation">' . loc('Menu') . '</a>';
-  $output .= _language_switcher('');
+            . _language_switcher('');
+  // Sending the screen-fixed menu button out to the base of the DOM tree.
+  $GLOBALS['temp']['layout_elements']['body_end'][] =
+    '<a class="menu-button fixed" href="#navigation">' . loc('Menu') . '</a>';
   return $output;
 }
 

@@ -141,6 +141,9 @@ $temp['raw_attributes']['html']                        = array();
 $temp['raw_attributes']['head']                        = array();
 $temp['raw_attributes']['body']                        = array();
 $temp['raw_attributes']['body']['class']               = array();
+$temp['layout_elements']                               = array();
+$temp['layout_elements']['body_start']                 = array();
+$temp['layout_elements']['body_end']                   = array();
 
 
 // #############################################################################
