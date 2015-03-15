@@ -36,7 +36,7 @@ composer.lock
 
 # I don't know if I may include a generated modernizr.js instance, so I don't.
 # I'll put the custom-build's download link in the theme_settings.php where I declare it.
-/public/document_public_assets/modernizr.custom.25804.js
+modernizr.custom.*.js
 
 # Content-related
 # (It's possible you wouldn't want to version-control large media-file blobs.)
