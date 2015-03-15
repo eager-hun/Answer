@@ -12,9 +12,11 @@
 (function ($, window, document, undefined) {
   "use strict";
 
-  var orientation = {/*TODO*/};
-  var ajaxSuite = {/*TODO*/};
-  var modalSuite = {
+  window.awrA = window.awrA || {};
+
+  awrA.orientation = {/*TODO*/};
+  awrA.ajaxSuite = {/*TODO*/};
+  awrA.modalSuite = {
     'modalTemplate': [
       '<div id="overlay--common"></div>',
       '<div id="modal--common" tabindex="0">',
@@ -92,7 +94,7 @@
       });
     }
   };
-  var utility = {
+  awrA.utility = {
     'scrollWatcher': function() {
       if (window.pageYOffset > 0) {
         $('body').attr('data-scrolled-in', 'true');
@@ -125,12 +127,6 @@
       });
     }
   };
-
-  // Assigning assets to their final place in the global awrA object.
-  awrA.orientation = orientation;
-  awrA.ajaxSuite = ajaxSuite;
-  awrA.modalSuite = modalSuite;
-  awrA.utility = utility;
 
   // Initializing assets.
   awrA.modalSuite.createModal();
