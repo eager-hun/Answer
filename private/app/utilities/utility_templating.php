@@ -363,17 +363,11 @@ function templateutils_prerender_fields($args) {
       $template_args['variables']['field_label'] =
         ensafe_string($field_data['field_label'], 'html');
     }
-    // Pre-pre-render image fields.
-    if ($field_data['field_type'] == 'image') {
-      // var_dump($field_data);
-      $img_template = array(
-        'template_name' => 'image',
-        'variables' => array(
-          'attributes' =>
-            templateutils_render_html_attributes($field_data['field_content']['attributes']),
-        ),
-      );
-      $template_args['variables']['field_content'] = templateutils_present($img_template);
+
+    // Checking for field_content_prerenders.
+    $helper_func = 'field_content_prerender_' . $field_data['field_type'];
+    if (function_exists($helper_func)) {
+      $template_args['variables']['field_content'] = $helper_func($field_data);
     }
     else {
       // Field contents are ought to be already escaped by the field data
@@ -381,6 +375,7 @@ function templateutils_prerender_fields($args) {
       $template_args['variables']['field_content'] =
         $field_data['field_content'];
     }
+
     if (array_key_exists('link_to', $field_data)) {
       $link_template = array(
         'template_name' => 'link',

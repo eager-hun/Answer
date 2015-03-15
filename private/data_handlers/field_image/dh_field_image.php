@@ -29,3 +29,17 @@ function dh_field_image($args) {
   );
   return $output;
 }
+
+/**
+ * Field content prerender.
+ */
+function field_content_prerender_image($field_data) {
+  $img_template = array(
+    'template_name' => 'image',
+    'variables' => array(
+      'attributes' =>
+        templateutils_render_html_attributes($field_data['field_content']['attributes']),
+    ),
+  );
+  return templateutils_present($img_template);
+}
