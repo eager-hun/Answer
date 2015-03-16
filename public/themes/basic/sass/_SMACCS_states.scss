@@ -52,12 +52,12 @@
 // #############################################################################
 // Mobile-menu vs. desktop-menu.
 
-.has-js [id="navigation"] {
+.has-js .sidebar .block--menu {
   display: none;
 }
 
 @include breakpoint($bkp-multi-min) {
-  .has-js [id="navigation"] {
+  .has-js .sidebar .block--menu {
     display: block;
   }
   .overlay--nav,

@@ -2079,12 +2079,12 @@ blockquote {
   opacity: 0;
 }
 
-.has-js [id="navigation"] {
+.has-js .sidebar .block--menu {
   display: none;
 }
 
 @media (min-width: 43.75em) {
-  .has-js [id="navigation"] {
+  .has-js .sidebar .block--menu {
     display: block;
   }
 
