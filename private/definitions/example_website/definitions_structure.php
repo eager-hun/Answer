@@ -226,7 +226,7 @@ $structure['entity_definitions']['image_display'] = array(
     'field_preview_image' => array(
       'role' => 'meta',
       'type' => 'field_image',
-      'style' => 'small',
+      'style' => 'medium',
       'translatable' => FALSE,
       'label' => loc('fl--preview-image'),
     ),

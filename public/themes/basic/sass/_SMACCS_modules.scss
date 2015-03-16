@@ -112,7 +112,7 @@ blockquote {
 // #############################################################################
 // Flexilists.
 
-.fl-item + .fl-item {
+.fl-item--standard + .fl-item--standard {
   margin-top: $layout-pad*1.25;
 }
 

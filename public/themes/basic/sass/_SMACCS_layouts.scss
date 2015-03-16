@@ -72,7 +72,7 @@
 .layout--2sb.symmetric.has-1-sb.sb-1 {
   @include add-grid(6 18 at $bkp-multi-min);
   @include add-gutter(0 at $bkp-multi-min);
-  @include background-grid;
+  // @include background-grid;
 }
 .layout--2sb.symmetric.has-1-sb.sb-1 {
   @include breakpoint($bkp-multi-min) {
@@ -91,7 +91,7 @@
 .layout--2sb.symmetric.has-1-sb.sb-2 {
   @include add-grid(18 6 at $bkp-multi-min);
   @include add-gutter(0 at $bkp-multi-min);
-  @include background-grid;
+  // @include background-grid;
 }
 .layout--2sb.symmetric.has-1-sb.sb-2 {
   @include breakpoint($bkp-multi-min) {
@@ -114,7 +114,7 @@
   @include add-gutter(0 at $bkp-multi-min);
   @include add-grid(6 12 6 at $bkp-multi-ht-min);
   @include add-gutter(1 at $bkp-multi-ht-min);
-  @include background-grid;
+  // @include background-grid;
 }
 .layout--2sb.symmetric.has-2-sb {
   @include breakpoint($bkp-multi-min) {
@@ -154,7 +154,7 @@
 .layout--2sb.content-left.has-1-sb {
   @include add-grid(18 6 at $bkp-multi-min);
   @include add-gutter(0 at $bkp-multi-min);
-  @include background-grid;
+  // @include background-grid;
 }
 .layout--2sb.content-left.has-1-sb {
   @include breakpoint($bkp-multi-min) {
@@ -175,7 +175,7 @@
   @include add-gutter(0 at $bkp-multi-min);
   @include add-grid(12 6 6 at $bkp-multi-ht-min);
   @include add-gutter(1 at $bkp-multi-ht-min);
-  @include background-grid;
+  // @include background-grid;
 }
 .layout--2sb.content-left.has-2-sb {
   @include breakpoint($bkp-multi-min) {
@@ -215,7 +215,7 @@
 .layout--2sb.content-right.has-1-sb {
   @include add-grid(6 18 at $bkp-multi-min);
   @include add-gutter(0 at $bkp-multi-min);
-  @include background-grid;
+  // @include background-grid;
 }
 .layout--2sb.content-right.has-1-sb {
   @include breakpoint($bkp-multi-min) {
@@ -236,7 +236,7 @@
   @include add-gutter(0 at $bkp-multi-min);
   @include add-grid(6 6 12 at $bkp-multi-ht-min);
   @include add-gutter(1 at $bkp-multi-ht-min);
-  @include background-grid;
+  // @include background-grid;
 }
 .layout--2sb.content-right.has-2-sb {
   @include breakpoint($bkp-multi-min) {
@@ -278,7 +278,7 @@
   @include add-gutter(0 at $bkp-multi-min);
   @include add-grid(5 19 at $bkp-multi-ht-min);
   @include add-gutter(0 at $bkp-multi-ht-min);
-  @include background-grid;
+  // @include background-grid;
 }
 .layout--landing_1 {
   .column--main {
@@ -317,6 +317,58 @@
           @include grid-span(5, 4);
         }
       }
+    }
+  }
+}
+
+
+// #############################################################################
+// Grid: "gallery cards".
+
+.fl--style-gallery-cards {
+  text-align: center;
+  // To compensate for the bottom row of grid items' needles bottom margin.
+  margin-bottom: -$layout-pad*2.3;
+
+  @include add-grid(2 at $bkp-mono-ht-min);
+  @include add-gutter(0.1 at $bkp-mono-ht-min);
+  @include add-grid(3 at $bkp-multi-ht-min);
+  @include add-gutter(0.1 at $bkp-multi-ht-min);
+
+  & > .item {
+    margin: 0 0 $layout-pad*2.3;
+    display: inline-block;
+    max-width: 100%;
+  }
+
+  @include breakpoint($bkp-mono-ht-min) {
+    & > .item {
+      display: block;
+    }
+  }
+  // Two-col grid.
+  @include breakpoint($bkp-mono-ht-min $bkp-multi-mt-max) {
+    & > .item:nth-child(2n+1) {
+      @include grid-span(1, 1);
+
+      clear: left;
+    }
+    & > .item:nth-child(2n+2) {
+      @include grid-span(1, 2);
+    }
+  }
+  // Three-col grid when wide enough.
+  @include breakpoint($bkp-multi-ht-min) {
+    & > .item:nth-child(3n+1) {
+      @include grid-span(1, 1);
+
+      clear: left;
+    }
+    & > .item:nth-child(3n+2) {
+      @include grid-span(1, 2);
+    }
+    & > .item:nth-child(3n+3) {
+      @include grid-span(1, 3);
     }
   }
 }

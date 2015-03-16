@@ -74,20 +74,18 @@ function _create_list($args) {
   }
 
   // List item options with attributes.
+
   if (!array_key_exists('item_options', $def)) {
     $def['item_options'] = array();
     $def['item_options']['attributes'] = array();
-    $def['item_options']['attributes']['class'] = array('fl-item');
+    $def['item_options']['attributes']['class'] = array();
   }
   elseif (!array_key_exists('attributes', $def['item_options'])) {
     $def['item_options']['attributes'] = array();
-    $def['item_options']['attributes']['class'] = array('fl-item');
+    $def['item_options']['attributes']['class'] = array();
   }
   elseif (!array_key_exists('class', $def['item_options']['attributes'])) {
-    $def['item_options']['attributes']['class'] = array('fl-item');
-  }
-  else {
-    $def['item_options']['attributes']['class'][] = 'fl-item';
+    $def['item_options']['attributes']['class'] = array();
   }
 
   $rendered_list_attribs =
