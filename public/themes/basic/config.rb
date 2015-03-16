@@ -16,14 +16,14 @@ extensions_dir  = 'sass-extensions'
 
 # Preferred output style (can be overridden via the command line).
 # output_style = :expanded or :nested or :compact or :compressed
-output_style = :compressed
+output_style = :expanded
 
 # To enable relative paths to assets via Compass helper functions.
 relative_assets = true
 
 # Debugging.
 line_comments = false
-sourcemap     = false
+sourcemap     = true
 
 # Alternative locations for resources.
 add_import_path '../../shared_assets/sass'

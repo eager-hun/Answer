@@ -1,1 +1,10 @@
-p{color:green;font-weight:bold}
+/**
+ * @file
+ * Experimental stylesheet that should get inlined into the <head>.
+ */
+p {
+  color: green;
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=styles_inline_test.css.map */

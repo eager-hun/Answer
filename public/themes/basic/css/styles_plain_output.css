@@ -1,1 +1,180 @@
-.messages-container{color:#333}.messages{padding:0.5em}.messages+.messages{margin-top:0.5em}.messages-container ul{margin:0;padding:0 0 0 2em}.messages pre{margin-bottom:2em;overflow:visible}.messages li:last-child pre{margin-bottom:1em}.messages-container .info{background:#afa;border:1px solid green}.messages-container .info a,.messages-container .info a:hover{color:#090}.messages-container .warning{background:#ffa;border:1px solid orange}.messages-container .warning a,.messages-container .warning a:hover{color:#c80}.messages-container .alert{background:pink;border:1px solid red}.messages-container .alert a,.messages-container .alert a:hover{color:#b00}.messages-container .debug{background:#E7F1F5;border:1px solid cornflowerblue}.messages-container .debug a,.messages-container .debug a:hover{color:dodgerblue}body{color:#333;font-family:sans-serif;line-height:1.5;margin:2em auto;max-width:800px;padding:0.5em}h1{font-weight:normal}.field__label{font-weight:bold;margin:1em 0}@media (min-width: 43.75em){.page-content{border:1px solid silver;padding:1em}}
+/**
+ * @file
+ * Very simplistic output style.
+ *
+ * Being used for presenting deprecated content and maintenance messages.
+ */
+/**
+ * @file
+ * Definitions of variables + further Compass setup.
+ *
+ * On configuring Compass:
+ * @see
+ * http://compass-style.org/help/documentation/configuration-reference/
+ * http://compass-style.org/help/documentation/sass-based-configuration-options/
+ * http://compass-style.org/index/variables/
+ *
+ * On using Compass:
+ * @see
+ * http://compass-style.org/reference/compass/
+ * http://compass-style.org/index/mixins/
+ * http://compass-style.org/index/functions/
+ *
+ * On rgba() colors:
+ * @see
+ * http://thesassway.com/intermediate/mixins-for-semi-transparent-colors
+ *
+ *
+ * On further plugins:
+ * @see
+ * http://snugug.com/musings/introducing-breakpoint-media-queries-made-easy
+ * https://github.com/codingdesigner/breakpoint/blob/master/README.markdown
+ * https://github.com/at-import/breakpoint/wiki/Advanced-Media-Queries
+ *
+ * https://github.com/at-import/Singularity
+ *
+ * On everything:
+ * @see
+ * http://caniuse.com/
+ * http://mcdlr.com/8/ ('Useful UTF-8 Characters')
+ */
+/* LEGEND for the breakpoint variables:
+| <- $layout-page-min-width                          $layout-page-max-width -> |
+|                                                                              |
+|            <- monocol ->              |            <- multicol ->            |
+|                                       |                                      |
+|  monocol   |  monocol   |  monocol    |  multicol  |  multicol  |  multicol  |
+|  lowthird  |  midthird  |  highthird  |  lowthird  |  midthird  |  highthird |
+| (mono-lt)  | (mono-mt)  | (mono-ht)   | (multi-lt) | (multi-mt) | (multi-ht) |
+*/
+/**
+ * @file
+ * Custom mixins.
+ *
+ * Mixins vs Extending utility-role Placeholders?
+ *
+ * Mixins won, placeholders lost so badly that they will not be used. Repetition
+ * originating from using mixins will be mitigated by gzip serving the resulting
+ * files (gzip works well on repeated patterns, they say).
+ *
+ * @see
+ * http://www.sitepoint.com/avoid-sass-extend/
+ * http://csswizardry.com/2014/11/when-to-use-extend-when-to-use-a-mixin/
+ *
+ * Reminder on basic syntax:
+ * @code
+ *
+ * @mixin test-mixin--box($bg: gold, $padding: 1em) {
+ *   background: $bg;
+ *   padding: $padding;
+ *
+ *   @if $bg == (gold) and $padding == (1em) {
+ *     border: 1px solid red;
+ *   }
+ *   @else if $bg == (gold) and $padding != (1em) {
+ *     border: 5px solid red;
+ *   }
+ *   @else {
+ *     border: 3px solid black;
+ *   }
+ * }
+ *
+ * @endcode
+ */
+/**
+ * Sys notification styles.
+ */
+/* Messages layout. */
+.messages-container {
+  color: #333;
+}
+
+.messages {
+  padding: 0.5em;
+}
+
+.messages + .messages {
+  margin-top: 0.5em;
+}
+
+.messages-container ul {
+  margin: 0;
+  padding: 0 0 0 2em;
+}
+
+.messages pre {
+  margin-bottom: 2em;
+  overflow: visible;
+}
+
+.messages li:last-child pre {
+  margin-bottom: 1em;
+}
+
+/* Messages colors. */
+.messages-container .info {
+  background: #afa;
+  border: 1px solid green;
+}
+
+.messages-container .info a,
+.messages-container .info a:hover {
+  color: #090;
+}
+
+.messages-container .warning {
+  background: #ffa;
+  border: 1px solid orange;
+}
+
+.messages-container .warning a,
+.messages-container .warning a:hover {
+  color: #c80;
+}
+
+.messages-container .alert {
+  background: pink;
+  border: 1px solid red;
+}
+
+.messages-container .alert a,
+.messages-container .alert a:hover {
+  color: #b00;
+}
+
+.messages-container .debug {
+  background: #E7F1F5;
+  border: 1px solid cornflowerblue;
+}
+
+.messages-container .debug a,
+.messages-container .debug a:hover {
+  color: dodgerblue;
+}
+
+body {
+  color: #333;
+  font-family: sans-serif;
+  line-height: 1.5;
+  margin: 2em auto;
+  max-width: 800px;
+  padding: 0.5em;
+}
+
+h1 {
+  font-weight: normal;
+}
+
+.field__label {
+  font-weight: bold;
+  margin: 1em 0;
+}
+
+@media (min-width: 43.75em) {
+  .page-content {
+    border: 1px solid silver;
+    padding: 1em;
+  }
+}
+
+/*# sourceMappingURL=styles_plain_output.css.map */
