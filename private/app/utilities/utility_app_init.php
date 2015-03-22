@@ -49,9 +49,10 @@ function base_path($options = array()) {
       . '://' . $domain . '/';
   }
   else {
-    $message = 'index.php should be situated in the webroot. "working_dir" support is not developed yet.';
-    sys_notify($message, 'warning');
-    apputils_exit_nicely();
+    $output = ensafe_string($config['env']['http_protocol'], 'attribute_value')
+      . '://' . $domain . '/'
+      . ensafe_string($config['env']['working_dir'], 'path_fragment')
+      . '/';
   }
   return $output;
 }

@@ -47,10 +47,9 @@ $registry['app_internals']['private_assets'] = DIRECTOR_DIR . 'private';
 // and managed in the theme; they then will have to be included from there.
 $registry['app_internals']['public_assets'] = DIRECTOR_DIR . 'public';
 
-// This will be the starting bit of all externally accessed urls to resources.
-// Provide the name of the directory that is sitting in the document root (next
-// to index.php); the server protocol and domain name will be added later by the
-// script.
+// This will be the part of all externally accessed urls to resources.
+// Provide the name of the directory that contains your public assets (this
+// string will be added to the base_path() output).
 $registry['app_externals']['path_root'] = 'public';
 
 // The website instance to be used.

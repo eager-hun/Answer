@@ -114,8 +114,9 @@ function regenerate_xml_sitemaps() {
     $filename = ensafe_string($sitemap_config['sitemap_name'], 'attribute_value')
       . '_' . str_replace('.', '_', ensafe_string($sitemap_config['domain'][$locale_key], 'file_name'))
       . '.xml';
-    // FIXME: the registry should have a public root entry.
-    $sitemap = $_SERVER['DOCUMENT_ROOT'] . '/' . $filename;
+    // NOTE: TBH I'm not sure why and how would one put a sitemap.xml into a
+    // subdirectory of a domain. Is there such a thing as "scoped sitemap.xml"?
+    $sitemap = SCRIPT_ROOT . $filename;
     $base_path_opts = array(
       'environment' => 'live',
       'for_locale'  => $locale_key,

@@ -62,12 +62,17 @@ $config['env']['domain']['locale']['primary'] =
 $config['env']['domain']['locale']['secondary'] =
   $config['presets'][CONFIG_PRESET]['domain']['secondary'];
 
-$config['xml_sitemap_generator']['domain']['primary'] =
-  $config['presets']['live']['domain']['primary'];
-$config['xml_sitemap_generator']['domain']['secondary'] =
-  $config['presets']['live']['domain']['secondary'];
+// Working dir.
+// Provide it, if your site is not operating from the document root (if the
+// index.php is in a subdirectory).
+// NOTE: don't use slashes at the beginning or at the end.
+//
+// If your index.php is in the document root however, provide FALSE as value,
+// or an empty string.
+$config['env']['working_dir'] = '';
 
-// -----------------------------------------------------------------------------
+
+// #############################################################################
 // Document properties.
 
 $config['document']['locale']['primary']['langcode']     = 'en';
@@ -79,7 +84,7 @@ $config['document']['locale']['secondary']['php_locale'] = 'hu-HU.utf8';
 // giving the visitor a hint on the 'abandonedness' of the website. IMO,
 // abandoned websites with outdated content can cause real inconvenience for
 // people in a number of situations.)
-$config['document']['global_lastmod'] = '2015-03-08'; // (format: YYYY-MM-DD)
+$config['document']['global_lastmod'] = '2015-03-22'; // (format: YYYY-MM-DD)
 
 
 // #############################################################################
@@ -235,6 +240,11 @@ $config['content']['short_tags'] = array(
 
 // #############################################################################
 // MISC.
+
+$config['xml_sitemap_generator']['domain']['primary'] =
+  $config['presets']['live']['domain']['primary'];
+$config['xml_sitemap_generator']['domain']['secondary'] =
+  $config['presets']['live']['domain']['secondary'];
 
 // Custom substring used for prefixing the XML sitemap filename.
 $config['xml_sitemap_generator']['sitemap_name'] = 'sitemap';

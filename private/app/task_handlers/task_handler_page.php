@@ -11,8 +11,15 @@ require_once($registry['app_internals']['utilities'] . '/utility_page.php');
 if (empty($request['page_id'])) {
   // Bring in known paths.
   pageutils_import_paths_from_cache($registry, $request, $temp, $datapool);
-  // Decide the page_id by comparing path to our path records.
-  if (($index = array_search($request['uri_path'], $datapool['paths'])) !== FALSE) {
+  if (empty($config['env']['working_dir'])) {
+    $prepared_uri_path = $request['uri_path'];
+  }
+  else {
+    $to_trim = $config['env']['working_dir'] . '/';
+    $prepared_uri_path = substr($request['uri_path'], strlen($to_trim));
+  }
+  // Decide the page_id by comparing the path to our path records.
+  if (($index = array_search($prepared_uri_path, $datapool['paths'])) !== FALSE) {
     $path_record = $temp['raw_paths'][$index];
     $request['page_id'] = ltrim(strstr($path_record, ':'), ':');
   }

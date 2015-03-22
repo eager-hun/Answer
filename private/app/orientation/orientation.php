@@ -57,17 +57,33 @@ else {
   if (!empty($request['uri_path'])) {
     $request['uri_path_items'] = explode('/', $request['uri_path']);
 
-    $special_task =
-      array_search($request['uri_path_items'][0] ,$config['app']['reserved_paths']);
+    if (!empty($config['env']['working_dir'])) {
+      $working_dir_items = explode('/', $config['env']['working_dir']);
+      $pivotal_key = count($working_dir_items);
+      $special_task =
+        array_search($request['uri_path_items'][$pivotal_key] ,$config['app']['reserved_paths']);
+    }
+    else {
+      $special_task =
+        array_search($request['uri_path_items'][0] ,$config['app']['reserved_paths']);
+    }
     if ($special_task !== FALSE) {
       $request['task']['type'] = $special_task;
     }
     else {
       $request['task']['type'] = 'page';
-      // The page_id will be identified later on.
+      if (!empty($config['env']['working_dir'])) {
+        $home_path = $config['env']['working_dir'] . '/';
+        if ($request['uri_path'] == $home_path) {
+          $request['task']['type'] = 'page';
+          $request['page_id'] = 'home';
+        }
+        // Else the page_id will be identified later on.
+      }
+      // And the page_id will be identified later on.
     }
   }
-  // No path given in the URI, so it is the homepage.
+  // No path given in the URI, so homepage gets served.
   else {
     $request['task']['type'] = 'page';
     $request['page_id'] = 'home';
