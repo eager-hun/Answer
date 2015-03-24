@@ -9,8 +9,11 @@
 // #############################################################################
 // Config Presets.
 
-// NOTE: you can get multiple domain names (alternative HTTP_HOSTs) by setting
+// NOTE 1: you can get multiple domain names (alternative HTTP_HOSTs) by setting
 // up multiple virtual hosts to point to the directory of this installation.
+
+// NOTE 2: you can get more info about the various dev- admin- and security
+// modes towards the end of this very file, in the "CAUTION ZONE" section.
 
 // Dev site presets.
 $config['presets']['dev'] = [
@@ -22,6 +25,7 @@ $config['presets']['dev'] = [
   'serve_bare_data'  => 1, // 0 || 1 .
   'dev_mode'         => 1, // 0 || 1 || 'verbose' .
   'admin_mode'       => 1, // 0 || 1 .
+  'give_up_security' => 0, // 0 || 1 .
 ];
 
 // Stage site presets.
@@ -34,6 +38,7 @@ $config['presets']['stage'] = [
   'serve_bare_data'  => 0,
   'dev_mode'         => 0,
   'admin_mode'       => 0,
+  'give_up_security' => 0,
 ];
 
 // Live site presets.
@@ -46,6 +51,7 @@ $config['presets']['live'] = [
   'serve_bare_data'  => 0,
   'dev_mode'         => 0,
   'admin_mode'       => 0,
+  'give_up_security' => 0,
 ];
 
 // Active preset: one of the ^^ above.
@@ -258,10 +264,14 @@ $config['htmlpurifier']['id_prefix'] = 'anchor--';
 // #############################################################################
 // CAUTION ZONE.
 
+// The bare-data mode currently returns content without authenticating requests.
+// This - at least theoretically - opens up the possibility for other websites
+// to "borrow" your content.
 $config['app']['serve_bare_data'] =
   $config['presets'][CONFIG_PRESET]['serve_bare_data'];
 
-// The dev_mode does things that migth be considered risky on a public server.
+// The dev_mode may do things that are risky to do on a public server!
+// NEVER enable dev_mode on public instances!
 $config['app']['dev_mode'] =
   $config['presets'][CONFIG_PRESET]['dev_mode'];
 
@@ -291,3 +301,8 @@ $config['app']['dev_mode'] =
 //    impossibility of unwanted access to admin functions.
 $config['app']['admin_mode'] =
   $config['presets'][CONFIG_PRESET]['admin_mode'];
+
+// The give_up_security switch allows unsafe setting combinations to be used.
+// NEVER enable give_up_security on public instances!
+$config['app']['give_up_security'] =
+  $config['presets'][CONFIG_PRESET]['give_up_security'];

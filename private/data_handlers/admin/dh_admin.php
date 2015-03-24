@@ -14,7 +14,7 @@ function dh_admin($args) {
 
   // Authorizaton check.
   // @see also the "security" component!
-  if (!is_admin($GLOBALS['config'])) {
+  if (!is_admin()) {
     $header = $request['server_protocol'] . " 403 Forbidden";
     sys_notify(loc('http-403'), 'warning');
     datautils_send_standard_headers($request);

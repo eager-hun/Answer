@@ -70,7 +70,7 @@ function distrust_input($input, $from) {
         return ensafe_string($config['env']['domain']['locale'][$domain_index], 'domain');
       }
       else {
-        sys_notify("Unrecognized domain name. (Consult your config file's <em>Config presets</em> section.)", 'warning');
+        sys_notify("Unrecognized domain name. (Consult your config file's _Config presets_ section.)", 'warning');
         if (!empty($request['server_protocol'])) {
           $header = $request['server_protocol'] . ' 400 Bad request';
           apputils_exit_nicely($header);
@@ -120,10 +120,18 @@ function ensafe_string($string, $usage = 'display') {
         // So the bizarre situation is that we cannot sys_notify() here about
         // the lack of the htmlpurifier lib, because the sys_notify() output
         // also wants to be sanitized by this codeblock, which means an infinite
-        // loop. Anyways, apputils_wake_resource() should already have taken
-        // good care of notifying about the situation. This place would have
-        // only been double assurance. That we can't have now. So here we go.
-        $processed = $string;
+        // loop.
+        // NOTE: apputils_wake_resource() should already have made sure that
+        // a notification about the risks were issued.
+        if (!empty($GLOBALS['config']['app']['give_up_security'])
+            && $GLOBALS['config']['app']['give_up_security'] === 1) {
+          // You can get unescaped HTML output only if you explicitly disabled
+          // security.
+          $processed = $string;
+        }
+        else {
+          $processed = htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+        }
       }
       break;
     case 'domain':
@@ -205,11 +213,49 @@ function ensafe_array_vals(&$val, $key, $usage = 'attribute_value') {
  *
  * FIXME one day.
  */
-function is_admin($config) {
-  if (array_key_exists('admin_mode', $config['app'])) {
-    return $config['app']['admin_mode'];
+function is_admin() {
+  if (array_key_exists('admin_mode', $GLOBALS['config']['app'])) {
+    if ($GLOBALS['config']['app']['admin_mode'] === 1) {
+      return TRUE;
+    }
+    else {
+      return FALSE;
+    }
   }
   else {
     return FALSE;
+  }
+}
+
+/**
+ * In-app security policies.
+ */
+function implement_security_policies() {
+  // The script should only run if the config presets are used in the standard
+  // way.
+  if (!defined('CONFIG_PRESET')
+      || empty($GLOBALS['config']['presets'][CONFIG_PRESET])) {
+    sys_notify('Improper usage of script.', 'alert');
+    apputils_exit_nicely();
+  }
+
+  if (is_dev_mode()) {
+    error_reporting(E_ALL);
+
+    // Warning about enabled dev_mode on public instances.
+    if (CONFIG_PRESET == 'stage' || CONFIG_PRESET == 'live') {
+      sys_notify('Warning: a configuration conflict was detected.', 'warning');
+    }
+
+    // Giving in to various incentives, temporarily we can do this.
+    // apputils_disable_htmlpurifier($config);
+  }
+  else {
+    error_reporting(0);
+  }
+
+  // Warning about enabled admin_mode on public instances.
+  if (is_admin() && (CONFIG_PRESET == 'stage' || CONFIG_PRESET == 'live')) {
+    sys_notify('Warning: a configuration conflict was detected.', 'warning');
   }
 }

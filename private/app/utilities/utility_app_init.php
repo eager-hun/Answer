@@ -186,10 +186,11 @@ function show($variable_name) {
  *   Optional. Recognized values: on || verbose.
  */
 function is_dev_mode($level = '') {
-  global $config;
-
   if (!empty($level) && $level == 'verbose') {
-    if ($config['app']['dev_mode'] == 'verbose') {
+    // NOTE: needs typesafe comparison operator, as the disabled dev_mode is
+    // represented by 0 as value here, and - in php - one shouldn't rely on
+    // the results of simple comparisons between integer vs string.
+    if ($GLOBALS['config']['app']['dev_mode'] === 'verbose') {
       return TRUE;
     }
     else {
@@ -197,7 +198,7 @@ function is_dev_mode($level = '') {
     }
   }
   else {
-    if (!empty($config['app']['dev_mode'])) {
+    if (!empty($GLOBALS['config']['app']['dev_mode'])) {
       return TRUE;
     }
     else {
@@ -235,7 +236,7 @@ function apputils_wake_resource($resource_type, $resource_id, $options = array()
         }
         else {
           if (!in_array('dependency_htmlpurifier', $config['app']['suppress_warnings'])) {
-            $message = "Missing the dependency <em>htmlpurifier</em> can lead to trouble: everyone can get hacked. (Consult your config file's <em>Dependencies</em> section.)";
+            $message = "Missing the dependency _htmlpurifier_ can lead to trouble: everyone can get hacked. (Consult your config file's _Dependencies_ section.)";
             sys_notify($message, 'warning');
           }
           // We store its id in the initiated array, so it won't be loaded any more.
@@ -244,7 +245,7 @@ function apputils_wake_resource($resource_type, $resource_id, $options = array()
       }
       if ($resource_id == 'php-markdown' && !in_array($resource_id, $temp['dependencies']['met'])) {
         if (!in_array('dependency_php-markdown', $config['app']['suppress_warnings'])) {
-          $message = "Missing the dependency <em>php-markdown</em> imposes inconvenience: texts might look really ugly. (Consult your config file's <em>Dependencies</em> section.)";
+          $message = "Missing the dependency _php-markdown_ imposes inconvenience: texts might look really ugly. (Consult your config file's _Dependencies_ section.)";
           sys_notify($message, 'warning');
           // We store its id in the initiated array, so it won't be loaded any more.
           $temp['initiated_resources']['classes'][] = $resource_id;

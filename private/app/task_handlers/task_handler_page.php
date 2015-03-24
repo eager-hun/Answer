@@ -63,7 +63,7 @@ if ($page_data_temp['data_type'] == 'entity') {
   datautils_data_fetcher($page_data_temp, $fetch_opts);
 
   if (empty($temp['entity_metadata'][$page_data_temp['instance_id']]['meta']['is_published'])) {
-    if (!is_admin($config)) {
+    if (!is_admin()) {
       // Overwriting the $request with the 403 page.
       $request['page_id'] = 'http-403';
     }
@@ -74,7 +74,7 @@ if ($page_data_temp['data_type'] == 'entity') {
 }
 if ($page_data_temp['data_type'] == 'binder'
     && empty($page_data_temp['is_published'])) {
-  if (!is_admin($config)) {
+  if (!is_admin()) {
     // Overwriting the $request with the 403 page.
     $request['page_id'] = 'http-403';
   }
@@ -83,7 +83,7 @@ if ($page_data_temp['data_type'] == 'binder'
   }
 }
 
-if (is_admin($config)) {
+if (is_admin()) {
   $request['contexts'][] = 'admin';
 }
 

@@ -155,23 +155,7 @@ require_once($registry['app_current']['config'] . '/config.php');
 // -----------------------------------------------------------------------------
 // Post-config adjustments.
 
-if (!defined('CONFIG_PRESET') || empty($config['presets'][CONFIG_PRESET])) {
-  sys_notify('Improper usage of script.', 'alert');
-  apputils_exit_nicely();
-}
-
-if (is_dev_mode()) {
-  error_reporting(E_ALL);
-  // When tuning HTML output, temporarily we can do this.
-  // apputils_disable_htmlpurifier($config);
-}
-else {
-  error_reporting(0);
-
-  if (is_admin($config)) {
-    sys_notify('Warning: a configuration conflict was detected.', 'warning');
-  }
-}
+implement_security_policies();
 
 // Site-instance-dependent locations.
 $registry['app_current']['definitions'] =

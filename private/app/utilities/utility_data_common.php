@@ -99,7 +99,7 @@ function _fetch_entity_raw($args, $fetch_options) {
 
   // Is the entity published?
   if (empty($record['meta']['is_published'])) {
-    if (!is_admin($GLOBALS['config'])) {
+    if (!is_admin()) {
       $GLOBALS['temp']['data_statuses'][$instance_id] = '403';
       return FALSE;
     }
