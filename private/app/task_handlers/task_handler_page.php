@@ -203,7 +203,6 @@ $common_args = array(
   'instance_id' => $template_name,
   'output_type' => 'html',
   'present_as'  => $template_name,
-  'requestor'   => 'page',
 );
 datautils_data_fetcher($common_args);
 

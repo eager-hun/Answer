@@ -11,6 +11,7 @@ if (empty($config['app']['serve_bare_data'])) {
   apputils_exit_nicely($header);
 }
 
+// Checking if the request contains all neccessary arguments.
 if (!empty($request['get_data']['data_type'])
     && array_key_exists('instance_id', $request['get_data'])) {
 
@@ -24,7 +25,6 @@ if (!empty($request['get_data']['data_type'])
 
   // Fetching data.
   $fetcher_args = array(
-    'data_requestor' => 'bare_data', // Indicate the current task handler.
     'data_type'      => $data_type,
     'instance_id'    => $instance_id,
   );
@@ -35,7 +35,7 @@ if (!empty($request['get_data']['data_type'])
   // Fetching data.
   datautils_data_fetcher($fetcher_args);
 
-  // If result doesn't seem OK.
+  // If the result doesn't seem OK.
   if ($temp['data_statuses'][$instance_id] != '200') {
     if ($temp['data_statuses'][$instance_id] == '403') {
       // Other error states emitted a notification, but 403 was silent, so
@@ -51,18 +51,17 @@ if (!empty($request['get_data']['data_type'])
   else {
     // Providing input for the renderer utilities.
     $presenter_args = array();
+    $presenter_args['p10n_subject'] = $request['get_data']['data_type'];
     if (!empty($request['get_data']['output_type'])) {
       $presenter_args['output_type'] = $request['get_data']['output_type'];
     }
     if (!empty($request['get_data']['present_as'])) {
       $presenter_args['present_as'] = $request['get_data']['present_as'];
     }
-    else {
-      $presenter_args['present_as'] = 'automatic_inventory';
-    }
-    // Let dresser have all the info we have so far.
+    // Let the presenter layer have all the info that we have so far.
     $dresser_args = array_merge_recursive($fetcher_args, $presenter_args);
-    // data_dresser() will call present() and return the rendered item.
+    // templateutils_data_dresser() will call templateutils_present() and return
+    // the rendered item.
     $response = templateutils_data_dresser($dresser_args);
   }
 }

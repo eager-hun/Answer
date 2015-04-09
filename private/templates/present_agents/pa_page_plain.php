@@ -10,7 +10,7 @@ function pa_page_plain(&$args) {
   // $args['wrapper_options']['attributes']['class'][] = 'some-class';
 
   // Slot assingments.
-  $args['for_dispatcher'] = array(
+  $args['variable_dispatcher_options'] = array(
     'assignments' => array(
       'slot_page_content' => array(
         'sys_notifications' => array(),

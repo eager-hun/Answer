@@ -5,7 +5,10 @@
  */
 
 /**
- * Data dressing wrapper function.
+ * Data dresser.
+ *
+ * It organizes the calls for templateutils_present() on behalf of binders and
+ * entities.
  */
 function templateutils_data_dresser($args) {
   // Render an entity.
@@ -18,6 +21,7 @@ function templateutils_data_dresser($args) {
     if (!empty($GLOBALS['temp']['raw_entities'][$args['instance_id']])) {
       $args['raw_data'] =
         $GLOBALS['temp']['raw_entities'][$args['instance_id']]['fields'];
+      $args['p10n_subject'] = 'entity';
       if (!empty($args['raw_data'])) {
         return templateutils_present($args);
       }
@@ -50,6 +54,8 @@ function templateutils_data_dresser($args) {
  * Recursive binder renderer.
  */
 function _binder_render_recursive($args, &$items_buffer, &$result) {
+  // FIXME: how doesn't it accumulate while processing unrelated binder
+  // definitions??? It does? It looks like as if it does.
   static $inception = 0;
 
   if (!empty($GLOBALS['definitions']['binders'][$args['instance_id']])) {
@@ -69,67 +75,63 @@ function _binder_render_recursive($args, &$items_buffer, &$result) {
     }
     elseif ($item['data_type'] == 'binder') {
       $inception++;
-      if ($inception < 20) {
+      if ($inception < 40) {
         $nested_items = array();
         _binder_render_recursive($item, $nested_items, $result);
         if (!empty($nested_items)) {
           $item['raw_data'] = $nested_items;
+          $item['p10n_subject'] = 'binder';
           $items_buffer[$item['instance_id']] = templateutils_present($item);
         }
       }
       else {
-        $message = 'Nesting depth of binders has exceeded 20, aborting.'
-                 . "<br>Tip: review your binder definitions to find the cause of the 'Inception overload'.";
+        $message = 'Nesting depth of binders has blown the limiter fuse, aborting.'
+                 . "<br>Tip: review your binder definitions to find the cause for excessive binder nesting.";
         sys_notify($message, 'warning');
         $args['raw_data'] = $items_buffer;
+        $args['p10n_subject'] = 'binder';
         $result = templateutils_present($args);
         return;
       }
     }
     elseif ($item['data_type'] == 'current_page_primary_content') {
       if (!empty($GLOBALS['request']['page_data'])) {
-        $content_data = $GLOBALS['request']['page_data'];
-        $content_data['wrapper_options'] = array(
+        // The renderer will be able to use much of $request's page_data.
+        $render_args_for_prim = $GLOBALS['request']['page_data'];
+        // Appending further rendering options.
+        $render_args_for_prim['wrapper_options'] = array(
           'attributes' => array(
             'id'       => 'primary-content',
             'class'    => array('primary-content'),
             'tabindex' => '0',
           ),
         );
-        if ($content_data['data_type'] == 'binder') {
-          $content_data['wrapper_options']['attributes']['class'][] = 'binder';
+        $render_args_for_prim['flag_primary_content'] = TRUE;
 
-          if (empty($content_data['present_as'])) {
-            $content_data['present_as'] = 'automatic_inventory';
-          }
+        if ($render_args_for_prim['data_type'] == 'binder') {
           // If the primary content is a binder, we store it with its instance
           // name.
           // TODO: finding out why I had to do this and why it wont't break.
-          $items_buffer[$content_data['instance_id']] =
-            templateutils_data_dresser($content_data);
+          $items_buffer[$render_args_for_prim['instance_id']] =
+            templateutils_data_dresser($render_args_for_prim);
         }
-        elseif ($content_data['data_type'] == 'entity') {
-          $content_data['wrapper_options']['attributes']['class'][] = 'entity';
-
-          $pa_full = $content_data['entity_type'] . '_full';
+        elseif ($render_args_for_prim['data_type'] == 'entity') {
+          // Sorting out the right presentation_agent for the entity.
+          $pa_full = $render_args_for_prim['entity_type'] . '_full';
           if (!empty($item['present_as'])) {
-            $content_data['present_as'] = $item['present_as'];
+            $render_args_for_prim['present_as'] = $item['present_as'];
           }
           elseif (empty($item['present_as'])
               && !empty($GLOBALS['registry']['known_present_agents'])
               && in_array($pa_full, $GLOBALS['registry']['known_present_agents'])) {
-            $content_data['present_as'] = $pa_full;
-          }
-          else {
-            $content_data['present_as'] = 'automatic_inventory';
+            $render_args_for_prim['present_as'] = $pa_full;
           }
           // If the primary content is an entity, we store it with an alias of
           // 'page_primary_content'.
           // TODO: finding out why I had to do this and why it wont't break.
           $items_buffer['page_primary_content'] =
-            templateutils_data_dresser($content_data);
+            templateutils_data_dresser($render_args_for_prim);
         }
-        $content_data['this_is_primary_content'] = TRUE;
       }
     }
     else {
@@ -138,6 +140,7 @@ function _binder_render_recursive($args, &$items_buffer, &$result) {
     }
   }
   $args['raw_data'] = $items_buffer;
+  $args['p10n_subject'] = 'binder';
   $result = templateutils_present($args);
 }
 
@@ -145,11 +148,24 @@ function _binder_render_recursive($args, &$items_buffer, &$result) {
  * Present data.
  */
 function templateutils_present($args) {
-  // Default output is HTML (as opposed to JSON, that should be an option).
+
+  // Default output is HTML (as opposed to JSON, which, in the future, should
+  // also be an option).
   if (!array_key_exists('output_type', $args)) {
     $args['output_type'] = 'html';
   }
-
+  // Some templates offer variable HTML tag for the wrapper; here we make sure
+  // they receive an argument as default.
+  if (empty($args['variables']['wrapper_html_tag'])) {
+    $args['variables']['wrapper_html_tag'] = 'div';
+  }
+  // Binders and entities do definitely need a presentation agent to sort them
+  // out. If none had been specified yet, let's specify a default for them.
+  if (empty($args['present_as'])
+      && !empty($args['p10n_subject'])
+      && ($args['p10n_subject'] == 'binder' || $args['p10n_subject'] == 'entity')) {
+    $args['present_as'] = 'automatic_inventory';
+  }
   // Making sure that the wrapper options infrastructure is ready to use, but
   // also keep possible earlier declarations.
   if (!array_key_exists('wrapper_options', $args)) {
@@ -165,17 +181,8 @@ function templateutils_present($args) {
     $args['wrapper_options']['attributes']['class'] = array();
   }
 
-  // Some templates offer variable HTML tag for wrapper; make sure they receive
-  // an argument as default.
-  if (empty($args['variables']['wrapper_html_tag'])) {
-    $args['variables']['wrapper_html_tag'] = 'div';
-  }
-
-  // Presenting can happen either by applying the specified a template, or the
-  // specified present_agent.
-  // If the template is specified, should be specified in $args['template'].
-  // If the present_agent is specified, then it should be done in
-  // $args['present_as'].
+  // If a presentation agent was appointed, let's now allow it do its work on
+  // our data before templatizing.
   if (!empty($args['present_as'])) {
     apputils_wake_resource('present_agent', $args['present_as']);
     $present_agent_func = 'pa_' . $args['present_as'];
@@ -189,12 +196,7 @@ function templateutils_present($args) {
       apputils_wake_resource('present_agent', 'automatic_inventory');
       pa_automatic_inventory($args);
     }
-    // Item signature.
-    if ($args['data_type'] == 'entity') {
-      $item_signature = $args['template_name'] . '--' . $args['instance_id'];
-      $args['wrapper_options']['attributes']['class'][] =
-        ensafe_string($item_signature, 'attribute_value');
-    }
+
     // If the template is a layout, then load the layout definition now and
     // pass on its properties.
     if (strpos($args['template_name'], 'layout_') === 0) {
@@ -205,7 +207,7 @@ function templateutils_present($args) {
         $GLOBALS['definitions']['layouts'][$args['template_name']]['template_source'];
     }
     // Implement assignments.
-    if (!empty($args['for_dispatcher'])) {
+    if (!empty($args['variable_dispatcher_options'])) {
       templateutils_variable_dispatcher($args);
     }
     // Some after-effects to the template .
@@ -213,6 +215,17 @@ function templateutils_present($args) {
     if (function_exists($post_dispatch_func)) {
       $post_dispatch_func($args);
     }
+  }
+
+  // Item signatures (a.k.a. HTML classes for the wrapper tag).
+  $args['wrapper_options']['attributes']['class'][] =
+    ensafe_string($args['template_name'], 'attribute_value');
+  if (!empty($args['p10n_subject'])) {
+    $args['wrapper_options']['attributes']['class'][] =
+      ensafe_string($args['p10n_subject'], 'attribute_value');
+    $item_signature = $args['p10n_subject'] . '--' . $args['instance_id'];
+    $args['wrapper_options']['attributes']['class'][] =
+      ensafe_string($item_signature, 'attribute_value');
   }
 
   // Producing output.
@@ -225,12 +238,6 @@ function templateutils_present($args) {
       $message = 'No result was returned for <em>'
         . ensafe_string($args['instance_id'], 'attribute_name') . '</em> because it did not have any variables to put out.';
       sys_notify($message, 'warning');
-      /*
-      ob_start();
-      var_dump($args);
-      $message = ob_get_clean();
-      sys_notify($message, 'debug');
-      */
     }
   }
   elseif ($args['output_type'] == 'html') {
@@ -250,6 +257,7 @@ function templateutils_present($args) {
  * Return data formatted as HTML.
  */
 function _templatize_html($args) {
+
   // Template name.
   // $args['template'] should have either been provided before calling
   // templateutils_present(), or, if a present_agent was employed, then it
@@ -332,50 +340,46 @@ function templateutils_prerender_fields($args) {
   $template_args['template_source'] = 'function';
 
   foreach ($fields as $field_id => $field_data) {
-    // var_dump($field_id);
-    // var_dump($field_data);
-    if (empty($field_data)) {
-      // var_dump($args);
-    }
-    // Only process the field if the it actually has any content.
+
+    // Only process the field if it actually has any content.
     // (Watch for '0' as valid content though!)
     if (!isset($field_data['field_content'])) {
       // Leave this, jump to next field.
       continue;
     }
-    // Reset on every iteration.
+    // Resetting these on every iteration.
     $template_args['wrapper_options'] = array(
       'attributes' => array(
         'class' => array(
-          'field',
           // Do we need to sanitize these? Could we spare doing it?
-          'field--' . ensafe_string($field_id, 'attribute_value'),
-          'field-type--' . ensafe_string($field_data['field_type'], 'attribute_value'),
+          'field_id--' . ensafe_string($field_id, 'attribute_value'),
+          'field_type--' . ensafe_string($field_data['field_type'], 'attribute_value'),
         ),
       ),
     );
     $template_args['variables'] = array();
 
-    if (!in_array('without_label', $args['field_formatter_options'])) {
-      // NOTE: Escape the label now! (if it comes through loc() then it is
-      // already escaped, but there is no guarantee that it was defined via
-      // loc().
-      $template_args['variables']['field_label'] =
-        ensafe_string($field_data['field_label'], 'html');
-    }
+    // NOTE: Escape the label now! (if it comes through loc() then it is
+    // already escaped, but there is no guarantee that it was defined via
+    // loc().
+    $template_args['variables']['field_label'] =
+      ensafe_string($field_data['field_label'], 'html');
 
     // Checking for field_content_prerenders.
     $helper_func = 'field_content_prerender_' . $field_data['field_type'];
     if (function_exists($helper_func)) {
+      // Getting field content on board via the corresponding content
+      // prerendrer.
       $template_args['variables']['field_content'] = $helper_func($field_data);
     }
     else {
-      // Field contents are ought to be already escaped by the field data
-      // handler.
+      // Field contents are ought to be already escaped by the corresponding
+      // field data handler.
       $template_args['variables']['field_content'] =
         $field_data['field_content'];
     }
 
+    // Wrapping the field content into a link, if that was asked for.
     if (array_key_exists('link_to', $field_data)) {
       $link_template = array(
         'template_name' => 'link',
@@ -386,6 +390,18 @@ function templateutils_prerender_fields($args) {
       );
       $template_args['variables']['field_content'] = templateutils_present($link_template);
     }
+
+    // As per now, the template variant can be chosen as per entity; it will be
+    // the same for all fields within a given entity.
+    // How about postponing the possibility for various field template variants
+    // within the same entity until we have a page cache (for performance
+    // considerations) ?
+    if (!empty($args['field_prerenderer_options']['template_variant'])) {
+      $template_args['wrapper_options']['template_variant'] =
+        $args['field_prerenderer_options']['template_variant'];
+    }
+
+    // Rendering the complete field now.
     $output[$field_id] = templateutils_present($template_args);
   }
   unset($field_id, $field_data);
@@ -406,16 +422,11 @@ function templateutils_variable_dispatcher(&$args) {
     // A string variable to collect the slot's rendered content, item by item.
     $args['variables'][$slot_id] = '';
     // The present agent defined which items belong to this slot.
-    if (!empty($args['for_dispatcher']['assignments'][$slot_id])) {
-      $slot_assigned_items = $args['for_dispatcher']['assignments'][$slot_id];
+    if (!empty($args['variable_dispatcher_options']['assignments'][$slot_id])) {
+      $slot_assigned_items = $args['variable_dispatcher_options']['assignments'][$slot_id];
       foreach($slot_assigned_items as $item_id => $item_args) {
         if (!empty($args['raw_data'][$item_id])) {
           $args['variables'][$slot_id] .= $args['raw_data'][$item_id];
-//          if ($slot_id =='main_content') {
-//            var_dump($slot_id);
-//            var_dump($args['for_dispatcher']['assignments'][$slot_id]);
-//            var_dump($args['variables'][$slot_id]);
-//          }
         }
       }
     }

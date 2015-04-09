@@ -181,6 +181,7 @@ $menus['developers-menu'] = array(
 // #############################################################################
 // (developer's) CSS-tuner menu.
 
+/*
 $menus['menu_developer_menu'] = array(
   'menu_options' => array(
     'attributes' => array(
@@ -278,3 +279,4 @@ $menus['menu_developer_menu'] = array(
                 ),
   ),
 );
+*/

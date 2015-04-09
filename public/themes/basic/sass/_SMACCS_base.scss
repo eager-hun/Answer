@@ -81,7 +81,7 @@ span.anchor {
 // #############################################################################
 // Some fields.
 
-.field--field_preview_image {
+.field_id--field_preview_image {
   a {
     @include link-no-hover-border;
   }
@@ -91,7 +91,7 @@ span.anchor {
   }
 }
 .dynamic--full {
-  .field--field_description {
+  .field_id--field_description {
     margin-bottom: $layout-pad*2;
   }
 }

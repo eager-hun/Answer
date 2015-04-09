@@ -23,7 +23,9 @@ function pa_dynamic_full(&$args) {
 
   // Pre-rendering fields.
   if ($args['data_type'] == 'entity') {
-    $args['field_formatter_options'] = array('without_label');
+    $args['field_prerenderer_options'] = array(
+      'template_variant' => 'essence',
+    );
     $args['raw_data'] = templateutils_prerender_fields($args);
   }
 

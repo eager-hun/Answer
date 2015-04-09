@@ -375,10 +375,10 @@ span.anchor {
   vertical-align: text-top;
 }
 
-.field--field_preview_image a:hover, .field--field_preview_image a:focus {
+.field_id--field_preview_image a:hover, .field_id--field_preview_image a:focus {
   border-bottom: none;
 }
-.field--field_preview_image img {
+.field_id--field_preview_image img {
   display: inline-block;
   line-height: 1;
   margin: 0;
@@ -390,7 +390,7 @@ span.anchor {
   padding: 0.25em;
 }
 
-.dynamic--full .field--field_description {
+.dynamic--full .field_id--field_description {
   margin-bottom: 2em;
 }
 
@@ -857,7 +857,7 @@ blockquote:last-child {
 }
 .textbox:before,
 blockquote:before {
-  background-image: url('../images/icon-sprite-main--prod--4.svg?1425562839');
+  background-image: url('../images/icon-sprite-main--prod--4.svg?1427225625');
   background-attachment: scroll;
   background-repeat: no-repeat;
   -moz-border-radius: 3px;
@@ -871,7 +871,7 @@ blockquote:before {
 }
 .mdz-no-svg .textbox:before, .mdz-no-svg
 blockquote:before {
-  background-image: url('../images/icon-sprite-main--prod--4.png?1425562839');
+  background-image: url('../images/icon-sprite-main--prod--4.png?1427225625');
 }
 
 .textbox--hero p,
@@ -936,27 +936,27 @@ blockquote:before {
   margin-top: 1.25em;
 }
 
-.fl--style-plain .field--field_title {
+.fl--style-plain .field_id--field_title {
   font-size: 1.4em;
 }
-.fl--style-plain .field--field_preview_text {
+.fl--style-plain .field_id--field_preview_text {
   margin-top: 0.25em;
   padding-left: 1em;
 }
-.fl--style-plain .field--field_preview_text .field__content {
+.fl--style-plain .field_id--field_preview_text .field__content {
   font-size: 0.9em;
 }
-.fl--style-plain .field--field_preview_text p,
-.fl--style-plain .field--field_preview_text ul {
+.fl--style-plain .field_id--field_preview_text p,
+.fl--style-plain .field_id--field_preview_text ul {
   margin: 0 0 0.5em;
 }
-.fl--style-plain .field--field_preview_text p:last-child,
-.fl--style-plain .field--field_preview_text ul:last-child {
+.fl--style-plain .field_id--field_preview_text p:last-child,
+.fl--style-plain .field_id--field_preview_text ul:last-child {
   margin-bottom: 0;
 }
 
 @media (min-width: 43.75em) {
-  .fl--style-plain .field--field_preview_text {
+  .fl--style-plain .field_id--field_preview_text {
     padding-left: 1.5em;
   }
 }
@@ -1291,7 +1291,7 @@ del {
   color: #b7b7b7;
 }
 
-.field-type--image img {
+.field_type--image img {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
@@ -1678,7 +1678,7 @@ a.menu-button.fixed {
   text-align: left;
 }
 .langswitch .label.has-icon:before {
-  background-image: url('../images/icon-sprite-main--prod--4.svg?1425562839');
+  background-image: url('../images/icon-sprite-main--prod--4.svg?1427225625');
   background-attachment: scroll;
   background-repeat: no-repeat;
   content: '';
@@ -1691,7 +1691,7 @@ a.menu-button.fixed {
   width: 18px;
 }
 .mdz-no-svg .langswitch .label.has-icon:before {
-  background-image: url('../images/icon-sprite-main--prod--4.png?1425562839');
+  background-image: url('../images/icon-sprite-main--prod--4.png?1427225625');
 }
 .langswitch .label.home-page:before {
   background-position: center -190px;
@@ -1714,14 +1714,14 @@ a.menu-button.fixed {
 }
 
 .locale .flag {
-  background-image: url('../images/icon-sprite-main--prod--4.svg?1425562839');
+  background-image: url('../images/icon-sprite-main--prod--4.svg?1427225625');
   background-attachment: scroll;
   background-repeat: no-repeat;
   border: 1px solid white;
   border: 1px solid rgba(255, 255, 255, 0.5);
 }
 .mdz-no-svg .locale .flag {
-  background-image: url('../images/icon-sprite-main--prod--4.png?1425562839');
+  background-image: url('../images/icon-sprite-main--prod--4.png?1427225625');
 }
 .locale .flag:before {
   background-image: linear-gradient(135deg, rgba(0, 0, 0, 0), rgba(90, 90, 166, 0.1), rgba(90, 90, 166, 0.3));
@@ -1837,7 +1837,7 @@ blockquote {
   z-index: 1;
 }
 [id="modal__close"]:before {
-  background-image: url('../images/icon-sprite-main--prod--4.svg?1425562839');
+  background-image: url('../images/icon-sprite-main--prod--4.svg?1427225625');
   background-attachment: scroll;
   background-repeat: no-repeat;
   background-position: center -131px;
@@ -1847,7 +1847,7 @@ blockquote {
   width: 22px;
 }
 .mdz-no-svg [id="modal__close"]:before {
-  background-image: url('../images/icon-sprite-main--prod--4.png?1425562839');
+  background-image: url('../images/icon-sprite-main--prod--4.png?1427225625');
 }
 [id="modal__close"]:focus {
   -moz-box-shadow: #ebe0eb 0 0 5px 2px;
@@ -1890,7 +1890,7 @@ blockquote {
   z-index: 900;
 }
 .throbber--modal:before {
-  background-image: url('../images/icon-sprite-main--prod--4.svg?1425562839');
+  background-image: url('../images/icon-sprite-main--prod--4.svg?1427225625');
   background-attachment: scroll;
   background-repeat: no-repeat;
   background-position: center -160px;
@@ -1905,7 +1905,7 @@ blockquote {
   animation: spinner 1s linear infinite;
 }
 .mdz-no-svg .throbber--modal:before {
-  background-image: url('../images/icon-sprite-main--prod--4.png?1425562839');
+  background-image: url('../images/icon-sprite-main--prod--4.png?1427225625');
 }
 
 @-webkit-keyframes spinner {
@@ -1949,13 +1949,13 @@ blockquote {
   }
 }
 .jump-links {
-  background-image: url('../images/icon-sprite-main--prod--4.svg?1425562839');
+  background-image: url('../images/icon-sprite-main--prod--4.svg?1427225625');
   background-attachment: scroll;
   background-repeat: no-repeat;
   background-position: -9999px -9999px;
 }
 .mdz-no-svg .jump-links {
-  background-image: url('../images/icon-sprite-main--prod--4.png?1425562839');
+  background-image: url('../images/icon-sprite-main--prod--4.png?1427225625');
 }
 
 /**
@@ -1966,7 +1966,7 @@ blockquote {
   font-size: 1.5em;
   margin-bottom: 0.65em;
 }
-.layout--landing_1 .column--main .flexilist .field--field_title {
+.layout--landing_1 .column--main .flexilist .field_id--field_title {
   font-size: 1.2em;
 }
 
@@ -2141,7 +2141,7 @@ blockquote {
  * @see
  * http://csswizardry.com/2013/04/shame-css/
  */
-.primary-content.entity .field--field_body .field__content > h1:first-child, .primary-content.entity .field--field_body .field__content > h2:first-child, .primary-content.entity .field--field_body .field__content > h3:first-child {
+.primary-content.entity > h1:first-child, .primary-content.entity > h2:first-child, .primary-content.entity > h3:first-child {
   margin-top: 0;
 }
 

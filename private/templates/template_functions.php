@@ -8,11 +8,9 @@
  * Draw plain (Return passed in data without any template around it).
  */
 function draw_plain($args) {
-  $output = '';
   if (!empty($args['variables']['content'])) {
-    $output .= $args['variables']['content'];
+    return $args['variables']['content'];
   }
-  return $output;
 }
 
 /**
@@ -36,16 +34,35 @@ function draw_wrap($args) {
  * Draw a field.
  */
 function draw_field($args) {
-  $output = '<div' . $args['variables']['wrapper_attributes'] . ">\n";
-  if (!empty($args['variables']['field_label'])) {
-    $output .= '<div class="label field__label">'
+  $buffer = '';
+
+  if (!empty($args['wrapper_options']['template_variant'])) {
+    $variant = $args['wrapper_options']['template_variant'];
+  }
+  else {
+    $variant = 'full';
+  }
+
+  if ($variant == 'full' && !empty($args['variables']['field_label'])) {
+    $buffer .= '<div class="label field__label">'
       . $args['variables']['field_label'] . '</div>';
   }
   if (isset($args['variables']['field_content'])) {
-    $output .= "<div class='field__content'>\n"
-      . $args['variables']['field_content'] . "\n</div>\n";
+    if ($variant == 'essence' || $variant == 'plain') {
+      $buffer .= $args['variables']['field_content'] . "\n";
+    }
+    else {
+      $buffer .= "<div class='field__content'>\n"
+        . $args['variables']['field_content'] . "\n</div>\n";
+    }
   }
-  $output .= "</div>\n";
+  if ($variant != 'plain') {
+    $output = '<div' . $args['variables']['wrapper_attributes'] . ">\n"
+            . $buffer . "</div>\n";
+  }
+  else {
+    $output = $buffer;
+  }
   return $output;
 }
 
@@ -55,7 +72,7 @@ function draw_field($args) {
 function draw_block($args) {
   $output = '<div' . $args['variables']['wrapper_attributes'] . ">\n";
   if (!empty($args['variables']['block_title'])) {
-    $output .= '<div' . $args['variables']['title_attributes'] . '>'
+    $output .= '<div' . $args['variables']['title_attributes'] . ">\n"
       . $args['variables']['block_title'] . "</div>\n";
   }
   if (isset($args['variables']['block_content'])) {

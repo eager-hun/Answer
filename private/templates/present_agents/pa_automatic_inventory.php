@@ -11,7 +11,6 @@ function pa_automatic_inventory(&$args) {
 
   // Pre-rendering fields - in case an entity was passed in for presenting.
   if ($args['data_type'] == 'entity') {
-    $args['field_formatter_options'] = array();
     $args['raw_data'] = templateutils_prerender_fields($args);
   }
 

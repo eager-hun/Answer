@@ -117,10 +117,10 @@ blockquote {
 }
 
 .fl--style-plain {
-  .field--field_title {
+  .field_id--field_title {
     font-size: 1.4em;
   }
-  .field--field_preview_text {
+  .field_id--field_preview_text {
     margin-top: $layout-pad*0.25;
     padding-left: $layout-pad;
 
@@ -140,7 +140,7 @@ blockquote {
 
 // -----------------------------------------------------------------------------
 @include breakpoint($bkp-multi-min) {
-  .fl--style-plain .field--field_preview_text {
+  .fl--style-plain .field_id--field_preview_text {
     padding-left: 1.5em;
   }
 }

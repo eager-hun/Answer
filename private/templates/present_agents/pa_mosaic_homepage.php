@@ -11,7 +11,7 @@ function pa_mosaic_homepage(&$args) {
   $args['wrapper_options']['attributes']['class'][] = 'content-level--homepage';
 
   // Slot assingments.
-  $args['for_dispatcher'] = array(
+  $args['variable_dispatcher_options'] = array(
     'assignments' => array(
       'top' => array(
         'content_meta' => array(),
@@ -34,7 +34,6 @@ function pa_mosaic_homepage(&$args) {
 
   // Pre-rendering fields - in case an entity was passed in for presenting.
   if ($args['data_type'] == 'entity') {
-    $args['field_formatter_options'] = array();
     $args['raw_data'] = templateutils_prerender_fields($args);
   }
 }

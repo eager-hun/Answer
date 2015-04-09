@@ -442,3 +442,50 @@ function apputils_disable_htmlpurifier(&$config) {
     sys_notify('Status: HTMLpurifier is disabled.', 'warning');
   }
 }
+
+/**
+ * Explore undocumented APIs, tool_No 1: audit a function's arguments.
+ *
+ * NOTE: this is only for developer usage, obviously.
+ *
+ * It was created for finding out what kind of args ever make it into
+ * templating-related functions - some of whom can end up inside beasts of
+ * recursive sequences.
+ *
+ * Usage: drop it inside the inspected func:
+ *
+ * @code
+ *
+ * apputils_explore_arguments($args);
+ *
+ * @endcode
+ *
+ * To see the results, do var_dump($temp['arguments_explorer']); near the end
+ * of director.php.
+ */
+function apputils_explore_arguments($args_to_inspect) {
+  if (!is_dev_mode()) {
+    return;
+  }
+
+  static $argsexp_inspect_id = 0;
+  if (!array_key_exists('arguments_explorer', $GLOBALS['temp'])) {
+    $GLOBALS['temp']['arguments_explorer'] = array();
+  }
+  $call_trace = debug_backtrace();
+  $inspected_function = $call_trace[1]['function'];
+  if (!array_key_exists($inspected_function, $GLOBALS['temp']['arguments_explorer'])) {
+    $GLOBALS['temp']['arguments_explorer'][$inspected_function] = array();
+  }
+  $GLOBALS['temp']['arguments_explorer'][$inspected_function][$argsexp_inspect_id] = array(
+    'caller' => $call_trace[2]['function'],
+    'args' => array(),
+  );
+  foreach ($args_to_inspect as $argument_name => $argument_val) {
+    if (!in_array($argument_name, $GLOBALS['temp']['arguments_explorer'][$inspected_function][$argsexp_inspect_id])) {
+      $GLOBALS['temp']['arguments_explorer'][$inspected_function][$argsexp_inspect_id]['args'][] = $argument_name;
+    }
+  }
+  unset($argument_name, $argument_val);
+  $argsexp_inspect_id++;
+}

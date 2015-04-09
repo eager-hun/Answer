@@ -78,7 +78,7 @@ strong {
 del {
   color: lighten(color(minor), 25%);
 }
-.field-type--image {
+.field_type--image {
   img {
     @include image-border;
     @include image-fit;

@@ -32,6 +32,7 @@ function template_customize_block(&$args) {
   }
 
   // This part is not optional, all blocks need it...
+  // UPDATE: could it be part of the pa_block() then?
   $args['variables']['title_attributes'] =
     templateutils_render_html_attributes($args['title_attributes']);
 }

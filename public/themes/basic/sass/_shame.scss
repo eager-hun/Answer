@@ -12,9 +12,7 @@
 // This top padding kills the collapsing of top/bottom margins, and there is too
 // big a whitespace present if the first child has a top margin.
 
-// Also, these additional wrappers should be stripped by templating options.
-
-.primary-content.entity .field--field_body .field__content {
+.primary-content.entity {
   & > h1:first-child,
   & > h2:first-child,
   & > h3:first-child {
