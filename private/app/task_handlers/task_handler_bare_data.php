@@ -51,7 +51,6 @@ if (!empty($request['get_data']['data_type'])
   else {
     // Providing input for the renderer utilities.
     $presenter_args = array();
-    $presenter_args['p10n_subject'] = $request['get_data']['data_type'];
     if (!empty($request['get_data']['output_type'])) {
       $presenter_args['output_type'] = $request['get_data']['output_type'];
     }

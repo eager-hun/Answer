@@ -49,7 +49,7 @@ function pa_article_preview(&$args) {
   $fields_to_keep = array(
     'field_title',
     'field_preview_text',
-    // 'field_preview_image', // TODO: It needs a dedicated present_agent.
+    // 'field_preview_image', // TODO: It needs a dedicated presentation_agent.
   );
   foreach($args['raw_data'] as $field_id => $field_data) {
     if (!in_array($field_id, $fields_to_keep)) {
@@ -60,7 +60,7 @@ function pa_article_preview(&$args) {
   // Pre-rendering fields
   if ($args['data_type'] == 'entity') {
     $args['field_prerenderer_options'] = array(
-      'template_variant' => 'essence',
+      'template_variant' => 'nolabel',
     );
     $args['raw_data'] = templateutils_prerender_fields($args);
   }

@@ -26,12 +26,15 @@ By default, bare data mode can be accessed on the `/bare-data` path (this value 
 The bare data mode operates by and is expecting HTTP GET parameters:
 
 - `data_type` (mandatory)
-  - possible values are: `entity` or `binder`
+  - Valid values are: `entity` or `binder`.
 - `entity_type` (mandatory for entities)
 - `instance_id` (mandatory)
 - `present_as` (optional)
-  - The default `present_agent` is `automatic_inventory`. Note: not all entity
-    types and `present_agent`s are compatible.
+  - The default `presentation_agent` is `automatic_inventory`. Note: not all
+    entity types and `presentation_agent`s are compatible.
+- `output_type` (optional)
+  - Defaults to `html`, the other valid option would be `json`, which, though,
+    doesn't do much, as this feature is not finished yet.
 
 ### Bare data mode examples:
 

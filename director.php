@@ -126,7 +126,7 @@ $temp['initiated_resources']['classes']                = array();
 $temp['initiated_resources']['definitions']            = array();
 $temp['initiated_resources']['data_handler']           = array();
 $temp['initiated_resources']['permanent_data_storage'] = array();
-$temp['initiated_resources']['present_agent']          = array();
+$temp['initiated_resources']['presentation_agent']     = array();
 $temp['initiated_resources']['layout']                 = array();
 $temp['data_statuses']                                 = array();
 $temp['raw_paths']                                     = array();
@@ -197,8 +197,8 @@ else {
 }
 
 // Present agents could live in a subdirectory of templates.
-$registry['app_current']['present_agents'] =
-  $registry['app_current']['templates'] . '/present_agents';
+$registry['app_current']['presentation_agents'] =
+  $registry['app_current']['templates'] . '/presentation_agents';
 
 // Registering locations of resources that are available externally, via web
 // URLs.

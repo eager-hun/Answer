@@ -311,14 +311,14 @@ function apputils_wake_resource($resource_type, $resource_id, $options = array()
       }
     }
   }
-  elseif ($resource_type == 'present_agent') {
-    if (!in_array($resource_id, $temp['initiated_resources']['present_agent'])) {
-      $resource_file = $registry['app_current']['present_agents']
+  elseif ($resource_type == 'presentation_agent') {
+    if (!in_array($resource_id, $temp['initiated_resources']['presentation_agent'])) {
+      $resource_file = $registry['app_current']['presentation_agents']
         . '/pa_' . $resource_id . '.php';
       if (file_exists($resource_file)) {
         require_once($resource_file);
         // We store its id in the initiated array, so it won't be loaded any more.
-        $temp['initiated_resources']['present_agent'][] = $resource_id;
+        $temp['initiated_resources']['presentation_agent'][] = $resource_id;
       }
       else {
         _loader_failure($resource_type, $resource_id);
@@ -456,19 +456,21 @@ function apputils_disable_htmlpurifier(&$config) {
  *
  * @code
  *
- * apputils_explore_arguments($args);
+ * apputils_explore_arguments($args, $output = 'keys');
  *
  * @endcode
  *
  * To see the results, do var_dump($temp['arguments_explorer']); near the end
  * of director.php.
  */
-function apputils_explore_arguments($args_to_inspect) {
+function apputils_explore_arguments($args_to_inspect, $output = 'keys') {
   if (!is_dev_mode()) {
     return;
   }
 
   static $argsexp_inspect_id = 0;
+
+  $call_id = '# ' . $argsexp_inspect_id;
   if (!array_key_exists('arguments_explorer', $GLOBALS['temp'])) {
     $GLOBALS['temp']['arguments_explorer'] = array();
   }
@@ -477,15 +479,18 @@ function apputils_explore_arguments($args_to_inspect) {
   if (!array_key_exists($inspected_function, $GLOBALS['temp']['arguments_explorer'])) {
     $GLOBALS['temp']['arguments_explorer'][$inspected_function] = array();
   }
-  $GLOBALS['temp']['arguments_explorer'][$inspected_function][$argsexp_inspect_id] = array(
+  $GLOBALS['temp']['arguments_explorer'][$inspected_function][$call_id] = array(
     'caller' => $call_trace[2]['function'],
     'args' => array(),
   );
-  foreach ($args_to_inspect as $argument_name => $argument_val) {
-    if (!in_array($argument_name, $GLOBALS['temp']['arguments_explorer'][$inspected_function][$argsexp_inspect_id])) {
-      $GLOBALS['temp']['arguments_explorer'][$inspected_function][$argsexp_inspect_id]['args'][] = $argument_name;
-    }
+  if ($output == 'full') {
+    $GLOBALS['temp']['arguments_explorer'][$inspected_function][$call_id]['args'] =
+      $args_to_inspect;
   }
-  unset($argument_name, $argument_val);
+  else {
+    $GLOBALS['temp']['arguments_explorer'][$inspected_function][$call_id]['args'] =
+      array_keys($args_to_inspect);
+  }
+
   $argsexp_inspect_id++;
 }

@@ -21,7 +21,7 @@ function templateutils_data_dresser($args) {
     if (!empty($GLOBALS['temp']['raw_entities'][$args['instance_id']])) {
       $args['raw_data'] =
         $GLOBALS['temp']['raw_entities'][$args['instance_id']]['fields'];
-      $args['p10n_subject'] = 'entity';
+      $args['presentation_subject'] = 'entity';
       if (!empty($args['raw_data'])) {
         return templateutils_present($args);
       }
@@ -80,7 +80,7 @@ function _binder_render_recursive($args, &$items_buffer, &$result) {
         _binder_render_recursive($item, $nested_items, $result);
         if (!empty($nested_items)) {
           $item['raw_data'] = $nested_items;
-          $item['p10n_subject'] = 'binder';
+          $item['presentation_subject'] = 'binder';
           $items_buffer[$item['instance_id']] = templateutils_present($item);
         }
       }
@@ -89,7 +89,7 @@ function _binder_render_recursive($args, &$items_buffer, &$result) {
                  . "<br>Tip: review your binder definitions to find the cause for excessive binder nesting.";
         sys_notify($message, 'warning');
         $args['raw_data'] = $items_buffer;
-        $args['p10n_subject'] = 'binder';
+        $args['presentation_subject'] = 'binder';
         $result = templateutils_present($args);
         return;
       }
@@ -122,8 +122,8 @@ function _binder_render_recursive($args, &$items_buffer, &$result) {
             $render_args_for_prim['present_as'] = $item['present_as'];
           }
           elseif (empty($item['present_as'])
-              && !empty($GLOBALS['registry']['known_present_agents'])
-              && in_array($pa_full, $GLOBALS['registry']['known_present_agents'])) {
+              && !empty($GLOBALS['registry']['known_presentation_agents'])
+              && in_array($pa_full, $GLOBALS['registry']['known_presentation_agents'])) {
             $render_args_for_prim['present_as'] = $pa_full;
           }
           // If the primary content is an entity, we store it with an alias of
@@ -140,7 +140,7 @@ function _binder_render_recursive($args, &$items_buffer, &$result) {
     }
   }
   $args['raw_data'] = $items_buffer;
-  $args['p10n_subject'] = 'binder';
+  $args['presentation_subject'] = 'binder';
   $result = templateutils_present($args);
 }
 
@@ -162,8 +162,8 @@ function templateutils_present($args) {
   // Binders and entities do definitely need a presentation agent to sort them
   // out. If none had been specified yet, let's specify a default for them.
   if (empty($args['present_as'])
-      && !empty($args['p10n_subject'])
-      && ($args['p10n_subject'] == 'binder' || $args['p10n_subject'] == 'entity')) {
+      && !empty($args['presentation_subject'])
+      && ($args['presentation_subject'] == 'binder' || $args['presentation_subject'] == 'entity')) {
     $args['present_as'] = 'automatic_inventory';
   }
   // Making sure that the wrapper options infrastructure is ready to use, but
@@ -184,16 +184,16 @@ function templateutils_present($args) {
   // If a presentation agent was appointed, let's now allow it do its work on
   // our data before templatizing.
   if (!empty($args['present_as'])) {
-    apputils_wake_resource('present_agent', $args['present_as']);
-    $present_agent_func = 'pa_' . $args['present_as'];
+    apputils_wake_resource('presentation_agent', $args['present_as']);
+    $presentation_agent_func = 'pa_' . $args['present_as'];
 
     // Running present agent on the data.
-    if (function_exists($present_agent_func)) {
-      $present_agent_func($args);
+    if (function_exists($presentation_agent_func)) {
+      $presentation_agent_func($args);
     }
     else {
       // Fallback function is 'automatic_inventory'.
-      apputils_wake_resource('present_agent', 'automatic_inventory');
+      apputils_wake_resource('presentation_agent', 'automatic_inventory');
       pa_automatic_inventory($args);
     }
 
@@ -220,10 +220,10 @@ function templateutils_present($args) {
   // Item signatures (a.k.a. HTML classes for the wrapper tag).
   $args['wrapper_options']['attributes']['class'][] =
     ensafe_string($args['template_name'], 'attribute_value');
-  if (!empty($args['p10n_subject'])) {
+  if (!empty($args['presentation_subject'])) {
     $args['wrapper_options']['attributes']['class'][] =
-      ensafe_string($args['p10n_subject'], 'attribute_value');
-    $item_signature = $args['p10n_subject'] . '--' . $args['instance_id'];
+      ensafe_string($args['presentation_subject'], 'attribute_value');
+    $item_signature = $args['presentation_subject'] . '--' . $args['instance_id'];
     $args['wrapper_options']['attributes']['class'][] =
       ensafe_string($item_signature, 'attribute_value');
   }
@@ -232,7 +232,7 @@ function templateutils_present($args) {
   if (empty($args['variables'])) {
     // NOTE: with this being in place, we can not really know if there was
     // really no data to put out (empty $args['variables']), or specifying
-    // template_name or present_agent was forgotten about.
+    // template_name or presentation_agent was forgotten about.
     $output = '';
     if (is_dev_mode('verbose')) {
       $message = 'No result was returned for <em>'
@@ -260,8 +260,8 @@ function _templatize_html($args) {
 
   // Template name.
   // $args['template'] should have either been provided before calling
-  // templateutils_present(), or, if a present_agent was employed, then it
-  // should have been set by the present_agent.
+  // templateutils_present(), or, if a presentation_agent was employed, then it
+  // should have been set by the presentation_agent.
   if (!empty($args['template_name'])) {
     $template_name = $args['template_name'];
   }
@@ -471,13 +471,13 @@ function templateutils_render_html_attributes($attribs_array) {
 
 
 /**
- * Read the external list of known present_agents.
+ * Read the external list of known presentation_agents.
  */
 function templateutils_import_pa_cache(&$registry) {
-  $cache_file = $registry['app_current']['cache'] . '/cache_present_agents.txt';
+  $cache_file = $registry['app_current']['cache'] . '/cache_presentation_agents.txt';
   if (file_exists($cache_file)) {
     $pa_s = file_get_contents($cache_file);
-    $registry['known_present_agents'] = preg_split("/\r\n|\n|\r/", $pa_s);
+    $registry['known_presentation_agents'] = preg_split("/\r\n|\n|\r/", $pa_s);
   }
   else {
     sys_notify("Error: the application could not find the present agents' cache.", 'warning');

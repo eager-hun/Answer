@@ -1071,7 +1071,7 @@ a.jump-link, a.jump-link:focus, a.jump-link:hover {
   display: none;
 }
 
-.block--header_widgets {
+.entity--header_widgets {
   text-align: right;
   vertical-align: middle;
 }
