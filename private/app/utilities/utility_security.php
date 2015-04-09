@@ -246,9 +246,6 @@ function implement_security_policies() {
     if (CONFIG_PRESET == 'stage' || CONFIG_PRESET == 'live') {
       sys_notify('Warning: a configuration conflict was detected.', 'warning');
     }
-
-    // Giving in to various incentives, temporarily we can do this.
-    // apputils_disable_htmlpurifier($config);
   }
   else {
     error_reporting(0);

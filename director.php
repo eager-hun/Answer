@@ -157,6 +157,11 @@ require_once($registry['app_current']['config'] . '/config.php');
 
 implement_security_policies();
 
+// Optionally disabling htmlpurifier.
+// NOTE: activating 'give_up_security' in config presets makes this complete.
+// WARNING: UNSAFE ACTION, only for isolated development environments!
+// apputils_disable_htmlpurifier();
+
 // Site-instance-dependent locations.
 $registry['app_current']['definitions'] =
   $registry['app_internals']['definitions']

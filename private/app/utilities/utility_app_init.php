@@ -429,17 +429,17 @@ function apputils_script_diagnostics() {
 }
 
 /**
- * Disable HTMLpurifier while working on text-filters.
+ * Disable HTMLpurifier while working on things.
  *
  * This must be called after the HTMLpurifier dependency was set up in the
  * config (this just overrides those values).
+ *
+ * Integrated safety measure is that it only works in dev_mode.
  */
-function apputils_disable_htmlpurifier(&$config) {
-  $config['app']['dependencies']['htmlpurifier'] = FALSE;
-  $config['app']['suppress_warnings'][] = 'dependency_htmlpurifier';
-
-  if (!is_dev_mode()) {
-    sys_notify('Status: HTMLpurifier is disabled.', 'warning');
+function apputils_disable_htmlpurifier() {
+  if (is_dev_mode()) {
+    $GLOBALS['config']['app']['dependencies']['htmlpurifier'] = FALSE;
+    $GLOBALS['config']['app']['suppress_warnings'][] = 'dependency_htmlpurifier';
   }
 }
 
