@@ -3,9 +3,10 @@
  * @file
  * Developer's blank canvas.
  *
- * TODO: first development task should be to put all 'devpages' entities into
- * their dedicated external file - within this data-handler's directory.
- * (An example could be how dh_admin does it.)
+ * TODO: first development task should be to put all 'devpages' projects into
+ * their dedicated external file (or even, directory) - within this
+ * data-handler's directory.
+ * (An example might (or might not) be how dh_admin does it.)
  */
 
 /**
@@ -29,9 +30,9 @@ function dh_devpages($args) {
 }
 
 /**
- * Blank sheet.
+ * Project 1.
  */
-function _blank_sheet($args) {
-  return '<p>This content is being provided by the <code>devpages</code> data handler.</p><p>Come and swap it with something more useful.</p>';
+function _project_1($args) {
+  return '<p>Project 1., hosted and provided by the <code>devpages</code> data handler.</p>';
 }
 

@@ -1,19 +1,13 @@
 
 <!--HIGH-->
 
-**_Basic tasks:_**
+**_Topics:_**
 
 - [Using the bare data mode](#anchor--bare-data-mode)
 - [Adding new content](#anchor--adding-new-content)
 - [Adding new website instance](#anchor--new-website)
 - [Initial deploy to public server](#anchor--initial-deploy)
 - [Deploying changes to public server](#anchor--deploying-changes)
-
-**_Advanced tasks:_**
-
-- [Working with dynamic entities](#anchor--dynamic-entities)
-- [Adding a new entity to pages](#anchor--new-entity-to-pages)
-
 
 <!--/HIGH-->
 
@@ -194,13 +188,3 @@ is accessible via the _admin interface_).
       - Set the `CONFIG_PRESET` definition: it's likely you will find it being set to 'dev', while, likely again, it should be set to 'live',
       - review all the other settings that are not governed by the presets,
       - save, then test site.
-
-
-## <span class="anchor" id="anchor--dynamic-entities"></span>Working with dynamic entities
-
-TODO: documenting
-
-
-## <span class="anchor" id="anchor--new-entity-to-pages"></span>Adding a new entity to pages
-
-TODO: documenting

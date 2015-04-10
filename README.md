@@ -34,9 +34,16 @@ development process that:
 
 ## Documentation
 
+### Operating manuals
+
 - [Installation guide][doc-install]
-- [Operating manual][doc-ops] (jump-links to anchors don't work when viewed on
+- [Operating manual][doc-basic-ops] (jump-links to anchors don't work when viewed on
   GitHub.)
+- [Developer docs][doc-4-devs] (jump-links to anchors don't work when viewed on
+  GitHub.)
+
+### Project handling
+
 - [Development backlog][dev-bkglog]
 - [Planning of next main version][dev-next-v]
 
@@ -50,6 +57,7 @@ development process that:
 
 
 [doc-install]: howto--install.md
-[doc-ops]: private/permanent_storage/example_website/content_files/locale_primary/generic/operating-manual__field_body.md
+[doc-basic-ops]: private/permanent_storage/example_website/content_files/locale_primary/static_page/mc-operating-manual__field_body.md
+[doc-4-devs]: private/permanent_storage/example_website/content_files/locale_primary/static_page/devel-docs__field_body.md
 [dev-bkglog]: http://answer-demo.netcompass.eu/devel/answer-project-development-backlog
 [dev-next-v]: http://answer-demo.netcompass.eu/devel/answer-project-next-version-planning

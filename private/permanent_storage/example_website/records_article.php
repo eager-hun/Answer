@@ -111,15 +111,12 @@ Félhosszú előnézeti szöveg cikk 2 számára.
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque finibus porttitor ipsum non suscipit. Donec in ullamcorper quam. Morbi molestie dui nec auctor.
 EOT;
 
-
-// #############################################################################
-// DEPRECATED CONTENT.
-
 // -----------------------------------------------------------------------------
-$article['deprecated-article-3'] = [
+// NOTE: "DEPRECATED" CONTENT.
+$article['article-3'] = [
   'meta' => [
     'is_published' => 1,
-    'is_deprecated' => 1,
+    'is_deprecated' => 1, // <--- NOTE: example for "deprecated" content.
     'supports_locales' => [
       'primary',
       'secondary',

@@ -1,4 +1,11 @@
 
+
+<!--HIGH-->
+
+Privately accessible page, where site admins could keep their thoughts of this concern on&nbsp;track.
+
+<!--/HIGH-->
+
 ## Sections
 
 - `articles_all`

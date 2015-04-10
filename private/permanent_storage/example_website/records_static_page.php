@@ -34,19 +34,177 @@ $static_page['home'] = [
     ],
   ],
   'data' => [
-    // 'field_date_created'  => '2015-01-01',
-    // 'field_date_lastmod'  => '2015-01-01',
+    'field_date_created'  => NULL, // Format: YYYY-MM-DD.
+    'field_date_lastmod'  => NULL, // Format: YYYY-MM-DD.
     'field_title' => [
       'locale_primary'   => 'Welcome',
       'locale_secondary' => 'Üdvözlet',
     ],
-    // 'field_subtitle' => [
-    //   'locale_primary'   => '',
-    //   'locale_secondary' => '',
-    // ],
+    'field_subtitle' => [
+      'locale_primary'   => NULL,
+      'locale_secondary' => NULL,
+    ],
     'field_body' => [
       'locale_primary'   => '[[external-file]]',
       'locale_secondary' => '[[external-file]]',
+    ],
+  ],
+];
+
+
+// #############################################################################
+// MISSION CONTROL.
+
+// -----------------------------------------------------------------------------
+$static_page['mc-operating-manual'] = [
+  'meta' => [
+    'is_published' => 0,
+    'text_formats' => [
+      'field_title'        => 'html',
+      'field_subtitle'     => 'html',
+      'field_body'         => 'md',
+    ],
+  ],
+  'data' => [
+    'field_date_created'  => NULL, // Format: YYYY-MM-DD.
+    'field_date_lastmod'  => NULL, // Format: YYYY-MM-DD.
+    'field_title' => [
+      'locale_primary'   => 'Operating manual',
+    ],
+    'field_subtitle' => [
+      'locale_primary'   => NULL,
+    ],
+    'field_body' => [
+      'locale_primary'   => '[[external-file]]',
+    ],
+  ],
+];
+
+// -----------------------------------------------------------------------------
+$static_page['mc-planning-outline'] = [
+  'meta' => [
+    'is_published' => 0,
+    'text_formats' => [
+      'field_title'        => 'html',
+      'field_subtitle'     => 'html',
+      'field_body'         => 'md',
+    ],
+  ],
+  'data' => [
+    'field_date_created'  => NULL, // Format: YYYY-MM-DD.
+    'field_date_lastmod'  => NULL, // Format: YYYY-MM-DD.
+    'field_title' => [
+      'locale_primary'   => 'Site outline planning',
+    ],
+    'field_subtitle' => [
+      'locale_primary'   => NULL,
+    ],
+    'field_body' => [
+      'locale_primary'   => '[[external-file]]',
+    ],
+  ],
+];
+
+// -----------------------------------------------------------------------------
+$static_page['mc-planning-taxonomy'] = [
+  'meta' => [
+    'is_published' => 0,
+    'text_formats' => [
+      'field_title'        => 'html',
+      'field_subtitle'     => 'html',
+      'field_body'         => 'md',
+    ],
+  ],
+  'data' => [
+    'field_date_created'  => NULL, // Format: YYYY-MM-DD.
+    'field_date_lastmod'  => NULL, // Format: YYYY-MM-DD.
+    'field_title' => [
+      'locale_primary'   => 'Taxonomy planning',
+    ],
+    'field_subtitle' => [
+      'locale_primary'   => NULL,
+    ],
+    'field_body' => [
+      'locale_primary'   => '[[external-file]]',
+    ],
+  ],
+];
+
+// -----------------------------------------------------------------------------
+$static_page['mc-app-mods'] = [
+  'meta' => [
+    'is_published' => 0,
+    'text_formats' => [
+      'field_title'        => 'html',
+      'field_subtitle'     => 'html',
+      'field_body'         => 'md',
+    ],
+  ],
+  'data' => [
+    'field_date_created'  => NULL, // Format: YYYY-MM-DD.
+    'field_date_lastmod'  => NULL, // Format: YYYY-MM-DD.
+    'field_title' => [
+      'locale_primary'   => 'List of desired application modifications',
+    ],
+    'field_subtitle' => [
+      'locale_primary'   => NULL,
+    ],
+    'field_body' => [
+      'locale_primary'   => '[[external-file]]',
+    ],
+  ],
+];
+
+// -----------------------------------------------------------------------------
+$static_page['mc-article-ideas'] = [
+  'meta' => [
+    'is_published' => 0,
+    'text_formats' => [
+      'field_title'        => 'html',
+      'field_subtitle'     => 'html',
+      'field_body'         => 'md',
+    ],
+  ],
+  'data' => [
+    'field_date_created'  => NULL, // Format: YYYY-MM-DD.
+    'field_date_lastmod'  => NULL, // Format: YYYY-MM-DD.
+    'field_title' => [
+      'locale_primary'   => 'Article ideas',
+    ],
+    'field_subtitle' => [
+      'locale_primary'   => NULL,
+    ],
+    'field_body' => [
+      'locale_primary'   => '[[external-file]]',
+    ],
+  ],
+];
+
+
+// #############################################################################
+// DEVELOPER PAGES.
+
+// -----------------------------------------------------------------------------
+$static_page['devel-docs'] = [
+  'meta' => [
+    'is_published' => 0,
+    'text_formats' => [
+      'field_title'        => 'html',
+      'field_subtitle'     => 'html',
+      'field_body'         => 'md',
+    ],
+  ],
+  'data' => [
+    'field_date_created'  => NULL, // Format: YYYY-MM-DD.
+    'field_date_lastmod'  => NULL, // Format: YYYY-MM-DD.
+    'field_title' => [
+      'locale_primary'   => 'Documentation for developers',
+    ],
+    'field_subtitle' => [
+      'locale_primary'   => NULL,
+    ],
+    'field_body' => [
+      'locale_primary'   => '[[external-file]]',
     ],
   ],
 ];

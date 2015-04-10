@@ -112,7 +112,7 @@ $menus['mission_control_menu'] = array(
     ),
   ),
   'items' => array(
-    'operating-manual' => array(
+    'mc-operating-manual' => array(
       'depth'  => 1,
       'parent' => FALSE,
       'type'   => 'link',
@@ -126,26 +126,27 @@ $menus['mission_control_menu'] = array(
       'path'   => $GLOBALS['config']['app']['admin_path'],
       'text'   => 'Admin interface',
     ),
-    'site-structure-planning' => array(
+    'mc-planning-outline' => array(
       'depth'  => 1,
       'parent' => FALSE,
-      'type'   => 'static',
-      'text'   => 'Site structure planning',
+      'type'   => 'link',
+      'path'   => 'mission-control/site-outline-planning',
+      'text'   => 'Planning: site outline',
     ),
-        'mc-outline-planning' => array(
-          'depth'  => 2,
-          'parent' => 'site-structure-planning',
-          'type'   => 'link',
-          'path'   => 'mission-control/site-outline-planning',
-          'text'   => 'Site outline planning',
-        ),
-        'mc-taxonomy-planning' => array(
-          'depth'  => 2,
-          'parent' => 'site-structure-planning',
-          'type'   => 'link',
-          'path'   => 'mission-control/taxonomy-planning',
-          'text'   => 'Taxonomy planning',
-        ),
+    'mc-planning-taxonomy' => array(
+      'depth'  => 1,
+      'parent' => FALSE,
+      'type'   => 'link',
+      'path'   => 'mission-control/taxonomy-planning',
+      'text'   => 'Planning: taxonomy',
+    ),
+    'mc-app-mods' => array(
+      'depth'  => 1,
+      'parent' => FALSE,
+      'type'   => 'link',
+      'path'   => 'mission-control/desired-application-modifications',
+      'text'   => 'Desired app modifications',
+    ),
     'mc-article-ideas' => array(
       'depth'  => 1,
       'parent' => FALSE,
@@ -167,12 +168,26 @@ $menus['developers-menu'] = array(
     ),
   ),
   'items' => array(
-    'devel-blank-sheet' => array(
+    'devel-docs' => array(
       'depth'  => 1,
       'parent' => FALSE,
       'type'   => 'link',
-      'path'   => 'devel/blank-sheet',
-      'text'   => 'Developer\'s blank sheet',
+      'path'   => 'devel/documentation-for-developers',
+      'text'   => 'Developer documentation',
+    ),
+    'projects' => array(
+      'depth'  => 1,
+      'parent' => FALSE,
+      'type'   => 'static',
+      'text'   => 'Projects',
+    ),
+    // >>> DEPTH 2 >>>
+    'devel-project-1' => array(
+      'depth'  => 2,
+      'parent' => 'projects',
+      'type'   => 'link',
+      'path'   => 'devel/project-1',
+      'text'   => 'Project 1',
     ),
   ),
 );
@@ -211,72 +226,75 @@ $menus['menu_developer_menu'] = array(
       'path'    => 'asdf',
       'text'   => 'E link again',
     ),
-        'level-2-link' => array(
-          'depth'  => 2,
-          'parent' => 'level-1-link-2',
-          'type'   => 'link',
-          'path'    => 'asd',
-          'text'   => 'Home',
-        ),
-        'level-2-static' => array(
-          'depth'  => 2,
-          'parent' => 'level-1-link-2',
-          'type'   => 'static',
-          'text'   => 'E level-2 static',
-        ),
-        'level-2-link-2' => array(
-          'depth'  => 2,
-          'parent' => 'level-1-link-2',
-          'type'   => 'link',
-          'path'    => 'asdf',
-          'text'   => 'E link again',
-        ),
-        'level-2-static-2' => array(
-          'depth'  => 2,
-          'parent' => 'level-1-link-2',
-          'type'   => 'static',
-          'text'   => 'E level-2 static 2',
-        ),
-            'level-3-link' => array(
-              'depth'  => 3,
-              'parent' => 'level-2-static-2',
-              'type'   => 'link',
-              'path'    => 'adsf',
-              'text'   => 'Home',
-            ),
-            'level-3-static' => array(
-              'depth'  => 3,
-              'parent' => 'level-2-static-2',
-              'type'   => 'static',
-              'text'   => 'E level-3 static',
-            ),
-            'level-3-link-2' => array(
-              'depth'  => 3,
-              'parent' => 'level-2-static-2',
-              'type'   => 'link',
-              'path'    => 'asdf',
-              'text'   => 'E Lorem ipsum dolor sit amet, consetetur',
-            ),
-                'level-4-link' => array(
-                  'depth'  => 4,
-                  'parent' => 'level-3-link-2',
-                  'type'   => 'link',
-                  'path'    => 'asdf',
-                  'text'   => 'Home',
-                ),
-                'level-4-static' => array(
-                  'depth'  => 4,
-                  'parent' => 'level-3-link-2',
-                  'type'   => 'static',
-                  'text'   => 'E level-4 static',
-                ),
-                'articles_all' => array(
-                  'depth'  => 4,
-                  'parent' => 'level-3-link-2',
-                  'type'   => 'link',
-                  'path'    => 'articles/',
-                  'text'   => 'E Articles Lorem ipsum dolor sit amet, consetetur',
-                ),
+    // >>> DEPTH 2 >>>
+    'level-2-link' => array(
+      'depth'  => 2,
+      'parent' => 'level-1-link-2',
+      'type'   => 'link',
+      'path'    => 'asd',
+      'text'   => 'Home',
+    ),
+    'level-2-static' => array(
+      'depth'  => 2,
+      'parent' => 'level-1-link-2',
+      'type'   => 'static',
+      'text'   => 'E level-2 static',
+    ),
+    'level-2-link-2' => array(
+      'depth'  => 2,
+      'parent' => 'level-1-link-2',
+      'type'   => 'link',
+      'path'    => 'asdf',
+      'text'   => 'E link again',
+    ),
+    'level-2-static-2' => array(
+      'depth'  => 2,
+      'parent' => 'level-1-link-2',
+      'type'   => 'static',
+      'text'   => 'E level-2 static 2',
+    ),
+    // >>> DEPTH 3 >>>
+    'level-3-link' => array(
+      'depth'  => 3,
+      'parent' => 'level-2-static-2',
+      'type'   => 'link',
+      'path'    => 'adsf',
+      'text'   => 'Home',
+    ),
+    'level-3-static' => array(
+      'depth'  => 3,
+      'parent' => 'level-2-static-2',
+      'type'   => 'static',
+      'text'   => 'E level-3 static',
+    ),
+    'level-3-link-2' => array(
+      'depth'  => 3,
+      'parent' => 'level-2-static-2',
+      'type'   => 'link',
+      'path'    => 'asdf',
+      'text'   => 'E Lorem ipsum dolor sit amet, consetetur',
+    ),
+    // >>> DEPTH 4 >>>
+    'level-4-link' => array(
+      'depth'  => 4,
+      'parent' => 'level-3-link-2',
+      'type'   => 'link',
+      'path'    => 'asdf',
+      'text'   => 'Home',
+    ),
+    'level-4-static' => array(
+      'depth'  => 4,
+      'parent' => 'level-3-link-2',
+      'type'   => 'static',
+      'text'   => 'E level-4 static',
+    ),
+    'articles_all' => array(
+      'depth'  => 4,
+      'parent' => 'level-3-link-2',
+      'type'   => 'link',
+      'path'    => 'articles/',
+      'text'   => 'E Articles Lorem ipsum dolor sit amet, consetetur',
+    ),
   ),
 );
 */

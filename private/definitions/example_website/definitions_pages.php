@@ -105,6 +105,26 @@ $pages['article-2'] = [
   'xml_sitemap_include' => 1,
 ];
 
+// -----------------------------------------------------------------------------
+// NOTE: "DEPRECATED" CONTENT.
+$pages['article-3'] = [
+  'data_type'         => 'entity',
+  'entity_type'       => 'article',
+  'instance_id'       => 'article-3',
+  'meta_descriptions' => [
+    'primary'   => 'Meta description for this page.',
+    'secondary' => 'Meta leírás ennek az oldalnak.',
+  ],
+  'has_translations'  => 0, // Not important, as language switcher won't be shown.
+  'paths' => [
+    'primary'   => 'articles/article-three-path',
+    'secondary' => 'cikkek/cikk-harom-utvonal',
+  ],
+  'in_section'        => 'articles_all',
+  'in_context'        => 'deprecated',
+  'xml_sitemap_include' => 1,
+];
+
 
 // #############################################################################
 // IMAGE DISPLAYS.
@@ -151,29 +171,6 @@ $pages['test-image-2'] = [
   ],
   'in_section'        => 'images_all',
   'in_context'        => '',
-  'xml_sitemap_include' => 1,
-];
-
-
-// #############################################################################
-// DEPRECATED CONTENT.
-
-// -----------------------------------------------------------------------------
-$pages['deprecated-article-3'] = [
-  'data_type'         => 'entity',
-  'entity_type'       => 'article',
-  'instance_id'       => 'deprecated-article-3',
-  'meta_descriptions' => [
-    'primary'   => 'Meta description for this page.',
-    'secondary' => 'Meta leírás ennek az oldalnak.',
-  ],
-  'has_translations'  => 0, // Not important, as language switcher won't be shown.
-  'paths' => [
-    'primary'   => 'articles/article-three-path',
-    'secondary' => 'cikkek/cikk-harom-utvonal',
-  ],
-  'in_section'        => 'articles_all',
-  'in_context'        => 'deprecated',
   'xml_sitemap_include' => 1,
 ];
 
@@ -232,10 +229,10 @@ $pages['gone-example'] = [
 // MISSON CONTROL ELEMENTS.
 
 // -----------------------------------------------------------------------------
-$pages['operating-manual'] = [
+$pages['mc-operating-manual'] = [
   'data_type'         => 'entity',
-  'entity_type'       => 'generic',
-  'instance_id'       => 'operating-manual',
+  'entity_type'       => 'static_page',
+  'instance_id'       => 'mc-operating-manual',
   'has_translations'  => 0,
   'paths' => [
     'primary'   => 'mission-control/operating-manual',
@@ -245,23 +242,10 @@ $pages['operating-manual'] = [
 ];
 
 // -----------------------------------------------------------------------------
-$pages['mc-article-ideas'] = [
+$pages['mc-planning-outline'] = [
   'data_type'         => 'entity',
-  'entity_type'       => 'generic',
-  'instance_id'       => 'mc-article-ideas',
-  'has_translations'  => 0,
-  'paths' => [
-    'primary'   => 'mission-control/article-ideas',
-  ],
-  'in_section'        => 'mission_control',
-  'in_context'        => 'noindex',
-];
-
-// -----------------------------------------------------------------------------
-$pages['mc-outline-planning'] = [
-  'data_type'         => 'entity',
-  'entity_type'       => 'generic',
-  'instance_id'       => 'mc-outline-planning',
+  'entity_type'       => 'static_page',
+  'instance_id'       => 'mc-planning-outline',
   'has_translations'  => 0,
   'paths' => [
     'primary'   => 'mission-control/site-outline-planning',
@@ -271,13 +255,39 @@ $pages['mc-outline-planning'] = [
 ];
 
 // -----------------------------------------------------------------------------
-$pages['mc-taxonomy-planning'] = [
+$pages['mc-planning-taxonomy'] = [
   'data_type'         => 'entity',
-  'entity_type'       => 'generic',
-  'instance_id'       => 'mc-taxonomy-planning',
+  'entity_type'       => 'static_page',
+  'instance_id'       => 'mc-planning-taxonomy',
   'has_translations'  => 0,
   'paths' => [
     'primary'   => 'mission-control/taxonomy-planning',
+  ],
+  'in_section'        => 'mission_control',
+  'in_context'        => 'noindex',
+];
+
+// -----------------------------------------------------------------------------
+$pages['mc-app-mods'] = [
+  'data_type'         => 'entity',
+  'entity_type'       => 'static_page',
+  'instance_id'       => 'mc-app-mods',
+  'has_translations'  => 0,
+  'paths' => [
+    'primary'   => 'mission-control/desired-application-modifications',
+  ],
+  'in_section'        => 'mission_control',
+  'in_context'        => 'noindex',
+];
+
+// -----------------------------------------------------------------------------
+$pages['mc-article-ideas'] = [
+  'data_type'         => 'entity',
+  'entity_type'       => 'static_page',
+  'instance_id'       => 'mc-article-ideas',
+  'has_translations'  => 0,
+  'paths' => [
+    'primary'   => 'mission-control/article-ideas',
   ],
   'in_section'        => 'mission_control',
   'in_context'        => 'noindex',
@@ -288,14 +298,27 @@ $pages['mc-taxonomy-planning'] = [
 // DEVELOPER CONTENT.
 
 // -----------------------------------------------------------------------------
-$pages['devel-blank-sheet'] = [
+$pages['devel-docs'] = [
+  'data_type'         => 'entity',
+  'entity_type'       => 'static_page',
+  'instance_id'       => 'devel-docs',
+  'has_translations'  => 0,
+  'paths' => [
+    'primary'   => 'devel/documentation-for-developers',
+  ],
+  'in_section'        => 'devel',
+  'in_context'        => 'noindex,',
+];
+
+// -----------------------------------------------------------------------------
+$pages['devel-project-1'] = [
   'data_type'         => 'entity',
   'entity_type'       => 'dynamic',
-  'instance_id'       => 'devel-blank-sheet',
+  'instance_id'       => 'devel-project-1',
   'has_translations'  => 1,
   'paths' => [
-    'primary'   => 'devel/blank-sheet',
-    'secondary' => 'devel/ures-lap',
+    'primary'   => 'devel/project-1',
+    'secondary' => 'devel/projekt-1',
   ],
   'in_section'        => 'devel',
   'in_context'        => 'noindex',

@@ -1,4 +1,10 @@
 
+<!--HIGH-->
+
+Privately accessible page, where site admins could keep their thoughts of this concern on&nbsp;track.
+
+<!--/HIGH-->
+
 <!--DEFS-->
 
 - Vocabulary: Vocabulary-one

@@ -468,7 +468,7 @@ $dynamic['images-all'] = [
 // DEVELOPER CONTENT.
 
 // -----------------------------------------------------------------------------
-$dynamic['devel-blank-sheet'] = [
+$dynamic['devel-project-1'] = [
   'meta' => [
     'is_published' => 0,
     'text_formats' => [
@@ -481,12 +481,12 @@ $dynamic['devel-blank-sheet'] = [
   ],
   'data' => [
     'field_title' => [
-      'locale_primary'   => 'This thing.',
-      'locale_secondary' => 'Ez a dolog.',
+      'locale_primary'   => 'Project 1.',
+      'locale_secondary' => 'Projekt 1.',
     ],
     // The field_body is arguments for the specified data-handler.
     'field_body' => [
-      'order_id'   => 'blank_sheet',
+      'order_id'   => 'project_1',
     ],
   ],
 ];

@@ -1,12 +1,12 @@
 cikkek/:articles-all
 cikkek/cikk-egy-utvonal:article-1
 cikkek/cikk-ketto-utvonal:article-2
+cikkek/cikk-harom-utvonal:article-3
 kepek/:images-all
 kepek/1:test-image-1
 kepek/2:test-image-2
-cikkek/cikk-harom-utvonal:deprecated-article-3
 cikkek:301-articles
 kepek:301-images
 pelda-megszunt-tartalom-utvonala:gone-example
-devel/ures-lap:devel-blank-sheet
+devel/projekt-1:devel-project-1
 for-example-this:admin-interface
