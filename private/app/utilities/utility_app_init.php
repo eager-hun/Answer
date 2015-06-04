@@ -280,10 +280,24 @@ function apputils_wake_resource($resource_type, $resource_id, $options = array()
   }
   elseif ($resource_type == 'data_handler') {
     if (!in_array($resource_id, $temp['initiated_resources']['data_handler'])) {
-      $resource_file = $registry['app_internals']['data_handlers']
-        . '/' . $resource_id . '/dh_' . $resource_id . '.php';
-      if (file_exists($resource_file)) {
-        require_once($resource_file);
+
+      // We have no registry of data handlers. So first we look for a data
+      // handler among the standard ones, and if it's not there, then among the
+      // custom ones. Cheap.
+      // This implies that you cannot have a custom data handler with a name
+      // that's identical to one among the standard ones. Room to improve.
+      $resource_file_standard = $registry['app_internals']['data_handlers']
+        . '/standard/' . $resource_id . '/dh_' . $resource_id . '.php';
+      $resource_file_custom = $registry['app_internals']['data_handlers']
+        . '/custom/' . $resource_id . '/dh_' . $resource_id . '.php';
+
+      if (file_exists($resource_file_standard)) {
+        require_once($resource_file_standard);
+        // We store its id in the initiated array, so it won't be loaded any more.
+        $temp['initiated_resources']['data_handler'][] = $resource_id;
+      }
+      elseif (file_exists($resource_file_custom)) {
+        require_once($resource_file_custom);
         // We store its id in the initiated array, so it won't be loaded any more.
         $temp['initiated_resources']['data_handler'][] = $resource_id;
       }

@@ -13,7 +13,7 @@ function dh_admin($args) {
   global $registry, $request;
 
   // Authorizaton check.
-  // @see also the "security" component!
+  // @see also the "security" utility!
   if (!is_admin()) {
     $header = $request['server_protocol'] . " 403 Forbidden";
     sys_notify(loc('http-403'), 'warning');
@@ -29,8 +29,8 @@ function dh_admin($args) {
       && array_key_exists($request['get_data']['task'], $admin_tasks)) {
 
     $current_task = $request['get_data']['task'];
-    $task_file = $registry['app_internals']['data_handlers'] . '/admin/'
-      . $admin_tasks[$current_task]['include'] . '.php';
+    $task_file = $registry['app_internals']['data_handlers']
+      . '/standard/admin/' . $admin_tasks[$current_task]['include'] . '.php';
     if (file_exists($task_file)) {
       include_once($task_file);
     }

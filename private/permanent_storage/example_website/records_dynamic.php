@@ -476,7 +476,7 @@ $dynamic['devel-project-1'] = [
       'field_description' => 'md',
     ],
     'data_handlers' => [
-      'field_body' => 'devpages',
+      'field_body' => 'custom_entities',
     ],
   ],
   'data' => [

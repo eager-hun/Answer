@@ -24,15 +24,18 @@ function dh_field_php($args) {
 
   if (function_exists($data_handler_func)) {
     $result = $data_handler_func($contractor_args);
+
+    $output = array(
+      'field_type'    => 'php',
+      'field_label'   => $args['field_defs']['label'],
+      'field_content' => $result,
+    );
   }
   elseif (is_dev_mode()) {
     sys_notify('Unrecognized data handler function was suggested to php field handler.', 'warning');
+
+    $output = NULL;
   }
 
-  $output = array(
-    'field_type'    => 'php',
-    'field_label'   => $args['field_defs']['label'],
-    'field_content' => $result,
-  );
   return $output;
 }
