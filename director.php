@@ -95,6 +95,9 @@ $registry['app_current']['config'] =
 
 $config                                                = array();
 $config['presets']                                     = array();
+$config['presets']['dev']                              = array();
+$config['presets']['stage']                            = array();
+$config['presets']['live']                             = array();
 $config['env']                                         = array();
 $config['env']['live_site_domain']                     = array();
 $config['app']                                         = array();
@@ -152,15 +155,23 @@ require_once($registry['app_internals']['utilities'] . '/utility_security.php');
 require_once($registry['app_internals']['utilities'] . '/utility_app_init.php');
 require_once($registry['app_current']['config'] . '/config.php');
 
-// -----------------------------------------------------------------------------
-// Post-config adjustments.
-
-implement_security_policies();
-
-// Optionally disabling htmlpurifier.
-// NOTE: activating 'give_up_security' in config presets makes this complete.
-// WARNING: UNSAFE ACTION, only for isolated development environments!
-// apputils_disable_htmlpurifier();
+// Introducing config preset values to the application.
+$config['env']['http_protocol'] =
+  $config['presets'][CONFIG_PRESET]['http_protocol'];
+$config['env']['domain']['locale']['primary'] =
+  $config['presets'][CONFIG_PRESET]['domain']['primary'];
+$config['env']['domain']['locale']['secondary'] =
+  $config['presets'][CONFIG_PRESET]['domain']['secondary'];
+$config['env']['working_dir'] =
+  $config['presets'][CONFIG_PRESET]['working_dir'];
+$config['app']['serve_bare_data'] =
+  $config['presets'][CONFIG_PRESET]['serve_bare_data'];
+$config['app']['dev_mode'] =
+  $config['presets'][CONFIG_PRESET]['dev_mode'];
+$config['app']['admin_mode'] =
+  $config['presets'][CONFIG_PRESET]['admin_mode'];
+$config['app']['give_up_security'] =
+  $config['presets'][CONFIG_PRESET]['give_up_security'];
 
 // Site-instance-dependent locations.
 $registry['app_current']['definitions'] =
@@ -174,6 +185,16 @@ $registry['app_current']['storage'] =
 $registry['app_current']['cache'] =
   $registry['app_internals']['cache']
     . '/' . $registry['app_internals']['website_instance'];
+
+// -----------------------------------------------------------------------------
+// Post-config adjustments.
+
+implement_security_policies();
+
+// Optionally disabling htmlpurifier.
+// NOTE: activating 'give_up_security' in config presets makes this complete.
+// WARNING: UNSAFE ACTION, only for isolated development environments!
+// apputils_disable_htmlpurifier();
 
 
 // #############################################################################
