@@ -8,7 +8,7 @@ function pa_image_display_full(&$args) {
   $args['variables']['wrapper_html_tag'] = 'article';
 
   // Wrapper attributes.
-  $args['wrapper_options']['attributes']['class'][] = 'image_display--full';
+  // $args['wrapper_options']['attributes']['class'][] = 'some-class';
 
   // Image alt attribute.
   // The field_caption is already sanitized by the text-field data-handler.

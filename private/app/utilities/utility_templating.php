@@ -2,6 +2,8 @@
 /**
  * @file
  * Templating utilities.
+ *
+ * print '<pre>'; var_dump($var); print '</pre>';
  */
 
 /**
@@ -103,7 +105,7 @@ function _binder_render_recursive($args, &$items_buffer, &$result) {
           'attributes' => array(
             'id'       => 'primary-content',
             'class'    => array('primary-content'),
-            'tabindex' => '0',
+            'tabindex' => '-1',
           ),
         );
         $render_args_for_prim['flag_primary_content'] = TRUE;
@@ -148,7 +150,6 @@ function _binder_render_recursive($args, &$items_buffer, &$result) {
  * Present data.
  */
 function templateutils_present($args) {
-
   // Default output is HTML (as opposed to JSON, which, in the future, should
   // also be an option).
   if (!array_key_exists('output_type', $args)) {
@@ -181,8 +182,21 @@ function templateutils_present($args) {
     $args['wrapper_options']['attributes']['class'] = array();
   }
 
-  // If a presentation agent was appointed, let's now allow it do its work on
-  // our data before templatizing.
+  // Item signatures (a.k.a. HTML classes for the wrapper tag).
+  if (!empty($args['presentation_subject'])) {
+    $args['wrapper_options']['attributes']['class'][] =
+      ensafe_string($args['presentation_subject'], 'attribute_value');
+    if ($args['presentation_subject'] == 'entity') {
+      $item_signature_type = $args['presentation_subject'] . '--' . $args['entity_type'];
+      $args['wrapper_options']['attributes']['class'][] =
+        ensafe_string($item_signature_type, 'attribute_value');
+    }
+    $item_signature_id = $args['presentation_subject'] . '--' . $args['instance_id'];
+    $args['wrapper_options']['attributes']['class'][] =
+      ensafe_string($item_signature_id, 'attribute_value');
+  }
+
+  // This is the time for the presentation agent, if one was appointed.
   if (!empty($args['present_as'])) {
     apputils_wake_resource('presentation_agent', $args['present_as']);
     $presentation_agent_func = 'pa_' . $args['present_as'];
@@ -198,11 +212,12 @@ function templateutils_present($args) {
     }
 
     // If the template is a layout, then load the layout definition now and
-    // pass on its properties.
+    // learn its properties.
     if (strpos($args['template_name'], 'layout_') === 0) {
+      $args['presentation_is_layout'] = TRUE;
       apputils_wake_resource('layout', $args['template_name']);
       // Stating the way the template is implemented (if it is a function or
-      // a template file).
+      // a php_template file).
       $args['template_source'] =
         $GLOBALS['definitions']['layouts'][$args['template_name']]['template_source'];
     }
@@ -210,6 +225,11 @@ function templateutils_present($args) {
     if (!empty($args['variable_dispatcher_options'])) {
       templateutils_variable_dispatcher($args);
     }
+
+    // p10n HTML class.
+    $args['wrapper_options']['attributes']['class'][] = 'p10n--'
+      . ensafe_string($args['present_as'], 'attribute_value');
+
     // Some after-effects to the template .
     $post_dispatch_func = 'post_dispatch_' . $args['template_name'];
     if (function_exists($post_dispatch_func)) {
@@ -217,16 +237,9 @@ function templateutils_present($args) {
     }
   }
 
-  // Item signatures (a.k.a. HTML classes for the wrapper tag).
-  $args['wrapper_options']['attributes']['class'][] =
+  // More HTML class.
+  $args['wrapper_options']['attributes']['class'][] = 'tpl--' .
     ensafe_string($args['template_name'], 'attribute_value');
-  if (!empty($args['presentation_subject'])) {
-    $args['wrapper_options']['attributes']['class'][] =
-      ensafe_string($args['presentation_subject'], 'attribute_value');
-    $item_signature = $args['presentation_subject'] . '--' . $args['instance_id'];
-    $args['wrapper_options']['attributes']['class'][] =
-      ensafe_string($item_signature, 'attribute_value');
-  }
 
   // Producing output.
   if (empty($args['variables'])) {
@@ -250,6 +263,7 @@ function templateutils_present($args) {
     sys_notify('Template agent did not understand the rendering instruction. No result were returned.', 'warning');
     $output = '';
   }
+
   return $output;
 }
 
@@ -257,7 +271,6 @@ function templateutils_present($args) {
  * Return data formatted as HTML.
  */
 function _templatize_html($args) {
-
   // Template name.
   // $args['template'] should have either been provided before calling
   // templateutils_present(), or, if a presentation_agent was employed, then it
@@ -279,43 +292,65 @@ function _templatize_html($args) {
     $template_source = $args['template_source'];
   }
 
+
+  // Preparing template variables.
+  if (!empty($args['wrapper_options']['attributes'])) {
+    $args['variables']['wrapper_attributes'] =
+      $args['wrapper_options']['attributes'];
+  }
+  else {
+    $args['variables']['wrapper_attributes'] = array();
+  }
+  // Seeking for and - if it exists - applying the customizing function.
+  $customizer = 'template_customize_' . $template_name;
+  if (function_exists($customizer)) {
+    $customizer($args);
+  }
+  // Rendering the HTML attributes string.
+  $args['variables']['wrapper_attributes'] =
+    templateutils_render_html_attributes($args['variables']['wrapper_attributes']);
+
+  // Function as template.
   if ($template_source == 'function') {
     $template_function = 'draw_' . $template_name;
-  }
-  else {
-    sys_notify('Currently only functions are supported as template sources.', 'warning');
-  }
 
-  if (function_exists($template_function)) {
-    if (!empty($args['wrapper_options']['attributes'])) {
-      $args['variables']['wrapper_attributes'] =
-        $args['wrapper_options']['attributes'];
+    if (function_exists($template_function)) {
+      $output = $template_function($args);
     }
     else {
-      $args['variables']['wrapper_attributes'] = array();
+      $output = FALSE;
+      if (is_dev_mode()) {
+        $message = 'Did not find the specified template function: <em>'
+          . ensafe_string($args['template_name'], 'attribute_value') . '</em>.';
+      }
+      else {
+        $message = 'Did not find the specified template function.';
+      }
+      sys_notify($message, 'warning');
     }
-    // Seeking for and - if it exists - applying the customizing function.
-    $customizer = 'template_customize_' . $template_name;
-    if (function_exists($customizer)) {
-      $customizer($args);
-    }
-    // Rendering the HTML attributes string.
-    $args['variables']['wrapper_attributes'] =
-      templateutils_render_html_attributes($args['variables']['wrapper_attributes']);
-
-    $output = $template_function($args);
   }
-  else {
-    $output = FALSE;
-    if (is_dev_mode()) {
-      $message = 'Did not find the specified template function: <em>'
-        . ensafe_string($args['template_name'], 'attribute_value') . '</em>.';
+  // PHP template file as template.
+  elseif ($template_source == 'php_template') {
+    $variables = $args['variables'];
+    if ($args['presentation_is_layout']) {
+      $template_file = $GLOBALS['registry']['app_current']['templates'] . '/layouts/'
+                     . $template_name . '/' . $template_name . '.template.php';
+      ob_start();
+      include($template_file);
+      $output = ob_get_clean();
     }
     else {
-      $message = 'Did not find the specified template function.';
+      $msg = "At the current level of development, only layouts can have php template files.";
+      sys_notify($msg, 'warning');
+      $output = NULL;
     }
-    sys_notify($message, 'warning');
   }
+  else {
+    $msg = "Currently only 'function' and 'php_template' are supported as template sources.";
+    sys_notify($msg, 'warning');
+    $output = NULL;
+  }
+
   return $output;
 }
 
@@ -443,12 +478,16 @@ function templateutils_variable_dispatcher(&$args) {
 function templateutils_render_html_attributes($attribs_array) {
   $output = '';
   foreach ($attribs_array as $attrib_name => $attrib_val) {
-    $output .= ' ' . ensafe_string($attrib_name, 'attribute_name');
     if (is_array($attrib_val)) {
-      array_walk($attrib_val, 'ensafe_array_vals', 'attribute_value');
-      $output .= '="' . implode(' ', $attrib_val) . '"';
+      if (count($attrib_val) > 0) {
+        $output .= ' ' . ensafe_string($attrib_name, 'attribute_name');
+
+        array_walk($attrib_val, 'ensafe_array_vals', 'attribute_value');
+        $output .= '="' . implode(' ', $attrib_val) . '"';
+      }
     }
     else {
+      $output .= ' ' . ensafe_string($attrib_name, 'attribute_name');
       if ($attrib_name == 'title') {
         $output .= '="' . ensafe_string($attrib_val) . '"';
       }

@@ -8,7 +8,7 @@ function pa_article_full(&$args) {
   $args['variables']['wrapper_html_tag'] = 'article';
 
   // Wrapper attributes.
-  $args['wrapper_options']['attributes']['class'][] = 'article--full';
+  // $args['wrapper_options']['attributes']['class'][] = 'some-class';
 
   // Keeping only the body field.
   $fields_to_keep = array(

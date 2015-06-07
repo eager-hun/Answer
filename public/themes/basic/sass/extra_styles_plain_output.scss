@@ -6,7 +6,7 @@
  */
 
 @import "sass_base";
-@import "sass_mixins_shared";
+@import "sass_mixins";
 @import "sys_notification_styles_shared";
 
 body {
@@ -27,7 +27,7 @@ h1 {
 
 // -----------------------------------------------------------------------------
 // Growing screens.
-@include breakpoint($bkp-multi-min) {
+@include breakpoint($bkp-wide-min) {
   .page-content {
     border: 1px solid silver;
     padding: 1em;

@@ -16,8 +16,10 @@ function pa_page_default(&$args) {
         'header_default' => array(),
         'header_suffix_default' => array(),
       ),
-      'slot_body_level' => array(
+      'slot_main_level' => array(
         'content_level_default' => array(),
+      ),
+      'slot_footer_level' => array(
         'footer_default' => array(),
       ),
     ),

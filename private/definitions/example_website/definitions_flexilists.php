@@ -19,13 +19,13 @@ $flexilists['articles_top'] = array(
   'present_items_as' => 'article_preview',
   'list_options' => array(
     'attributes' => array(
-      'class' => array('fl--style-plain'),
+      'class' => array('l--list-plain'),
     ),
   ),
   'item_options' => array(
     'link_items_to_pages' => 1,
     'attributes' => array(
-      'class' => array('fl-item--standard'),
+      'class' => array('item'),
     ),
   ),
 );
@@ -46,13 +46,13 @@ $flexilists['articles_all'] = array(
   'present_items_as' => 'article_preview',
   'list_options' => array(
     'attributes' => array(
-      'class' => array('fl--style-plain'),
+      'class' => array('l--list-plain'),
     ),
   ),
   'item_options' => array(
     'link_items_to_pages' => 1,
     'attributes' => array(
-      'class' => array('fl-item--standard'),
+      'class' => array('item'),
     ),
   ),
 );
@@ -76,7 +76,7 @@ $flexilists['images_all'] = array(
   'present_items_as' => 'image_display_preview',
   'list_options' => array(
     'attributes' => array(
-      'class' => array('fl--style-gallery-cards','grid'),
+      'class' => array('l--gallery-cards', 'grid'),
     ),
   ),
   'item_options' => array(

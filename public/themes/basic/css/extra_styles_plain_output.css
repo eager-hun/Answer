@@ -41,15 +41,15 @@
 /* LEGEND for the breakpoint variables:
 | <- $layout-page-min-width                          $layout-page-max-width -> |
 |                                                                              |
-|            <- monocol ->              |            <- multicol ->            |
+|             <- narrow ->              |              <- wide ->              |
 |                                       |                                      |
-|  monocol   |  monocol   |  monocol    |  multicol  |  multicol  |  multicol  |
+|   narrow   |   narrow   |   narrow    |    wide    |    wide    |    wide    |
 |  lowthird  |  midthird  |  highthird  |  lowthird  |  midthird  |  highthird |
-| (mono-lt)  | (mono-mt)  | (mono-ht)   | (multi-lt) | (multi-mt) | (multi-ht) |
+| (narrow-lt)| (narrow-mt)| (narrow-ht) |  (wide-lt) |  (wide-mt) |  (wide-ht) |
 */
 /**
  * @file
- * Custom mixins.
+ * Theme-specific custom mixins.
  *
  * Mixins vs Extending utility-role Placeholders?
  *
@@ -61,7 +61,7 @@
  * http://www.sitepoint.com/avoid-sass-extend/
  * http://csswizardry.com/2014/11/when-to-use-extend-when-to-use-a-mixin/
  *
- * Reminder on basic syntax:
+ * NOTES on basic syntax:
  * @code
  *
  * @mixin test-mixin--box($bg: gold, $padding: 1em) {
@@ -80,6 +80,14 @@
  * }
  *
  * @endcode
+ */
+/**
+ * Allow buttons to have distinct shadow effects in complex situations.
+ *
+ * Complex situations arise when we want to replace CSS outline (on focus) with
+ * outer box shadows, and then, upon focus event, alongside the new
+ * focus-indicating shadows, we want to keep the original inset box shadows too
+ * that were originally part of the standard button appearance.
  */
 /**
  * Sys notification styles.
@@ -177,4 +185,4 @@ h1 {
   }
 }
 
-/*# sourceMappingURL=styles_plain_output.css.map */
+/*# sourceMappingURL=extra_styles_plain_output.css.map */

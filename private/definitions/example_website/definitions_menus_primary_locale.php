@@ -175,16 +175,23 @@ $menus['developers-menu'] = array(
       'path'   => 'devel/documentation-for-developers',
       'text'   => 'Developer documentation',
     ),
-    'projects' => array(
+    'devel-comp-demo' => array(
+      'depth'  => 1,
+      'parent' => FALSE,
+      'type'   => 'link',
+      'path'   => 'devel/components-demo',
+      'text'   => 'Components demo',
+    ),
+    'development' => array(
       'depth'  => 1,
       'parent' => FALSE,
       'type'   => 'static',
-      'text'   => 'Projects',
+      'text'   => 'Development',
     ),
     // >>> DEPTH 2 >>>
     'devel-project-1' => array(
       'depth'  => 2,
-      'parent' => 'projects',
+      'parent' => 'development',
       'type'   => 'link',
       'path'   => 'devel/project-1',
       'text'   => 'Project 1',

@@ -1,46 +1,38 @@
 /**
  * @file
- * Rules for _reusable_ modules.
+ * Components.
  *
- * NOTE to self: If it's not reusable at various places, then it should go
- * elsewhere.
+ * Components are such elements on the pages that exist at their own right, and
+ * other things can not build upon them.
  */
 
 
 // #############################################################################
-// Language switchers.
+// Content meta-data readout.
 
-.langswitch {
-  @include bare-list;
+.content-meta__info {
+  font-size: 0.9em;
+  padding: $layout-pad*0.5 0 0;
+}
+.content-meta__item {
+  display: inline-block;
+  line-height: 1.8;
+  margin: 0 $layout-pad*3 $layout-pad*0.5 0;
 
-  ul {
-    @include bare-list;
+  &:last-child {
+    margin-right: 0;
   }
   li {
     display: inline-block;
   }
-  li + li {
-    margin-left: $layout-pad*1.5;
-  }
-}
-.locale {
-  .flag {
-    display: inline-block;
-    height: 20px;
-    position: relative;
-    top: -0.05em;
-    vertical-align: middle;
-    width: 30px;
-
-    .langswitch--page & {
-      margin-right: $layout-pad / 2;
-    }
+  .label {
+    display: block;
   }
 }
 
 
 // #############################################################################
-// In-text features.
+// In-text components.
 
 .textbox,
 blockquote {
@@ -86,10 +78,9 @@ blockquote {
       & > div {
         margin-left: 1em;
       }
-      // :first-of-type could have been favoured, but ie8.
-      & > p:first-child {
-        margin: 1em 0 0.5em;
-        padding: 0.25em 0;
+      & > p:first-of-type {
+        font-style: italic;
+        font-weight: 700;
       }
     }
     ul {
@@ -110,72 +101,29 @@ blockquote {
 
 
 // #############################################################################
-// Flexilists.
+// Fields.
 
-.fl-item--standard + .fl-item--standard {
-  margin-top: $layout-pad*1.25;
-}
+.tpl--field {
+  margin-bottom: $layout-pad;
 
-.fl--style-plain {
-  .field_id--field_title {
-    font-size: 1.4em;
-  }
-  .field_id--field_preview_text {
-    margin-top: $layout-pad*0.25;
-    padding-left: $layout-pad;
-
-    .field__content {
-      font-size: 0.9em;
-    }
-    p,
-    ul {
-      margin: 0 0 0.5em;
-    }
-    p:last-child,
-    ul:last-child {
-      margin-bottom: 0;
-    }
+  &:last-child {
+    margin-bottom: 0;
   }
 }
 
-// -----------------------------------------------------------------------------
-@include breakpoint($bkp-multi-min) {
-  .fl--style-plain .field_id--field_preview_text {
-    padding-left: 1.5em;
+.field_type--image {
+  a,
+  img {
+    @include image-fit;
+  }
+}
+.p10n--dynamic_full {
+  .field_id--field_description {
+    margin-bottom: $layout-pad*2;
   }
 }
 
-.fl--style-images-large {
-  .fl-item + .fl-item {
-    margin-top: $layout-pad*2.5;
-  }
-}
 
 // #############################################################################
-// Overlays and modals.
+// Presentations.
 
-[id="overlay--common"],
-[id="modal--common"] {
-  @include transition-property(opacity);
-  @include transition-duration($transitspeed-mid);
-
-  display: none;
-  opacity: 0;
-}
-[id="overlay--common"] {
-  bottom: 0;
-  left: 0;
-  right: 0;
-  position: fixed;
-  top: 0;
-  z-index: 1000;
-}
-[id="modal--common"] {
-  left: 0;
-  height: 0;
-  overflow: visible;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 2000;
-}

@@ -2,9 +2,12 @@
  * @file
  * Experimental stylesheet that should get inlined into the <head>.
  */
-
+/*
+// So that we can see if it works.
 p {
-  // So that we can see if it works.
   color: green;
   font-weight: bold;
 }
+*/
+
+/*# sourceMappingURL=extra_styles_inline.css.map */

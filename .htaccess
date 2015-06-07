@@ -18,3 +18,9 @@ ErrorDocument 404 /index.php
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^(.*)$ index.php/$1 [L]
 </IfModule>
+
+<IfModule mod_deflate.c>
+  <FilesMatch "\.(html|php|css|js|svg|ttf|eot|otf|woff)$">
+    SetOutputFilter DEFLATE
+  </FilesMatch>
+</IfModule>

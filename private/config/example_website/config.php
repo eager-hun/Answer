@@ -314,7 +314,7 @@ $config['theme']['templates_source'] = 'system';
  *
  * @see:
  * http://vbence.web.elte.hu/regex_leiras.html
- * http://regexper.com/
+ * https://regex101.com/
  */
 
 $config['content']['short_tags'] = array(
@@ -340,7 +340,7 @@ $config['content']['short_tags'] = array(
     2  => '</div>',
     3  => '<div class="textbox textbox--note">',
     4  => '</div>',
-    5  => '<div class="textbox textbox--hilite">',
+    5  => '<div class="textbox textbox--highlight">',
     6  => '</div>',
     7  => '<div class="textbox textbox--links">',
     8  => '</div>',

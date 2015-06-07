@@ -146,17 +146,6 @@ if (!empty($definitions['contexts']['by_uri']) && !empty($request['uri_path'])) 
   unset($context, $uris, $uri);
 }
 
-/*
-TODO: if you don't remember why it's here and everything works well, then
-delete this all.
-// Adding default section and context if none yet (but, why?).
-if (empty($request['sections'])) {
-  $request['sections'][] = 'default';
-}
-if (empty($request['contexts'])) {
-  $request['contexts'][] = 'default';
-}
-*/
 
 // ###########################################################################
 // Building and rendering page contents.
@@ -219,9 +208,9 @@ $html_body = templateutils_data_dresser($common_args);
 // ###########################################################################
 // Rendering the HTML document.
 
-$temp['raw_attributes']['html'] = array(
-  'lang' => $request['locale']['langcode'],
-);
+$temp['raw_attributes']['html']['class'][] = 'no-js';
+$temp['raw_attributes']['html']['lang'] = $request['locale']['langcode'];
+
 $html_doc_args = array(
   'variables' => array(
     'html_attributes' => templateutils_render_html_attributes($temp['raw_attributes']['html']),

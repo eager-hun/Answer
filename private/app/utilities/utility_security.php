@@ -170,11 +170,11 @@ function ensafe_string($string, $usage = 'display') {
       break;
     case 'inline_css':
       // WARNING!
-      // Don't use inlined CSS until proper sanitization is not implemented!
-      // CSS seems to be among the most unsafe things ever.
+      // Bear in mind that CSS seems to be among the most unsafe things ever.
       // See:
       // http://stackoverflow.com/questions/3241616/sanitize-user-defined-css-in-php#answer-5209050
-      $processed = "/* Your inline CSS could be here - one day. */\n";
+      // This regexp gets CSS commens and newlines out.
+      $processed = preg_replace('#\/\*(.+?)\*\/|\r?\n|\r#s', '', $string);
       break;
     // Default is same as 'display'.
     default:

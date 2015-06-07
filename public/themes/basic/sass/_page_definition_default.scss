@@ -1,0 +1,184 @@
+/**
+ * @file
+ * Default page definition.
+ *
+ * This mainly means the formatting of the header, the footer, and the main
+ * section's outlining styles.
+ *
+ * NOTE: if there are specific pages, or groups of pages that have altered- or
+ * completely unique page definitions, those rules could be going into
+ * page_groups_and_specific_pages.scss.
+ */
+
+.page-center {
+  max-width: $layout-page-max-width;
+  min-width: $layout-page-min-width;
+  margin-left: auto;
+  margin-right: auto;
+  padding: $layout-pad/2;
+}
+
+
+// #############################################################################
+// Default page header.
+
+.region--header {
+  display: table;
+  width: 100%;
+
+  .tpl--block {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+.site-name {
+  font-size: 1.2em;
+
+  &,
+  &:hover {
+    text-decoration: none;
+  }
+}
+.site-tagline {
+  display: none; // Only on wider screens.
+  font-style: italic;
+}
+.entity--header_widgets {
+  text-align: right;
+}
+
+.region--header_suffix {
+  margin: $layout-pad*0.75 0 0;
+}
+
+// -----------------------------------------------------------------------------
+// Growing screens.
+
+@include breakpoint($bkp-wide-min) {
+  .site-tagline {
+    display: block; // It was hidden before.
+  }
+}
+@include breakpoint($bkp-wide-ht-min) {
+  .page-level--header {
+    .page-center {
+      padding-top: $layout-pad*0.75;
+      padding-bottom: $layout-pad*0.75;
+    }
+  }
+}
+
+// #############################################################################
+// Content neighborhood.
+
+.page-level--main {
+  padding-top: $layout-pad*1.75;
+  padding-bottom: $layout-pad*1.75;
+}
+.entity--content_meta {
+  margin-bottom: $layout-pad*1.75;
+}
+h1.page__title { // Overspecifying to override other h1 rule.
+  @include page-title-appearance;
+}
+.page__subtitle {
+  @include page-subtitle-appearance;
+
+  .page__title + & {
+    margin-top: -0.25em;
+  }
+}
+.block__title {
+  @include block-title-appearance;
+}
+
+// -----------------------------------------------------------------------------
+// Growing screens.
+
+@include breakpoint($bkp-wide-min) {
+  .page-level--main {
+    padding-top: $layout-pad*2.5;
+    padding-bottom: $layout-pad*2.5;
+  }
+  h1.page__title {
+
+  }
+  .page__subtitle {
+
+  }
+  .entity--content_meta {
+    margin-bottom: $layout-pad*2;
+  }
+  [id="navigation"],
+  .primary-content {
+    // Trick to allow a little room over them when we jump here via an anchor.
+    margin-top: -$layout-pad;
+    padding-top: $layout-pad;
+  }
+}
+@include breakpoint($bkp-wide-ht-min) {
+  .page-level--main {
+    padding-top: $layout-pad*4;
+    padding-bottom: $layout-pad*4;
+  }
+  h1.page__title {
+
+  }
+  .page__subtitle {
+
+  }
+  .entity--content_meta {
+    margin-bottom: $layout-pad*2.5;
+  }
+}
+@include breakpoint($layout-page-max-width) {
+  .content-level {
+    min-height: 24em;
+  }
+}
+
+
+// #############################################################################
+// Default footer.
+
+.region--footer {
+  @include n-clearfix;
+
+  padding-top: $layout-pad*0.25;
+  // Padding bottom is extra room for the fixed menu button.
+  padding-bottom: $layout-pad*3;
+  text-align: center;
+
+  .tpl--block {
+    margin-bottom: 0;
+
+    & + .tpl--block {
+      margin-top: $layout-pad;
+    }
+  }
+  .block__content {
+    font-size: 0.9em;
+  }
+  .menu {
+    display: inline-block;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Growing screens.
+
+@include breakpoint($bkp-wide-min) {
+  // Sticky footer.
+  @include sticky-footer(
+    130px,
+    "#main-screen",
+    "#footer-push",
+    ".page-level--footer"
+  );
+  .region--footer {
+    // The fixed menu button is not being used on multicol-width screens,
+    // so the extra padding can be reset. Since it is sticky footer with fixed
+    // height though, adjusting the bottom padding won't matter much.
+    padding-bottom: $layout-pad*0.5;
+  }
+}

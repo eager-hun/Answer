@@ -113,7 +113,7 @@ function pageutils_document_assets($return_type) {
           $output .= ensafe_string(file_get_contents($file), 'inline_css');
         }
       }
-      $output .= "</style>\n";
+      $output .= "\n</style>\n";
     }
     if (!empty($config['ui']['css_external'])) {
       foreach ($config['ui']['css_external'] as $external) {
@@ -272,9 +272,16 @@ function pageutils_html_head() {
   if (!empty($config['theme']['head_additions'])) {
     $output .= implode("\n", $config['theme']['head_additions']) . "\n";
   }
+
   $output .= pageutils_document_assets('head_css');
 
-  // FIXME: A better resource loading system.
+  $output .= implode("\n", array(
+    "<script>",
+    "document.documentElement.className = ",
+    "document.documentElement.className.replace(/(?:^|\s)no-js(?!\S)/g , 'has-js');",
+    "</script>"
+  )) . "\n";
+
   $html5shiv = $GLOBALS['registry']['app_externals']['libraries_frontend']
         . '/html5shiv/dist/html5shiv.min.js';
   $respondjs = $GLOBALS['registry']['app_externals']['libraries_frontend']
@@ -287,7 +294,6 @@ function pageutils_html_head() {
     "<![endif]-->",
   )) . "\n";
 
-  $output .= "<script>document.documentElement.className += ' has-js';</script>\n";
   $output .= pageutils_document_assets('head_js');
 
   return $output;

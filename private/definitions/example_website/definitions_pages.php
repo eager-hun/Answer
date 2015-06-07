@@ -323,3 +323,17 @@ $pages['devel-project-1'] = [
   'in_section'        => 'devel',
   'in_context'        => 'noindex',
 ];
+
+// -----------------------------------------------------------------------------
+$pages['devel-comp-demo'] = [
+  'data_type'         => 'entity',
+  'entity_type'       => 'dynamic',
+  'instance_id'       => 'devel-comp-demo',
+  'has_translations'  => 0,
+  'paths' => [
+    'primary'   => 'devel/components-demo',
+    'secondary' => NULL,
+  ],
+  'in_section'        => 'devel',
+  'in_context'        => 'noindex',
+];

@@ -8,7 +8,7 @@ function pa_static_page_full(&$args) {
   $args['variables']['wrapper_html_tag'] = 'article';
 
   // Wrapper attributes.
-  $args['wrapper_options']['attributes']['class'][] = 'static-page--full';
+  // $args['wrapper_options']['attributes']['class'][] = 'some-class';
 
   // Keeping only the body field.
   $fields_to_keep = array(

@@ -550,6 +550,8 @@ function _render_menu_level($menu_id, $depth, $menu_level_data) {
       // Preparing attributes.
       $link_attributes = array(
         'href' => base_path() . $item_data['path'],
+        // Menu 'button_class' is needed so some styles can be shared with
+        // static menu items that are not links.
         'class' => array(
           'menu__link',
           'menu__button',

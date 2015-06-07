@@ -1,21 +1,23 @@
 /**
  * @file
- * Layout rules. As I observe, layouts can be thought of as modules as well.
+ * Structures and layouts.
  *
- * @see
- * https://github.com/at-import/Singularity/wiki
- * http://snugug.github.io/RWD-with-Sass-Compass/#/interesting-grids
- * http://snugug.github.io/RWD-with-Sass-Compass/#/nested-grid-html
+ * Structures are stuff that are half-prepared things that other stuff can
+ * reuse and build upon.
  */
 
-.block {
+.box {
+  @include box();
+}
+
+.tpl--block {
   margin-bottom: $layout-pad*2;
 
   &:last-child {
     margin-bottom: 0;
   }
 }
-.sidebar .block {
+.sidebar .tpl--block {
   margin-bottom: $layout-pad*1.5;
 
   &:last-child {
@@ -26,15 +28,23 @@
   // Same as the sidebar block margin.
   margin-bottom: $layout-pad*1.5;
 }
-.sidebar:last-child {
-  margin-bottom: $layout-pad*2;
-}
 
-@include breakpoint($bkp-multi-min) {
+@include breakpoint($bkp-wide-min) {
   .column {
-    margin-bottom: $layout-pad*2;
+    margin-bottom: 0;
   }
 }
+
+
+// #############################################################################
+// Layouts.
+
+/**
+ * @see
+ * https://github.com/at-import/Singularity/wiki
+ * http://snugug.github.io/RWD-with-Sass-Compass/#/interesting-grids
+ * http://snugug.github.io/RWD-with-Sass-Compass/#/nested-grid-html
+ */
 
 
 // #############################################################################
@@ -47,7 +57,7 @@
 
   list-style-type: none; // In case we gridify a list.
 
-  // .block { background: rgba(black,0.1); } // For debugging;
+  // .tpl--block { background: rgba(black,0.1); } // For debugging;
 }
 
 
@@ -70,17 +80,16 @@
 
 // SYMMETRIC: There is one sidebar: .sidebar_1
 .layout--2sb.symmetric.has-1-sb.sb-1 {
-  @include add-grid(6 18 at $bkp-multi-min);
-  @include add-gutter(0 at $bkp-multi-min);
+  @include add-grid(6 18 at $bkp-wide-min);
+  @include add-gutter(0 at $bkp-wide-min);
   // @include background-grid;
 }
 .layout--2sb.symmetric.has-1-sb.sb-1 {
-  @include breakpoint($bkp-multi-min) {
+  @include breakpoint($bkp-wide-min) {
     & > .main_content {
       @include grid-span(1, 2);
 
       padding-left: 6%;
-      padding-right: 6%;
     }
     & > .sidebar_1 {
       @include grid-span(1, 1);
@@ -89,16 +98,15 @@
 }
 // SYMMETRIC: There is one sidebar: .sidebar_2
 .layout--2sb.symmetric.has-1-sb.sb-2 {
-  @include add-grid(18 6 at $bkp-multi-min);
-  @include add-gutter(0 at $bkp-multi-min);
+  @include add-grid(18 6 at $bkp-wide-min);
+  @include add-gutter(0 at $bkp-wide-min);
   // @include background-grid;
 }
 .layout--2sb.symmetric.has-1-sb.sb-2 {
-  @include breakpoint($bkp-multi-min) {
+  @include breakpoint($bkp-wide-min) {
     & > .main_content {
       @include grid-span(1, 1);
 
-      padding-left: 6%;
       padding-right: 6%;
     }
     & > .sidebar_2 {
@@ -110,14 +118,14 @@
 }
 // SYMMETRIC: Present on the page: both sidebars.
 .layout--2sb.symmetric.has-2-sb {
-  @include add-grid(6 18 at $bkp-multi-min);
-  @include add-gutter(0 at $bkp-multi-min);
-  @include add-grid(6 12 6 at $bkp-multi-ht-min);
-  @include add-gutter(1 at $bkp-multi-ht-min);
+  @include add-grid(6 18 at $bkp-wide-min);
+  @include add-gutter(0 at $bkp-wide-min);
+  @include add-grid(6 12 6 at $bkp-wide-ht-min);
+  @include add-gutter(1 at $bkp-wide-ht-min);
   // @include background-grid;
 }
 .layout--2sb.symmetric.has-2-sb {
-  @include breakpoint($bkp-multi-min) {
+  @include breakpoint($bkp-wide-min) {
     & > .main_content {
       @include grid-span(1, 2);
 
@@ -131,7 +139,7 @@
       clear: both;
     }
   }
-  @include breakpoint($bkp-multi-ht-min) {
+  @include breakpoint($bkp-wide-ht-min) {
     & > .main_content {
       @include grid-span(1, 2);
 
@@ -152,12 +160,12 @@
 
 // CONTENT-LEFT: There is one sidebar.
 .layout--2sb.content-left.has-1-sb {
-  @include add-grid(18 6 at $bkp-multi-min);
-  @include add-gutter(0 at $bkp-multi-min);
+  @include add-grid(18 6 at $bkp-wide-min);
+  @include add-gutter(0 at $bkp-wide-min);
   // @include background-grid;
 }
 .layout--2sb.content-left.has-1-sb {
-  @include breakpoint($bkp-multi-min) {
+  @include breakpoint($bkp-wide-min) {
     & > .main_content {
       @include grid-span(1, 1);
 
@@ -171,14 +179,14 @@
 }
 // CONTENT-LEFT: Present on the page: both sidebars.
 .layout--2sb.content-left.has-2-sb {
-  @include add-grid(18 6 at $bkp-multi-min);
-  @include add-gutter(0 at $bkp-multi-min);
-  @include add-grid(12 6 6 at $bkp-multi-ht-min);
-  @include add-gutter(1 at $bkp-multi-ht-min);
+  @include add-grid(18 6 at $bkp-wide-min);
+  @include add-gutter(0 at $bkp-wide-min);
+  @include add-grid(12 6 6 at $bkp-wide-ht-min);
+  @include add-gutter(1 at $bkp-wide-ht-min);
   // @include background-grid;
 }
 .layout--2sb.content-left.has-2-sb {
-  @include breakpoint($bkp-multi-min) {
+  @include breakpoint($bkp-wide-min) {
     & > .main_content {
       @include grid-span(1, 1);
 
@@ -192,7 +200,7 @@
       clear: both;
     }
   }
-  @include breakpoint($bkp-multi-ht-min) {
+  @include breakpoint($bkp-wide-ht-min) {
     & > .main_content {
       @include grid-span(1, 1);
 
@@ -213,12 +221,12 @@
 
 // CONTENT-RIGHT: There is one sidebar.
 .layout--2sb.content-right.has-1-sb {
-  @include add-grid(6 18 at $bkp-multi-min);
-  @include add-gutter(0 at $bkp-multi-min);
+  @include add-grid(6 18 at $bkp-wide-min);
+  @include add-gutter(0 at $bkp-wide-min);
   // @include background-grid;
 }
 .layout--2sb.content-right.has-1-sb {
-  @include breakpoint($bkp-multi-min) {
+  @include breakpoint($bkp-wide-min) {
     & > .main_content {
       @include grid-span(1, 2);
 
@@ -232,14 +240,14 @@
 }
 // CONTENT-RIGHT: Present on the page: both sidebars.
 .layout--2sb.content-right.has-2-sb {
-  @include add-grid(6 18 at $bkp-multi-min);
-  @include add-gutter(0 at $bkp-multi-min);
-  @include add-grid(6 6 12 at $bkp-multi-ht-min);
-  @include add-gutter(1 at $bkp-multi-ht-min);
+  @include add-grid(6 18 at $bkp-wide-min);
+  @include add-gutter(0 at $bkp-wide-min);
+  @include add-grid(6 6 12 at $bkp-wide-ht-min);
+  @include add-gutter(1 at $bkp-wide-ht-min);
   // @include background-grid;
 }
 .layout--2sb.content-right.has-2-sb {
-  @include breakpoint($bkp-multi-min) {
+  @include breakpoint($bkp-wide-min) {
     & > .main_content {
       @include grid-span(1, 2);
 
@@ -253,7 +261,7 @@
       clear: both;
     }
   }
-  @include breakpoint($bkp-multi-ht-min) {
+  @include breakpoint($bkp-wide-ht-min) {
     & > .main_content {
       @include grid-span(1, 3);
 
@@ -271,83 +279,86 @@
 
 
 // #############################################################################
-// .layout--landing_1
+// (Flexi)lists.
 
-.layout--landing_1 {
-  @include add-grid(6 18 at $bkp-multi-min);
-  @include add-gutter(0 at $bkp-multi-min);
-  @include add-grid(5 19 at $bkp-multi-ht-min);
-  @include add-gutter(0 at $bkp-multi-ht-min);
-  // @include background-grid;
-}
-.layout--landing_1 {
-  .column--main {
-    .grid-item {
-      margin-bottom: 2em;
-    }
-  }
-  @include breakpoint($bkp-multi-min) {
-    .sidebar {
-      @include grid-span(1, 1);
-    }
-    .column--main {
-      @include grid-span(1, 2);
+.l--list-plain {
+  & > .item {
+    margin-bottom: $layout-pad;
 
-      padding-left: 6%;
-      padding-right: 6%;
-    }
-  }
-  @include breakpoint($bkp-multi-ht-min) {
-    .sidebar {
-      @include grid-span(1, 1);
-    }
-    .column--main {
-      @include grid-span(1, 2);
-
-      .grid-item {
-        margin-bottom: 0;
-      }
-    }
-    @include layout(8) {
-      @include layout($gutter: 2) { // FIXME: this gutter behaves unexpectedly.
-        .slot--major_1 {
-          @include grid-span(3, 1);
-        }
-        .slot--major_2 {
-          @include grid-span(5, 4);
-        }
-      }
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 }
+
+/*
+.fl-item--standard + .fl-item--standard {
+  margin-top: $layout-pad*1.25;
+}
+
+.fl--style-plain {
+  .field_id--field_title {
+    font-size: 1.4em;
+  }
+  .field_id--field_preview_text {
+    margin-top: $layout-pad*0.25;
+    padding-left: $layout-pad;
+
+    .field__content {
+      font-size: 0.9em;
+    }
+    p,
+    ul {
+      margin: 0 0 0.5em;
+    }
+    p:last-child,
+    ul:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+@include breakpoint($bkp-wide-min) {
+  .fl--style-plain .field_id--field_preview_text {
+    padding-left: 1.5em;
+  }
+}
+
+.fl--style-images-large {
+  .fl-item + .fl-item {
+    margin-top: $layout-pad*2.5;
+  }
+}
+*/
 
 
 // #############################################################################
 // Grid: "gallery cards".
 
-.fl--style-gallery-cards {
+.l--gallery-cards {
   text-align: center;
-  // To compensate for the bottom row of grid items' needles bottom margin.
+  // To compensate for the bottom row of grid items' needless bottom margin.
   margin-bottom: -$layout-pad*2.3;
 
-  @include add-grid(2 at $bkp-mono-ht-min);
-  @include add-gutter(0.1 at $bkp-mono-ht-min);
-  @include add-grid(3 at $bkp-multi-ht-min);
-  @include add-gutter(0.1 at $bkp-multi-ht-min);
+  @include add-grid(2 at $bkp-narrow-ht-min);
+  @include add-gutter(0.1 at $bkp-narrow-ht-min);
+  @include add-grid(3 at $bkp-wide-ht-min);
+  @include add-gutter(0.1 at $bkp-wide-ht-min);
 
   & > .item {
-    margin: 0 0 $layout-pad*2.3;
+    margin-bottom: $layout-pad*1.5;
     display: inline-block;
     max-width: 100%;
   }
 
-  @include breakpoint($bkp-mono-ht-min) {
+  @include breakpoint($bkp-narrow-ht-min) {
     & > .item {
       display: block;
     }
   }
   // Two-col grid.
-  @include breakpoint($bkp-mono-ht-min $bkp-multi-mt-max) {
+  @include breakpoint($bkp-narrow-ht-min $bkp-wide-mt-max) {
     & > .item:nth-child(2n+1) {
       @include grid-span(1, 1);
 
@@ -358,7 +369,7 @@
     }
   }
   // Three-col grid when wide enough.
-  @include breakpoint($bkp-multi-ht-min) {
+  @include breakpoint($bkp-wide-ht-min) {
     & > .item:nth-child(3n+1) {
       @include grid-span(1, 1);
 
@@ -382,7 +393,7 @@
   margin-bottom: $layout-pad;
 }
 
-@include breakpoint($bkp-multi-mt-min) {
+@include breakpoint($bkp-wide-mt-min) {
   .splitter__fit {
     overflow-x: hidden;
   }
@@ -403,3 +414,4 @@
     }
   }
 }
+

@@ -3,8 +3,10 @@
  * Compiler-free barefoot CSS.
  */
 
+/* So that we can see if it works. */
+/*
 h1 {
-  /* So that we can see if it works. */
   color: orange;
   font-style: italic;
 }
+*/

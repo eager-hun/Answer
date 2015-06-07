@@ -9,11 +9,11 @@
   if (document.getElementById('modal--common')) {
     var menus = [];
     $('.sidebar .block--menu').each(function() {
-      menus.push($(this).clone().removeAttr('id'));
+      menus.push($(this).clone().removeAttr('id tabindex'));
     });
     awrA.modalSuite.populateModal(menus);
     awrA.modalSuite.specifyVariant('nav');
-    $('.menu-button').on('click', function(event) {
+    $('.menu-trigger').on('click', function(event) {
       event.preventDefault();
       awrA.modalSuite.showModal();
     });

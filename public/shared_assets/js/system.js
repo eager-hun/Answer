@@ -19,7 +19,7 @@
   awrA.modalSuite = {
     'modalTemplate': [
       '<div id="overlay--common"></div>',
-      '<div id="modal--common" tabindex="0">',
+      '<div id="modal--common" tabindex="-1">',
         '<div id="modal__content">',
           '<button id="modal__close" class="modal__close" tabindex="0"></button>',
         '</div>',

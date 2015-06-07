@@ -107,6 +107,7 @@ function draw_menu_item($args) {
  * Draw static menu item.
  */
 function draw_static_menu_item($args) {
+  // FIXME: the span.menu__static should receive its classes through $args too!
   $output = '<li' . $args['variables']['wrapper_attributes'] . '>'
     . '<span class="menu__static menu__button"><span>'
     . $args['variables']['item_text'] . '</span></span>'
@@ -164,7 +165,7 @@ function draw_content_meta($args) {
   if (!empty($args['variables']['date_created'])
       || !empty($args['variables']['date_lastmod'])
       || !empty($args['variables']['langswitch_page'])) {
-    $output .= '<div class="content-meta">';
+    $output .= '<div class="content-meta__info">';
     if (!empty($args['variables']['date_created'])) {
       $output .= '<div class="content-meta__item doc-meta--created">'
         . $args['variables']['date_created'] . '</div>';
@@ -173,7 +174,7 @@ function draw_content_meta($args) {
       $output .= '<div class="content-meta__item doc-meta--lastmod">'
         . $args['variables']['date_lastmod'] . '</div>';
     }
-    $output .= "</div><!-- /.content-meta -->\n";
+    $output .= "</div><!-- /.content-meta__info -->\n";
   }
   return $output;
 }

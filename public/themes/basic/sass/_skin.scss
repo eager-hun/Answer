@@ -1,0 +1,234 @@
+/**
+ * @file
+ * Skin.
+ *
+ * Belong here:
+ * colors, backgrounds, borders, radiuses, effects.
+ *
+ * Do not belong here:
+ * font-size, -family, line-height, and other typography-related things.
+ *
+ * Might belong here:
+ * Anything, if it is made neccessary by something legit belonging here.
+ *
+ * E.g. when something gets a non-default bg-color, extra padding might become
+ * neccessary around it; then that padding should come here too.
+ *
+ * The reasoning behind this is that if that bg-color ever gets removed, then
+ * the extra padding will likely be unneeded too; but it would be a hassle to
+ * search for the declaration of that related padding elsewhere. So it may live
+ * here then.
+ */
+
+
+// #############################################################################
+// Page definition - skin.
+
+html {
+  background: color(bg);
+  color: color(text);
+}
+[id="main-screen"] {
+  background: color(bg-light);
+}
+.page-level--header {
+  // Hack to make sure the shadow doesn't weaken on the left and right ends.
+  // Box shadow syntax: $color $hoff $voff $blur $spread $inset
+  // @include box-shadow(lighten(color(shadow), 10%) 0 -3px 4px 4px);
+  @include text-color-invert-zone;
+
+  background: color(prim);
+  position: relative;
+  z-index: 10; // So that it elevates above .page-level--main.
+
+  &,
+  & .label {
+    color: rgba(color(text-invert), 0.7);
+  }
+}
+.content-meta__info {
+  border-top: 1px solid color(border-light);
+  border-bottom: 1px solid color(border-light);
+}
+.page-level--footer {
+  background: color(blockfill);
+}
+
+
+// #############################################################################
+// Texts - skin.
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  color: lighten(color(text), 10%);
+}
+a {
+  // Order of link styling:
+  // :focus, :visited, :hover, :visited:hover, :active.
+
+  @include transition-color;
+
+  color: color(link);
+  text-decoration: none;
+
+  &:focus {
+    outline: 1px dotted color(link);
+  }
+  &:visited {
+    color: color(link-visited);
+  }
+  &:hover {
+    color: color(link-hover);
+    text-decoration: underline;
+  }
+  &:visited:hover {
+    color: color(link-visited);
+  }
+}
+.label {
+  color: color(minor);
+}
+del {
+  color: lighten(color(minor), 25%);
+}
+code {
+  @include border-radius;
+
+  background: lighten(color(blockfill), 4%);
+  padding: 0.05em 0.35em;
+}
+.messages .code {
+  background: rgba(color(text-invert), 0.5);
+}
+::selection {
+  background: color(prim);
+  color: color(text-invert);
+}
+::-moz-selection {
+  background: color(prim);
+  color: color(text-invert);
+}
+
+
+// #############################################################################
+// Components and structures - skin.
+
+.field_type--image {
+  img {
+    @include image-border;
+  }
+}
+.messages {
+  @include border-radius;
+}
+// < dl >-looking lists in Markdown-authored content.
+.defs > ul > li > p:first-of-type {
+  border-bottom: 1px dotted color(border-mid);
+  color: lighten(color(text), 10%);
+  margin: 1em 0 0.5em;
+  padding: 0.25em 0;
+}
+
+a.menu-trigger { // Overqualifying because of link rules to be overridden.
+  @include border-radius;
+  @include transition-property(opacity);
+  @include transition-duration($transitspeed-mid);
+
+  &,
+  &:hover {
+    border: 1px solid color(text-invert);
+    border: 1px solid rgba(color(text-invert), 0.8);
+    color: color(text-invert);
+    color: rgba(color(text-invert),0.9);
+    text-decoration: none;
+  }
+  // Come on, .menu-trigger is for mobile! Yes, but it's so nice.
+  &:hover,
+  &:focus {
+    @include box-shadow(color(link-invert) 0 0 4px 1px);
+
+    outline: none;
+    border-color: color(text-invert);
+  }
+
+  &.fixed {
+    @include border-radius(4px);
+    @include box-shadow(
+      $default-box-shadow-color
+      0
+      1px
+      6px
+      $default-box-shadow-spread
+    );
+
+    background: color(nav);
+    border-color: color(text-invert);
+    color: color(text-invert);
+  }
+}
+
+[id="overlay--common"],
+[id="modal--common"] {
+  @include transition-property(opacity);
+  @include transition-duration($transitspeed-mid);
+}
+[id="modal__content"] {
+  @include border-radius;
+
+  background: color(bg-light);
+}
+[id="modal__close"] {
+  @include box-shadow;
+}
+
+
+// #############################################################################
+// In-article styles.
+
+// The appearance (e.g. (bg-)colors) of textboxes could be amended here.
+
+// .textbox,
+// blockquote {
+//
+// }
+// .textbox--hero {
+//   &:before {}
+// }
+// .textbox--highlight {
+//   &:before {}
+// }
+// .textbox--note {
+//   &:before {}
+// }
+// .textbox--links {
+//   &:before {}
+// }
+// blockquote {
+//   &:before {}
+// }
+
+
+// #############################################################################
+// Sprite prefetching for UI elements that appear only @ user interaction.
+
+// (On mobile, the sprite-needing modal-elements only come out of display: none;
+//  when the modal is activated. That's too late to request the sprite.)
+// See:
+// http://css-tricks.com/snippets/css/css-only-image-preloading/
+// Note: link rel="prefetch" is not good enough, this is IMO better.
+
+.jump-links { // Unsuspecting irrelevant element.
+  @include icon(main);
+
+  background-position: -9999px -9999px;
+}

@@ -476,7 +476,7 @@ $dynamic['devel-project-1'] = [
       'field_description' => 'md',
     ],
     'data_handlers' => [
-      'field_body' => 'custom_entities',
+      'field_body' => 'devel_entities',
     ],
   ],
   'data' => [
@@ -487,6 +487,30 @@ $dynamic['devel-project-1'] = [
     // The field_body is arguments for the specified data-handler.
     'field_body' => [
       'order_id'   => 'project_1',
+    ],
+  ],
+];
+
+// -----------------------------------------------------------------------------
+$dynamic['devel-comp-demo'] = [
+  'meta' => [
+    'is_published' => 0,
+    'text_formats' => [
+      'field_title'       => 'html',
+      'field_description' => 'md',
+    ],
+    'data_handlers' => [
+      'field_body' => 'devel_entities',
+    ],
+  ],
+  'data' => [
+    'field_title' => [
+      'locale_primary'   => 'Components demo',
+      'locale_secondary' => NULL,
+    ],
+    // The field_body is arguments for the specified data-handler.
+    'field_body' => [
+      'order_id'   => 'components_demo',
     ],
   ],
 ];

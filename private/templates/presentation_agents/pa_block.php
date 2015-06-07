@@ -7,6 +7,8 @@ function pa_block(&$args) {
   $args['template_name'] = 'block';
 
   // Wrapper attributes.
+  // $args['wrapper_options']['attributes']['class'][] = 'some-class';
+
   $args['title_attributes'] = array(
     'class' => array(
       'block__title',

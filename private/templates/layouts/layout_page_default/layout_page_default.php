@@ -7,12 +7,13 @@
  * Layout definition.
  */
 $definitions['layouts']['layout_page_default'] = array(
-  'template_source' => 'function',
+  'template_source' => 'php_template',
   'slots' => array(
-    'slot_body_start'    => array(),
-    'slot_header_level'  => array(),
-    'slot_body_level'    => array(),
-    'slot_body_end'      => array(),
+    'slot_body_start'   => array(),
+    'slot_header_level' => array(),
+    'slot_main_level'   => array(),
+    'slot_footer_level' => array(),
+    'slot_body_end'     => array(),
   ),
 );
 
@@ -55,29 +56,4 @@ function post_dispatch_layout_page_default(&$args) {
 
   // Adding javascripts.
   $args['variables']['slot_body_end'] .= pageutils_document_assets('body_js');
-}
-
-/**
- * Draw layout.
- */
-function draw_layout_page_default($args) {
-  $output = '<body' . $args['variables']['wrapper_attributes'] . ">\n";
-  if (!empty($args['variables']['slot_body_start'])) {
-    $output .= $args['variables']['slot_body_start'];
-  }
-  if (!empty($args['variables']['slot_header_level'])) {
-    $output .= "<div class=\"page-level page-level--header\">\n<div class=\"page-center\">\n"
-             . $args['variables']['slot_header_level']
-             . "</div>\n</div>\n";
-  }
-  if (!empty($args['variables']['slot_body_level'])) {
-    $output .= "<div class=\"page-level page-level--body\">\n<div class=\"page-center\">\n"
-             . $args['variables']['slot_body_level']
-             . "</div>\n</div>\n";
-  }
-  if (!empty($args['variables']['slot_body_end'])) {
-    $output .= $args['variables']['slot_body_end'];
-  }
-  $output .= "</body>\n";
-  return $output;
 }

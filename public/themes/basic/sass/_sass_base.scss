@@ -44,7 +44,7 @@
 @import "breakpoint";
 @import "singularitygs";
 
-$debug-configuration: true; // I don't know what it does.
+// $debug-configuration: true; // I don't know what it does.
 
 
 // #############################################################################
@@ -64,27 +64,27 @@ $breakpoint-to-ems: true;
 /* LEGEND for the breakpoint variables:
 | <- $layout-page-min-width                          $layout-page-max-width -> |
 |                                                                              |
-|            <- monocol ->              |            <- multicol ->            |
+|             <- narrow ->              |              <- wide ->              |
 |                                       |                                      |
-|  monocol   |  monocol   |  monocol    |  multicol  |  multicol  |  multicol  |
+|   narrow   |   narrow   |   narrow    |    wide    |    wide    |    wide    |
 |  lowthird  |  midthird  |  highthird  |  lowthird  |  midthird  |  highthird |
-| (mono-lt)  | (mono-mt)  | (mono-ht)   | (multi-lt) | (multi-mt) | (multi-ht) |
+| (narrow-lt)| (narrow-mt)| (narrow-ht) |  (wide-lt) |  (wide-mt) |  (wide-ht) |
 */
 
-$bkp-mono-lt-max:           419px;
-$bkp-mono-mt-min:           420px;
-$bkp-mono-mt-max:           579px;
-$bkp-mono-ht-min:           580px;
+$bkp-narrow-lt-max:         419px;
+$bkp-narrow-mt-min:         420px;
+$bkp-narrow-mt-max:         579px;
+$bkp-narrow-ht-min:         580px;
 
-$bkp-mono-max:              699px;
-$bkp-multi-min:             700px;
+$bkp-narrow-max:            699px;
+$bkp-wide-min:              700px;
 
-$bkp-multi-lt-max:          859px;
-$bkp-multi-mt-min:          860px;
-$bkp-multi-mt-max:          919px;
-$bkp-multi-ht-min:          920px;
+$bkp-wide-lt-max:           859px;
+$bkp-wide-mt-min:           860px;
+$bkp-wide-mt-max:           919px;
+$bkp-wide-ht-min:           920px;
 
-$bkp-multi-ht-max: $layout-page-max-width - 1;
+$bkp-wide-ht-max: $layout-page-max-width - 1;
 // For above highthird max, you can use 'min-width: $layout-page-max-width';
 
 // -----------------------------------------------------------------------------
@@ -130,12 +130,14 @@ $colors: (
   help:                   $temp-color-accent-2,
   text:                   #333,
   text-invert:            white,
+  bg-light:               white,
   bg:                     $temp-color-blockfill,
-  bg-sec:                 #333,
+  bg-dark:                 #333,
   blockfill:              $temp-color-blockfill,
   link:                   saturate($temp-color-prim, 15%),
-  link-hover:             saturate(darken($temp-color-prim, 10%), 15%),
-  link-invert:            desaturate(lighten($temp-color-accent-1, 40%), 20%),
+  link-visited:           purple, // TODO.
+  link-hover:             darken(saturate($temp-color-prim, 15%), 15%),
+  link-invert:            white,
   border-mid:             $temp-color-border-base,
   border-light:           #ccc,
   border-dark:            darken($temp-color-border-base, 20%),

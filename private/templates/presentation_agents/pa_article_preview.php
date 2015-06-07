@@ -7,7 +7,7 @@ function pa_article_preview(&$args) {
   $args['template_name'] = 'wrap';
 
   // Wrapper attributes.
-  $args['wrapper_options']['attributes']['class'][] = 'article--preview';
+  // $args['wrapper_options']['attributes']['class'][] = 'some-class';
 
   // Adding links to the title and preview_image fields.
   $item = $args['instance_id'];

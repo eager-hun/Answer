@@ -3,15 +3,15 @@
  * 'Master' stylesheet.
  *
  * Used for stitching the partials together.
+ *
+ * NOTE: files with names pre- or suffixed with 'shared' get included from the
+ * public/shared_assets directory. Those files can be included in any of the
+ * installed themes, so they should be handled with awareness of this fact.
  */
 
-// NOTE: the files prefixed with 'shared' get included from the
-// public/shared_assets directory. Those files can be included in any of the
-// installed themes, so they should be handled with awareness of this fact.
-
 @import "sass_base";
-@import "sass_mixins_shared";
-@import "sass_mixins_theme";
+@import "sass_mixins";
+
 
 // normalize.css is being included via 'sass-css-importer' plugin.
 // (It originally resides in '../../../libraries_frontend/'.)
@@ -22,15 +22,15 @@
 // 2. Thus, normalize's rules can be sent over in the request for styles.css
 // 3. It will get 'uglified' along with the rest of the styles when we set
 //    output_style = :compressed in config.rb.
-
 // @import "CSS:normalize"; // In the public repo, I link this .css separately.
 
 @import "sys_notification_styles_shared";
-@import "SMACCS_base";
-@import "SMACCS_layouts";
-@import "SMACCS_modules";
-@import "styles_page_things";
-@import "SMACCS_theme";
-@import "styles_specific_pages";
-@import "SMACCS_states";
+@import "base";
+@import "layouts";
+@import "page_definition_default";
+@import "components";
+@import "forms";
+@import "navigation";
+@import "skin";
+@import "page_groups_and_specific_pages";
 @import "shame";

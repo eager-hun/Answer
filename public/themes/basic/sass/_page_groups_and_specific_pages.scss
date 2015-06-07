@@ -1,0 +1,80 @@
+/**
+ * @file
+ * Styles: page groups and specific pages.
+ *
+ * Intended contents:
+ * - rare stlyings that occur only on specific pages, typically concerning
+ *   components and content on specific pages.
+ * - If there are different page-variants that have altered- or unique page
+ *   definition (header, footer, unique body bg), that could be placed here too.
+ */
+
+
+// #############################################################################
+// Homepage.
+
+/*
+.binder--mosaic_homepage {
+  .main_content {
+    .block__title {
+      font-size: 1.5em;
+      margin-bottom: 0.65em;
+    }
+  }
+  .flexilist .field_id--field_title {
+    font-size: 1.2em;
+  }
+}
+@include breakpoint($bkp-wide-ht-min) {
+  .binder--mosaic_homepage {
+    .main_content {
+      .block__title {
+        margin-bottom: 1em;
+      }
+    }
+  }
+}
+*/
+
+
+// #############################################################################
+// Admin-page.
+
+.admin-tasks {
+  @include bare-list;
+
+  text-align: center;
+
+  li + li {
+    margin-top: $layout-pad;
+  }
+  a {
+    @include button($color: action);
+  }
+}
+
+@include breakpoint($bkp-wide-min) {
+  .admin-tasks {
+    text-align: left;
+  }
+}
+
+
+// #############################################################################
+// Component-demo page.
+
+.component-demo {
+  .cd__title {
+    margin-bottom: 0.15em;
+  }
+  .cd__description {
+    @include description-style;
+
+    margin-bottom: $layout-pad*1.5;
+  }
+  .component-demo + & {
+    border-top: 1px solid color(border-light);
+    margin-top: $layout-pad*2.5;
+    padding-top: $layout-pad*2.5;
+  }
+}

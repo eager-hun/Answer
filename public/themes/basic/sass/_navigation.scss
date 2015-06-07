@@ -1,0 +1,649 @@
+/**
+ * @file
+ * Rules for navigation.
+ */
+
+
+// #############################################################################
+// Language switchers.
+
+.langswitch {
+  @include bare-list;
+
+  ul {
+    @include bare-list;
+  }
+  li {
+    display: inline-block;
+  }
+  li + li {
+    margin-left: $layout-pad*1.5;
+  }
+}
+.locale {
+  .flag {
+    @include icon(main);
+
+    border: 1px solid color(text-invert);
+    border: 1px solid rgba(color(text-invert),0.5);
+    display: inline-block;
+    height: 20px;
+    position: relative;
+    top: -0.05em;
+    vertical-align: middle;
+    width: 30px;
+
+    // An almost transparent overlay over flags that help to adjust their
+    // percieved colors more harmonic to the theme's primary color.
+    &:before {
+      background-image: linear-gradient(
+        135deg,
+        transparent,
+        rgba(color(prim),0.1),
+        rgba(color(prim),0.3)
+      );
+      bottom: 0;
+      content: ' ';
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    .langswitch--page & {
+      margin-right: $layout-pad / 2;
+    }
+  }
+}
+
+.langswitch {
+  .pretext {
+    padding-bottom: $layout-pad*0.5;
+  }
+  [class*="header_widgets"] & {
+    float: right;
+  }
+  .label {
+    text-align: left;
+
+    &.has-icon:before {
+      @include icon(main);
+
+      content: '';
+      display: inline-block;
+      height: 18px;
+      margin-right: $layout-pad*0.75;
+      position: relative;
+      top: -1px;
+      vertical-align: middle;
+      width: 18px;
+    }
+  }
+  .label.home-page:before {
+    background-position: center -190px;
+  }
+  .label.translations:before {
+    background-position: center -210px;
+  }
+  .label.no-translations:before {
+    background-position: center -230px;
+  }
+}
+.langswitch--nav {
+  .label.home-page:before {
+    background-position: center -250px;
+  }
+  .label.translations:before {
+    background-position: center -270px;
+  }
+  .label.no-translations:before {
+    background-position: center -290px;
+  }
+}
+
+.locale--primary .flag {
+  background-position: center 0;
+}
+.locale--secondary .flag {
+  background-position: center -20px;
+}
+.langswitch--nav .flag {
+  border: 1px solid color(border-mid);
+  border: 1px solid rgba(color(border-mid),0.3);
+}
+
+// Flag states.
+a.locale:focus {
+  outline: none !important;
+}
+a.locale:hover .flag,
+a.locale:focus .flag {
+  @include box-shadow(color(link-invert) 0 0 4px 1px);
+
+  border-color: rgba(color(text-invert), 0.8);
+}
+// That's the langswitch that got placed into the mobile main menu
+// (in the modal).
+.langswitch--nav {
+  padding: $layout-pad*0.25 0 $layout-pad*0.75;
+
+  a.locale:hover .flag,
+  a.locale:focus .flag {
+    @include box-shadow(color(nav) 0 0 4px 1px);
+
+    border-color: color(text-invert);
+  }
+}
+
+
+// #############################################################################
+// Menus.
+
+$_menu-color: color(nav);
+$_light-color: color(blockfill);
+
+// -----------------------------------------------------------------------------
+// Regular menus.
+
+.menu,
+.menu ul {
+  @include bare-list;
+
+  line-height: 1.2;
+}
+// NOTE: the .menu__button class is shared between live links and static menu
+// items, while .menu__link class is present only on live links. Since some
+// rules must be shared among links and static items, and some rules must not,
+// it neccessitates some juggling with styles around these classes.
+.nav-format--regular {
+  // This is a bit risky setup, but with this very appearance, it might be
+  // pulled off.
+  @include border-radius;
+
+  background: $_menu-color;
+  overflow: hidden;
+
+  ul {
+    // Each level of nested menu is darker by this much.
+    background: rgba(black,0.15);
+  }
+  .menu__button {
+    @include disable-font-boost;
+    @include transition-property(background-color);
+    @include transition-duration($transitspeed-fast);
+
+    border: 1px solid $_menu-color;
+    border-top: 1px solid rgba(white,0.15);
+    border-bottom: 1px solid rgba(black,0.15);
+    display: block;
+    padding: $layout-pad*0.3 $layout-pad*0.5;
+    position: relative;
+
+    & > span {
+      @include transition-property(background-color);
+      @include transition-duration($transitspeed-fast);
+      @include border-radius($default-border-radius*0.75);
+      @include box-sizing(border-box);
+
+      // Later we will need it, and don't want it to jump when the border
+      // appears. So we put it there now as transparent.
+      border: 1px dotted transparent;
+      display: inline-block;
+      padding: 0.25em 0.33em;
+
+      // Indicator-arrow in inactive state. (Opacity: 0)
+      // &:after {
+      //   @include transition-property(opacity);
+      //   @include transition-duration($transitspeed-fast);
+      //
+      //   color: white;
+      //   font-family: monospace;
+      //   font-size: 12px;
+      //   height: 12px;
+      //   line-height: 1;
+      //   margin-top: -6px;
+      //   opacity: 0;
+      //   position: absolute;
+      //   top: 50%;
+      // }
+    }
+  }
+  .menu__static {
+    display: block;
+    padding: $layout-pad*0.5 $layout-pad*0.5;
+
+    & > span {
+      color: color(text-invert);
+      color: rgba(color(text-invert),0.7);
+      font-size: 0.75em;
+      font-style: italic;
+      font-weight: 700;
+      text-transform: uppercase;
+
+      &:after {
+        content: ':';
+      }
+    }
+  }
+  .active-trail > .menu__button > span {
+    background: rgba(white,0.15);
+  }
+  .menu__link {
+    // Order of link styling:
+    // :focus, :visited, :hover, :visited:hover, :active.
+
+    color: white;
+    text-decoration: none;
+    text-shadow: $default-text-shadow;
+
+    &:focus {
+      outline: none;
+
+      & > span {
+        border-color: rgba(white, 0.75);
+      }
+    }
+    &:hover {
+      @include box-shadow(none);
+
+      background-color: rgba(black,0.1);
+      color: white;
+      outline: none;
+
+      & > span {
+        background-color: rgba(black, 0.15);
+        border-color: transparent;
+      }
+    }
+    &:visited:hover {
+      color: white;
+    }
+    &.active > span {
+      background-color: rgba(black, 0.15);
+
+      // &:after {
+      //   opacity: 1;
+      // }
+    }
+    // &:hover > span:after {
+    //   opacity: 0.75;
+    // }
+  }
+}
+// Regular menu's color variants.
+.nav-format--regular.variant--light {
+  background: $_light-color;
+
+  ul {
+    // Overriding the nested menu levels' darkening, as it doesn't seem to
+    // look good here.
+    // NOTE: no substitute visual clue was invented in its place.
+    background: transparent;
+  }
+  .menu__static {
+    & > span {
+      color: color(minor);
+      color: rgba(color(text),0.7);
+    }
+  }
+  .menu__button {
+    border: 1px solid transparent;
+    border-top: 1px solid rgba(white,0.15);
+    border-bottom: 1px solid rgba(black,0.07);
+
+    &,
+    &:hover,
+    &:visited:hover {
+      color: color(link);
+    }
+  }
+  .menu__link {
+    text-shadow: 0 0 4px rgba(white, 0.7);
+  }
+  .active-trail > .menu__button > span {
+    background: rgba(white,0.75);
+  }
+  .menu__link {
+    // Order of link styling:
+    // :focus, :visited, :hover, :visited:hover, :active.
+
+    &:focus > span {
+      border-color: rgba(color(link), 0.75);
+    }
+    &:hover {
+      background-color: rgba(black,0.05);
+
+      & > span {
+        background-color: rgba(black, 0.05);
+        border-color: transparent;
+      }
+    }
+    &.active > span {
+      background-color: rgba(black, 0.07);
+    }
+  }
+}
+// Supplementary indications in menu items (not in use, currently).
+.indications--on-right {
+  .nav-format--regular {
+    // .menu__link > span:after {
+    //   content: '\25B6'; // Right pointing arrow.
+    //   right: 0.4em;
+    // }
+    .menu__button {
+      padding-left: $layout-pad*0.5;
+      padding-right: $layout-pad*1;
+    }
+    .depth--2 > .menu__button {
+      padding-left: $layout-pad*1.25;
+    }
+    .depth--3 > .menu__button {
+      padding-left: $layout-pad*2;
+    }
+    .depth--4 > .menu__button {
+      padding-left: $layout-pad*2.75;
+    }
+  }
+}
+.indications--on-left {
+  .nav-format--regular {
+    // .menu__link > span:after {
+    //   content: '\25c0'; // Left pointing arrow.
+    //   left: 0.4em;
+    // }
+    .menu__button {
+      padding-left: $layout-pad*1;
+      padding-right: $layout-pad*0.5;
+    }
+    .depth--2 > .menu__button {
+      padding-left: $layout-pad*1.75;
+    }
+    .depth--3 > .menu__button {
+      padding-left: $layout-pad*2.5;
+    }
+    .depth--4 > .menu__button {
+      padding-left: $layout-pad*3.25;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Menu variant: button-row.
+
+.nav-format--button-row {
+  .menu__item {
+    float: left;
+    margin: 0 $layout-pad*0.25 $layout-pad*0.5;
+    white-space: nowrap;
+  }
+  .menu__link {
+    @include button($size: small, $color: plain-light);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Mobile-menu-trigger buttons.
+
+a.menu-trigger { // Overqualifying because of link rules to be overridden.
+  display: inline-block;
+  font-size: 0.9em;
+  padding: 0.1em 0.5em 0;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &.fixed {
+    // Fixing a Chrome bug of flickering fixed elements.
+    -webkit-transform: translateZ(0);
+
+    bottom: $layout-pad;
+    position: fixed;
+    right: -10em; // Off-screen.
+    opacity: 0; // Only scrolled-in state (see states) will show it.
+    z-index: 1000;
+  }
+}
+
+
+
+// #############################################################################
+// Operation of menus, menu-triggers, and language switchers.
+
+.has-js .sidebar .block--menu {
+  display: none;
+}
+[class*="header_widgets"] .langswitch {
+  display: none;
+}
+
+.menu-trigger {
+  [data-modal-show="true"] & {
+    opacity: 0;
+  }
+}
+.menu-trigger.fixed {
+  display: none;
+
+  [data-scrolled-in="true"] & {
+    display: inline-block;
+    right: $layout-pad;
+    opacity: 1;
+  }
+  [data-modal-show="true"] & {
+    opacity: 0;
+  }
+}
+
+@include breakpoint($bkp-wide-min) {
+  .has-js .sidebar .block--menu {
+    display: block;
+  }
+  .overlay--nav,
+  .modal--nav {
+    display: none !important;
+  }
+  [class*="header_widgets"] .langswitch {
+    display: block;
+  }
+  [class*="header_widgets"] .menu-trigger,
+  .menu-trigger.fixed,
+  [class*="main-menu"] .langswitch {
+    display: none !important;
+  }
+}
+
+
+// #############################################################################
+// Overlays and modals.
+
+[id="overlay--common"],
+[id="modal--common"] {
+  // TODO: move these into SMACCS-theme.
+  // @include transition-property(opacity);
+  // @include transition-duration($transitspeed-mid);
+
+  display: none;
+  opacity: 0;
+}
+[id="overlay--common"] {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
+[id="modal--common"] {
+  left: 0;
+  height: 0;
+  overflow: visible;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 2000;
+}
+
+// Throbber.
+[id="throbber--modal"][data-on="true"] {
+  opacity: 1;
+}
+[id="throbber--modal"][data-on="false"] {
+  opacity: 0;
+}
+[data-modal-init="false"] [id="throbber--modal"] {
+  display: none;
+}
+
+[id="overlay--common"] {
+  background: gray;
+  background: rgba(black,0.65);
+}
+[id="modal__content"] {
+  max-width: $layout-page-max-width - 200;
+  margin: $layout-pad*1.5 $layout-pad $layout-pad;
+  position: relative;
+}
+[id="modal__close"] {
+  @include strip-button;
+  @include border-radius(50%);
+
+  background: gray;
+  border: 1px solid gray;
+  cursor: pointer;
+  height: 24px;
+  position: absolute;
+  right: -12px;
+  text-align: center;
+  top: -12px;
+  width: 24px;
+  z-index: 1; // To raise it above the modal's content. (???).
+
+  &:before {
+    @include icon(main);
+
+    background-position: center -131px;
+    content: '';
+    display: block;
+    height: 22px;
+    width: 22px;
+  }
+  &:focus {
+    @include box-shadow(color(link-invert) 0 0 5px 2px);
+
+    border-color: color(text-invert);
+    outline: none;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Modal variants.
+.modal--nav {
+  [id="modal__content"] {
+    padding: $layout-pad*0.5;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Modal operations.
+
+[data-modal-init="true"] {
+  [id="overlay--common"],
+  [id="modal--common"] {
+    display: block;
+  }
+}
+[data-modal-show="true"] {
+  [id="overlay--common"],
+  [id="modal--common"] {
+    opacity: 1;
+  }
+}
+[data-modal-init="false"] {
+  [id="overlay--common"],
+  [id="modal--common"] {
+    display: none;
+  }
+}
+[data-modal-show="false"] {
+  [id="overlay--common"],
+  [id="modal--common"] {
+    opacity: 0;
+  }
+}
+[id="overlay--common"],
+[id="modal--common"] {
+  cursor: pointer;
+}
+[id="modal__content"] {
+  cursor: default;
+}
+
+
+// #############################################################################
+// Misc.
+
+// NOTE: The throbber is being unfinished.
+.throbber {
+
+}
+// TODO: shouldn't it be called throbber--global?
+.throbber--modal {
+  @include border-radius(12px);
+  @include box-shadow;
+  @include transition-property(opacity);
+  @include transition-duration($transitspeed-mid);
+
+  background: color(action);
+  border: 2px solid color(text-invert);
+  display: block;
+  height: 32px;
+  left: 50%;
+  margin: -12px 0 0 -12px;
+  opacity: 0; // Only data-on="true" attribute should show it. See SMACCS_states.
+  padding: 2px;
+  position: fixed;
+  width: 32px;
+  top: 50%;
+  z-index: 900;
+
+  &:before {
+    @include icon(main);
+
+    background-position: center -160px;
+    content: ' ';
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+
+    -webkit-animation: spinner 1s linear infinite;
+    -moz-animation: spinner 1s linear infinite;
+    -ms-animation: spinner 1s linear infinite;
+    -o-animation: spinner 1s linear infinite;
+    animation: spinner 1s linear infinite;
+  }
+}
+
+@-webkit-keyframes spinner {
+  100% {
+    @include transform(rotate(360deg));
+  }
+}
+@-moz-keyframes spinner {
+  100% {
+    @include transform(rotate(360deg));
+  }
+}
+@-ms-keyframes spinner {
+  100% {
+    @include transform(rotate(360deg));
+  }
+}
+@-o-keyframes spinner {
+  100% {
+    @include transform(rotate(360deg));
+  }
+}
+@keyframes spinner {
+  100% {
+    @include transform(rotate(360deg));
+  }
+}

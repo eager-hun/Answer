@@ -8,7 +8,7 @@ function pa_dynamic_full(&$args) {
   $args['variables']['wrapper_html_tag'] = 'article';
 
   // Wrapper attributes.
-  $args['wrapper_options']['attributes']['class'][] = 'dynamic--full';
+  // $args['wrapper_options']['attributes']['class'][] = 'some-class';
 
   // Keeping only specific fields.
   $fields_to_keep = array(

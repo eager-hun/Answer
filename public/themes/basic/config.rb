@@ -1,3 +1,14 @@
+# Hack/quickfix:
+# See: https://github.com/Compass/compass/issues/1851
+# See: https://github.com/Compass/compass/issues/1868#issuecomment-62783187
+require 'compass/import-once/importer'
+module Compass::ImportOnce::Importer
+  def find(uri, options, *args)
+    uri, force_import = handle_force_import(uri.gsub(/^\(NOT IMPORTED\) /, ''))
+    maybe_replace_with_dummy_engine(super(uri, options, *args), options, force_import)
+  end
+end
+
 require 'compass/import-once/activate'
 
 # Require any additional compass plugins here.

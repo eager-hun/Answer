@@ -342,7 +342,7 @@ function apputils_wake_resource($resource_type, $resource_id, $options = array()
   elseif ($resource_type == 'layout') {
     if (!in_array($resource_id, $temp['initiated_resources']['layout'])) {
       $resource_file = $registry['app_current']['templates'] . '/layouts/'
-        . $resource_id . '/' . $resource_id . '.php';
+                     . $resource_id . '/' . $resource_id . '.php';
       if (file_exists($resource_file)) {
         require_once($resource_file);
         // We store its id in the initiated array, so it won't be loaded any more.
