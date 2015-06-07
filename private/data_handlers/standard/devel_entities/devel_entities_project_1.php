@@ -3,7 +3,6 @@
  * Custom script for the project_1 devel entity.
  */
 
-
 /**
  * Standard function.
  *

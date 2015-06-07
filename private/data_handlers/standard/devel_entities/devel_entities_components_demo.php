@@ -3,7 +3,6 @@
  * Custom script for the components_demo devel entity.
  */
 
-
 /**
  * Standard function.
  *
@@ -25,7 +24,6 @@ function _decd_template($variables) {
   $title       = ensafe_string($variables['title'], 'html');
   $description = ensafe_string($variables['description'], 'html');
   $demo        = $variables['demo'];
-
 
   $output = '<div class="component-demo cd--' . $name . '">';
   $output .= '<h2 class="cd__title">' . $title . '</h2>';
@@ -52,7 +50,7 @@ function _decd_placeholder() {
 }
 
 /**
- * Placeholder demo.
+ * In-text features.
  */
 function _decd_in_text() {
   $text = <<<EOT
@@ -63,25 +61,23 @@ function _decd_in_text() {
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dictum, velit sit amet faucibus consequat, felis purus malesuada odio, sit amet tincidunt ante massa eu nibh. Quisque nec ornare massa, in posuere diam.
 <!--/HERO-->
 
-### Note:
-
-<!--NOTE-->
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dictum, velit sit amet faucibus consequat, felis purus malesuada odio, sit amet tincidunt ante massa eu nibh. Quisque nec ornare massa, in posuere diam.
-<!--/NOTE-->
-
 ### High:
 
 <!--HIGH-->
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dictum, velit sit amet faucibus consequat, felis purus malesuada odio, sit amet tincidunt ante massa eu nibh. Quisque nec ornare massa, in posuere diam.
 <!--/HIGH-->
 
+### Note:
+
+<!--NOTE-->
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dictum, velit sit amet faucibus consequat, felis purus malesuada odio, sit amet tincidunt ante massa eu nibh. Quisque nec ornare massa, in posuere diam.
+<!--/NOTE-->
+
 ### Links:
 
 <!--LINKS-->
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dictum, velit sit amet faucibus consequat, felis purus malesuada odio, sit amet tincidunt ante massa eu nibh. Quisque nec ornare massa, in posuere diam.
 <!--/LINKS-->
-
-
 
 EOT;
 
