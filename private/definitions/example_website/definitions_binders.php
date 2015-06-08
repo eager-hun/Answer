@@ -80,6 +80,7 @@ $binders['page_default'] = array(
 
 // -----------------------------------------------------------------------------
 // HEADER.
+
 $binders['header_default'] = array(
   'items' => array(
     array(
@@ -109,6 +110,7 @@ $binders['header_suffix_default'] = array(
 
 // -----------------------------------------------------------------------------
 // CONTENT LEVEL.
+
 $binders['content_level_default'] = array(
   'items' => array(
     array(
@@ -131,6 +133,7 @@ $binders['content_level_default'] = array(
 
 // -----------------------------------------------------------------------------
 // PRIMARY CONTENT.
+
 $binders['primary_content'] = array(
   'items' => array(
     array(
@@ -147,6 +150,7 @@ $binders['primary_content'] = array(
 
 // -----------------------------------------------------------------------------
 // SIDEBAR 1.
+
 $binders['sidebar_1_default'] = array(
   'items' => array(
     array(
@@ -209,6 +213,7 @@ $binders['sidebar_1_default'] = array(
 
 // -----------------------------------------------------------------------------
 // SIDEBAR 2.
+
 $binders['sidebar_2_default'] = array(
   'items' => array(
 
@@ -217,6 +222,7 @@ $binders['sidebar_2_default'] = array(
 
 // -----------------------------------------------------------------------------
 // FOOTER.
+
 $binders['footer_default'] = array(
   'items' => array(
     array(
@@ -248,6 +254,7 @@ $binders['footer_default'] = array(
 
 // -----------------------------------------------------------------------------
 // Page template with plain look and contents.
+
 $binders['page_plain'] = array(
   'items' => array(
     array(
@@ -274,6 +281,7 @@ $binders['page_plain'] = array(
 
 // -----------------------------------------------------------------------------
 // Homepage global level.
+
 $binders['page_homepage'] = array(
   'items' => array(
     array(
@@ -314,6 +322,7 @@ $binders['page_homepage'] = array(
 
 // -----------------------------------------------------------------------------
 // Homepage content level.
+
 $binders['mosaic_homepage'] = array(
   'binder_options' => array(
     'title' => array(
@@ -394,6 +403,69 @@ $binders['mosaic_homepage'] = array(
         'condition' => 'is',
         'value'     => 'admin',
       ),
+    ),
+  ),
+);
+
+
+// #############################################################################
+// PROTOTYPING: Binders for a SINGLE MOCK PAGE.
+
+/**
+ * NOTES:
+ *
+ * What do prototypes do here? Why isn't there a "prototyping" site instance,
+ * where all sorts of prototyping could be compactly contained?
+ *
+ * Indeed that is the intention, and the possibility for it is theoretically
+ * already open.
+ *
+ * But it would mean two different sites to maintain - in this very early,
+ * refactor-heavy period of time. Changes to the config system? There would be
+ * multiple config files to update. Changes to how definitions work? Multiple
+ * sets of definitions to maintain. Not good.
+ *
+ * So, until the procedures get a bit polished up, a little prototyping is being
+ * smuggled into this example_website instance.
+ */
+
+// -----------------------------------------------------------------------------
+// "Single Mock Page" global level.
+
+$binders['single_mock_page'] = array(
+  'items' => array(
+    array(
+      'data_type'   => 'entity',
+      'entity_type' => 'dynamic',
+      'instance_id' => 'smp-header',
+      'present_as'  => 'plain',
+      'field_prerenderer_options' => array(
+        'template_variant' => 'plain',
+      ),
+    ),
+    array(
+      'data_type'   => 'entity',
+      'entity_type' => 'dynamic',
+      'instance_id' => 'smp-main',
+      'present_as'  => 'plain',
+      'field_prerenderer_options' => array(
+        'template_variant' => 'plain',
+      ),
+    ),
+    array(
+      'data_type'   => 'entity',
+      'entity_type' => 'dynamic',
+      'instance_id' => 'smp-footer',
+      'present_as'  => 'plain',
+      'field_prerenderer_options' => array(
+        'template_variant' => 'plain',
+      ),
+    ),
+    array(
+      'data_type'   => 'entity',
+      'entity_type' => 'dynamic',
+      'instance_id' => 'sys_notifications',
+      'present_as'  => 'block',
     ),
   ),
 );

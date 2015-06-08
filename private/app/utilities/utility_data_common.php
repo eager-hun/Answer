@@ -35,8 +35,8 @@ function _fetch_entity_raw($args, $fetch_options) {
   // Evaluating request.
 
   if (empty($args['entity_type'])) {
-    $message = 'Entity type was unprovided while requesting entity.';
-    sys_notify($message);
+    $message = 'Error: entity type was unprovided while requesting entity.';
+    sys_notify($message, 'warning');
     $GLOBALS['temp']['data_statuses'][$args['instance_id']] = '400';
     return FALSE;
   }

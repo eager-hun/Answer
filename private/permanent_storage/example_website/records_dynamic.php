@@ -514,3 +514,76 @@ $dynamic['devel-comp-demo'] = [
     ],
   ],
 ];
+
+
+// #############################################################################
+// PROTOTYPING: entities for the SINGLE MOCK PAGE.
+
+// -----------------------------------------------------------------------------
+$dynamic['smp-header'] = [
+  'meta' => [
+    'is_published' => 1,
+    'text_formats' => [
+      'field_title'       => 'html',
+      'field_description' => 'md',
+    ],
+    'data_handlers' => [
+      'field_body' => 'devel_entities',
+    ],
+  ],
+  'data' => [
+    'field_title' => [
+      'locale_primary'   => NULL,
+    ],
+    // The field_body is arguments for the specified data-handler.
+    'field_body' => [
+      'order_id'   => 'smp_header',
+    ],
+  ],
+];
+
+// -----------------------------------------------------------------------------
+$dynamic['smp-main'] = [
+  'meta' => [
+    'is_published' => 1,
+    'text_formats' => [
+      'field_title'       => 'html',
+      'field_description' => 'md',
+    ],
+    'data_handlers' => [
+      'field_body' => 'devel_entities',
+    ],
+  ],
+  'data' => [
+    'field_title' => [
+      'locale_primary'   => NULL,
+    ],
+    // The field_body is arguments for the specified data-handler.
+    'field_body' => [
+      'order_id'   => 'smp_main',
+    ],
+  ],
+];
+
+// -----------------------------------------------------------------------------
+$dynamic['smp-footer'] = [
+  'meta' => [
+    'is_published' => 1,
+    'text_formats' => [
+      'field_title'       => 'html',
+      'field_description' => 'md',
+    ],
+    'data_handlers' => [
+      'field_body' => 'devel_entities',
+    ],
+  ],
+  'data' => [
+    'field_title' => [
+      'locale_primary'   => NULL,
+    ],
+    // The field_body is arguments for the specified data-handler.
+    'field_body' => [
+      'order_id'   => 'smp_footer',
+    ],
+  ],
+];

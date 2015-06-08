@@ -4,7 +4,7 @@
  * Place to define pages for the website.
  */
 
-/*
+/* SAMPLE ENTRY.
 $pages['page-id-comes-here'] = [ // Should be the same as the instance_id!
   'data_type'         => '', // entity or binder.
   'entity_type'       => '', // Provide this, if it's an entity.
@@ -31,9 +31,9 @@ $pages['home'] = [
   // 'entity_type'      => 'static_page',
   // 'instance_id'      => 'home',
   'data_type'        => 'binder',
-  'instance_id'      => 'mosaic_homepage',
-  'present_as'       => 'mosaic_homepage',
-  'template_variant' => 'page_homepage',
+  'instance_id'      => 'mosaic_homepage', // Id of the payload (binder).
+  'present_as'       => 'mosaic_homepage', // PA for the payload.
+  'template_variant' => 'page_homepage',   // Id of the page global binder.
   'meta_descriptions' => [
     'primary'   => 'Meta description for this page.',
     'secondary' => 'Meta leírás ennek az oldalnak.',
@@ -48,6 +48,31 @@ $pages['home'] = [
   'is_published'      => 1,
   'xml_sitemap_include' => 1,
 ];
+
+// -----------------------------------------------------------------------------
+// Alternative homepage: "Single Mock Page" for quick prototyping.
+
+/* Delete this line for having this prototype as homepage.
+$pages['home'] = [
+  'data_type'        => 'binder',
+  'instance_id'      => 'single_mock_page', // Needed for whatever reason.
+  'template_variant' => 'single_mock_page', // Id of the page global binder.
+
+  'meta_descriptions' => [
+    'primary'   => 'Meta description for this page.',
+    'secondary' => NULL,
+  ],
+  'has_translations'  => 0, // Special setting for the 'home' page.
+  'paths' => [
+    'primary'   => '',
+    'secondary' => '',
+  ],
+  'in_section'        => '',
+  'in_context'        => '',
+  'is_published'      => 1,
+  'xml_sitemap_include' => 1,
+];
+// */
 
 
 // #############################################################################
