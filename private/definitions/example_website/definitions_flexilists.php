@@ -7,25 +7,35 @@
 $flexilists['articles_top'] = array(
   'data_type'    => 'entity',
   'entity_type'  => 'article',
-  'fetch_fields' => array(
-    'field_title',
-    'field_preview_text',
-    'field_preview_image',
-  ),
   'instance_ids' => array(
     'article-1',
     'article-2',
   ),
-  'present_items_as' => 'article_preview',
-  'list_options' => array(
-    'attributes' => array(
-      'class' => array('l--list-plain'),
+  'presets_list_properties' => array(
+    // DEFAULT PROPERTIES.
+    'default' => array(
+      'fetch_fields' => array(
+        'field_title',
+        'field_preview_text',
+        'field_preview_image',
+      ),
+      'link_items_to_pages' => 1,
     ),
   ),
-  'item_options' => array(
-    'link_items_to_pages' => 1,
-    'attributes' => array(
-      'class' => array('item'),
+  'presets_presentation' => array(
+    // DEFAULT PRESENTATION.
+    'default' => array(
+      'present_items_as' => 'article_preview',
+      'list_options' => array(
+        'attributes' => array(
+          'class' => array('l--list-plain'),
+        ),
+      ),
+      'item_options' => array(
+        'attributes' => array(
+          'class' => array('item'),
+        ),
+      ),
     ),
   ),
 );
@@ -34,25 +44,35 @@ $flexilists['articles_top'] = array(
 $flexilists['articles_all'] = array(
   'data_type'    => 'entity',
   'entity_type'  => 'article',
-  'fetch_fields' => array(
-    'field_title',
-    'field_preview_text',
-    'field_preview_image',
-  ),
   'instance_ids' => array(
     'article-1',
     'article-2',
   ),
-  'present_items_as' => 'article_preview',
-  'list_options' => array(
-    'attributes' => array(
-      'class' => array('l--list-plain'),
+  'presets_list_properties' => array(
+    // DEFAULT PROPERTIES.
+    'default' => array(
+      'fetch_fields' => array(
+        'field_title',
+        'field_preview_text',
+        'field_preview_image',
+      ),
+      'link_items_to_pages' => 1,
     ),
   ),
-  'item_options' => array(
-    'link_items_to_pages' => 1,
-    'attributes' => array(
-      'class' => array('item'),
+  'presets_presentation' => array(
+    // DEFAULT PRESENTATION.
+    'default' => array(
+      'present_items_as' => 'article_preview',
+      'list_options' => array(
+        'attributes' => array(
+          'class' => array('l--list-plain'),
+        ),
+      ),
+      'item_options' => array(
+        'attributes' => array(
+          'class' => array('item'),
+        ),
+      ),
     ),
   ),
 );
@@ -61,10 +81,6 @@ $flexilists['articles_all'] = array(
 $flexilists['images_all'] = array(
   'data_type'    => 'entity',
   'entity_type'  => 'image_display',
-  'fetch_fields' => array(
-    'field_preview_image',
-    'field_caption',
-  ),
   'instance_ids' => array(
     'test-image-1',
     'test-image-2',
@@ -73,16 +89,67 @@ $flexilists['images_all'] = array(
     'test-image-5',
     'test-image-6',
   ),
-  'present_items_as' => 'image_display_preview',
-  'list_options' => array(
-    'attributes' => array(
-      'class' => array('l--gallery-cards', 'grid'),
+  'presets_list_properties' => array(
+    // DEFAULT PROPERTIES.
+    'default' => array(
+      'fetch_fields' => array(
+        'field_preview_image',
+        'field_caption',
+      ),
+      'link_items_to_pages' => 1,
+    ),
+    // TESTING PROPERTIES.
+    'testing-props' => array(
+      'fetch_fields' => array(
+        'field_title',
+        'field_preview_image',
+        'field_caption',
+      ),
+      // 'link_items_to_pages' => 1,
     ),
   ),
-  'item_options' => array(
-    'link_items_to_pages' => 1,
-    'attributes' => array(
-      'class' => array('item'),
+  'presets_presentation' => array(
+    // DEFAULT PRESENTATION.
+    'default' => array(
+      'list_HTML_markup' => 'div', // Unimplemented.
+      'present_items_as' => 'image_display_preview',
+      'list_options' => array(
+        'attributes' => array(
+          'class' => array(
+            'l--gallery-cards',
+            'grid',
+          ),
+        ),
+      ),
+      'item_options' => array(
+        'attributes' => array(
+          'class' => array(
+            'item',
+          ),
+        ),
+      ),
+    ),
+    // TESTING PRESENTATION.
+    'testing-prez' => array(
+      'list_HTML_markup' => 'div', // Unimplemented.
+      'present_items_as' => 'image_display_preview',
+      'list_options' => array(
+        'attributes' => array(
+          'class' => array(
+            'l--gallery-cards',
+            'grid',
+            'testing-prez',
+          ),
+        ),
+      ),
+      'item_options' => array(
+        'attributes' => array(
+          'class' => array(
+            'item',
+            'testing-prez',
+          ),
+        ),
+      ),
     ),
   ),
 );

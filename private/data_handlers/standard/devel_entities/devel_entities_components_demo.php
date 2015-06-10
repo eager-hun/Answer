@@ -7,11 +7,14 @@
  * Standard function.
  *
  * Make its name match the file-name.
+ *
+ * @return string
+ *   The complete rendered components demo series.
  */
 function devel_entities_components_demo($args) {
   $output = '';
-  $output .= _decd_placeholder();
   $output .= _decd_in_text();
+  $output .= _decd_grids();
 
   return $output;
 }
@@ -20,9 +23,20 @@ function devel_entities_components_demo($args) {
  * Return a template for each component/group.
  */
 function _decd_template($variables) {
+
+  // Preparing for rendering inputs that were received as markdown.
+  $parse_title = array(
+    'text_format' => 'md',
+    'data' => $variables['title'],
+  );
+  $parse_description = array(
+    'text_format' => 'md',
+    'data' => $variables['description'],
+  );
+
   $name        = ensafe_string($variables['name'], 'attribute_value');
-  $title       = ensafe_string($variables['title'], 'html');
-  $description = ensafe_string($variables['description'], 'html');
+  $title       = datautils_filter($parse_title);
+  $description = datautils_filter($parse_description);
   $demo        = $variables['demo'];
 
   $output = '<div class="component-demo cd--' . $name . '">';
@@ -91,7 +105,33 @@ EOT;
   $output = array(
     'name'        => 'in-text',
     'title'       => 'In-text components',
-    'description' => 'E.g. textboxes, splitters.',
+    'description' => 'E.g. textboxes, splitters.<br>These already are, or can be made available as "short tags" (configured in `config.php`)',
+    'demo'        => $demo,
+  );
+  return _decd_template($output);
+}
+
+/**
+ * Grids initiative.
+ */
+function _decd_grids() {
+
+  // ---------------------------------------------------------------------------
+  // Some images.
+  $flexilist_args = array(
+    'order_id' => 'images_all',
+  );
+  $flexilist_opts = array(
+    'list_properties_preset' => 'default',
+    'presentation_preset'    => 'default',
+  );
+  apputils_wake_resource('data_handler', 'flexilist');
+  $demo = dh_flexilist($flexilist_args, $flexilist_opts);
+
+  $output = array(
+    'name'        => 'grids',
+    'title'       => 'Grids initiative',
+    'description' => 'Grids initiative. To be continued.',
     'demo'        => $demo,
   );
   return _decd_template($output);

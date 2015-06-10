@@ -6,10 +6,35 @@
 
 /**
  * Data fetching wrapper function.
+ *
+ * @param array $args
+ * @param array $fetch_options
+ *   - 'entity_data_handling', possible values:
+ *     - 'put_to_temp' (this is the default),
+ *     - 'return' (allows fetching docs out of the normal page processing
+ *       sequence).
+ *   - 'entity_only_meta', a boolean.
+ * @return mixed
  */
 function datautils_data_fetcher($args, $fetch_options = array()) {
+
+  $default_fetch_options = array(
+    'entity_data_handling' => 'put_to_temp',
+    'entity_only_meta' => FALSE,
+  );
+  // FIXME: look out for array_merge behavior! Will it be compatible with
+  // any kind of values, merge intents? I suspect it might need more
+  // attention.
+  $fetch_options = array_merge($default_fetch_options, $fetch_options);
+
   if ($args['data_type'] == 'entity') {
-    _fetch_entity_raw($args, $fetch_options);
+    if ($fetch_options['entity_data_handling'] == 'return') {
+      return _fetch_entity_raw($args, $fetch_options);
+    }
+    else {
+      // Update the $temp array then.
+      _fetch_entity_raw($args, $fetch_options);
+    }
   }
   elseif ($args['data_type'] == 'binder') {
     _fetch_binder($args, $fetch_options);
@@ -28,6 +53,15 @@ function datautils_data_fetcher($args, $fetch_options = array()) {
 
 /**
  * Fetch a single entity.
+ *
+ * @param type $args
+ * @param type $fetch_options
+ *   - 'entity_data_handling', possible values:
+ *     - 'put_to_temp' (this is the default),
+ *     - 'return' (allows fetching docs out of the normal page processing
+ *       sequence).
+ *   - 'entity_only_meta', a boolean.
+ * @return mixed
  */
 function _fetch_entity_raw($args, $fetch_options) {
 
@@ -56,7 +90,9 @@ function _fetch_entity_raw($args, $fetch_options) {
         . ' Dev mode may have more.';
     }
     sys_notify($message, 'warning');
-    $GLOBALS['temp']['data_statuses'][$instance_id] = '404';
+    if ($fetch_options['entity_data_handling'] == 'put_to_temp') {
+      $GLOBALS['temp']['data_statuses'][$instance_id] = '404';
+    }
     return FALSE;
   }
   // Loading the entity type records.
@@ -73,7 +109,9 @@ function _fetch_entity_raw($args, $fetch_options) {
       $message = 'Requested instance_id is not found. Dev mode may have more.';
     }
     sys_notify($message, 'warning');
-    $GLOBALS['temp']['data_statuses'][$instance_id] = '404';
+    if ($fetch_options['entity_data_handling'] == 'put_to_temp') {
+      $GLOBALS['temp']['data_statuses'][$instance_id] = '404';
+    }
     return FALSE;
   }
 
@@ -85,22 +123,30 @@ function _fetch_entity_raw($args, $fetch_options) {
   $record = $GLOBALS['datapool']['permanent_data_storage'][$entity_type][$instance_id];
 
   if (!empty($fetch_options['entity_only_meta'])) {
-    $GLOBALS['temp']['entity_metadata'][$instance_id] = array(
-      'meta'   => $record['meta'],
-    );
-    return;
+    if($fetch_options['entity_data_handling'] == 'put_to_temp') {
+      $GLOBALS['temp']['entity_metadata'][$instance_id] = array(
+        'meta'   => $record['meta'],
+      );
+      return TRUE;
+    }
+    elseif ($fetch_options['entity_data_handling'] == 'return') {
+      return $record['meta'];
+    }
   }
 
-  // Not working twice or more.
-  if (!empty($GLOBALS['temp']['raw_entities'][$instance_id])) {
+  // Not working twice or more, (if in the default 'put_to_temp' mode).
+  if ($fetch_options['entity_data_handling'] == 'put_to_temp'
+      && !empty($GLOBALS['temp']['raw_entities'][$instance_id])) {
     // We already have a fetched instance of this entity.
-    return;
+    return TRUE;
   }
 
   // Is the entity published?
   if (empty($record['meta']['is_published'])) {
     if (!is_admin()) {
-      $GLOBALS['temp']['data_statuses'][$instance_id] = '403';
+      if ($fetch_options['entity_data_handling'] == 'put_to_temp') {
+        $GLOBALS['temp']['data_statuses'][$instance_id] = '403';
+      }
       return FALSE;
     }
     elseif (is_dev_mode('verbose')) {
@@ -112,7 +158,7 @@ function _fetch_entity_raw($args, $fetch_options) {
 
   // Narrowing the list of the to-be-processed fields to those that were
   // requested.
-  if (!empty($args['fetch_fields'])) {
+  if (array_key_exists('fetch_fields', $args)) {
     $record['data'] = array_intersect_key($record['data'], array_flip($args['fetch_fields']));
   }
   // Else all fields will be processed.
@@ -122,7 +168,8 @@ function _fetch_entity_raw($args, $fetch_options) {
   // Talking to the field handler starts.
 
   $fields = array();
-  $field_defs = $GLOBALS['definitions']['structure']['entity_definitions'][$entity_type]['fields'];
+  $field_defs =
+    $GLOBALS['definitions']['structure']['entity_definitions'][$entity_type]['fields'];
 
   foreach($record['data'] as $field_id => $field_data) {
     // Preparing common args for the field handlers.
@@ -148,11 +195,18 @@ function _fetch_entity_raw($args, $fetch_options) {
   }
   unset($field_id, $field_data);
 
-  $GLOBALS['temp']['raw_entities'][$instance_id] = array(
+  $result_array = array(
     'meta'   => $record['meta'],
     'fields' => $fields,
   );
-  $GLOBALS['temp']['data_statuses'][$instance_id] = '200';
+  if ($fetch_options['entity_data_handling'] == 'put_to_temp') {
+    $GLOBALS['temp']['raw_entities'][$instance_id] = $result_array;
+    $GLOBALS['temp']['data_statuses'][$instance_id] = '200';
+    return TRUE;
+  }
+  elseif ($fetch_options['entity_data_handling'] == 'return') {
+    return $result_array;
+  }
 }
 
 /**

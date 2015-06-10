@@ -17,7 +17,7 @@ function pa_article_preview(&$args) {
   else {
     $path_locale = LOCALE_KEY;
   }
-  if (!empty($args['flexilist_order']['item_options']['link_items_to_pages'])
+  if (!empty($args['flexilist_order']['link_items_to_pages'])
       && !empty($GLOBALS['definitions']['pages'][$item])) {
     if (array_key_exists($path_locale, $GLOBALS['definitions']['pages'][$item]['paths'])) {
       $content_path = $GLOBALS['definitions']['pages'][$item]['paths'][$path_locale];
