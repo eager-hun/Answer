@@ -81,14 +81,14 @@ function _flexilist_build_list($args, $advanced_opts) {
   }
   else {
     if (is_dev_mode()) {
-      $message = 'Not found the definition for flexilist <em>'
+      $message = 'Error: not found the definition for flexilist <em>'
         . $args['order_id'] . '</em>.';
     }
     else {
-      $message = 'Not found the definition for flexilist.';
+      $message = 'Error: not found the definition for flexilist.';
     }
     sys_notify($message, 'warning');
-    $def = array();
+    return FALSE;
   }
 
   if ($def['data_type'] != 'entity') {
@@ -309,11 +309,14 @@ function _flexilist_produce_results_of_entities($args, $def, $advanced_opts, &$r
         }
       }
     }
-    elseif (is_dev_mode()) {
-      $msg = 'Flexilist did not find the entity manifest for <code>'
-           . $item . '</code> of entity type <code>' . $def['entity_type']
-           . '</code>.';
-      sys_notify($msg, 'warning');
+    else {
+      if (is_dev_mode()) {
+        $msg = 'Flexilist did not find the entity manifest for <code>'
+             . $item . '</code> of entity type <code>' . $def['entity_type']
+             . '</code>.';
+        sys_notify($msg, 'warning');
+      }
+      continue;
     }
 
     // Preparing argument for the data_fetcher.
@@ -328,21 +331,23 @@ function _flexilist_produce_results_of_entities($args, $def, $advanced_opts, &$r
       $item_data['fetch_fields']  = $def['list_properties']['fetch_fields'];
     }
 
+    // Items won't be rendered.
     if ($result_format == 'array_of_items_raw_data') {
       $fetcher_options = array(
         'entity_data_handling' => 'return',
       );
-      // Question: should we make the result contain the metadata too, or
-      // should we extract only the fields?
       $entity_data = datautils_data_fetcher($item_data, $fetcher_options);
       // The fetcher - for different reasons - could return FALSE.
       // So let's watch out.
       // (Also watch out: can $entity_data be int 0, or similarly tricky?)
       if (!empty($entity_data)) {
+        // Question: should we make the result contain the metadata too, or
+        // should we extract only the fields?
         $results[] = $entity_data['fields'];
       }
       unset($entity_data);
     }
+    // Items need to be rendered.
     elseif ($result_format == 'array_of_items_rendered'
             || $result_format == 'rendered_component') {
       // The data_fetcher will put this entity into the global $temp array, for
@@ -378,7 +383,6 @@ function _flexilist_produce_results_of_entities($args, $def, $advanced_opts, &$r
         $results[] = $rendered_entity;
       }
       unset($rendered_entity);
-
     }
   }
   unset($item);
