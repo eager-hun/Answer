@@ -13,8 +13,8 @@
  */
 function devel_entities_components_demo($args) {
   $output = '';
-  $output .= _decd_in_text();
   $output .= _decd_grids();
+  $output .= _decd_in_text();
 
   return $output;
 }
@@ -118,26 +118,26 @@ function _decd_grids() {
 
   apputils_wake_resource('data_handler', 'flexilist');
 
-  $flexilist_1_args = array(
+  $list_1_args = array(
     'order_id' => 'images_all',
   );
-  $flexilist_1_opts = array(
+  $list_1_opts = array(
     'list_properties_preset' => 'default',
     'presentation_preset'    => 'default',
   );
-  $list1 = dh_flexilist($flexilist_1_args, $flexilist_1_opts);
+  $list1 = dh_flexilist($list_1_args, $list_1_opts);
 
-  // $flexilist_2_args = array(
-  //   'order_id' => 'images_all',
-  // );
-  // $flexilist_2_opts = array(
-  //   'list_properties_preset' => 'testing-props',
-  //   'presentation_preset'    => 'testing-prez',
-  // );
-  // $list2 = dh_flexilist($flexilist_2_args, $flexilist_2_opts);
+  $list_2_args = array(
+    'order_id' => 'images_all',
+  );
+  $list_2_opts = array(
+    'list_properties_preset' => 'matrix-cards',
+    'presentation_preset'    => 'matrix-cards',
+  );
+  $list2 = dh_flexilist($list_2_args, $list_2_opts);
 
-  $demo = '<h3>Test list 1</h3>' . $list1;
-     // . '<h3>Test list 2</h3>' . $list2;
+  $demo = '<h3>Matrix, float, 3 col</h3>' . $list1
+        . '<h3>Matrix, float, 4 col, card style</h3>' . $list2;
 
   $output = array(
     'name'        => 'grids',

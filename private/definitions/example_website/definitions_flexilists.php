@@ -89,8 +89,8 @@ $flexilists['images_all'] = array(
     'test-image-5',
     'test-image-6',
   ),
+  // PROPERTIES PRESETS.
   'presets_list_properties' => array(
-    // DEFAULT PROPERTIES.
     'default' => array(
       'fetch_fields' => array(
         'field_preview_image',
@@ -98,26 +98,33 @@ $flexilists['images_all'] = array(
       ),
       'link_items_to_pages' => 1,
     ),
-    // TESTING PROPERTIES.
-    'testing-props' => array(
+    'matrix-cards' => array(
+      'fetch_fields' => array(
+        'field_preview_text',
+        'field_preview_image',
+      ),
+      'link_items_to_pages' => 1,
+    ),
+    'test' => array(
       'fetch_fields' => array(
         'field_title',
         'field_preview_text',
         'field_preview_image',
       ),
-      // 'link_items_to_pages' => 1,
+      'link_items_to_pages' => 1,
     ),
   ),
+  // PRESENTATION PRESETS.
   'presets_presentation' => array(
-    // DEFAULT PRESENTATION.
     'default' => array(
       'list_HTML_markup' => 'div', // Unimplemented.
       'present_items_as' => 'image_display_preview',
       'list_options' => array(
         'attributes' => array(
           'class' => array(
-            'l--gallery-cards',
             'grid',
+            'l--matrix',
+            'l--matrix--cols-3',
           ),
         ),
       ),
@@ -129,16 +136,15 @@ $flexilists['images_all'] = array(
         ),
       ),
     ),
-    // TESTING PRESENTATION.
-    'testing-prez' => array(
+    'matrix-cards' => array(
       'list_HTML_markup' => 'div', // Unimplemented.
       'present_items_as' => 'automatic_inventory',
       'list_options' => array(
         'attributes' => array(
           'class' => array(
-            'l--gallery-cards',
             'grid',
-            'testing-prez',
+            'l--matrix',
+            'l--matrix--cols-4',
           ),
         ),
       ),
@@ -146,7 +152,29 @@ $flexilists['images_all'] = array(
         'attributes' => array(
           'class' => array(
             'item',
+            'card',
+          ),
+        ),
+      ),
+    ),
+    'test' => array(
+      'list_HTML_markup' => 'div', // Unimplemented.
+      'present_items_as' => 'automatic_inventory',
+      'list_options' => array(
+        'attributes' => array(
+          'class' => array(
             'testing-prez',
+            'grid',
+            'l--matrix',
+            'l--matrix--cols-3',
+          ),
+        ),
+      ),
+      'item_options' => array(
+        'attributes' => array(
+          'class' => array(
+            'testing-prez',
+            'item',
           ),
         ),
       ),

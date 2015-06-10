@@ -123,6 +123,9 @@ code {
 // #############################################################################
 // Components and structures - skin.
 
+// -----------------------------------------------------------------------------
+// Fields.
+
 .field_type--image {
   img {
     @include image-border;
@@ -138,6 +141,44 @@ code {
   margin: 1em 0 0.5em;
   padding: 0.25em 0;
 }
+
+// -----------------------------------------------------------------------------
+// Modals.
+
+[id="overlay--common"],
+[id="modal--common"] {
+  @include transition-property(opacity);
+  @include transition-duration($transitspeed-mid);
+}
+[id="modal__content"] {
+  @include border-radius;
+
+  background: color(bg-light);
+}
+[id="modal__close"] {
+  @include box-shadow;
+}
+
+// -----------------------------------------------------------------------------
+// Boxes, cards.
+
+.grid > .card {
+  @include box-shadow;
+  @include border-radius;
+
+  padding: $layout-pad;
+
+  .field_type--image {
+    margin-left: -1em;
+    margin-right: -1em;
+  }
+  img {
+    @include remove-image-border;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Misc UI.
 
 a.menu-trigger { // Overqualifying because of link rules to be overridden.
   @include border-radius;
@@ -175,20 +216,6 @@ a.menu-trigger { // Overqualifying because of link rules to be overridden.
     border-color: color(text-invert);
     color: color(text-invert);
   }
-}
-
-[id="overlay--common"],
-[id="modal--common"] {
-  @include transition-property(opacity);
-  @include transition-duration($transitspeed-mid);
-}
-[id="modal__content"] {
-  @include border-radius;
-
-  background: color(bg-light);
-}
-[id="modal__close"] {
-  @include box-shadow;
 }
 
 

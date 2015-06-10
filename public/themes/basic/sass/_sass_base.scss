@@ -73,16 +73,16 @@ $breakpoint-to-ems: true;
 
 $bkp-narrow-lt-max:         419px;
 $bkp-narrow-mt-min:         420px;
-$bkp-narrow-mt-max:         579px;
-$bkp-narrow-ht-min:         580px;
+$bkp-narrow-mt-max:         559px;
+$bkp-narrow-ht-min:         560px;
 
 $bkp-narrow-max:            699px;
 $bkp-wide-min:              700px;
 
-$bkp-wide-lt-max:           859px;
-$bkp-wide-mt-min:           860px;
-$bkp-wide-mt-max:           919px;
-$bkp-wide-ht-min:           920px;
+$bkp-wide-lt-max:           819px;
+$bkp-wide-mt-min:           820px;
+$bkp-wide-mt-max:           959px;
+$bkp-wide-ht-min:           960px;
 
 $bkp-wide-ht-max: $layout-page-max-width - 1;
 // For above highthird max, you can use 'min-width: $layout-page-max-width';

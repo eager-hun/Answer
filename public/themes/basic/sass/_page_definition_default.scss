@@ -7,7 +7,9 @@
  *
  * NOTE: if there are specific pages, or groups of pages that have altered- or
  * completely unique page definitions, those rules could be going into
- * page_groups_and_specific_pages.scss.
+ * page_groups_and_specific_pages.scss. This will become important when/if we
+ * attempt to deliver "critical styles" - especially for the homepage - at a
+ * faster track.
  */
 
 .page-center {
@@ -26,9 +28,23 @@
   display: table;
   width: 100%;
 
-  .tpl--block {
+  .entity {
     display: table-cell;
+    padding-left: $layout-pad*0.5;
+    padding-right: $layout-pad*0.5;
     vertical-align: middle;
+
+    &:first-child {
+      padding-left: 0;
+    }
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+  .menu-trigger {
+    // Hack to keep the text in the vertical center of the button.
+    // It's a hack, because I don't know why it works, but it does. :)
+    vertical-align: text-top;
   }
 }
 .site-name {

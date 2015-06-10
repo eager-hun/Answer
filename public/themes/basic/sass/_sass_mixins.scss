@@ -295,6 +295,12 @@
   border: 1px solid color(border-light);
   padding: $layout-pad*0.25;
 }
+@mixin remove-image-border() {
+  @include border-radius(0);
+
+  border: none;
+  padding: 0;
+}
 
 @mixin call-to-action() {
 
