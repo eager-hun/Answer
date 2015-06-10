@@ -9,6 +9,27 @@ function pa_image_display_preview(&$args) {
   // Wrapper attributes.
   // $args['wrapper_options']['attributes']['class'][] = 'some-class';
 
+  // Keeping only the preview-related fields.
+  //
+  // NOTE1: if this PA is called by a flexilist, the flexilist might have
+  // been able to do the fetching with the 'fetch_fields' argument, which
+  // will already have similar results to this field-picking thing here. In that
+  // case this here is redundant.
+  //
+  // NOTE2: however, we might have such CSS written for this component, that
+  // expects only these fields. So to keep the visual presentation intact, the
+  // integrity of the presentation must be kept. The following restriction
+  // therefore needs to stay - to ensure the controlled output in _all_ cases.
+  $fields_to_keep = array(
+    'field_preview_image',
+    'field_caption',
+  );
+  foreach($args['raw_data'] as $field_id => $field_data) {
+    if (!in_array($field_id, $fields_to_keep)) {
+      unset($args['raw_data'][$field_id]);
+    }
+  }
+
   // Adding links to the title and preview_image fields.
   $item = $args['instance_id'];
   if (!empty($args['fetch_locale'])) {
@@ -40,32 +61,16 @@ function pa_image_display_preview(&$args) {
 
   // Image alt attribute.
   // The field_caption is already sanitized by the text-field data-handler.
-  $args['raw_data']['field_preview_image']['field_content']['attributes']['alt'] =
-    $args['raw_data']['field_caption']['field_content'];
-  $args['raw_data']['field_preview_image']['field_content']['attributes']['title'] =
-    $args['raw_data']['field_caption']['field_content'];
-  unset($args['raw_data']['field_caption']);
-
-  // Keeping only the preview-related fields.
-  //
-  // NOTE1: if this PA is called by a flexilist, the flexilist might have
-  // been able to do the fetching with the 'fetch_fields' argument, which
-  // will already have similar results to this field-picking thing here. In that
-  // case this here is redundant.
-  //
-  // NOTE2: however, we might have such CSS written for this component, that
-  // expects only these fields. So to keep the visual presentation intact, the
-  // integrity of the presentation must be kept. The following restriction
-  // therefore needs to stay - to ensure the controlled output in _all_ cases.
-  $fields_to_keep = array(
-    'field_preview_image',
-    'field_caption',
-  );
-  foreach($args['raw_data'] as $field_id => $field_data) {
-    if (!in_array($field_id, $fields_to_keep)) {
-      unset($args['raw_data'][$field_id]);
-    }
+  if (!empty($args['raw_data']['field_caption']['field_content'])) {
+    $args['raw_data']['field_preview_image']['field_content']['attributes']['alt'] =
+      $args['raw_data']['field_caption']['field_content'];
+    $args['raw_data']['field_preview_image']['field_content']['attributes']['title'] =
+      $args['raw_data']['field_caption']['field_content'];
   }
+  // This template would automatically include all fields it sees.
+  // Since we don't want the caption anywhere else than the img's title
+  // attribute, we need to unset it now.
+  unset($args['raw_data']['field_caption']);
 
   // Pre-rendering fields.
   if ($args['data_type'] == 'entity') {

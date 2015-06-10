@@ -112,21 +112,32 @@ EOT;
 }
 
 /**
- * Grids initiative.
+ * Grids.
  */
 function _decd_grids() {
 
-  // ---------------------------------------------------------------------------
-  // Some images.
-  $flexilist_args = array(
+  apputils_wake_resource('data_handler', 'flexilist');
+
+  $flexilist_1_args = array(
     'order_id' => 'images_all',
   );
-  $flexilist_opts = array(
+  $flexilist_1_opts = array(
     'list_properties_preset' => 'default',
     'presentation_preset'    => 'default',
   );
-  apputils_wake_resource('data_handler', 'flexilist');
-  $demo = dh_flexilist($flexilist_args, $flexilist_opts);
+  $list1 = dh_flexilist($flexilist_1_args, $flexilist_1_opts);
+
+  // $flexilist_2_args = array(
+  //   'order_id' => 'images_all',
+  // );
+  // $flexilist_2_opts = array(
+  //   'list_properties_preset' => 'testing-props',
+  //   'presentation_preset'    => 'testing-prez',
+  // );
+  // $list2 = dh_flexilist($flexilist_2_args, $flexilist_2_opts);
+
+  $demo = '<h3>Test list 1</h3>' . $list1;
+     // . '<h3>Test list 2</h3>' . $list2;
 
   $output = array(
     'name'        => 'grids',

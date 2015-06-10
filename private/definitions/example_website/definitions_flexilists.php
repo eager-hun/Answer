@@ -102,8 +102,8 @@ $flexilists['images_all'] = array(
     'testing-props' => array(
       'fetch_fields' => array(
         'field_title',
+        'field_preview_text',
         'field_preview_image',
-        'field_caption',
       ),
       // 'link_items_to_pages' => 1,
     ),
@@ -132,7 +132,7 @@ $flexilists['images_all'] = array(
     // TESTING PRESENTATION.
     'testing-prez' => array(
       'list_HTML_markup' => 'div', // Unimplemented.
-      'present_items_as' => 'image_display_preview',
+      'present_items_as' => 'automatic_inventory',
       'list_options' => array(
         'attributes' => array(
           'class' => array(

@@ -12,9 +12,20 @@
  * It organizes the calls for templateutils_present() on behalf of binders and
  * entities.
  */
-function templateutils_data_dresser($args) {
+function templateutils_data_dresser($args, $advanced_opts = array()) {
+
+  // Being safe by having fallback values for important args.
+  $default_advanced_opts = array(
+    'data_source' => 'temp',
+  );
+  // FIXME: look out for array_merge behavior! Will it be compatible with
+  // any kind of values, merge intents? I suspect it might need more attention.
+  $advanced_opts = array_merge($default_advanced_opts, $advanced_opts);
+
+  $data_source = $advanced_opts['data_source'];
+
   // Render an entity.
-  if ($args['data_type'] == 'entity') {
+  if ($args['data_type'] == 'entity' && $data_source == 'temp') {
     if ($GLOBALS['temp']['data_statuses'][$args['instance_id']] != '200') {
       // Something was up with this content and data_fetcher() did not
       // leave data for us to dress.
@@ -38,6 +49,16 @@ function templateutils_data_dresser($args) {
         $message = 'Inexistent entity was passed in for dressing up.';
       }
       sys_notify($message, 'warning');
+    }
+  }
+  elseif ($args['data_type'] == 'entity' && $data_source == 'args') {
+    if (array_key_exists('raw_data', $args)) {
+      $args['presentation_subject'] = 'entity';
+      return templateutils_present($args);
+    }
+    elseif (is_dev_mode()) {
+      sys_notify('Mishap: no raw data had been passed for data_dresser.', 'warning');
+      return FALSE;
     }
   }
   // Render a binder.

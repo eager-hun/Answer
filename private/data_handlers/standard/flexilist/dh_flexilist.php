@@ -188,8 +188,11 @@ function _flexilist_build_list($args, $advanced_opts) {
     // following better.
     $list_wrapper_default_classes = array(
       'flexilist',
-      'flexilist--' . $args['order_id'],
+      'fl--id--' . $args['order_id'],
+      'fl--props--' . $advanced_opts['list_properties_preset'],
+      'fl--p10n--' . $advanced_opts['presentation_preset'],
     );
+
     if (!array_key_exists('list_options', $def['presentation'])) {
       $def['presentation']['list_options'] = array();
       $def['presentation']['list_options']['attributes'] = array();
@@ -213,7 +216,7 @@ function _flexilist_build_list($args, $advanced_opts) {
         );
     }
 
-    // Rendering the list wrapper's attributes.
+    // Rendering (also escaping) the list wrapper's attributes.
     $rendered_list_attribs =
       templateutils_render_html_attributes($def['presentation']['list_options']['attributes']);
   }
@@ -254,7 +257,9 @@ function _flexilist_build_list($args, $advanced_opts) {
       return '<div' . $rendered_list_attribs . ">\n" . implode('', $results) . "</div>\n";
     }
     else {
-      return '<div' . $rendered_list_attribs . ">\n" . loc('flexilist-empty-result') . "</div>\n";
+      $no_results = '<div' . $rendered_list_attribs . ">\n<p class=\"fl__no-result\">"
+                  . loc('flexilist-empty-result') . "</p>\n</div>\n";
+      return $no_results;
     }
   }
   else {
@@ -331,18 +336,20 @@ function _flexilist_produce_results_of_entities($args, $def, $advanced_opts, &$r
       $item_data['fetch_fields']  = $def['list_properties']['fetch_fields'];
     }
 
+    // Fetching the item's raw data.
+    $fetcher_options = array(
+      'entity_data_handling' => 'return',
+    );
+    $entity_data = datautils_data_fetcher($item_data, $fetcher_options);
+
     // Items won't be rendered.
     if ($result_format == 'array_of_items_raw_data') {
-      $fetcher_options = array(
-        'entity_data_handling' => 'return',
-      );
-      $entity_data = datautils_data_fetcher($item_data, $fetcher_options);
       // The fetcher - for different reasons - could return FALSE.
       // So let's watch out.
-      // (Also watch out: can $entity_data be int 0, or similarly tricky?)
+      // (Also watch out: can $entity_data ever be int 0, or similarly tricky?)
       if (!empty($entity_data)) {
         // Question: should we make the result contain the metadata too, or
-        // should we extract only the fields?
+        // should we extract only the fields? Only fields, for now.
         $results[] = $entity_data['fields'];
       }
       unset($entity_data);
@@ -350,9 +357,6 @@ function _flexilist_produce_results_of_entities($args, $def, $advanced_opts, &$r
     // Items need to be rendered.
     elseif ($result_format == 'array_of_items_rendered'
             || $result_format == 'rendered_component') {
-      // The data_fetcher will put this entity into the global $temp array, for
-      // the data_dresser (the renderer utility) to pick it up from there.
-      datautils_data_fetcher($item_data);
 
       // FIXME: the meaning of flexilist_order here is alike "ordering a pizza";
       // it's not about the order of the results.
@@ -365,20 +369,15 @@ function _flexilist_produce_results_of_entities($args, $def, $advanced_opts, &$r
       );
 
       // Dress data, then append to the results array.
-      //
-      // As of now, the dresser gets entity data from the global $temp array;
-      // if however anything is up with the entity (e.g. the fetcher did not
-      // fetch it properly, for e.g. an entity 403 reason), the dresser will
-      // return FALSE.
-      // Perhaps the data_dresser will need to be updated too to be able to work
-      // with directly passed in to-be-dressed data (so that we can fetch such
-      // way that the raw array is sent here, then look into value, and do a
-      // skip here if neccessary - or, if all is well, pass the raw array to the
-      // upgraded dresser from here).
-      //
-      // Alternative way of keeping FALSE values out of the $results:
-      $rendered_entity = templateutils_data_dresser($item_data);
-      // (Watch out: can $entity_data be int 0, or similarly tricky?)
+      $dresser_opts = array(
+        'data_source' => 'args',
+      );
+      $item_data['raw_data'] = $entity_data['fields'];
+
+      $rendered_entity = templateutils_data_dresser($item_data, $dresser_opts);
+
+      // Keeping FALSE returns out of the result list.
+      // Watch out: can $rendered_entity ever be int 0, or similarly tricky?
       if (!empty($rendered_entity)) {
         $results[] = $rendered_entity;
       }

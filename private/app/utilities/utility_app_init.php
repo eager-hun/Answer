@@ -466,7 +466,7 @@ function apputils_disable_htmlpurifier() {
  * templating-related functions - some of whom can end up inside beasts of
  * recursive sequences.
  *
- * Usage: drop it inside the inspected func:
+ * Quick usage; drop it inside the inspected func:
  *
  * @code
  *
@@ -474,8 +474,27 @@ function apputils_disable_htmlpurifier() {
  *
  * @endcode
  *
- * To see the results, do var_dump($temp['arguments_explorer']); near the end
- * of director.php.
+ * To see the results (at the bottom of the page), do
+ *
+ * @code
+ *
+ * print '<pre>'; var_dump($temp['arguments_explorer']); print '</pre>';
+ *
+ * @endcode
+ *
+ * near the end of director.php.
+ *
+ * Alternative: selective usage; drop it like this inside the inspected func:
+ *
+ * @code
+ *
+ * $call_trace = debug_backtrace();
+ * $inspected_function = $call_trace[1]['function'];
+ * if ($inspected_function == 'foo') {
+ *   apputils_explore_arguments($args, $output = 'keys');
+ * }
+ *
+ * @endcode
  */
 function apputils_explore_arguments($args_to_inspect, $output = 'keys') {
   if (!is_dev_mode()) {
@@ -484,7 +503,7 @@ function apputils_explore_arguments($args_to_inspect, $output = 'keys') {
 
   static $argsexp_inspect_id = 0;
 
-  $call_id = '# ' . $argsexp_inspect_id;
+  $call_id = 'call# ' . $argsexp_inspect_id;
   if (!array_key_exists('arguments_explorer', $GLOBALS['temp'])) {
     $GLOBALS['temp']['arguments_explorer'] = array();
   }
@@ -501,6 +520,7 @@ function apputils_explore_arguments($args_to_inspect, $output = 'keys') {
     $GLOBALS['temp']['arguments_explorer'][$inspected_function][$call_id]['args'] =
       $args_to_inspect;
   }
+  // Else show only keys.
   else {
     $GLOBALS['temp']['arguments_explorer'][$inspected_function][$call_id]['args'] =
       array_keys($args_to_inspect);
