@@ -13,28 +13,7 @@
 // #############################################################################
 // Homepage.
 
-/*
-.binder--mosaic_homepage {
-  .main_content {
-    .block__title {
-      font-size: 1.5em;
-      margin-bottom: 0.65em;
-    }
-  }
-  .flexilist .field_id--field_title {
-    font-size: 1.2em;
-  }
-}
-@include breakpoint($bkp-wide-ht-min) {
-  .binder--mosaic_homepage {
-    .main_content {
-      .block__title {
-        margin-bottom: 1em;
-      }
-    }
-  }
-}
-*/
+
 
 
 // #############################################################################
@@ -67,14 +46,12 @@
   .cd__title {
     margin-bottom: 0.15em;
   }
-  .cd__description {
-    @include description-style;
-
-    margin-bottom: $layout-pad*1.5;
-  }
   .component-demo + & {
-    border-top: 1px solid color(border-light);
-    margin-top: $layout-pad*2.5;
-    padding-top: $layout-pad*2.5;
+    margin-top: $layout-pad*3.5;
   }
+}
+.cd__description {
+  @include description-style;
+
+  margin-bottom: $layout-pad*2;
 }

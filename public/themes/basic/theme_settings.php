@@ -33,15 +33,16 @@ $config['ui']['css_external'][] = array(
 );
 
 // Emergency vanilla .css file.
-$config['ui']['css_external'][] = array(
-  'source' => 'theme_static',
-  'file'   => 'static.css',
-);
+// $config['ui']['css_external'][] = array(
+//   'source' => 'theme_static',
+//   'file'   => 'static.css',
+// );
+
 // < style > tag in the < head >.
-$config['ui']['css_inline'][] = array(
-  'source' => 'theme_generated',
-  'file'   => 'extra_styles_inline.css',
-);
+// $config['ui']['css_inline'][] = array(
+//   'source' => 'theme_generated',
+//   'file'   => 'extra_styles_inline.css',
+// );
 
 
 // #############################################################################
@@ -81,6 +82,7 @@ $config['ui']['js_body'][] = array(
 
 $config['theme']['head_additions'] = array(
   '<meta name="viewport" content="width=device-width, initial-scale=1">',
+  '<link href="http://fonts.googleapis.com/css?family=Roboto:400,300,700" rel="stylesheet" type="text/css">',
   // This is for a new meta tag that Android browsers support. They adjust the
   // color of the native interface to the site's primary color provided here.
   // '<meta name="theme-color" content="#000000">',
