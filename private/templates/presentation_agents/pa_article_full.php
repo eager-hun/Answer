@@ -10,8 +10,9 @@ function pa_article_full(&$args) {
   // Wrapper attributes.
   // $args['wrapper_options']['attributes']['class'][] = 'some-class';
 
-  // Keeping only the body field.
+  // Keeping only the neccessary fields.
   $fields_to_keep = array(
+    'field_image',
     'field_body',
   );
   foreach($args['raw_data'] as $field_id => $field_data) {
@@ -23,7 +24,7 @@ function pa_article_full(&$args) {
   // Pre-rendering fields.
   if ($args['data_type'] == 'entity') {
     $args['field_prerenderer_options'] = array(
-      'template_variant' => 'plain',
+      'template_variant' => 'essence',
     );
     $args['raw_data'] = templateutils_prerender_fields($args);
   }

@@ -53,7 +53,8 @@ $article['article-1'] = [
       'locale_primary'    => '[[external-file]]',
       'locale_secondary'  => '[[external-file]]',
     ],
-    // 'field_preview_image' => 'sample-image.png', // Yet in development.
+    'field_preview_image' => 'sample-image.png',
+    'field_image'         => 'sample-image.png',
   ],
 ];
 $article['article-1']['data']['field_preview_text']['locale_primary'] = <<<EOT
@@ -97,7 +98,8 @@ $article['article-2'] = [
       'locale_primary'    => '[[external-file]]',
       'locale_secondary'  => '[[external-file]]',
     ],
-    // 'field_preview_image' => 'sample-image.png', // Yet in development.
+    'field_preview_image' => 'sample-image.png',
+    'field_image'         => 'sample-image.png',
   ],
 ];
 $article['article-2']['data']['field_preview_text']['locale_primary'] = <<<EOT
@@ -143,7 +145,8 @@ $article['article-3'] = [
       'locale_primary'    => '[[external-file]]',
       'locale_secondary'  => '[[external-file]]',
     ],
-    // 'field_preview_image' => 'sample-image.png', // Yet in development.
+    'field_preview_image' => 'sample-image.png',
+    'field_image'         => 'sample-image.png',
   ],
 ];
 $article['article-3']['data']['field_preview_text']['locale_primary'] = <<<EOT

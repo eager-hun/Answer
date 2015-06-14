@@ -178,6 +178,12 @@ h1 {
   margin: 1em 0;
 }
 
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
 @media (min-width: 43.75em) {
   .page-content {
     border: 1px solid silver;

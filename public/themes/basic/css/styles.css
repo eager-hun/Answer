@@ -890,7 +890,7 @@ span.anchor {
 }
 @media (min-width: 26.25em) and (max-width: 43.6875em) {
   .l--matrix--cols-4 > .item:nth-child(2n+1) {
-    width: 47.61905%;
+    width: 46.51163%;
     float: left;
     margin-right: -100%;
     margin-left: 0;
@@ -898,7 +898,7 @@ span.anchor {
     clear: left;
   }
   .l--matrix--cols-4 > .item:nth-child(2n+2) {
-    width: 47.61905%;
+    width: 46.51163%;
     float: right;
     margin-left: 0;
     margin-right: 0;
@@ -910,7 +910,7 @@ span.anchor {
 }
 @media (min-width: 43.75em) and (max-width: 59.9375em) {
   .l--matrix--cols-4 > .item:nth-child(3n+1) {
-    width: 31.25%;
+    width: 30.30303%;
     float: left;
     margin-right: -100%;
     margin-left: 0;
@@ -918,14 +918,14 @@ span.anchor {
     clear: left;
   }
   .l--matrix--cols-4 > .item:nth-child(3n+2) {
-    width: 31.25%;
+    width: 30.30303%;
     float: left;
     margin-right: -100%;
-    margin-left: 34.375%;
+    margin-left: 34.84848%;
     clear: none;
   }
   .l--matrix--cols-4 > .item:nth-child(3n+3) {
-    width: 31.25%;
+    width: 30.30303%;
     float: right;
     margin-left: 0;
     margin-right: 0;
@@ -937,7 +937,7 @@ span.anchor {
 }
 @media (min-width: 60em) {
   .l--matrix--cols-4 > .item:nth-child(4n+1) {
-    width: 23.25581%;
+    width: 22.47191%;
     float: left;
     margin-right: -100%;
     margin-left: 0;
@@ -945,21 +945,21 @@ span.anchor {
     clear: left;
   }
   .l--matrix--cols-4 > .item:nth-child(4n+2) {
-    width: 23.25581%;
+    width: 22.47191%;
     float: left;
     margin-right: -100%;
-    margin-left: 25.5814%;
+    margin-left: 25.8427%;
     clear: none;
   }
   .l--matrix--cols-4 > .item:nth-child(4n+3) {
-    width: 23.25581%;
+    width: 22.47191%;
     float: left;
     margin-right: -100%;
-    margin-left: 51.16279%;
+    margin-left: 51.68539%;
     clear: none;
   }
   .l--matrix--cols-4 > .item:nth-child(4n+4) {
-    width: 23.25581%;
+    width: 22.47191%;
     float: right;
     margin-left: 0;
     margin-right: 0;
@@ -968,6 +968,46 @@ span.anchor {
   .l--matrix--cols-4 > .item:nth-last-child(2), .l--matrix--cols-4 > .item:nth-last-child(3)
   .l--matrix--cols-4 > .item:nth-last-child(4) {
     margin-bottom: 0;
+  }
+}
+
+.tpl--layout_2col_asm_combi:before, .tpl--layout_2col_asm_combi:after {
+  content: ' ';
+  display: table;
+}
+.tpl--layout_2col_asm_combi:after {
+  clear: both;
+}
+.tpl--layout_2col_asm_combi > .slot {
+  margin-bottom: 1em;
+}
+.tpl--layout_2col_asm_combi > .slot:last-child {
+  margin-bottom: 0;
+}
+@media (min-width: 26.25em) {
+  .tpl--layout_2col_asm_combi .col--1 {
+    float: left;
+    width: 40%;
+  }
+  .tpl--layout_2col_asm_combi .col--2 {
+    padding-left: 45%;
+  }
+  .tpl--layout_2col_asm_combi > .column {
+    margin-bottom: 0;
+  }
+  .tpl--layout_2col_asm_combi .slot--bottom {
+    clear: both;
+  }
+  .tpl--layout_2col_asm_combi .slot + .slot--bottom {
+    margin-top: 1em;
+  }
+}
+@media (min-width: 60em) {
+  .tpl--layout_2col_asm_combi .col--1 {
+    width: 28%;
+  }
+  .tpl--layout_2col_asm_combi .col--2 {
+    padding-left: 33%;
   }
 }
 
@@ -1323,58 +1363,34 @@ blockquote:before {
   margin: 0;
   vertical-align: text-bottom;
 }
+.tpl--field + .field_type--image, .field_type--image + .tpl--field {
+  margin-top: 2em;
+}
 
 .p10n--dynamic_full .field_id--field_description {
   margin-bottom: 2em;
 }
 
-.l--list-plain > .item {
-  margin-bottom: 1em;
+.l--list-plain > .item + .item {
+  border-top: 1px solid #ccc;
+  margin-top: 2em;
+  padding-top: 2em;
 }
-.l--list-plain > .item:last-child {
-  margin-bottom: 0;
+.l--list-plain .field_id--field_title {
+  font-size: 1.15em;
+  margin-top: 1.5em;
+  margin-bottom: 0.65em;
+  margin-top: 1em;
+}
+.l--list-plain .field_id--field_preview_text {
+  font-size: 0.9em;
 }
 
-/*
-.fl-item--standard + .fl-item--standard {
-  margin-top: $layout-pad*1.25;
-}
-
-.fl--style-plain {
-  .field_id--field_title {
-    font-size: 1.4em;
-  }
-  .field_id--field_preview_text {
-    margin-top: $layout-pad*0.25;
-    padding-left: $layout-pad;
-
-    .field__content {
-      font-size: 0.9em;
-    }
-    p,
-    ul {
-      margin: 0 0 0.5em;
-    }
-    p:last-child,
-    ul:last-child {
-      margin-bottom: 0;
-    }
+@media (min-width: 26.25em) {
+  .l--list-plain .field_id--field_title {
+    margin-top: -0.25em;
   }
 }
-
-// -----------------------------------------------------------------------------
-@include breakpoint($bkp-wide-min) {
-  .fl--style-plain .field_id--field_preview_text {
-    padding-left: 1.5em;
-  }
-}
-
-.fl--style-images-large {
-  .fl-item + .fl-item {
-    margin-top: $layout-pad*2.5;
-  }
-}
-*/
 /**
  * @file
  * Rules for web form items.
@@ -2152,7 +2168,7 @@ pre {
   -webkit-border-radius: 3px;
   border-radius: 3px;
   border: 1px solid #ccc;
-  padding: 0.25em;
+  padding: 4px;
 }
 
 .messages {
@@ -2273,6 +2289,16 @@ a.menu-trigger.fixed {
  * - If there are different page-variants that have altered- or unique page
  *   definition (header, footer, unique body bg), that could be placed here too.
  */
+.p10n--mosaic_homepage .block__title {
+  border-bottom: 1px solid #ccc;
+  font-size: 1.6em;
+  padding-bottom: 0.25em;
+  margin-bottom: 0.85em;
+}
+.p10n--mosaic_homepage .l--list-plain {
+  padding-top: 0.75em;
+}
+
 .admin-tasks {
   list-style-type: none;
   margin: 0;

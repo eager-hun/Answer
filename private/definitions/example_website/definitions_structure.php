@@ -130,7 +130,7 @@ $structure['entity_definitions']['article'] = array(
     'field_preview_image' => array(
       'role' => 'meta',
       'type' => 'field_image',
-      'style' => 'small',
+      'style' => 'medium',
       'translatable' => FALSE,
       'label' => loc('fl--preview-image'),
     ),
@@ -158,6 +158,13 @@ $structure['entity_definitions']['article'] = array(
       'type' => 'field_text',
       'translatable' => TRUE,
       'label' => loc('fl--body'),
+    ),
+    'field_image' => array(
+      'role' => 'meta',
+      'type' => 'field_image',
+      'style' => 'large',
+      'translatable' => FALSE,
+      'label' => loc('fl--image'),
     ),
     'field_attached_entities' => array(
       'role' => 'data',

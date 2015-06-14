@@ -187,9 +187,9 @@ function _flexilist_build_list($args, $advanced_opts) {
     // TODO: find out what kind of array merge or union could implement the
     // following better.
     $list_wrapper_default_classes = array(
-      'flexilist',
+      // 'flexilist',
       'fl--id--' . $args['order_id'],
-      'fl--props--' . $advanced_opts['list_properties_preset'],
+      // 'fl--props--' . $advanced_opts['list_properties_preset'],
       'fl--p10n--' . $advanced_opts['presentation_preset'],
     );
 

@@ -368,11 +368,11 @@
 
 .l--matrix--cols-4 {
   @include add-grid(2 at $bkp-narrow-mt-min);
-  @include add-gutter(0.1 at $bkp-narrow-mt-min);
+  @include add-gutter(0.15 at $bkp-narrow-mt-min);
   @include add-grid(3 at $bkp-wide-min);
-  @include add-gutter(0.1 at $bkp-wide-min);
+  @include add-gutter(0.15 at $bkp-wide-min);
   @include add-grid(4 at $bkp-wide-ht-min);
-  @include add-gutter(0.1 at $bkp-wide-ht-min);
+  @include add-gutter(0.15 at $bkp-wide-ht-min);
 
   @include breakpoint($bkp-narrow-mt-min) {
     & > .item {
@@ -435,6 +435,49 @@
     & > .item:nth-last-child(3)
     & > .item:nth-last-child(4) {
       margin-bottom: 0;
+    }
+  }
+}
+
+
+// #############################################################################
+// Predefined layout templates.
+
+.tpl--layout_2col_asm_combi {
+  @include n-clearfix;
+
+  & > .slot {
+    // background: pink;
+    margin-bottom: $layout-pad;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  @include breakpoint($bkp-narrow-mt-min) {
+    .col--1 {
+      float: left;
+      width: 40%;
+    }
+    .col--2 {
+      padding-left: 45%;
+    }
+    & > .column {
+      margin-bottom: 0;
+    }
+    .slot--bottom {
+      clear: both;
+    }
+    .slot + .slot--bottom {
+      margin-top: $layout-pad;
+    }
+  }
+  @include breakpoint($bkp-wide-ht-min) {
+    .col--1 {
+      width: 28%;
+    }
+    .col--2 {
+      padding-left: 33%;
     }
   }
 }

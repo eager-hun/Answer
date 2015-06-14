@@ -4,12 +4,13 @@
  */
 
 function pa_article_preview(&$args) {
-  $args['template_name'] = 'wrap';
+  $args['template_name'] = 'layout_2col_asm_combi';
 
   // Wrapper attributes.
   // $args['wrapper_options']['attributes']['class'][] = 'some-class';
 
   // Adding links to the title and preview_image fields.
+  // FIXME: this has to go to dh_flexilist.
   $item = $args['instance_id'];
   if (!empty($args['fetch_locale'])) {
     $path_locale = $args['fetch_locale'];
@@ -49,7 +50,7 @@ function pa_article_preview(&$args) {
   $fields_to_keep = array(
     'field_title',
     'field_preview_text',
-    // 'field_preview_image', // TODO: It needs a dedicated presentation_agent.
+    'field_preview_image',
   );
   foreach($args['raw_data'] as $field_id => $field_data) {
     if (!in_array($field_id, $fields_to_keep)) {
@@ -60,11 +61,21 @@ function pa_article_preview(&$args) {
   // Pre-rendering fields
   if ($args['data_type'] == 'entity') {
     $args['field_prerenderer_options'] = array(
-      'template_variant' => 'nolabel',
+      'template_variant' => 'essence',
     );
     $args['raw_data'] = templateutils_prerender_fields($args);
   }
 
-  // Implementing assignments.
-  $args['variables']['content'] = implode("\n", $args['raw_data']);
+  // Slot assingments.
+  $args['variable_dispatcher_options'] = array(
+    'assignments' => array(
+      'slot_col_1' => array(
+        'field_preview_image' => array(),
+      ),
+      'slot_col_2' => array(
+        'field_title' => array(),
+        'field_preview_text' => array(),
+      ),
+    ),
+  );
 }

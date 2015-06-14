@@ -328,7 +328,8 @@
   @include border-radius;
 
   border: 1px solid color(border-light);
-  padding: $layout-pad*0.25;
+  // Unfortunately em units result in uneven looks due to rounding errors.
+  padding: 4px;
 }
 @mixin remove-image-border() {
   @include border-radius(0);
