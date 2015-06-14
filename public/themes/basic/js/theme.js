@@ -8,7 +8,7 @@
   // Mobile menu.
   if (document.getElementById('modal--common')) {
     var menus = [];
-    $('.sidebar .block--menu').each(function() {
+    $('.col--sidebar .block--menu').each(function() {
       menus.push($(this).clone().removeAttr('id tabindex'));
     });
     awrA.modalSuite.populateModal(menus);

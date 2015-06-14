@@ -8,7 +8,7 @@ function pa_mosaic_homepage(&$args) {
 
   // Wrapper attributes.
   $args['wrapper_options']['attributes']['class'][] = 'content-level';
-  $args['wrapper_options']['attributes']['class'][] = 'symmetric';
+  $args['wrapper_options']['attributes']['class'][] = 'content-in-mid';
 
   // Slot assingments.
   $args['variable_dispatcher_options'] = array(

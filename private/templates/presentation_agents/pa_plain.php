@@ -13,5 +13,6 @@ function pa_plain(&$args) {
 
   // Implementing assignments.
   // Putting all the content into the 'content' of the template.
+  // (The draw_plain() template is just the content with no wrapper around it.)
   $args['variables']['content'] = implode("\n", $args['raw_data']);
 }

@@ -17,6 +17,7 @@ function pa_single_mock_page(&$args) {
       ),
       'slot_main_level' => array(
         'smp-main' => array(),
+        'smp-layout-plan' => array(),
       ),
       'slot_footer_level' => array(
         'smp-footer' => array(),

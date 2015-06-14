@@ -408,7 +408,7 @@ a.menu-trigger { // Overqualifying because of link rules to be overridden.
 // #############################################################################
 // Operation of menus, menu-triggers, and language switchers.
 
-.has-js .sidebar .block--menu {
+.has-js .col--sidebar .block--menu {
   display: none;
 }
 [class*="header_widgets"] .langswitch {
@@ -434,7 +434,7 @@ a.menu-trigger { // Overqualifying because of link rules to be overridden.
 }
 
 @include breakpoint($bkp-wide-min) {
-  .has-js .sidebar .block--menu {
+  .has-js .col--sidebar .block--menu {
     display: block;
   }
   .overlay--nav,

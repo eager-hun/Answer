@@ -20,7 +20,7 @@ $definitions['layouts']['layout_2sb'] = array(
  */
 function post_dispatch_layout_2sb(&$args) {
   $args['wrapper_options']['attributes']['class'][] = 'grid';
-  $args['wrapper_options']['attributes']['class'][] = 'layout--2sb';
+  $args['wrapper_options']['attributes']['class'][] = 'l--2sb';
 
   if (empty($args['variables']['sidebar_1'])
       && empty($args['variables']['sidebar_2'])) {

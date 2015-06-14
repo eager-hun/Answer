@@ -439,6 +439,7 @@ $binders['single_mock_page'] = array(
       'entity_type' => 'dynamic',
       'instance_id' => 'smp-header',
       'present_as'  => 'plain',
+      // Unofficial hack. TODO: providing reliable support.
       'field_prerenderer_options' => array(
         'template_variant' => 'plain',
       ),
@@ -447,7 +448,18 @@ $binders['single_mock_page'] = array(
       'data_type'   => 'entity',
       'entity_type' => 'dynamic',
       'instance_id' => 'smp-main',
-      'present_as'  => 'plain',
+      'present_as'  => 'automatic_inventory',
+      // Unofficial hack. TODO: providing reliable support.
+      'field_prerenderer_options' => array(
+        'template_variant' => 'plain',
+      ),
+    ),
+    array(
+      'data_type'   => 'entity',
+      'entity_type' => 'dynamic',
+      'instance_id' => 'smp-layout-plan',
+      'present_as'  => 'automatic_inventory',
+      // Unofficial hack. TODO: providing reliable support.
       'field_prerenderer_options' => array(
         'template_variant' => 'plain',
       ),
@@ -457,6 +469,7 @@ $binders['single_mock_page'] = array(
       'entity_type' => 'dynamic',
       'instance_id' => 'smp-footer',
       'present_as'  => 'plain',
+      // Unofficial hack. TODO: providing reliable support.
       'field_prerenderer_options' => array(
         'template_variant' => 'plain',
       ),

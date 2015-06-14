@@ -125,5 +125,59 @@ blockquote {
 
 
 // #############################################################################
-// Presentations.
+// (Flexi)list-related arrangements.
 
+.l--list-plain {
+  & > .item {
+    margin-bottom: $layout-pad;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+/*
+.fl-item--standard + .fl-item--standard {
+  margin-top: $layout-pad*1.25;
+}
+
+.fl--style-plain {
+  .field_id--field_title {
+    font-size: 1.4em;
+  }
+  .field_id--field_preview_text {
+    margin-top: $layout-pad*0.25;
+    padding-left: $layout-pad;
+
+    .field__content {
+      font-size: 0.9em;
+    }
+    p,
+    ul {
+      margin: 0 0 0.5em;
+    }
+    p:last-child,
+    ul:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+@include breakpoint($bkp-wide-min) {
+  .fl--style-plain .field_id--field_preview_text {
+    padding-left: 1.5em;
+  }
+}
+
+.fl--style-images-large {
+  .fl-item + .fl-item {
+    margin-top: $layout-pad*2.5;
+  }
+}
+*/
+
+
+// #############################################################################
+// Presentations.

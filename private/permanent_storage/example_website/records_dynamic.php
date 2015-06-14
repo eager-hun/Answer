@@ -566,6 +566,29 @@ $dynamic['smp-main'] = [
 ];
 
 // -----------------------------------------------------------------------------
+$dynamic['smp-layout-plan'] = [
+  'meta' => [
+    'is_published' => 1,
+    'text_formats' => [
+      'field_title'       => 'html',
+      'field_description' => 'md',
+    ],
+    'data_handlers' => [
+      'field_body' => 'devel_entities',
+    ],
+  ],
+  'data' => [
+    'field_title' => [
+      'locale_primary'   => NULL,
+    ],
+    // The field_body is arguments for the specified data-handler.
+    'field_body' => [
+      'order_id'   => 'smp_layout_plan',
+    ],
+  ],
+];
+
+// -----------------------------------------------------------------------------
 $dynamic['smp-footer'] = [
   'meta' => [
     'is_published' => 1,

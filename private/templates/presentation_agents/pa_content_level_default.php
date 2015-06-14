@@ -7,9 +7,9 @@ function pa_content_level_default(&$args) {
   $args['template_name'] = 'layout_2sb';
 
   // Wrapper attributes.
-  $args['wrapper_options']['attributes']['class'][] = 'symmetric';
   $args['wrapper_options']['attributes']['class'][] = 'content-level';
   $args['wrapper_options']['attributes']['class'][] = 'content-level--default';
+  $args['wrapper_options']['attributes']['class'][] = 'content-in-mid';
 
   // Slot assingments.
   $args['variable_dispatcher_options'] = array(
