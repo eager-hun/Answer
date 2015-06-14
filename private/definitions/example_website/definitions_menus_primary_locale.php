@@ -125,6 +125,11 @@ $menus['mission_control_menu'] = array(
       'type'   => 'link',
       'path'   => $GLOBALS['config']['app']['admin_path'],
       'text'   => 'Admin interface',
+      'item_options' => array(
+        'attributes' => array( // Apparently unimplemented. TODO.
+          'id' => 'menu-item--admin',
+        ),
+      ),
     ),
     'mc-planning-outline' => array(
       'depth'  => 1,

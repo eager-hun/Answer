@@ -399,7 +399,7 @@ a.menu-trigger { // Overqualifying because of link rules to be overridden.
     position: fixed;
     right: -10em; // Off-screen.
     opacity: 0; // Only scrolled-in state (see states) will show it.
-    z-index: 1000;
+    z-index: 9000;
   }
 }
 
@@ -470,7 +470,7 @@ a.menu-trigger { // Overqualifying because of link rules to be overridden.
   right: 0;
   position: fixed;
   top: 0;
-  z-index: 1000;
+  z-index: 9100;
 }
 [id="modal--common"] {
   left: 0;
@@ -479,7 +479,7 @@ a.menu-trigger { // Overqualifying because of link rules to be overridden.
   position: absolute;
   top: 0;
   width: 100%;
-  z-index: 2000;
+  z-index: 9200;
 }
 
 // Throbber.

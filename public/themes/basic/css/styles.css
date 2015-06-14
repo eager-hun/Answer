@@ -180,7 +180,7 @@
 
 html {
   font-family: "Roboto", sans-serif;
-  font-size: 100%;
+  font-size: 103%;
   line-height: 1.5;
 }
 
@@ -203,10 +203,15 @@ h1,
 
 h2,
 .h2 {
-  border-bottom: 1px solid #ccc;
   font-size: 1.6em;
   margin-top: 1.75em;
-  margin-bottom: 1em;
+  margin-bottom: 0.85em;
+}
+
+article h2,
+article .h2 {
+  border-bottom: 1px solid #ccc;
+  font-size: 1.6em;
   padding-bottom: 0.25em;
   margin-bottom: 0.85em;
 }
@@ -229,7 +234,6 @@ h5,
 .h5 {
   font-size: 1.15em;
   margin-top: 1.5em;
-  margin-bottom: 1em;
   margin-bottom: 0.65em;
 }
 
@@ -260,6 +264,10 @@ dd {
   margin-left: 1em;
 }
 
+a {
+  word-wrap: break-word;
+}
+
 code {
   font-size: 0.8em;
   word-wrap: break-word;
@@ -269,7 +277,16 @@ code {
   font-size: 0.9em;
 }
 
+pre code {
+  word-wrap: normal;
+  display: block;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1em;
+}
+
 table {
+  font-size: 0.9em;
   width: 100%;
 }
 
@@ -282,6 +299,11 @@ th,
 td {
   border: 1px solid #ccc;
   padding: 0.25em 0.35em;
+}
+
+.table__wrap {
+  max-width: 100%;
+  overflow: auto;
 }
 
 h1:first-child,
@@ -306,6 +328,13 @@ ul:last-child,
 ol:last-child,
 dl:last-child {
   margin-bottom: 0;
+}
+
+hr {
+  height: 0;
+  background: 0;
+  border: 0;
+  border-top: 1px solid #ccc;
 }
 
 img,
@@ -1692,7 +1721,7 @@ a.menu-trigger.fixed {
   position: fixed;
   right: -10em;
   opacity: 0;
-  z-index: 1000;
+  z-index: 9000;
 }
 
 .has-js .sidebar .block--menu {
@@ -1751,7 +1780,7 @@ a.menu-trigger.fixed {
   right: 0;
   position: fixed;
   top: 0;
-  z-index: 1000;
+  z-index: 9100;
 }
 
 [id="modal--common"] {
@@ -1761,7 +1790,7 @@ a.menu-trigger.fixed {
   position: absolute;
   top: 0;
   width: 100%;
-  z-index: 2000;
+  z-index: 9200;
 }
 
 [id="throbber--modal"][data-on="true"] {
@@ -1969,7 +1998,8 @@ a.menu-trigger.fixed {
  * search for the declaration of that related padding elsewhere. So it may live
  * here then.
  */
-html {
+html,
+body {
   background: #eee;
   color: #333;
 }
@@ -2000,17 +2030,12 @@ html {
   color: white;
 }
 .page-level--header h1,
-.page-level--header .h1,
 .page-level--header h2,
-.page-level--header .h2,
 .page-level--header h3,
-.page-level--header .h3,
 .page-level--header h4,
-.page-level--header .h4,
 .page-level--header h5,
-.page-level--header .h5,
 .page-level--header h6,
-.page-level--header .h6,
+.page-level--header .pseudo-heading,
 .page-level--header .label {
   color: white;
 }
@@ -2080,8 +2105,15 @@ code {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
-  background: #f8f8f8;
+  background: #eee;
   padding: 0.05em 0.35em;
+}
+
+pre {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background: #eee;
 }
 
 .messages .code {

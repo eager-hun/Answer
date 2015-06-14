@@ -24,7 +24,8 @@
 // #############################################################################
 // Page definition - skin.
 
-html {
+html,
+body {
   background: color(bg);
   color: color(text);
 }
@@ -104,8 +105,13 @@ del {
 code {
   @include border-radius;
 
-  background: lighten(color(blockfill), 4%);
+  background: color(blockfill);
   padding: 0.05em 0.35em;
+}
+pre {
+  @include border-radius;
+
+  background: color(blockfill);
 }
 .messages .code {
   background: rgba(color(text-invert), 0.5);

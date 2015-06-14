@@ -56,9 +56,18 @@ $config['ui']['css_external'][] = array(
 // -----------------------------------------------------------------------------
 // JS files for the HTML head.
 
-// http://modernizr.com/download/#-inlinesvg-svg-touch-shiv-cssclasses-teststyles-prefixes-cssclassprefix:mdz!
-$config['ui']['js_body_dependency'][] = array(
-  'source'  => 'frontend_asset',
+// custom-feature-detects.js and modernizr.js should be concatenated together,
+// so that this custom pack of feature detects are the only one js file that is
+// loaded in the < head >.
+
+$config['ui']['js_head_dependency'][] = array(
+  'source'  => 'theme',
+  'file'    => 'custom-feature-detects.js',
+);
+
+// http://modernizr.com/download/#-inlinesvg-svg-touch-shiv-cssclasses-teststyles-/p/refixes-cssclassprefix:mdz!
+$config['ui']['js_head_dependency'][] = array(
+  'source'  => 'theme',
   'file'    => 'modernizr.custom.25804.js',
 );
 
@@ -70,6 +79,7 @@ $config['ui']['js_body'][] = array(
   'file'    => 'theme.js',
   'attribs' => array('async'),
 );
+
 // $config['ui']['js_body'][] = array(
 //   'source'  => 'frontend_asset',
 //   'file'    => 'visual-debug.js',

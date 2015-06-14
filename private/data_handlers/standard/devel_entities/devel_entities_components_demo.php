@@ -93,7 +93,7 @@ function _decd_typography() {
   $cells = array(
     'cell-1' => 'Cell 1',
     'cell-2' => 'Cell 2 praesent nec feugiat elit',
-    'cell-3' => 'Donec viverra augue',
+    'cell-3' => 'Vivamus quis nibh a urna auctor dictum id in sapien.',
     'cell-4' => '42',
     'cell-5' => 'Sed vehicula nunc at augue lacinia',
   );
@@ -121,6 +121,29 @@ function _decd_typography() {
     }
   }
   $table .= "</tbody>\n</table>\n";
+
+  // Code needs to be escaped.
+  $example_code = <<<EOT
+<body<?php print \$variables['wrapper_attributes']; ?>>
+
+  <?php if (!empty(\$variables['slot_body_start'])): ?>
+    <?php print \$variables['slot_body_start']; ?>
+  <?php endif; ?>
+
+  <?php if (!empty(\$variables['slot_page_content'])): ?>
+    <div class="page-content">
+      <?php print \$variables['slot_page_content']; ?>
+    </div>
+  <?php endif; ?>
+
+  <?php if (!empty(\$variables['slot_body_end'])): ?>
+    <?php print \$variables['slot_body_end']; ?>
+  <?php endif; ?>
+
+</body>
+EOT;
+
+  $pre = '<pre><code>' . htmlspecialchars($example_code) . '</code></pre>';
 
   $text = <<<EOT
 
@@ -195,15 +218,43 @@ Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac tu
   <p>Nunc eget commodo sem. Quisque sit amet convallis tortor, nec tempus neque. Vivamus quis nibh a urna auctor dictum id in sapien. Lorem ipsum dolor sit amet.</p>
 </blockquote>
 
-Nunc eget commodo sem. Quisque sit amet convallis tortor, nec tempus neque. Vivamus quis nibh a urna auctor dictum id in sapien. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ligula urna, posuere quis viverra id, condimentum et elit.
+ Integer nec tortor in erat semper tincidunt nec at nibh. Curabitur fermentum tellus nec dui sagittis semper. Nullam tristique aliquet odio. Integer sagittis purus turpis, in sodales lectus ullamcorper vitae.
 
-${table}
+### Table
+
+Tables are advised to have a `div.table__wrap` protector element around them
+when they occur in the content, to prevent tables from dangling out of their
+column.
+
+- [https://github.com/sniku/jQuery-doubleScroll/](https://github.com/sniku/jQuery-doubleScroll) may be of simple help,
+- [https://datatables.net/extensions/responsive/](https://datatables.net/extensions/responsive/) may be of advanced help.
+
+<div class="table__wrap">
+  ${table}
+</div>
 
 Pellentesque est quam, consequat sit amet fermentum at, feugiat commodo enim. Etiam vel eros sit amet magna cursus sodales.
 
-Pellentesque ut augue nisi. Quisque sit amet lorem sem. Vivamus vestibulum sem lacinia, vulputate ex ut, convallis leo. Pellentesque at ex orci. Praesent nec feugiat elit. Donec viverra augue in massa pretium, a tincidunt est dictum. Nulla consequat ante id sem feugiat suscipit. Duis placerat at ipsum non suscipit. Maecenas pretium imperdiet libero, in finibus risus molestie eu.
+Pellentesque ut augue nisi. Quisque sit amet lorem sem. Vivamus vestibulum sem lacinia, vulputate ex ut, convallis leo. Pellentesque at ex orci. Praesent nec feugiat elit. Donec viverra augue in massa pretium, a tincidunt est dictum.
+
+---
+
+Nulla consequat ante id sem feugiat suscipit. Duis placerat at ipsum non suscipit. Maecenas pretium imperdiet libero, in finibus risus molestie eu.
+
+Pellentesque ut augue nisi. Quisque sit amet lorem sem. Vivamus vestibulum sem lacinia, vulputate ex ut, convallis leo. Pellentesque at ex orci. Praesent nec feugiat elit. Donec viverra augue in massa pretium, a tincidunt est dictum.
+
+### Preformatted text
+
+    This preformatted text
+    seems to show not much
+    fancy formatting.
+
+### Code
+
+${pre}
 
 EOT;
+
 
   // Text filter.
   $filter_params = array(
@@ -226,7 +277,7 @@ EOT;
 function _decd_in_text() {
   $text = <<<EOT
 
-### Hero:
+### Hero
 
 <!--HERO-->
 
@@ -234,7 +285,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dictum, velit sit 
 
 <!--/HERO-->
 
-### High:
+### High
 
 <!--HIGH-->
 
@@ -242,7 +293,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dictum, velit sit 
 
 <!--/HIGH-->
 
-### Note:
+### Note
 
 <!--NOTE-->
 
@@ -250,7 +301,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dictum, velit sit 
 
 <!--/NOTE-->
 
-### Links:
+### Links
 
 <!--LINKS-->
 

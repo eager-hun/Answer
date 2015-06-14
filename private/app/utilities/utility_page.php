@@ -275,13 +275,6 @@ function pageutils_html_head() {
 
   $output .= pageutils_document_assets('head_css');
 
-  $output .= implode("\n", array(
-    "<script>",
-    "document.documentElement.className = ",
-    "document.documentElement.className.replace(/(?:^|\s)no-js(?!\S)/g , 'has-js');",
-    "</script>"
-  )) . "\n";
-
   $html5shiv = $GLOBALS['registry']['app_externals']['libraries_frontend']
         . '/html5shiv/dist/html5shiv.min.js';
   $respondjs = $GLOBALS['registry']['app_externals']['libraries_frontend']

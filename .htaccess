@@ -24,3 +24,46 @@ ErrorDocument 404 /index.php
     SetOutputFilter DEFLATE
   </FilesMatch>
 </IfModule>
+
+<ifModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header unset X-Powered-By
+  Header unset Server
+</ifModule>
+ServerSignature Off
+
+# Cache tweaks in the name of good intent.
+# Note: something seems to be up with my caching attempt, I'm ever getting 304
+# headers only on page refreshes, but not on navigating to another page.
+# Homework: https://www.mnot.net/cache_docs/
+<ifModule mod_headers.c>
+  Header unset ETag
+</ifModule>
+FileETag None
+
+# Expires headers.
+<IfModule mod_expires.c>
+  ExpiresActive on
+  AddType font/ttf .ttf
+  AddType font/otf .otf
+  AddType font/x-woff .woff
+  AddType image/svg+xml .svg
+  ExpiresDefault                       "access plus 1 year"
+  # CSS
+  ExpiresByType text/css               "access plus 1 year"
+  # Favicon
+  ExpiresByType image/x-icon           "access plus 1 year"
+  # HTML
+  ExpiresByType text/html              "access plus 0 seconds"
+  # JavaScript
+  ExpiresByType application/javascript "access plus 1 year"
+  # Media
+  ExpiresByType image/gif              "access plus 1 year"
+  ExpiresByType image/jpeg             "access plus 1 year"
+  ExpiresByType image/png              "access plus 1 year"
+  ExpiresByType image/svg+xml          "access plus 1 year"
+  # Web fonts
+  ExpiresByType font/ttf               "access plus 1 year"
+  ExpiresByType font/otf               "access plus 1 year"
+  ExpiresByType font/x-woff            "access plus 1 year"
+</IfModule>

@@ -12,4 +12,5 @@ page_default
 page_homepage
 page_plain
 plain
+single_mock_page
 static_page_full

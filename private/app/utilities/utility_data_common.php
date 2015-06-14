@@ -479,9 +479,6 @@ function loc($desired_key, $for_locale = '') {
 function datautils_send_standard_headers($request) {
   $charset_header = 'Content-Type: text/html; charset=utf-8';
   header($charset_header);
-  header("X-Content-Type-Options: nosniff");
-  header_remove("Server"); // But it was not set by php, so...
-  header_remove("X-Powered-By");
 }
 
 
