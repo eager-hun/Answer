@@ -2289,7 +2289,7 @@ a.menu-trigger.fixed {
  * - If there are different page-variants that have altered- or unique page
  *   definition (header, footer, unique body bg), that could be placed here too.
  */
-.p10n--mosaic_homepage .block__title {
+.p10n--mosaic_homepage .col--main .block__title {
   border-bottom: 1px solid #ccc;
   font-size: 1.6em;
   padding-bottom: 0.25em;

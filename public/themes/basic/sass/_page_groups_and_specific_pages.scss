@@ -14,8 +14,10 @@
 // Homepage.
 
 .p10n--mosaic_homepage {
-  .block__title {
-    @include h2-style-in-article;
+  .col--main {
+    .block__title {
+      @include h2-style-in-article;
+    }
   }
   .l--list-plain {
     padding-top: $layout-pad*0.75;
