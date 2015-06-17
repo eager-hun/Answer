@@ -36,6 +36,16 @@
  * http://snugug.github.io/RWD-with-Sass-Compass/#/interesting-grids
  * http://snugug.github.io/RWD-with-Sass-Compass/#/nested-grid-html
  * http://stackoverflow.com/a/24092721 (syntax-change)
+ *
+ * Note about out-of-the-blue clear: right;'s at unexpected places in grid
+ * declarations: while grid items by default are floated left, in Singularity
+ * grid (and in Zen-grids too, I'd expect) each row's last item is being floated
+ * to right, to fight inconsistencies originating from pixel-rounding-errors.
+ * Clearing right there is neccessary to keep a bottom row's last item in place
+ * when in the row above the last item grows the most tall.
+ *
+ * See:
+ * https://www.palantir.net/blog/responsive-design-s-dirty-little-secret
  */
 
 
@@ -45,9 +55,7 @@
 // @include sgs-change('debug', true); // The grid-bg-displays depend on this.
 
 .grid {
-  @include n-clearfix;
-
-  list-style-type: none; // In case we gridify a list.
+  @include grids-common;
 
   // .tpl--block { background: rgba(black,0.1); } // For debugging;
 }
@@ -97,7 +105,7 @@
 .l--2sb.content-in-mid.has-1-sb.sb-1 {
   @include add-grid(6 18 at $bkp-wide-min);
   @include add-gutter(1.7 at $bkp-wide-min);
-  @include background-grid;
+  // @include background-grid;
 }
 .l--2sb.content-in-mid.has-1-sb.sb-1 {
   @include breakpoint($bkp-wide-min) {
@@ -297,17 +305,18 @@
 
 
 // #############################################################################
-// Grids.
+// Grids and flexboxes.
+
+// -----------------------------------------------------------------------------
+// Matrix layouts with floats only.
 
 // Shared styles of all .l--matrix variants.
 .l--matrix {
-  text-align: center;
 
   & > .item {
     @include transition-property(all);
     @include transition-duration($transitspeed-mid);
 
-    display: inline-block;
     margin-bottom: $layout-pad*1.5;
     max-width: 100%;
 
@@ -315,7 +324,9 @@
       margin-bottom: 0;
     }
   }
-
+  .field_type--image {
+    max-width: 100%;
+  }
 }
 
 .l--matrix--cols-3 {
@@ -339,6 +350,8 @@
     }
     & > .item:nth-child(2n+2) {
       @include grid-span(1, 2);
+
+      clear: right;
     }
     // Note: the first one had its bottom margin: 0 at the basic definition.
     & > .item:nth-last-child(2) {
@@ -357,6 +370,8 @@
     }
     & > .item:nth-child(3n+3) {
       @include grid-span(1, 3);
+
+      clear: right;
     }
     // Note: the first one had its bottom margin: 0 at the basic definition.
     & > .item:nth-last-child(2),
@@ -389,6 +404,8 @@
     }
     & > .item:nth-child(2n+2) {
       @include grid-span(1, 2);
+
+      clear: right;
     }
     // Note: the first one had its bottom margin: 0 at the basic definition.
     & > .item:nth-last-child(2) {
@@ -407,6 +424,8 @@
     }
     & > .item:nth-child(3n+3) {
       @include grid-span(1, 3);
+
+      clear: right;
     }
     // Note: the first one had its bottom margin: 0 at the basic definition.
     & > .item:nth-last-child(2),
@@ -429,12 +448,158 @@
     }
     & > .item:nth-child(4n+4) {
       @include grid-span(1, 4);
+
+      clear: right;
     }
     // Note: the first one had its bottom margin: 0 at the basic definition.
     & > .item:nth-last-child(2),
     & > .item:nth-last-child(3)
     & > .item:nth-last-child(4) {
       margin-bottom: 0;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Flexbox layouts.
+// See https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+
+// (Note 1.: flexboxes are technically not grids.)
+// (Note 2.: but we can provide grid fallbacks to them.)
+
+// Note about fallbacks:
+// 1.:  they can either be display: table; or floated grids.
+// 2.:  we declare fallbacks only when modernizr has explicitly added
+//      .mdz-no-flexbox class.
+//    - fallbacks could be provided without this class, with weaker selectors,
+//      and then they could be overridden in case of flexbox support, but I
+//      wouldn't waste computing power on that, and wouldn't want to increase
+//      the chance of any bugs from the additional complexity.
+// 2a.: so if modernizr.js couldn't run in the browser (very low percentage,
+//      somewhere around 1%(?)), items will have full width instead of showing
+//      as columns.
+
+$bkp-flexboxes-enable-default: $bkp-wide-ht-min;
+
+.l--flexbox {
+  & > .item {
+    margin-bottom: $layout-pad;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@include breakpoint($bkp-flexboxes-enable-default) {
+
+  // Fallback table layout for the auto-row.
+  .mdz-no-flexbox {
+    .l--flexbox--auto-row {
+      // Border-spacing puts 'paddings' on the table's sides, but I don't want to
+      // over-worry this if I don't have to.
+      border-spacing: $layout-pad;
+      display: table;
+      margin: -1em 0;
+      table-layout: fixed;
+      width: 100%;
+
+      & > .item {
+        display: table-cell;
+      }
+    }
+  }
+
+  // Fallback floated grid for the explicitly wrapped sets.
+  .mdz-no-flexbox {
+    .l--flexbox--cols-3 {
+      @include grids-common;
+      @include add-grid(3 at $bkp-flexboxes-enable-default);
+      @include add-gutter(0.075 at $bkp-flexboxes-enable-default);
+
+      @include breakpoint($bkp-flexboxes-enable-default) {
+        & > .item:nth-child(3n+1) {
+          @include grid-span(1, 1);
+
+          clear: left;
+        }
+        & > .item:nth-child(3n+2) {
+          @include grid-span(1, 2);
+        }
+        & > .item:nth-child(3n+3) {
+          @include grid-span(1, 3);
+
+          clear: right;
+        }
+        // Note: the first one had its bottom margin: 0 at the basic definition.
+        & > .item:nth-last-child(2),
+        & > .item:nth-last-child(3) {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  // If the browser supports the new flexbox syntax.
+  .mdz-flexbox {
+    // Common styles.
+    .l--flexbox {
+      @include display-flex;
+    }
+
+    // .l--flexbox--auto-row is always a single, non-wrapping row.
+    .l--flexbox--auto-row {
+      @include flex-direction(row);
+
+      & > .item {
+        @include flex(1 1 auto);
+
+        margin: 0 1.5%;
+        // Hack to force equal width cols.
+        // See http://stackoverflow.com/a/7985973
+        width: 0;
+
+        &:first-child {
+          margin-left: 0;
+        }
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    // If cols are declared, then items of a number that's a multiple of the
+    // col count, can be used, and they get wrapped to a new row after every nth
+    // (predefined) item.
+    // So e.g. a 3 col wrapped flexbox could have 3, 6, 9, 12, 15, etc. items.
+    // This restriction is coming from the way I implemented the gaps (margins)
+    // between the items.
+    .l--flexbox--cols-3 {
+      @include flex-direction(row);
+      @include flex-wrap(wrap);
+
+      & > .item {
+        // The 30% here decides that rows can fit 3 items.
+        // The flex-grow: 1 before that allows then items to grow from 30% to
+        // fill all available width.
+        @include flex(1 0 30%);
+
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=958714
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=1110305
+        margin: 0 1.5% $layout-pad*1.25;
+
+        &:nth-child(3n+1) {
+          margin-left: 0;
+        }
+        &:nth-child(3n+3) {
+          margin-right: 0;
+        }
+        &:last-child,
+        &:nth-last-child(2),
+        &:nth-last-child(3) {
+          margin-bottom: 0;
+        }
+      }
     }
   }
 }

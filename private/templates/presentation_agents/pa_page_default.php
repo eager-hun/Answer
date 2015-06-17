@@ -9,6 +9,9 @@ function pa_page_default(&$args) {
   // Wrapper attributes.
   // $args['wrapper_options']['attributes']['class'][] = 'some-class';
 
+  // For debugging modernizr-based fallbacks.
+  // $args['wrapper_options']['attributes']['class'][] = 'mdz-no-flexbox';
+
   // Slot assingments.
   $args['variable_dispatcher_options'] = array(
     'assignments' => array(

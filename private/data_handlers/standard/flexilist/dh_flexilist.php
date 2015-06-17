@@ -188,9 +188,9 @@ function _flexilist_build_list($args, $advanced_opts) {
     // following better.
     $list_wrapper_default_classes = array(
       // 'flexilist',
-      'fl--id--' . $args['order_id'],
-      // 'fl--props--' . $advanced_opts['list_properties_preset'],
-      'fl--p10n--' . $advanced_opts['presentation_preset'],
+      'fl_id--' . $args['order_id'],
+      // 'fl_props--' . $advanced_opts['list_properties_preset'],
+      'fl_p10n--' . $advanced_opts['presentation_preset'],
     );
 
     if (!array_key_exists('list_options', $def['presentation'])) {

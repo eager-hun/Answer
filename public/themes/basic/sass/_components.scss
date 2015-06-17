@@ -123,12 +123,6 @@ blockquote {
   }
 }
 
-.p10n--dynamic_full {
-  .field_id--field_description {
-    margin-bottom: $layout-pad*2;
-  }
-}
-
 
 // #############################################################################
 // (Flexi)list-related arrangements.
@@ -160,3 +154,68 @@ blockquote {
 
 // #############################################################################
 // Presentations.
+
+// -----------------------------------------------------------------------------
+// Entity type "dynamic", view mode full.
+
+.p10n--dynamic_full {
+  .field_id--field_description {
+    margin-bottom: $layout-pad*2;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Image previews.
+
+.p10n--image_display_preview {
+  .l--matrix > & {
+    text-align: center;
+
+    .field_type--image {
+      display: inline-block;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// "Feature highlight".
+
+.tpl--feature_highlight {
+  @include display-flex;
+  @include flex-direction(column);
+  @include align-items(stretch);
+
+  text-align: center;
+  padding: $layout-pad*1.5 $layout-pad $layout-pad;
+
+  & > div {
+    @include flex(1 1 auto);
+  }
+  .slot--image {
+    width: 100px;
+    margin: 0 auto;
+
+    img {
+      @include border-radius(100%);
+    }
+  }
+  .slot--title {
+    @include h3-style;
+    @include pseudo-heading-shared;
+
+    margin: $layout-pad*0.5 0;
+  }
+  .slot--button {
+    @include display-flex;
+    @include align-items(flex-end);
+
+    .flex-pos {
+      @include flex(1 1 auto);
+    }
+    a {
+      @include button($color: nav);
+
+      margin-top: $layout-pad;
+    }
+  }
+}

@@ -52,15 +52,28 @@
 // Component-demo page.
 
 .component-demo {
-  .cd__title {
-    margin-bottom: 0.15em;
-  }
   .component-demo + & {
     margin-top: $layout-pad*3.5;
   }
-}
-.cd__description {
-  @include description-style;
+  .l--flexbox {
+    margin-top: $layout-pad*2;
+    margin-bottom: $layout-pad*3;
+  }
+  .entity--image_display.card {
+    text-align: center;
 
-  margin-bottom: $layout-pad*2;
+    .field_type--image {
+      max-width: none;
+    }
+  }
+  p.description,
+  .cd__description {
+    @include description-style;
+  }
+  .cd__description {
+    margin-bottom: $layout-pad*2;
+  }
+}
+.cd__title {
+  margin-bottom: 0.15em;
 }

@@ -10,7 +10,7 @@
 
 // This will be appended as a query argument in the links for .css and .js
 // assets.
-$config['theme']['version'] = '20150614-1';
+$config['theme']['version'] = '20150617-1';
 
 
 // #############################################################################
@@ -65,10 +65,10 @@ $config['ui']['js_head_dependency'][] = array(
   'file'    => 'custom-feature-detects.js',
 );
 
-// http://modernizr.com/download/#-inlinesvg-svg-touch-shiv-cssclasses-teststyles-/p/refixes-cssclassprefix:mdz!
+// http://modernizr.com/download/#-backgroundsize-flexbox-inlinesvg-svg-touch-cssclasses-teststyles-testprop-testallprops-domprefixes-cssclassprefix:mdz!
 $config['ui']['js_head_dependency'][] = array(
   'source'  => 'theme',
-  'file'    => 'modernizr.custom.25804.js',
+  'file'    => 'modernizr.custom.80541.js',
 );
 
 // -----------------------------------------------------------------------------

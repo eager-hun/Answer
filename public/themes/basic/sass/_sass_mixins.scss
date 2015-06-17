@@ -86,6 +86,11 @@
   //       You can consider using that one where this pseudo-element hack is
   //       interfering with your other interests.
 }
+@mixin grids-common {
+  @include n-clearfix;
+
+  list-style-type: none; // In case we gridify a list.
+}
 
 
 // #############################################################################
@@ -129,7 +134,10 @@
   margin-top: 1.5em;
   margin-bottom: 0.6em;
 }
-
+@mixin pseudo-heading-shared {
+  font-weight: 700;
+  line-height: 1.25;
+}
 
 // Sub- and superscripts.
 // See: http://stackoverflow.com/questions/501671/superscript-in-css-only

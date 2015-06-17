@@ -111,6 +111,7 @@
 }
 
 .messages pre {
+  background: transparent;
   margin-bottom: 2em;
   overflow: visible;
 }

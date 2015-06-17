@@ -255,7 +255,6 @@ ${pre}
 
 EOT;
 
-
   // Text filter.
   $filter_params = array(
     'text_format' => 'md',
@@ -271,6 +270,7 @@ EOT;
   );
   return _decd_template($output);
 }
+
 /**
  * In-text features.
  */
@@ -335,9 +335,11 @@ EOT;
  * Grids.
  */
 function _decd_grids() {
+  $registry = $GLOBALS['registry'];
 
   apputils_wake_resource('data_handler', 'flexilist');
 
+  // List 1.
   $list_1_args = array(
     'order_id' => 'images_all',
   );
@@ -345,8 +347,9 @@ function _decd_grids() {
     'list_properties_preset' => 'default',
     'presentation_preset'    => 'default',
   );
-  $list1 = dh_flexilist($list_1_args, $list_1_opts);
+  $list_1 = dh_flexilist($list_1_args, $list_1_opts);
 
+  // List 2.
   $list_2_args = array(
     'order_id' => 'images_all',
   );
@@ -354,10 +357,119 @@ function _decd_grids() {
     'list_properties_preset' => 'matrix-cards',
     'presentation_preset'    => 'matrix-cards',
   );
-  $list2 = dh_flexilist($list_2_args, $list_2_opts);
+  $list_2 = dh_flexilist($list_2_args, $list_2_opts);
 
-  $demo = '<h3>Matrix, float, 3 col</h3>' . $list1
-        . '<h3>Matrix, float, 4 col, card style</h3>' . $list2;
+  // List 3 (for "rich call-to-action"s).
+  $cta_list__items = array(
+    'item-1' => array(
+      'image'       => 'sample-image.png',
+      'title'       => 'Proin quis',
+      'text'        => 'Aliquam convallis odio ligula, a faucibus velit sodales et.',
+      'button_text' => 'Duis nec purus',
+      'button_url'  => '#',
+    ),
+    'item-2' => array(
+      'image'       => 'sample-image.png',
+      'title'       => 'Cras interdum placerat',
+      'text'        => 'Aliquam convallis odio ligula, a faucibus velit sodales et. Pellentesque urna risus, viverra in aliquam sed.',
+      'button_text' => 'Duis nec purus',
+      'button_url'  => '#',
+    ),
+    'item-3' => array(
+      'image'       => 'sample-image.png',
+      'title'       => 'Duis viverra',
+      'text'        => '<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p><p>Aliquam convallis odio ligula, a faucibus velit sodales et.</p>',
+      'button_text' => 'Duis nec purus',
+      'button_url'  => '#',
+    ),
+    'item-4' => array(
+      'image'       => 'sample-image.png',
+      'title'       => 'Aliquam nisl augue',
+      'text'        => 'Aliquam convallis odio ligula, a faucibus velit sodales et. Pellentesque urna risus, viverra in aliquam sed.',
+      'button_text' => 'Duis nec purus',
+      'button_url'  => '#',
+    ),
+    'item-5' => array(
+      'image'       => 'sample-image.png',
+      'title'       => 'Proin velit',
+      'text'        => 'Fusce tristique elit vel mi varius vulputate. Phasellus auctor ullamcorper ultrices sed.',
+      'button_text' => 'Duis nec purus',
+      'button_url'  => '#',
+    ),
+    'item-6' => array(
+      'image'       => 'sample-image.png',
+      'title'       => 'Aliquam nisl augue',
+      'text'        => 'Aliquam convallis odio ligula, a faucibus velit sodales et. Pellentesque urna risus, viverra in aliquam sed.',
+      'button_text' => 'Duis nec purus',
+      'button_url'  => '#',
+    ),
+  );
+
+  // Fabricating "rich call-to-action"s.
+  $feature_highlight_template = $registry['app_current']['templates']
+    . '/layouts/layout_feature_highlight/layout_feature_highlight.template.php';
+  $image_path_base = $registry['app_externals']['document_files']
+    . '/images/square_300/';
+  $cta_list_rendered_items = array();
+  foreach ($cta_list__items as $item) {
+    $image_attributes = array(
+      'src' => $image_path_base . ensafe_string($item['image'], 'file_name'),
+      'title' => ensafe_string($item['title']),
+    );
+    $image_template = array(
+      'template_name' => 'image',
+      'variables'     => array(
+        'attributes'  => templateutils_render_html_attributes($image_attributes),
+      ),
+    );
+    $link_attributes = array(
+      'href' => $item['button_url'],
+    );
+    $link_template = array(
+      'template_name' => 'link',
+      'variables' => array(
+        'link_attributes' => templateutils_render_html_attributes($link_attributes),
+        'link_text'       => ensafe_string($item['button_text']),
+      ),
+    );
+    $item_attributes = array(
+      'class' => array(
+        'item',
+        'tpl--feature_highlight',
+      ),
+    );
+    $variables = array(
+      'wrapper_attributes' => templateutils_render_html_attributes($item_attributes),
+      'slot_image'  => templateutils_present($image_template),
+      'slot_title'  => ensafe_string($item['title'], 'html'),
+      'slot_text'   => ensafe_string($item['text'], 'html'),
+      'slot_button' => templateutils_present($link_template),
+    );
+    ob_start();
+    include $feature_highlight_template;
+    $cta_list__rendered_items[] = ob_get_clean();
+  }
+  unset($item);
+
+  $cta_list_all_items = implode('', $cta_list__rendered_items);
+  $cta_list_2_items   = implode('', array_slice($cta_list__rendered_items, 0, 2));
+
+  $list_3 = '<div class="l--flexbox l--flexbox--auto-row">';
+  $list_3 .= $cta_list_2_items;
+  $list_3 .= '</div>';
+
+  $list_4 = '<div class="l--flexbox l--flexbox--cols-3">';
+  $list_4 .= $cta_list_all_items;
+  $list_4 .= '</div>';
+
+  $demo = '<h3>Matrix, float, 3 col</h3>' . $list_1
+        . '<h3>Matrix, float, 4 col, card style</h3>' . $list_2
+        . '<h3>Flexbox single row "auto stuffer", with <code>display: table;</code> fallback</h3>'
+        . '<p class="description">Listed items are "Feature highlight" components.</p>'
+        . $list_3
+        . '<h3>Flexbox 3-col multi row, with floated grid fallback</h3>'
+        . '<p class="description">Listed items are "Feature highlight" components.</p>'
+        . $list_4;
 
   $output = array(
     'name'        => 'grids',

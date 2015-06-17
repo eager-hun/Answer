@@ -115,6 +115,7 @@
 }
 
 .messages pre {
+  background: transparent;
   margin-bottom: 2em;
   overflow: visible;
 }
@@ -558,6 +559,16 @@ span.anchor {
  * http://snugug.github.io/RWD-with-Sass-Compass/#/interesting-grids
  * http://snugug.github.io/RWD-with-Sass-Compass/#/nested-grid-html
  * http://stackoverflow.com/a/24092721 (syntax-change)
+ *
+ * Note about out-of-the-blue clear: right;'s at unexpected places in grid
+ * declarations: while grid items by default are floated left, in Singularity
+ * grid (and in Zen-grids too, I'd expect) each row's last item is being floated
+ * to right, to fight inconsistencies originating from pixel-rounding-errors.
+ * Clearing right there is neccessary to keep a bottom row's last item in place
+ * when in the row above the last item grows the most tall.
+ *
+ * See:
+ * https://www.palantir.net/blog/responsive-design-s-dirty-little-secret
  */
 .grid {
   list-style-type: none;
@@ -810,9 +821,6 @@ span.anchor {
   }
 }
 
-.l--matrix {
-  text-align: center;
-}
 .l--matrix > .item {
   -moz-transition-property: all;
   -o-transition-property: all;
@@ -822,12 +830,14 @@ span.anchor {
   -o-transition-duration: 0.4s;
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
-  display: inline-block;
   margin-bottom: 1.5em;
   max-width: 100%;
 }
 .l--matrix > .item:last-child {
   margin-bottom: 0;
+}
+.l--matrix .field_type--image {
+  max-width: 100%;
 }
 
 @media (min-width: 35em) {
@@ -850,6 +860,7 @@ span.anchor {
     margin-left: 0;
     margin-right: 0;
     clear: none;
+    clear: right;
   }
   .l--matrix--cols-3 > .item:nth-last-child(2) {
     margin-bottom: 0;
@@ -877,6 +888,7 @@ span.anchor {
     margin-left: 0;
     margin-right: 0;
     clear: none;
+    clear: right;
   }
   .l--matrix--cols-3 > .item:nth-last-child(2), .l--matrix--cols-3 > .item:nth-last-child(3) {
     margin-bottom: 0;
@@ -903,6 +915,7 @@ span.anchor {
     margin-left: 0;
     margin-right: 0;
     clear: none;
+    clear: right;
   }
   .l--matrix--cols-4 > .item:nth-last-child(2) {
     margin-bottom: 0;
@@ -930,6 +943,7 @@ span.anchor {
     margin-left: 0;
     margin-right: 0;
     clear: none;
+    clear: right;
   }
   .l--matrix--cols-4 > .item:nth-last-child(2), .l--matrix--cols-4 > .item:nth-last-child(3) {
     margin-bottom: 0;
@@ -964,6 +978,7 @@ span.anchor {
     margin-left: 0;
     margin-right: 0;
     clear: none;
+    clear: right;
   }
   .l--matrix--cols-4 > .item:nth-last-child(2), .l--matrix--cols-4 > .item:nth-last-child(3)
   .l--matrix--cols-4 > .item:nth-last-child(4) {
@@ -971,6 +986,107 @@ span.anchor {
   }
 }
 
+.l--flexbox > .item {
+  margin-bottom: 1em;
+}
+.l--flexbox > .item:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 60em) {
+  .mdz-no-flexbox .l--flexbox--auto-row {
+    border-spacing: 1em;
+    display: table;
+    margin: -1em 0;
+    table-layout: fixed;
+    width: 100%;
+  }
+  .mdz-no-flexbox .l--flexbox--auto-row > .item {
+    display: table-cell;
+  }
+
+  .mdz-no-flexbox .l--flexbox--cols-3 {
+    list-style-type: none;
+  }
+  .mdz-no-flexbox .l--flexbox--cols-3:before, .mdz-no-flexbox .l--flexbox--cols-3:after {
+    content: ' ';
+    display: table;
+  }
+  .mdz-no-flexbox .l--flexbox--cols-3:after {
+    clear: both;
+  }
+}
+@media (min-width: 60em) and (min-width: 60em) {
+  .mdz-no-flexbox .l--flexbox--cols-3 > .item:nth-child(3n+1) {
+    width: 31.74603%;
+    float: left;
+    margin-right: -100%;
+    margin-left: 0;
+    clear: none;
+    clear: left;
+  }
+  .mdz-no-flexbox .l--flexbox--cols-3 > .item:nth-child(3n+2) {
+    width: 31.74603%;
+    float: left;
+    margin-right: -100%;
+    margin-left: 34.12698%;
+    clear: none;
+  }
+  .mdz-no-flexbox .l--flexbox--cols-3 > .item:nth-child(3n+3) {
+    width: 31.74603%;
+    float: right;
+    margin-left: 0;
+    margin-right: 0;
+    clear: none;
+    clear: right;
+  }
+  .mdz-no-flexbox .l--flexbox--cols-3 > .item:nth-last-child(2), .mdz-no-flexbox .l--flexbox--cols-3 > .item:nth-last-child(3) {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 60em) {
+  .mdz-flexbox .l--flexbox {
+    display: -webkit-flex;
+    display: flex;
+  }
+  .mdz-flexbox .l--flexbox--auto-row {
+    -webkit-flex-direction: row;
+    flex-direction: row;
+  }
+  .mdz-flexbox .l--flexbox--auto-row > .item {
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+    margin: 0 1.5%;
+    width: 0;
+  }
+  .mdz-flexbox .l--flexbox--auto-row > .item:first-child {
+    margin-left: 0;
+  }
+  .mdz-flexbox .l--flexbox--auto-row > .item:last-child {
+    margin-right: 0;
+  }
+  .mdz-flexbox .l--flexbox--cols-3 {
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  .mdz-flexbox .l--flexbox--cols-3 > .item {
+    -webkit-flex: 1 0 30%;
+    flex: 1 0 30%;
+    margin: 0 1.5% 1.25em;
+  }
+  .mdz-flexbox .l--flexbox--cols-3 > .item:nth-child(3n+1) {
+    margin-left: 0;
+  }
+  .mdz-flexbox .l--flexbox--cols-3 > .item:nth-child(3n+3) {
+    margin-right: 0;
+  }
+  .mdz-flexbox .l--flexbox--cols-3 > .item:last-child, .mdz-flexbox .l--flexbox--cols-3 > .item:nth-last-child(2), .mdz-flexbox .l--flexbox--cols-3 > .item:nth-last-child(3) {
+    margin-bottom: 0;
+  }
+}
 .tpl--layout_2col_asm_combi:before, .tpl--layout_2col_asm_combi:after {
   content: ' ';
   display: table;
@@ -1367,10 +1483,6 @@ blockquote:before {
   margin-top: 2em;
 }
 
-.p10n--dynamic_full .field_id--field_description {
-  margin-bottom: 2em;
-}
-
 .l--list-plain > .item + .item {
   border-top: 1px solid #ccc;
   margin-top: 2em;
@@ -1391,6 +1503,106 @@ blockquote:before {
     margin-top: -0.25em;
   }
 }
+.p10n--dynamic_full .field_id--field_description {
+  margin-bottom: 2em;
+}
+
+.l--matrix > .p10n--image_display_preview {
+  text-align: center;
+}
+.l--matrix > .p10n--image_display_preview .field_type--image {
+  display: inline-block;
+}
+
+.tpl--feature_highlight {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+  text-align: center;
+  padding: 1.5em 1em 1em;
+}
+.tpl--feature_highlight > div {
+  -webkit-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+.tpl--feature_highlight .slot--image {
+  width: 100px;
+  margin: 0 auto;
+}
+.tpl--feature_highlight .slot--image img {
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+}
+.tpl--feature_highlight .slot--title {
+  font-size: 1.45em;
+  margin-top: 1.75em;
+  margin-bottom: 0.85em;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0.5em 0;
+}
+.tpl--feature_highlight .slot--button {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: flex-end;
+  align-items: flex-end;
+}
+.tpl--feature_highlight .slot--button .flex-pos {
+  -webkit-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+.tpl--feature_highlight .slot--button a {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-transition-property: background-color;
+  -o-transition-property: background-color;
+  -webkit-transition-property: background-color;
+  transition-property: background-color;
+  -moz-transition-duration: 0.1s;
+  -o-transition-duration: 0.1s;
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1em;
+  font-style: normal;
+  max-width: 100%;
+  overflow: visible;
+  text-align: center;
+  text-decoration: none;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  height: auto;
+  line-height: 1.25;
+  padding: 0.25em 1em;
+  outline: none;
+  -moz-box-shadow: rgba(255, 255, 255, 0.3) 0 3px 9px 1px inset, rgba(50, 35, 60, 0.3) 0 -3px 9px 0px inset;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.3) 0 3px 9px 1px inset, rgba(50, 35, 60, 0.3) 0 -3px 9px 0px inset;
+  box-shadow: rgba(255, 255, 255, 0.3) 0 3px 9px 1px inset, rgba(50, 35, 60, 0.3) 0 -3px 9px 0px inset;
+  background-color: #5a5aa6;
+  text-shadow: 0 1px 4px rgba(10, 7, 12, 0.5);
+  margin-top: 1em;
+}
+.tpl--feature_highlight .slot--button a, .tpl--feature_highlight .slot--button a:visited, .tpl--feature_highlight .slot--button a:hover {
+  color: white;
+}
+.tpl--feature_highlight .slot--button a:hover {
+  background-color: #515195;
+}
+.tpl--feature_highlight .slot--button a:focus {
+  outline: none;
+  -moz-box-shadow: white 0 0 1px 1px, #5a5aa6 0 0 5px 2px, rgba(255, 255, 255, 0.3) 0 4px 9px 0px inset, rgba(50, 35, 60, 0.3) 0 -3px 9px 0px inset;
+  -webkit-box-shadow: white 0 0 1px 1px, #5a5aa6 0 0 5px 2px, rgba(255, 255, 255, 0.3) 0 4px 9px 0px inset, rgba(50, 35, 60, 0.3) 0 -3px 9px 0px inset;
+  box-shadow: white 0 0 1px 1px, #5a5aa6 0 0 5px 2px, rgba(255, 255, 255, 0.3) 0 4px 9px 0px inset, rgba(50, 35, 60, 0.3) 0 -3px 9px 0px inset;
+  border: none;
+}
+
 /**
  * @file
  * Rules for web form items.
@@ -2230,6 +2442,14 @@ pre {
   padding: 0;
 }
 
+.tpl--feature_highlight {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background: white;
+  border: 1px solid #ccc;
+}
+
 a.menu-trigger {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -2360,17 +2580,30 @@ a.menu-trigger.fixed {
     text-align: left;
   }
 }
-.component-demo .cd__title {
-  margin-bottom: 0.15em;
-}
 .component-demo + .component-demo {
   margin-top: 3.5em;
 }
-
-.cd__description {
+.component-demo .l--flexbox {
+  margin-top: 2em;
+  margin-bottom: 3em;
+}
+.component-demo .entity--image_display.card {
+  text-align: center;
+}
+.component-demo .entity--image_display.card .field_type--image {
+  max-width: none;
+}
+.component-demo p.description,
+.component-demo .cd__description {
   color: #777;
   font-style: italic;
+}
+.component-demo .cd__description {
   margin-bottom: 2em;
+}
+
+.cd__title {
+  margin-bottom: 0.15em;
 }
 
 /**
