@@ -82,6 +82,9 @@
  * @endcode
  */
 /**
+ * Can be used for replacing a focused item's outline with a box shadow.
+ */
+/**
  * Allow buttons to have distinct shadow effects in complex situations.
  *
  * Complex situations arise when we want to replace CSS outline (on focus) with

@@ -129,12 +129,10 @@ blockquote {
 
 .l--list-plain {
   & > .item + .item {
-    border-top: 1px solid color(border-light);
     margin-top: $layout-pad*2;
-    padding-top: $layout-pad*2;
   }
   .field_id--field_title {
-    @include h5-style;
+    @include h4-style;
 
     margin-top: 1em;
   }

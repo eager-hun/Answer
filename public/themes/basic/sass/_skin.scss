@@ -60,17 +60,12 @@ body {
 // Texts - skin.
 
 h1,
-.h1,
 h2,
-.h2,
 h3,
-.h3,
 h4,
-.h4,
 h5,
-.h5,
 h6,
-.h6 {
+.pseudo-heading {
   color: lighten(color(text), 10%);
 }
 a {
@@ -135,6 +130,17 @@ pre {
 .field_type--image {
   img {
     @include image-border;
+  }
+  a {
+    @include border-radius;
+
+    &:focus {
+      outline: none;
+
+      img {
+        @include focus-shadow($color: nav, $padded: false);
+      }
+    }
   }
 }
 .messages {

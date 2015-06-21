@@ -140,6 +140,7 @@ $colors: (
   link-visited:           purple, // TODO.
   link-hover:             darken(saturate($temp-color-prim, 15%), 15%),
   link-invert:            white,
+  link-invert-visited:    white,
   border-mid:             $temp-color-border-base,
   border-light:           #ccc,
   border-dark:            darken($temp-color-border-base, 20%),

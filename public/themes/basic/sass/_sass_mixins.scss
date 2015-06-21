@@ -309,7 +309,7 @@
     color: color(link-invert);
   }
   &:visited:hover {
-    color: color(link-invert);
+    color: color(link-invert-visited);
   }
 }
 
@@ -366,6 +366,23 @@
 }
 
 /**
+ * Can be used for replacing a focused item's outline with a box shadow.
+ */
+@mixin focus-shadow($color: nav, $padded: false) {
+  @if $padded == (true) {
+    @include box-shadow(
+      white 0 0 1px 1px,
+      color($color) 0 0 5px 2px
+    );
+  }
+  @else {
+    @include box-shadow(
+      color($color) 0 0 5px 2px
+    );
+  }
+}
+
+/**
  * Allow buttons to have distinct shadow effects in complex situations.
  *
  * Complex situations arise when we want to replace CSS outline (on focus) with
@@ -386,6 +403,8 @@
       );
     }
     @else {
+      // FIXME: This should somehow use values from the focus-shadow thing,
+      // either as @mixin or as a return value from a @function.
       @include box-shadow(
         white 0 0 1px 1px,
         color($color) 0 0 5px 2px,
@@ -402,6 +421,8 @@
       );
     }
     @else {
+      // FIXME: This should somehow use values from the focus-shadow thing,
+      // either as @mixin or as a return value from a @function.
       @include box-shadow(
         white 0 0 1px 1px,
         color($color) 0 0 5px 2px,
