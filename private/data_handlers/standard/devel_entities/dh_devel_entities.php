@@ -11,11 +11,17 @@
  * scripted entities.
  */
 
+
+/**
+ * Actions upon inclusion.
+ */
+$GLOBALS['temp']['dh_devel_entities'] = array();
+
 /**
  * Standard function.
  */
 function dh_devel_entities($args) {
-  $file_name      = dirname(__FILE__) . '/devel_entities_'
+  $file_name      = dirname(__FILE__) . '/dhde_'
                   . ensafe_string($args['order_id'], 'file_name') . '.php';
   $function_name  = 'devel_entities_' . $args['order_id'];
 

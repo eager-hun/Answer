@@ -130,7 +130,7 @@ $structure['entity_definitions']['article'] = array(
     'field_preview_image' => array(
       'role' => 'meta',
       'type' => 'field_image',
-      'style' => 'medium',
+      'style' => '4_3-400w',
       'translatable' => FALSE,
       'label' => loc('fl--preview-image'),
     ),
@@ -162,7 +162,7 @@ $structure['entity_definitions']['article'] = array(
     'field_image' => array(
       'role' => 'meta',
       'type' => 'field_image',
-      'style' => 'large',
+      'style' => '16_9-800w',
       'translatable' => FALSE,
       'label' => loc('fl--image'),
     ),
@@ -233,7 +233,7 @@ $structure['entity_definitions']['image_display'] = array(
     'field_preview_image' => array(
       'role' => 'meta',
       'type' => 'field_image',
-      'style' => 'medium',
+      'style' => '4_3-400w',
       'translatable' => FALSE,
       'label' => loc('fl--preview-image'),
     ),
@@ -253,7 +253,7 @@ $structure['entity_definitions']['image_display'] = array(
     'field_body' => array(
       'role' => 'data',
       'type' => 'field_image',
-      'style' => 'large',
+      'style' => '16_9-800w',
       'translatable' => FALSE,
       'label' => loc('Image'),
     ),

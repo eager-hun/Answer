@@ -4,6 +4,17 @@
  */
 
 /**
+ * Actions upon inclusion.
+ */
+$helpers_file = dirname(__FILE__) . '/dhde_cd_helpers.php';
+if (file_exists($helpers_file)) {
+  include_once($helpers_file);
+}
+
+_dhde_create_dummy_list();
+
+
+/**
  * Standard function.
  *
  * Make its name match the file-name.
@@ -13,6 +24,7 @@
  */
 function devel_entities_components_demo($args) {
   $output = '';
+  // $output .= _decd_carousels();
   $output .= _decd_grids();
   $output .= _decd_typography();
   $output .= _decd_in_text();
@@ -245,9 +257,10 @@ Pellentesque ut augue nisi. Quisque sit amet lorem sem. Vivamus vestibulum sem l
 
 ### Preformatted text
 
-    This preformatted text
-    seems to show not much
-    fancy formatting.
+    This preformatted text seems to show not much fancy formatting.
+
+    We must remember though to sample long lines of text here,
+    so that we can see how this behaves on narrower screens.
 
 ### Code
 
@@ -359,59 +372,17 @@ function _decd_grids() {
   );
   $list_2 = dh_flexilist($list_2_args, $list_2_opts);
 
-  // List 3 (for "rich call-to-action"s).
-  $cta_list__items = array(
-    'item-1' => array(
-      'image'       => 'sample-image.png',
-      'title'       => 'Proin quis',
-      'text'        => 'Aliquam convallis odio ligula, a faucibus velit sodales et.',
-      'button_text' => 'Duis nec purus',
-      'button_url'  => '#',
-    ),
-    'item-2' => array(
-      'image'       => 'sample-image.png',
-      'title'       => 'Cras interdum placerat',
-      'text'        => 'Aliquam convallis odio ligula, a faucibus velit sodales et. Pellentesque urna risus, viverra in aliquam sed.',
-      'button_text' => 'Duis nec purus',
-      'button_url'  => '#',
-    ),
-    'item-3' => array(
-      'image'       => 'sample-image.png',
-      'title'       => 'Duis viverra',
-      'text'        => '<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p><p>Aliquam convallis odio ligula, a faucibus velit sodales et.</p>',
-      'button_text' => 'Duis nec purus',
-      'button_url'  => '#',
-    ),
-    'item-4' => array(
-      'image'       => 'sample-image.png',
-      'title'       => 'Aliquam nisl augue',
-      'text'        => 'Aliquam convallis odio ligula, a faucibus velit sodales et. Pellentesque urna risus, viverra in aliquam sed.',
-      'button_text' => 'Duis nec purus',
-      'button_url'  => '#',
-    ),
-    'item-5' => array(
-      'image'       => 'sample-image.png',
-      'title'       => 'Proin velit',
-      'text'        => 'Fusce tristique elit vel mi varius vulputate. Phasellus auctor ullamcorper ultrices sed.',
-      'button_text' => 'Duis nec purus',
-      'button_url'  => '#',
-    ),
-    'item-6' => array(
-      'image'       => 'sample-image.png',
-      'title'       => 'Aliquam nisl augue',
-      'text'        => 'Aliquam convallis odio ligula, a faucibus velit sodales et. Pellentesque urna risus, viverra in aliquam sed.',
-      'button_text' => 'Duis nec purus',
-      'button_url'  => '#',
-    ),
-  );
-
-  // Fabricating "rich call-to-action"s.
+  // Fabricating "Feature highlight"s.
   $feature_highlight_template = $registry['app_current']['templates']
     . '/layouts/layout_feature_highlight/layout_feature_highlight.template.php';
+  $image_style = '1_1-270w';
   $image_path_base = $registry['app_externals']['document_files']
-    . '/images/square_300/';
-  $cta_list_rendered_items = array();
-  foreach ($cta_list__items as $item) {
+    . '/images/' . $image_style . '/';
+
+  $fh_list__items = $GLOBALS['temp']['dh_devel_entities']['cd_dummies']['dummy_list'];
+  $fh_list__rendered_items = array();
+
+  foreach ($fh_list__items as $item) {
     $image_attributes = array(
       'src' => $image_path_base . ensafe_string($item['image'], 'file_name'),
       'title' => ensafe_string($item['title']),
@@ -442,24 +413,24 @@ function _decd_grids() {
       'wrapper_attributes' => templateutils_render_html_attributes($item_attributes),
       'slot_image'  => templateutils_present($image_template),
       'slot_title'  => ensafe_string($item['title'], 'html'),
-      'slot_text'   => ensafe_string($item['text'], 'html'),
+      'slot_text'   => ensafe_string($item['short_text'], 'html'),
       'slot_button' => templateutils_present($link_template),
     );
     ob_start();
     include $feature_highlight_template;
-    $cta_list__rendered_items[] = ob_get_clean();
+    $fh_list__rendered_items[] = ob_get_clean();
   }
   unset($item);
 
-  $cta_list_all_items = implode('', $cta_list__rendered_items);
-  $cta_list_2_items   = implode('', array_slice($cta_list__rendered_items, 0, 2));
+  $fh_list_all_items = implode('', $fh_list__rendered_items);
+  $fh_list_2_items   = implode('', array_slice($fh_list__rendered_items, 0, 2));
 
   $list_3 = '<div class="l--flexbox l--flexbox--auto-row">';
-  $list_3 .= $cta_list_2_items;
+  $list_3 .= $fh_list_2_items;
   $list_3 .= '</div>';
 
   $list_4 = '<div class="l--flexbox l--flexbox--cols-3">';
-  $list_4 .= $cta_list_all_items;
+  $list_4 .= $fh_list_all_items;
   $list_4 .= '</div>';
 
   $demo = '<h3>Matrix, float, 3 col</h3>' . $list_1
@@ -475,6 +446,24 @@ function _decd_grids() {
     'name'        => 'grids',
     'title'       => 'Grids initiative',
     'description' => 'Grids initiative. To be continued.',
+    'demo'        => $demo,
+  );
+  return _decd_template($output);
+}
+
+/**
+ * Carousels.
+ */
+function _decd_carousels() {
+
+  $car_list__items = $GLOBALS['temp']['dh_devel_entities']['cd_dummies']['dummy_list'];
+
+  $demo = 'Carousels.';
+
+  $output = array(
+    'name'        => 'carousels',
+    'title'       => 'Carousels',
+    'description' => '',
     'demo'        => $demo,
   );
   return _decd_template($output);
