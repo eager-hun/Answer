@@ -283,10 +283,10 @@
 }
 
 @mixin image-fit() {
-  display: block;
+  display: inline-block;
   line-height: 1;
   margin: 0;
-  vertical-align: text-bottom;
+  vertical-align: bottom;
 }
 
 
@@ -472,7 +472,26 @@
   }
 
   // Theme variants.
-  @if $color == (action) or $color == (nav) {
+  @if $color == (plain-light) {
+    background-color: lighten(color(blockfill), 3%);
+    font-weight: 700;
+    text-shadow: 0 1px 1px white;
+
+    &,
+    &:visited {
+      color: darken(color(minor), 10%);
+    }
+    &:hover,
+    &:visited:hover,
+    &:focus {
+      background-color: color(nav);
+      border: none;
+      color: color(blockfill);
+      outline: none;
+      text-shadow: 0 1px 1px darken(color(shadow), 15%);
+    }
+  }
+  @else {
     @include button-shadows($size, $color, $focus: false);
 
     background-color: color($color);
@@ -490,25 +509,6 @@
       @include button-shadows($size, $color, $focus: true);
 
       border: none;
-    }
-  }
-  @else if $color == (plain-light) {
-    background-color: lighten(color(blockfill), 3%);
-    font-weight: 700;
-    text-shadow: 0 1px 1px white;
-
-    &,
-    &:visited {
-      color: darken(color(minor), 10%);
-    }
-    &:hover,
-    &:visited:hover,
-    &:focus {
-      background-color: color(nav);
-      border: none;
-      color: color(blockfill);
-      outline: none;
-      text-shadow: 0 1px 1px darken(color(shadow), 15%);
     }
   }
 }

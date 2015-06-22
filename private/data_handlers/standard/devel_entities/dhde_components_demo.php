@@ -3,15 +3,40 @@
  * Custom script for the components_demo devel entity.
  */
 
-/**
- * Actions upon inclusion.
- */
+
+// #############################################################################
+// Actions upon inclusion.
+
 $helpers_file = dirname(__FILE__) . '/dhde_cd_helpers.php';
 if (file_exists($helpers_file)) {
   include_once($helpers_file);
 }
+if (function_exists('_dhde_create_dummy_list')) {
+  _dhde_create_dummy_list();
+}
 
-_dhde_create_dummy_list();
+// Assets.
+// @ingroup not_sophisticated, I know.
+$GLOBALS['config']['ui']['js_body'][] = array(
+  'source' => 'frontend_library',
+  'file'   => 'slick.js/slick/slick.min.js',
+);
+$GLOBALS['config']['ui']['js_body'][] = array(
+  'source' => 'theme',
+  'file'   => 'components-demo.js',
+);
+$GLOBALS['config']['ui']['css_external'][] = array(
+  'source' => 'frontend_library',
+  'file'   => 'slick.js/slick/slick.css',
+);
+$GLOBALS['config']['ui']['css_external'][] = array(
+  'source' => 'frontend_library',
+  'file'   => 'slick.js/slick/slick-theme.css',
+);
+$GLOBALS['config']['ui']['css_external'][] = array(
+  'source' => 'theme_generated',
+  'file'   => 'extra_components_demo.css',
+);
 
 
 /**
@@ -24,8 +49,8 @@ _dhde_create_dummy_list();
  */
 function devel_entities_components_demo($args) {
   $output = '';
-  // $output .= _decd_carousels();
   $output .= _decd_grids();
+  $output .= _decd_carousels();
   $output .= _decd_typography();
   $output .= _decd_in_text();
 
@@ -38,18 +63,23 @@ function devel_entities_components_demo($args) {
 function _decd_template($variables) {
 
   // Preparing for rendering inputs that were received as markdown.
-  $parse_title = array(
-    'text_format' => 'md',
-    'data' => $variables['title'],
-  );
-  $parse_description = array(
-    'text_format' => 'md',
-    'data' => $variables['description'],
-  );
-
+  $title       = NULL;
+  $description = NULL;
+  if (!empty($variables['title'])) {
+    $parse_title = array(
+      'text_format' => 'md',
+      'data' => $variables['title'],
+    );
+    $title = datautils_filter($parse_title);
+  }
+  if (!empty($variables['description'])) {
+    $parse_description = array(
+      'text_format' => 'md',
+      'data' => $variables['description'],
+    );
+    $description = datautils_filter($parse_description);
+  }
   $name        = ensafe_string($variables['name'], 'attribute_value');
-  $title       = datautils_filter($parse_title);
-  $description = datautils_filter($parse_description);
   $demo        = $variables['demo'];
 
   $output = '<div class="component-demo cd--' . $name . '">';
@@ -69,7 +99,7 @@ function _decd_placeholder() {
 
   $output = array(
     'name'        => 'placeholder',
-    'title'       => 'Component demo placeholder',
+    'title'       => '<span class="anchor" id="anchor--placeholder"></span>Component demo placeholder',
     'description' => 'Placeholder description.',
     'demo'        => $demo,
   );
@@ -277,7 +307,7 @@ EOT;
 
   $output = array(
     'name'        => 'typography',
-    'title'       => 'Typography',
+    'title'       => '<span class="anchor" id="anchor--typography"></span>Typography',
     'description' => 'A basic overview.',
     'demo'        => $demo,
   );
@@ -337,7 +367,7 @@ EOT;
 
   $output = array(
     'name'        => 'in-text',
-    'title'       => 'In-text components',
+    'title'       => '<span class="anchor" id="anchor--in-text"></span>In-text components',
     'description' => 'E.g. textboxes, splitters.<br>These already are, or can be made available as "short tags" (configured in `config.php`)',
     'demo'        => $demo,
   );
@@ -377,7 +407,7 @@ function _decd_grids() {
     . '/layouts/layout_feature_highlight/layout_feature_highlight.template.php';
   $image_style = '1_1-270w';
   $image_path_base = $registry['app_externals']['document_files']
-    . '/images/' . $image_style . '/';
+                   . '/images/' . $image_style . '/';
 
   $fh_list__items = $GLOBALS['temp']['dh_devel_entities']['cd_dummies']['dummy_list'];
   $fh_list__rendered_items = array();
@@ -422,8 +452,8 @@ function _decd_grids() {
   }
   unset($item);
 
-  $fh_list_all_items = implode('', $fh_list__rendered_items);
-  $fh_list_2_items   = implode('', array_slice($fh_list__rendered_items, 0, 2));
+  $fh_list_all_items = implode("\n", $fh_list__rendered_items);
+  $fh_list_2_items   = implode("\n", array_slice($fh_list__rendered_items, 0, 2));
 
   $list_3 = '<div class="l--flexbox l--flexbox--auto-row">';
   $list_3 .= $fh_list_2_items;
@@ -444,8 +474,8 @@ function _decd_grids() {
 
   $output = array(
     'name'        => 'grids',
-    'title'       => 'Grids initiative',
-    'description' => 'Grids initiative. To be continued.',
+    'title'       => '<span class="anchor" id="anchor--grids"></span>Grid- and Flexbox layouts',
+    // 'description' => 'Grid- and Flexbox layouts.',
     'demo'        => $demo,
   );
   return _decd_template($output);
@@ -455,15 +485,68 @@ function _decd_grids() {
  * Carousels.
  */
 function _decd_carousels() {
+  $registry = $GLOBALS['registry'];
+  $slides_raw = $GLOBALS['temp']['dh_devel_entities']['cd_dummies']['dummy_list'];
 
-  $car_list__items = $GLOBALS['temp']['dh_devel_entities']['cd_dummies']['dummy_list'];
+  $car_1_image_style = '3_1-800w';
+  $car_1_image_path_base = $registry['app_externals']['document_files']
+                   . '/images/' . $car_1_image_style . '/';
+  $car_2_image_style = '4_3-400w';
+  $car_2_image_path_base = $registry['app_externals']['document_files']
+                   . '/images/' . $car_2_image_style . '/';
 
-  $demo = 'Carousels.';
+  $car_1_slides_rendered = array();
+  $car_2_slides_rendered = array();
+
+  foreach ($slides_raw as $index => $slide) {
+    $text = ensafe_string($slide['short_text'], 'html');
+    $car_1_img = '<img src="'
+         . $car_1_image_path_base . ensafe_string($slide['image'], 'file_name') . '">';
+    $car_2_img = '<img src="'
+         . $car_2_image_path_base . ensafe_string($slide['image'], 'file_name') . '">';
+    $button = '<a class="button" href="' . ensafe_string($slide['button_url']) . '">'
+            . ensafe_string($slide['button_text']) . '</a>';
+    $index = ensafe_string($index, 'attribute_value');
+    $car_1_rendered_item = <<<EOT
+<div class="slide" data-slide-number="${index}">
+  <div class="slot--image">${car_1_img}</div>
+  <div class="slot--text">${text}</div>
+</div>
+EOT;
+    $car_2_rendered_item = <<<EOT
+<div class="slide" data-slide-number="${index}">
+  <div class="slot--image">${car_2_img}</div>
+  <div class="slot--button">${button}</div>
+</div>
+EOT;
+    $car_1_slides_rendered[] = $car_1_rendered_item;
+    $car_2_slides_rendered[] = $car_2_rendered_item;
+  }
+  unset($slide);
+
+  $car_1 = "<div class=\"crsl__wrap crsl--single__wrap\">\n"
+         . "<div class=\"crsl crsl--single crsl--img-bg crsl--cd-1\">\n"
+         . implode("\n", $car_1_slides_rendered) . "\n</div>\n</div>\n";
+
+  $car_2 = "<div class=\"crsl__wrap crsl--multi__wrap\">\n"
+         . "<div class=\"crsl crsl--multi crsl--cd-2\">\n"
+         . implode("\n", $car_2_slides_rendered) . "\n</div>\n</div>\n";
+
+  // Reusing the previous outputs for a combined one.
+  $car_3 = "<div class=\"crsl__wrap crsl--single__wrap crsl--paged__wrap\">\n"
+         . "<div class=\"crsl crsl--single crsl--paged crsl--cd-3\">\n"
+         . implode("\n", $car_1_slides_rendered) . "\n</div>\n</div>\n";
+
+  $car_4 = "<div class=\"crsl__wrap crsl--multi__wrap crsl--pager__wrap\">\n"
+         . "<div class=\"crsl crsl--multi crsl--pager  crsl--cd-4\">\n"
+         . implode("\n", $car_2_slides_rendered) . "\n</div>\n</div>\n";
+
+  $demo = $car_1 . $car_2 . $car_3 . $car_4;
 
   $output = array(
     'name'        => 'carousels',
-    'title'       => 'Carousels',
-    'description' => '',
+    'title'       => '<span class="anchor" id="anchor--carousels"></span>Carousels',
+    // 'description' => '',
     'demo'        => $demo,
   );
   return _decd_template($output);

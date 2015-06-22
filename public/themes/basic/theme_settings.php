@@ -10,7 +10,7 @@
 
 // This will be appended as a query argument in the links for .css and .js
 // assets.
-$config['theme']['version'] = '20150617-1';
+$config['theme']['version'] = '20150622-1';
 
 
 // #############################################################################
@@ -77,13 +77,11 @@ $config['ui']['js_head_dependency'][] = array(
 $config['ui']['js_body'][] = array(
   'source'  => 'theme',
   'file'    => 'theme.js',
-  'attribs' => array('async'),
 );
 
 // $config['ui']['js_body'][] = array(
 //   'source'  => 'frontend_asset',
 //   'file'    => 'visual-debug.js',
-//   'attribs' => array('async'),
 // );
 
 

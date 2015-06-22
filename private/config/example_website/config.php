@@ -166,7 +166,7 @@ $config['document']['locale']['secondary']['php_locale'] = 'hu-HU.utf8';
  *
  * Format: YYYY-MM-DD .
  */
-$config['document']['global_lastmod'] = '2015-06-04';
+$config['document']['global_lastmod'] = '2015-06-22';
 
 
 // #############################################################################

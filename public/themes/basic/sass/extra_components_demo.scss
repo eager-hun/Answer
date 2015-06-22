@@ -1,0 +1,291 @@
+/**
+ * @file
+ * Styles specific to the components demo page.
+ */
+
+@import "sass_base";
+@import "sass_mixins";
+
+
+// Various elements on the components demo page.
+.component-demo {
+  .component-demo + & {
+    margin-top: $layout-pad*3.5;
+  }
+  .l--flexbox {
+    margin-top: $layout-pad*2;
+    margin-bottom: $layout-pad*3;
+  }
+  .entity--image_display.card {
+    text-align: center;
+
+    .field_type--image {
+      max-width: none;
+    }
+  }
+  p.description,
+  .cd__description {
+    @include description-style;
+  }
+  .cd__description {
+    margin-bottom: $layout-pad*2;
+  }
+}
+.cd__title {
+  margin-bottom: 0.15em;
+}
+
+
+// #############################################################################
+// Carousels.
+
+// -----------------------------------------------------------------------------
+// Component rules - carousels.
+
+.crsl__wrap + .crsl__wrap {
+  margin-top: $layout-pad*4;
+}
+
+.crsl.slick-slider { // Overspecifying to override slick.css.
+  margin-bottom: 0;    // Unless the carousel has "dots".
+  // margin-bottom: 65px; // Only for "dotted" carousels.
+}
+
+// -----------------------------------------------------------------------------
+// Carousels' shared rules.
+
+.crsl {
+  .slide {
+    // .slick-list likes to cut off 1-1px from top & bottom, preventing it.
+    margin-top: 1px;
+    margin-bottom: 1px;
+  }
+  .slide + .slide {
+    // Fallback for when things are not carouseling.
+    margin-top: $layout-pad*2;
+  }
+  &.slick-initialized {
+    // If things are carouseling.
+    .slide + .slide {
+      margin-top: 1px;
+    }
+  }
+  // These are the prev/next buttons.
+  & > button {
+    height: 32px;
+    // The 'Slick' font-family seems a bit off at big sizes, so taking that
+    // into account.
+    margin-top: -12px;
+    width: 32px;
+    z-index: 100; // I'm not sure about this.
+
+    &::before {
+      font-size: 32px;
+    }
+  }
+  .slot--image {
+    max-width: 100%;
+    position: relative;
+
+    img {
+      @include border-radius;
+      @include image-fit;
+    }
+  }
+  .slot--text {
+    position: relative;
+    z-index: 10;
+  }
+  .debug__slide-number {
+    @include border-radius;
+
+    background: color(minor);
+    bottom: $layout-pad*0.5;
+    color: color(text-invert);
+    font-size: 0.8em;
+    left: $layout-pad*0.5;
+    line-height: 1;
+    min-width: 1.25em;
+    padding: 2px;
+    position: absolute;
+    text-align: center;
+    z-index: 100;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Carousel variant: "single".
+
+.crsl--single {
+  .slick-prev {
+    left: 5px;
+  }
+  .slick-next {
+    right: 5px;
+  }
+  .slot--text {
+    padding-top: $layout-pad;
+  }
+  &.slick-initialized {
+    .slot--text {
+      // Leaving room on the sides for the absoluted prev/next buttons.
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Carousel variant: "img-bg".
+
+.crsl--img-bg {
+  @include n-clearfix;
+
+  .slide {
+    @include n-clearfix;
+  }
+  .slot--image {
+    float: left;
+    // Hack to allow the text go over the image, while still allowing everything
+    // to remain visible when the text proves to be taller than the image.
+    margin-right: -99%;
+
+    // Gradient overlay to reduce background noise and help text readability.
+    &::before {
+      @include background-image(
+        linear-gradient(
+          to bottom right,
+          rgba(#ddd, 0.2),
+          #ddd
+        )
+      );
+      content: '';
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Carousel variant: "multi".
+
+.crsl__wrap.crsl--multi__wrap {
+  // Room on the sides for the prev/next buttons.
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.crsl--multi {
+  .slick-prev {
+    left: -40px;
+  }
+  .slick-next {
+    right: -40px;
+  }
+  .slide {
+    margin-left: 4px;
+    margin-right: 4px;
+    text-align: center;
+  }
+  .slot--button {
+    margin-top: $layout-pad;
+  }
+  a.button {
+    @include button($size: small, $color: nav);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Carousel compounds.
+
+.crsl--pager {
+  // If things are not carouseling, we don't need the pager, as the paged items
+  // will be all visible, and have 100% value. No need for pager then.
+  display: none;
+
+  .slick-active {
+    // FIXME: https://github.com/kenwheeler/slick/issues/1248#issuecomment-95241299
+    // @include focus-shadow($color: nav, $padded: false);
+  }
+  &.slick-initialized {
+    // This appears to be working! Slick seems to somehow cope with this
+    // somewhat "recursive" hiding/showing hack.
+    display: block;
+
+    .slide,
+    .slide + .slide {
+      // Extra margin to prevent the .slick-active's shadow from being cut off.
+      margin-top: 7px;
+      margin-bottom: 4px;
+      cursor: pointer;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Skin rules - carousels.
+
+.crsl { // Overspecifying to override stuff.
+  .slick-prev:before,
+  .slick-next:before {
+    color: color(nav);
+  }
+}
+
+.crsl__wrap {
+  @include border-radius;
+
+  border: 1px solid color(border-light);
+  padding: 4px;
+}
+.crsl--paged__wrap {
+  @include border-bottom-radius(0);
+
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+
+  .crsl {
+    margin-bottom: 0;
+  }
+}
+.crsl__wrap + .crsl--pager__wrap {
+  @include border-top-radius(0);
+
+  border-top: none;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+// -----------------------------------------------------------------------------
+// Overrides for certain carousels in the demo.
+
+.crsl--cd-1 {
+  &.slick-slider {
+    margin-bottom: 65px;
+  }
+}
+.crsl--cd-2 {
+  &.slick-initialized {
+    .slide {
+      // Extra padding in slides so the protunding button-shadows don't get
+      // cut off - and then it all looks somewhat balanced.
+      padding: 4px 0 12px;
+    }
+  }
+}
+.crsl--cd-3 {
+  .slot--text {
+    display: none;
+  }
+}
+.crsl--cd-4 {
+  .slide {
+    @include border-radius;
+  }
+  .slot--button {
+    display: none;
+  }
+}

@@ -115,6 +115,8 @@ blockquote {
   a,
   img {
     @include image-fit;
+
+    max-width: 100%;
   }
 
   .tpl--field + &,

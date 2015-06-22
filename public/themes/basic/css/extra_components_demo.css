@@ -1,0 +1,368 @@
+/**
+ * @file
+ * Styles specific to the components demo page.
+ */
+/**
+ * @file
+ * Definitions of variables + further Compass setup.
+ *
+ * On configuring Compass:
+ * @see
+ * http://compass-style.org/help/documentation/configuration-reference/
+ * http://compass-style.org/help/documentation/sass-based-configuration-options/
+ * http://compass-style.org/index/variables/
+ *
+ * On using Compass:
+ * @see
+ * http://compass-style.org/reference/compass/
+ * http://compass-style.org/index/mixins/
+ * http://compass-style.org/index/functions/
+ *
+ * On rgba() colors:
+ * @see
+ * http://thesassway.com/intermediate/mixins-for-semi-transparent-colors
+ *
+ *
+ * On further plugins:
+ * @see
+ * http://snugug.com/musings/introducing-breakpoint-media-queries-made-easy
+ * https://github.com/codingdesigner/breakpoint/blob/master/README.markdown
+ * https://github.com/at-import/breakpoint/wiki/Advanced-Media-Queries
+ *
+ * https://github.com/at-import/Singularity
+ *
+ * On everything:
+ * @see
+ * http://caniuse.com/
+ * http://mcdlr.com/8/ ('Useful UTF-8 Characters')
+ */
+/* LEGEND for the breakpoint variables:
+| <- $layout-page-min-width                          $layout-page-max-width -> |
+|                                                                              |
+|             <- narrow ->              |              <- wide ->              |
+|                                       |                                      |
+|   narrow   |   narrow   |   narrow    |    wide    |    wide    |    wide    |
+|  lowthird  |  midthird  |  highthird  |  lowthird  |  midthird  |  highthird |
+| (narrow-lt)| (narrow-mt)| (narrow-ht) |  (wide-lt) |  (wide-mt) |  (wide-ht) |
+*/
+/**
+ * @file
+ * Theme-specific custom mixins.
+ *
+ * Mixins vs Extending utility-role Placeholders?
+ *
+ * Mixins won, placeholders lost so badly that they will not be used. Repetition
+ * originating from using mixins will be mitigated by gzip serving the resulting
+ * files (gzip works well on repeated patterns, they say).
+ *
+ * @see
+ * http://www.sitepoint.com/avoid-sass-extend/
+ * http://csswizardry.com/2014/11/when-to-use-extend-when-to-use-a-mixin/
+ *
+ * NOTES on basic syntax:
+ * @code
+ *
+ * @mixin test-mixin--box($bg: gold, $padding: 1em) {
+ *   background: $bg;
+ *   padding: $padding;
+ *
+ *   @if $bg == (gold) and $padding == (1em) {
+ *     border: 1px solid red;
+ *   }
+ *   @else if $bg == (gold) and $padding != (1em) {
+ *     border: 5px solid red;
+ *   }
+ *   @else {
+ *     border: 3px solid black;
+ *   }
+ * }
+ *
+ * @endcode
+ */
+/**
+ * Can be used for replacing a focused item's outline with a box shadow.
+ */
+/**
+ * Allow buttons to have distinct shadow effects in complex situations.
+ *
+ * Complex situations arise when we want to replace CSS outline (on focus) with
+ * outer box shadows, and then, upon focus event, alongside the new
+ * focus-indicating shadows, we want to keep the original inset box shadows too
+ * that were originally part of the standard button appearance.
+ */
+.component-demo + .component-demo {
+  margin-top: 3.5em;
+}
+.component-demo .l--flexbox {
+  margin-top: 2em;
+  margin-bottom: 3em;
+}
+.component-demo .entity--image_display.card {
+  text-align: center;
+}
+.component-demo .entity--image_display.card .field_type--image {
+  max-width: none;
+}
+.component-demo p.description,
+.component-demo .cd__description {
+  color: #777;
+  font-style: italic;
+}
+.component-demo .cd__description {
+  margin-bottom: 2em;
+}
+
+.cd__title {
+  margin-bottom: 0.15em;
+}
+
+.crsl__wrap + .crsl__wrap {
+  margin-top: 4em;
+}
+
+.crsl.slick-slider {
+  margin-bottom: 0;
+}
+
+.crsl .slide {
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+.crsl .slide + .slide {
+  margin-top: 2em;
+}
+.crsl.slick-initialized .slide + .slide {
+  margin-top: 1px;
+}
+.crsl > button {
+  height: 32px;
+  margin-top: -12px;
+  width: 32px;
+  z-index: 100;
+}
+.crsl > button::before {
+  font-size: 32px;
+}
+.crsl .slot--image {
+  max-width: 100%;
+  position: relative;
+}
+.crsl .slot--image img {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  display: inline-block;
+  line-height: 1;
+  margin: 0;
+  vertical-align: bottom;
+}
+.crsl .slot--text {
+  position: relative;
+  z-index: 10;
+}
+.crsl .debug__slide-number {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background: #777;
+  bottom: 0.5em;
+  color: white;
+  font-size: 0.8em;
+  left: 0.5em;
+  line-height: 1;
+  min-width: 1.25em;
+  padding: 2px;
+  position: absolute;
+  text-align: center;
+  z-index: 100;
+}
+
+.crsl--single .slick-prev {
+  left: 5px;
+}
+.crsl--single .slick-next {
+  right: 5px;
+}
+.crsl--single .slot--text {
+  padding-top: 1em;
+}
+.crsl--single.slick-initialized .slot--text {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.crsl--img-bg:before, .crsl--img-bg:after {
+  content: ' ';
+  display: table;
+}
+.crsl--img-bg:after {
+  clear: both;
+}
+.crsl--img-bg .slide:before, .crsl--img-bg .slide:after {
+  content: ' ';
+  display: table;
+}
+.crsl--img-bg .slide:after {
+  clear: both;
+}
+.crsl--img-bg .slot--image {
+  float: left;
+  margin-right: -99%;
+}
+.crsl--img-bg .slot--image::before {
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuMCIgeDI9IjEuMCIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2RkZGRkZCIgc3RvcC1vcGFjaXR5PSIwLjIiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkZGRkZGQiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0%, rgba(221, 221, 221, 0.2)), color-stop(100%, #dddddd));
+  background-image: -moz-linear-gradient(top, rgba(221, 221, 221, 0.2), #dddddd);
+  background-image: -webkit-linear-gradient(top, rgba(221, 221, 221, 0.2), #dddddd);
+  background-image: linear-gradient(to bottom right, rgba(221, 221, 221, 0.2), #dddddd);
+  content: '';
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.crsl__wrap.crsl--multi__wrap {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.crsl--multi .slick-prev {
+  left: -40px;
+}
+.crsl--multi .slick-next {
+  right: -40px;
+}
+.crsl--multi .slide {
+  margin-left: 4px;
+  margin-right: 4px;
+  text-align: center;
+}
+.crsl--multi .slot--button {
+  margin-top: 1em;
+}
+.crsl--multi a.button {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-transition-property: background-color;
+  -o-transition-property: background-color;
+  -webkit-transition-property: background-color;
+  transition-property: background-color;
+  -moz-transition-duration: 0.1s;
+  -o-transition-duration: 0.1s;
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1em;
+  font-style: normal;
+  max-width: 100%;
+  overflow: visible;
+  text-align: center;
+  text-decoration: none;
+  -moz-border-radius: 2.25px;
+  -webkit-border-radius: 2.25px;
+  border-radius: 2.25px;
+  font-size: 0.9em;
+  height: auto;
+  line-height: 1.25;
+  padding: 0.25em 0.5em;
+  outline: none;
+  -moz-box-shadow: rgba(255, 255, 255, 0.3) 0 3px 9px 1px inset, rgba(50, 35, 60, 0.3) 0 -3px 9px 0px inset;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.3) 0 3px 9px 1px inset, rgba(50, 35, 60, 0.3) 0 -3px 9px 0px inset;
+  box-shadow: rgba(255, 255, 255, 0.3) 0 3px 9px 1px inset, rgba(50, 35, 60, 0.3) 0 -3px 9px 0px inset;
+  background-color: #5a5aa6;
+  text-shadow: 0 1px 4px rgba(10, 7, 12, 0.5);
+}
+.crsl--multi a.button, .crsl--multi a.button:visited, .crsl--multi a.button:hover {
+  color: white;
+}
+.crsl--multi a.button:hover {
+  background-color: #515195;
+}
+.crsl--multi a.button:focus {
+  outline: none;
+  -moz-box-shadow: white 0 0 1px 1px, #5a5aa6 0 0 5px 2px, rgba(255, 255, 255, 0.3) 0 4px 9px 0px inset, rgba(50, 35, 60, 0.3) 0 -3px 9px 0px inset;
+  -webkit-box-shadow: white 0 0 1px 1px, #5a5aa6 0 0 5px 2px, rgba(255, 255, 255, 0.3) 0 4px 9px 0px inset, rgba(50, 35, 60, 0.3) 0 -3px 9px 0px inset;
+  box-shadow: white 0 0 1px 1px, #5a5aa6 0 0 5px 2px, rgba(255, 255, 255, 0.3) 0 4px 9px 0px inset, rgba(50, 35, 60, 0.3) 0 -3px 9px 0px inset;
+  border: none;
+}
+
+.crsl--pager {
+  display: none;
+}
+.crsl--pager.slick-initialized {
+  display: block;
+}
+.crsl--pager.slick-initialized .slide,
+.crsl--pager.slick-initialized .slide + .slide {
+  margin-top: 7px;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+
+.crsl .slick-prev:before,
+.crsl .slick-next:before {
+  color: #5a5aa6;
+}
+
+.crsl__wrap {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  padding: 4px;
+}
+
+.crsl--paged__wrap {
+  -moz-border-radius-bottomleft: 0;
+  -webkit-border-bottom-left-radius: 0;
+  border-bottom-left-radius: 0;
+  -moz-border-radius-bottomright: 0;
+  -webkit-border-bottom-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.crsl--paged__wrap .crsl {
+  margin-bottom: 0;
+}
+
+.crsl__wrap + .crsl--pager__wrap {
+  -moz-border-radius-topleft: 0;
+  -webkit-border-top-left-radius: 0;
+  border-top-left-radius: 0;
+  -moz-border-radius-topright: 0;
+  -webkit-border-top-right-radius: 0;
+  border-top-right-radius: 0;
+  border-top: none;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.crsl--cd-1.slick-slider {
+  margin-bottom: 65px;
+}
+
+.crsl--cd-2.slick-initialized .slide {
+  padding: 4px 0 12px;
+}
+
+.crsl--cd-3 .slot--text {
+  display: none;
+}
+
+.crsl--cd-4 .slide {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+.crsl--cd-4 .slot--button {
+  display: none;
+}
+
+/*# sourceMappingURL=extra_components_demo.css.map */

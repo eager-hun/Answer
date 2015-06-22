@@ -1477,10 +1477,11 @@ blockquote:before {
 
 .field_type--image a,
 .field_type--image img {
-  display: block;
+  display: inline-block;
   line-height: 1;
   margin: 0;
-  vertical-align: text-bottom;
+  vertical-align: bottom;
+  max-width: 100%;
 }
 .tpl--field + .field_type--image, .field_type--image + .tpl--field {
   margin-top: 2em;
@@ -2589,32 +2590,6 @@ a.menu-trigger.fixed {
     text-align: left;
   }
 }
-.component-demo + .component-demo {
-  margin-top: 3.5em;
-}
-.component-demo .l--flexbox {
-  margin-top: 2em;
-  margin-bottom: 3em;
-}
-.component-demo .entity--image_display.card {
-  text-align: center;
-}
-.component-demo .entity--image_display.card .field_type--image {
-  max-width: none;
-}
-.component-demo p.description,
-.component-demo .cd__description {
-  color: #777;
-  font-style: italic;
-}
-.component-demo .cd__description {
-  margin-bottom: 2em;
-}
-
-.cd__title {
-  margin-bottom: 0.15em;
-}
-
 /**
  * @file
  * Quickfixes.
