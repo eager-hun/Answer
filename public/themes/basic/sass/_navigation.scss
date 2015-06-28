@@ -8,52 +8,37 @@
 // Language switchers.
 
 .langswitch {
-  @include bare-list;
-
   ul {
     @include bare-list;
   }
   li {
     display: inline-block;
+    vertical-align: middle;
   }
   li + li {
     margin-left: $layout-pad*1.5;
   }
 }
 .locale {
+  display: block;
+  line-height: 1;
+
   .flag {
     @include icon(main);
 
-    border: 1px solid color(text-invert);
-    border: 1px solid rgba(color(text-invert),0.5);
-    display: inline-block;
+    border: 1px solid transparent;
+    display: block;
     height: 20px;
-    position: relative;
-    top: -0.05em;
-    vertical-align: middle;
+    line-height: 1;
     width: 30px;
-
-    // An almost transparent overlay over flags that help to adjust their
-    // percieved colors more harmonic to the theme's primary color.
-    &:before {
-      background-image: linear-gradient(
-        135deg,
-        transparent,
-        rgba(color(prim),0.1),
-        rgba(color(prim),0.3)
-      );
-      bottom: 0;
-      content: ' ';
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-
-    .langswitch--page & {
-      margin-right: $layout-pad / 2;
-    }
   }
+}
+// Picking the corresponding flags from the sprite.
+.locale--primary .flag {
+  background-position: center 0;
+}
+.locale--secondary .flag {
+  background-position: center -20px;
 }
 
 .langswitch {
@@ -79,6 +64,8 @@
       width: 18px;
     }
   }
+
+  // SVG icon variants for displaying over a dark background.
   .label.home-page:before {
     background-position: center -190px;
   }
@@ -89,7 +76,13 @@
     background-position: center -230px;
   }
 }
+
+// That's the langswitch that got placed into the mobile main menu
+// (in the modal).
 .langswitch--nav {
+  padding: $layout-pad*0.25 0 $layout-pad*0.75;
+
+  // SVG icon variants for displaying over a bright background.
   .label.home-page:before {
     background-position: center -250px;
   }
@@ -98,40 +91,6 @@
   }
   .label.no-translations:before {
     background-position: center -290px;
-  }
-}
-
-.locale--primary .flag {
-  background-position: center 0;
-}
-.locale--secondary .flag {
-  background-position: center -20px;
-}
-.langswitch--nav .flag {
-  border: 1px solid color(border-mid);
-  border: 1px solid rgba(color(border-mid),0.3);
-}
-
-// Flag states.
-a.locale:focus {
-  outline: none !important;
-}
-a.locale:hover .flag,
-a.locale:focus .flag {
-  @include box-shadow(color(link-invert) 0 0 4px 1px);
-
-  border-color: rgba(color(text-invert), 0.8);
-}
-// That's the langswitch that got placed into the mobile main menu
-// (in the modal).
-.langswitch--nav {
-  padding: $layout-pad*0.25 0 $layout-pad*0.75;
-
-  a.locale:hover .flag,
-  a.locale:focus .flag {
-    @include box-shadow(color(nav) 0 0 4px 1px);
-
-    border-color: color(text-invert);
   }
 }
 
@@ -156,40 +115,19 @@ $_light-color: color(blockfill);
 // rules must be shared among links and static items, and some rules must not,
 // it neccessitates some juggling with styles around these classes.
 .nav-format--regular {
-  // This is a bit risky setup, but with this very appearance, it might be
-  // pulled off.
-  @include border-radius;
-
-  background: $_menu-color;
-  overflow: hidden;
-
-  ul {
-    // Each level of nested menu is darker by this much.
-    background: rgba(black,0.15);
-  }
   .menu__button {
     @include disable-font-boost;
-    @include transition-property(background-color);
-    @include transition-duration($transitspeed-fast);
 
-    border: 1px solid $_menu-color;
-    border-top: 1px solid rgba(white,0.15);
-    border-bottom: 1px solid rgba(black,0.15);
     display: block;
-    padding: $layout-pad*0.3 $layout-pad*0.5;
     position: relative;
 
     & > span {
-      @include transition-property(background-color);
-      @include transition-duration($transitspeed-fast);
-      @include border-radius($default-border-radius*0.75);
       @include box-sizing(border-box);
 
-      // Later we will need it, and don't want it to jump when the border
+      // Later we will need the border, and we don't want it to jump when the it
       // appears. So we put it there now as transparent.
       border: 1px dotted transparent;
       display: inline-block;
-      padding: 0.25em 0.33em;
 
       // Indicator-arrow in inactive state. (Opacity: 0)
       // &:after {
@@ -210,11 +148,8 @@ $_light-color: color(blockfill);
   }
   .menu__static {
     display: block;
-    padding: $layout-pad*0.5 $layout-pad*0.5;
 
     & > span {
-      color: color(text-invert);
-      color: rgba(color(text-invert),0.7);
       font-size: 0.75em;
       font-style: italic;
       font-weight: 700;
@@ -225,107 +160,12 @@ $_light-color: color(blockfill);
       }
     }
   }
-  .active-trail > .menu__button > span {
-    background: rgba(white,0.15);
-  }
-  .menu__link {
-    // Order of link styling:
-    // :focus, :visited, :hover, :visited:hover, :active.
-
-    color: white;
-    text-decoration: none;
-    text-shadow: $default-text-shadow;
-
-    &:focus {
-      outline: none;
-
-      & > span {
-        border-color: rgba(white, 0.75);
-      }
-    }
-    &:hover {
-      @include box-shadow(none);
-
-      background-color: rgba(black,0.1);
-      color: white;
-      outline: none;
-
-      & > span {
-        background-color: rgba(black, 0.15);
-        border-color: transparent;
-      }
-    }
-    &:visited:hover {
-      color: white;
-    }
-    &.active > span {
-      background-color: rgba(black, 0.15);
-
-      // &:after {
-      //   opacity: 1;
-      // }
-    }
-    // &:hover > span:after {
-    //   opacity: 0.75;
-    // }
-  }
 }
-// Regular menu's color variants.
-.nav-format--regular.variant--light {
-  background: $_light-color;
 
-  ul {
-    // Overriding the nested menu levels' darkening, as it doesn't seem to
-    // look good here.
-    // NOTE: no substitute visual clue was invented in its place.
-    background: transparent;
-  }
-  .menu__static {
-    & > span {
-      color: color(minor);
-      color: rgba(color(text),0.7);
-    }
-  }
-  .menu__button {
-    border: 1px solid transparent;
-    border-top: 1px solid rgba(white,0.15);
-    border-bottom: 1px solid rgba(black,0.07);
-
-    &,
-    &:hover,
-    &:visited:hover {
-      color: color(link);
-    }
-  }
-  .menu__link {
-    text-shadow: 0 0 4px rgba(white, 0.7);
-  }
-  .active-trail > .menu__button > span {
-    background: rgba(white,0.75);
-  }
-  .menu__link {
-    // Order of link styling:
-    // :focus, :visited, :hover, :visited:hover, :active.
-
-    &:focus > span {
-      border-color: rgba(color(link), 0.75);
-    }
-    &:hover {
-      background-color: rgba(black,0.05);
-
-      & > span {
-        background-color: rgba(black, 0.05);
-        border-color: transparent;
-      }
-    }
-    &.active > span {
-      background-color: rgba(black, 0.07);
-    }
-  }
-}
-// Supplementary indications in menu items (not in use, currently).
+// Menu-level depth indications.
 .indications--on-right {
   .nav-format--regular {
+    // Supplementary indications in menu items (not in use, currently).
     // .menu__link > span:after {
     //   content: '\25B6'; // Right pointing arrow.
     //   right: 0.4em;
@@ -375,9 +215,6 @@ $_light-color: color(blockfill);
     float: left;
     margin: 0 $layout-pad*0.25 $layout-pad*0.5;
     white-space: nowrap;
-  }
-  .menu__link {
-    @include button($size: small, $color: plain-light);
   }
 }
 
@@ -498,6 +335,7 @@ a.menu-trigger { // Overqualifying because of link rules to be overridden.
   background: rgba(black,0.65);
 }
 [id="modal__content"] {
+  background: color(bg-light);
   max-width: $layout-page-max-width - 200;
   margin: $layout-pad*1.5 $layout-pad $layout-pad;
   position: relative;

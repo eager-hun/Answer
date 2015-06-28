@@ -134,6 +134,7 @@ pre {
   a {
     @include border-radius;
 
+    &:hover,
     &:focus {
       outline: none;
 
@@ -142,33 +143,6 @@ pre {
       }
     }
   }
-}
-.messages {
-  @include border-radius;
-}
-// < dl >-looking lists in Markdown-authored content.
-.defs > ul > li > p:first-of-type {
-  border-bottom: 1px dotted color(border-mid);
-  color: lighten(color(text), 10%);
-  margin: 1em 0 0.5em;
-  padding: 0.25em 0;
-}
-
-// -----------------------------------------------------------------------------
-// Modals.
-
-[id="overlay--common"],
-[id="modal--common"] {
-  @include transition-property(opacity);
-  @include transition-duration($transitspeed-mid);
-}
-[id="modal__content"] {
-  @include border-radius;
-
-  background: color(bg-light);
-}
-[id="modal__close"] {
-  @include box-shadow;
 }
 
 // -----------------------------------------------------------------------------
@@ -194,6 +168,232 @@ pre {
 
   background: color(bg-light);
   border: 1px solid color(border-light);
+}
+
+// -----------------------------------------------------------------------------
+// Misc components.
+
+.messages {
+  @include border-radius;
+}
+
+
+// #############################################################################
+// Navigation - skin.
+
+// -----------------------------------------------------------------------------
+// Langswitchers.
+
+.locale {
+  .flag {
+    border-color: color(text-invert);
+    border-color: rgba(color(text-invert),0.5);
+    position: relative;
+
+    // An almost transparent overlay over flags that help to adjust their
+    // percieved colors more harmonic to the theme's primary color.
+    &:before {
+      background-image: linear-gradient(
+        135deg,
+        transparent,
+        rgba(color(prim),0.1),
+        rgba(color(prim),0.3)
+      );
+      bottom: 0;
+      content: ' ';
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+}
+a.locale:focus {
+  outline: none !important;
+}
+a.locale:hover .flag,
+a.locale:focus .flag {
+  @include box-shadow(color(link-invert) 0 0 4px 1px);
+
+  border-color: rgba(color(text-invert), 0.8);
+}
+// That's the langswitch that got placed into the mobile main menu
+// (in the modal).
+.langswitch--nav {
+  .flag {
+    border-color: color(border-mid);
+    border-color: rgba(color(border-mid),0.3);
+  }
+  a.locale:hover .flag,
+  a.locale:focus .flag {
+    @include box-shadow(color(nav) 0 0 4px 1px);
+
+    border-color: color(text-invert);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Menus.
+
+.nav-format--regular {
+  @include border-radius;
+
+  background: $_menu-color;
+  // This is a bit risky setup, but with this very appearance, it might be
+  // pulled off.
+  overflow: hidden;
+
+  ul {
+    // Each level of nested menu is darker by this much.
+    background: rgba(black,0.15);
+  }
+  .menu__button {
+    @include transition-property(background-color);
+    @include transition-duration($transitspeed-fast);
+
+    border: 1px solid $_menu-color;
+    border-top: 1px solid rgba(white,0.15);
+    border-bottom: 1px solid rgba(black,0.15);
+    padding: 4px $layout-pad*0.5;
+
+    & > span {
+      @include transition-property(background-color);
+      @include transition-duration($transitspeed-fast);
+      @include border-radius($default-border-radius*0.75);
+
+      padding: 4px 0.33em;
+    }
+  }
+  .menu__static {
+    padding: $layout-pad*0.5 $layout-pad*0.5;
+
+    & > span {
+      color: color(text-invert);
+      color: rgba(color(text-invert),0.7);
+    }
+  }
+  .active-trail > .menu__button > span {
+    background: rgba(white,0.15);
+  }
+  .menu__link {
+    // Order of link styling:
+    // :focus, :visited, :hover, :visited:hover, :active.
+
+    color: white;
+    text-decoration: none;
+    text-shadow: $default-text-shadow;
+
+    &:focus {
+      outline: none;
+
+      & > span {
+        border-color: rgba(white, 0.75);
+      }
+    }
+    &:hover {
+      @include box-shadow(none);
+
+      background-color: rgba(black,0.1);
+      color: white;
+      outline: none;
+
+      & > span {
+        background-color: rgba(black, 0.15);
+        border-color: transparent;
+      }
+    }
+    &:visited:hover {
+      color: white;
+    }
+    &.active > span {
+      background-color: rgba(black, 0.15);
+
+      // &:after {
+      //   opacity: 1;
+      // }
+    }
+    // &:hover > span:after {
+    //   opacity: 0.75;
+    // }
+  }
+}
+
+// Regular menu's color variants.
+.nav-format--regular.variant--light {
+  background: $_light-color;
+
+  ul {
+    // Overriding the nested menu levels' darkening, as it doesn't seem to
+    // look good here.
+    // NOTE: no substitute visual clue was invented in its place.
+    background: transparent;
+  }
+  .menu__static {
+    & > span {
+      color: color(minor);
+      color: rgba(color(text),0.7);
+    }
+  }
+  .menu__button {
+    border: 1px solid transparent;
+    border-top: 1px solid rgba(white,0.15);
+    border-bottom: 1px solid rgba(black,0.07);
+
+    &,
+    &:hover,
+    &:visited:hover {
+      color: color(link);
+    }
+  }
+  .menu__link {
+    text-shadow: 0 0 4px rgba(white, 0.7);
+  }
+  .active-trail > .menu__button > span {
+    background: rgba(white,0.75);
+  }
+  .menu__link {
+    // Order of link styling:
+    // :focus, :visited, :hover, :visited:hover, :active.
+
+    &:focus > span {
+      border-color: rgba(color(link), 0.75);
+    }
+    &:hover {
+      background-color: rgba(black,0.05);
+
+      & > span {
+        background-color: rgba(black, 0.05);
+        border-color: transparent;
+      }
+    }
+    &.active > span {
+      background-color: rgba(black, 0.07);
+    }
+  }
+}
+
+// Menu variant: button-row.
+.nav-format--button-row {
+  .menu__link {
+    @include button($size: small, $color: plain-light);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Modals.
+
+[id="overlay--common"],
+[id="modal--common"] {
+  @include transition-property(opacity);
+  @include transition-duration($transitspeed-mid);
+}
+[id="modal__content"] {
+  @include border-radius;
+
+  background: color(bg-light);
+}
+[id="modal__close"] {
+  @include box-shadow;
 }
 
 // -----------------------------------------------------------------------------
@@ -240,6 +440,14 @@ a.menu-trigger { // Overqualifying because of link rules to be overridden.
 
 // #############################################################################
 // In-article styles.
+
+// < dl >-looking lists in Markdown-authored content.
+.defs > ul > li > p:first-of-type {
+  border-bottom: 1px dotted color(border-mid);
+  color: lighten(color(text), 10%);
+  margin: 1em 0 0.5em;
+  padding: 0.25em 0;
+}
 
 // The appearance (e.g. (bg-)colors) of textboxes could be amended here.
 
