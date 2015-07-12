@@ -20,9 +20,11 @@ $dynamic['http-301'] = [
     ]
   ],
   'data' => [
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id' => 'response_301',
+      'args' => [
+        'order_id' => 'response_301',
+      ],
     ],
   ],
 ];
@@ -44,9 +46,11 @@ $dynamic['http-403'] = [
       'locale_primary'   => 'Content not accessible',
       'locale_secondary' => 'Nem hozzáférhető tartalom',
     ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id' => 'response_403',
+      'args' => [
+        'order_id' => 'response_403',
+      ],
     ],
   ],
 ];
@@ -68,9 +72,11 @@ $dynamic['http-404'] = [
       'locale_primary'   => 'Content not found',
       'locale_secondary' => 'A tartalom nem található',
     ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id' => 'response_404',
+      'args' => [
+        'order_id' => 'response_404',
+      ],
     ],
   ],
 ];
@@ -92,9 +98,11 @@ $dynamic['http-410'] = [
       'locale_primary'   => 'Content is gone',
       'locale_secondary' => 'A tartalom megszűnt',
     ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id' => 'response_410',
+      'args' => [
+        'order_id' => 'response_410',
+      ],
     ],
   ],
 ];
@@ -120,9 +128,11 @@ $dynamic['admin-interface'] = [
       'locale_primary'   => 'Note: the following buttons will perform immediate action; no questions will be asked, no confirmation will be requested.',
       'locale_secondary' => 'Figyelem: az alábbi gombok működtetése azonnali akciót von maga után; az alkalmazás további kérdések, vagy megerősítés kérése nélkül végrehajtja a feladatokat.',
     ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id'   => '',
+      'args' => [
+        'order_id' => '',
+      ],
     ],
   ],
 ];
@@ -148,9 +158,11 @@ $dynamic['header_branding'] = [
       'locale_primary'   => FALSE,
       'locale_secondary' => FALSE,
     ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id'   => 'header_branding',
+      'args' => [
+        'order_id' => 'header_branding',
+      ],
     ],
   ],
 ];
@@ -172,9 +184,11 @@ $dynamic['header_widgets'] = [
       'locale_primary'   => FALSE,
       'locale_secondary' => FALSE,
     ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id'   => 'header_widgets',
+      'args' => [
+        'order_id' => 'header_widgets',
+      ],
     ],
   ],
 ];
@@ -196,9 +210,11 @@ $dynamic['sys_notifications'] = [
       'locale_primary'   => FALSE,
       'locale_secondary' => FALSE,
     ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id'   => 'sys_notifications',
+      'args' => [
+        'order_id' => 'sys_notifications',
+      ],
     ],
   ],
 ];
@@ -220,9 +236,11 @@ $dynamic['content_meta'] = [
       'locale_primary'   => FALSE,
       'locale_secondary' => FALSE,
     ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id'   => 'content_meta',
+      'args' => [
+        'order_id' => 'content_meta',
+      ],
     ],
   ],
 ];
@@ -244,9 +262,11 @@ $dynamic['site-lastmod'] = [
       'locale_primary'   => FALSE,
       'locale_secondary' => FALSE,
     ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id'   => 'site_lastmod',
+      'args' => [
+        'order_id' => 'site_lastmod',
+      ],
     ],
   ],
 ];
@@ -272,9 +292,11 @@ $dynamic['main-menu'] = [
       'locale_primary'   => 'Main menu',
       'locale_secondary' => 'Főmenü',
     ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id'   => 'main_menu',
+      'args' => [
+        'order_id' => 'main_menu',
+      ],
     ],
   ],
 ];
@@ -296,9 +318,11 @@ $dynamic['footer-menu'] = [
       'locale_primary'   => 'Footer menu',
       'locale_secondary' => 'Lábléc menü',
     ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id'   => 'footer_menu',
+      'args' => [
+        'order_id' => 'footer_menu',
+      ],
     ],
   ],
 ];
@@ -320,9 +344,11 @@ $dynamic['mission-control-menu'] = [
       'locale_primary'   => 'Mission control',
       'locale_secondary' => 'Mission control',
     ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id'   => 'mission_control_menu',
+      'args' => [
+        'order_id' => 'mission_control_menu',
+      ],
     ],
   ],
 ];
@@ -344,9 +370,11 @@ $dynamic['developers-menu'] = [
       'locale_primary'   => 'Developer\'s menu',
       'locale_secondary' => 'Fejleszői menü',
     ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id'   => 'developers-menu',
+      'args' => [
+        'order_id' => 'developers-menu',
+      ],
     ],
   ],
 ];
@@ -368,9 +396,11 @@ $dynamic['menu-developer-menu'] = [
       'locale_primary'   => 'Menu developer menu',
       'locale_secondary' => 'Menü-fejlesztéshez használatos menü',
     ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id'   => 'menu_developer_menu',
+      'args' => [
+        'order_id' => 'menu_developer_menu',
+      ],
     ],
   ],
 ];
@@ -380,7 +410,7 @@ $dynamic['menu-developer-menu'] = [
 // FLEXILISTS.
 
 // -----------------------------------------------------------------------------
-$dynamic['articles_top'] = [
+$dynamic['articles-top'] = [
   'meta' => [
     'is_published' => 1,
     'text_formats' => [
@@ -400,9 +430,15 @@ $dynamic['articles_top'] = [
     //   'locale_primary'   => '',
     //   'locale_secondary' => '',
     // ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id'   => 'articles_top',
+      'args' => [
+        'order_id' => 'articles_top',
+      ],
+      'opts' => [
+        'list_properties_preset' => 'default',
+        'presentation_preset'    => 'default',
+      ],
     ],
   ],
 ];
@@ -428,9 +464,15 @@ $dynamic['articles-all'] = [
     //   'locale_primary'   => 'I can haz description?',
     //   'locale_secondary' => '',
     // ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id'   => 'articles_all',
+      'args' => [
+        'order_id' => 'articles_all',
+      ],
+      'opts' => [
+        'list_properties_preset' => 'default',
+        'presentation_preset'    => 'default',
+      ],
     ],
   ],
 ];
@@ -456,9 +498,15 @@ $dynamic['images-all'] = [
     //   'locale_primary'   => '',
     //   'locale_secondary' => '',
     // ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id'   => 'images_all',
+      'args' => [
+        'order_id' => 'images_all',
+      ],
+      'opts' => [
+        'list_properties_preset' => 'default',
+        'presentation_preset'    => 'default',
+      ],
     ],
   ],
 ];
@@ -484,9 +532,11 @@ $dynamic['devel-project-1'] = [
       'locale_primary'   => 'Project 1.',
       'locale_secondary' => 'Projekt 1.',
     ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id'   => 'project_1',
+      'args' => [
+        'order_id' => 'project_1',
+      ],
     ],
   ],
 ];
@@ -508,9 +558,11 @@ $dynamic['devel-comp-demo'] = [
       'locale_primary'   => 'Components demo',
       'locale_secondary' => NULL,
     ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id'   => 'components_demo',
+      'args' => [
+        'order_id' => 'components_demo',
+      ],
     ],
   ],
 ];
@@ -535,9 +587,11 @@ $dynamic['smp-header'] = [
     'field_title' => [
       'locale_primary'   => NULL,
     ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id'   => 'smp_header',
+      'args' => [
+        'order_id' => 'smp_header',
+      ],
     ],
   ],
 ];
@@ -558,9 +612,11 @@ $dynamic['smp-main'] = [
     'field_title' => [
       'locale_primary'   => NULL,
     ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id'   => 'smp_main',
+      'args' => [
+        'order_id' => 'smp_main',
+      ],
     ],
   ],
 ];
@@ -581,9 +637,11 @@ $dynamic['smp-layout-plan'] = [
     'field_title' => [
       'locale_primary'   => NULL,
     ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id'   => 'smp_layout_plan',
+      'args' => [
+        'order_id' => 'smp_layout_plan',
+      ],
     ],
   ],
 ];
@@ -604,9 +662,11 @@ $dynamic['smp-footer'] = [
     'field_title' => [
       'locale_primary'   => NULL,
     ],
-    // The field_body is arguments for the specified data-handler.
+    // The field_body is instructions for the specified data-handler.
     'field_body' => [
-      'order_id'   => 'smp_footer',
+      'args' => [
+        'order_id' => 'smp_footer',
+      ],
     ],
   ],
 ];

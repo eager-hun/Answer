@@ -16,7 +16,7 @@ function pa_mosaic_homepage(&$args) {
       'main_content' => array(
         'content_meta' => array(),
         'home' => array(),
-        'articles_top' => array(),
+        'articles-top' => array(),
       ),
       'sidebar_1' => array(
         'main-menu' => array(),

@@ -363,7 +363,7 @@ $binders['mosaic_homepage'] = array(
     array(
       'data_type'   => 'entity',
       'entity_type' => 'dynamic',
-      'instance_id' => 'articles_top',
+      'instance_id' => 'articles-top',
       'present_as'  => 'block',
     ),
     array(

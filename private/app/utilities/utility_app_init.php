@@ -469,7 +469,7 @@ function apputils_disable_htmlpurifier() {
  * Quick usage; drop it inside the inspected func:
  *
  * @code
- *   apputils_explore_arguments($args, $output = 'keys');
+ *   apputils_explore_arguments($args, $output = 'full');
  * @endcode
  *
  * To see the results (at the bottom of the page), do
@@ -486,7 +486,7 @@ function apputils_disable_htmlpurifier() {
  *   $call_trace = debug_backtrace();
  *   $inspected_function = $call_trace[1]['function'];
  *   if ($inspected_function == 'foo') {
- *     apputils_explore_arguments($args, $output = 'keys');
+ *     apputils_explore_arguments($args, $output = 'full');
  *   }
  * @endcode
  */

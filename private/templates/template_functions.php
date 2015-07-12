@@ -149,7 +149,7 @@ function draw_langswitch_link($args) {
 function draw_image($args) {
   $prefix = '';
   $suffix = '';
-  if (array_key_exists('add_border_element', $args['wrapper_options'])) {
+  if (!empty($args['wrapper_options']['add_border_element'])) {
     $prefix = '<div class="img__border">';
     $suffix = '</div>';
   }
