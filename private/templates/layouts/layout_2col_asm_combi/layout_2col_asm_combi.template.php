@@ -13,15 +13,21 @@
     </div>
   <?php endif; ?>
 
-  <?php if (!empty($variables['slot_col_1'])): ?>
-    <div class="slot column col--1">
-      <?php print $variables['slot_col_1']; ?>
+  <?php if (!empty($variables['slot_right_top'])): ?>
+    <div class="slot slot--right_top col--right">
+      <?php print $variables['slot_right_top']; ?>
     </div>
   <?php endif; ?>
 
-  <?php if (!empty($variables['slot_col_2'])): ?>
-    <div class="slot column col--2">
-      <?php print $variables['slot_col_2']; ?>
+  <?php if (!empty($variables['slot_left'])): ?>
+    <div class="slot slot--left col--left">
+      <?php print $variables['slot_left']; ?>
+    </div>
+  <?php endif; ?>
+
+  <?php if (!empty($variables['slot_right_bottom'])): ?>
+    <div class="slot slot--right_bottom col--right">
+      <?php print $variables['slot_right_bottom']; ?>
     </div>
   <?php endif; ?>
 

@@ -309,8 +309,8 @@ function _sys_notifications($args) {
 function _page_jump_links($args) {
   // Single responsibility principle was not being respected in the wrapper.
   $output = '<div id="top" class="jump-links">' . "\n";
-  $output .= '<a class="jump-link" href="#navigation">' . loc('Jump to menu') . "</a>\n";
   $output .= '<a class="jump-link" href="#primary-content">' . loc('Jump to content') . '</a>';
+  $output .= '<a class="jump-link" href="#navigation">' . loc('Jump to menu') . "</a>\n";
   $output .= "</div>\n";
   return $output;
 }

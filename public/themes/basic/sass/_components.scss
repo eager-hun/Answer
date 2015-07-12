@@ -118,7 +118,20 @@ blockquote {
 
     max-width: 100%;
   }
+  .img__border {
+    @include n-clearfix;
+    
+    display: inline-block; // Because it can be placed inside an <a> tag.
+    max-width: 100%;
+    line-height: 1;
+    vertical-align: bottom;
 
+    img {
+      // That's against a Chrome glitch of positioning the inline-block image
+      // 1px too high. This solves that.
+      float: left;
+    }
+  }
   .tpl--field + &,
   & + .tpl--field {
     margin-top: $layout-pad*2;
@@ -127,40 +140,27 @@ blockquote {
 
 
 // #############################################################################
-// (Flexi)list-related arrangements.
-
-.l--list-plain {
-  & > .item + .item {
-    margin-top: $layout-pad*2;
-  }
-  .field_id--field_title {
-    @include h4-style;
-
-    margin-top: 1em;
-  }
-  .field_id--field_preview_text {
-    font-size: 0.9em;
-  }
-}
-
-@include breakpoint($bkp-narrow-mt-min) {
-  .l--list-plain {
-    .field_id--field_title {
-      margin-top: -0.25em;
-    }
-  }
-}
-
-
-// #############################################################################
 // Presentations.
 
 // -----------------------------------------------------------------------------
-// Entity type "dynamic", view mode full.
+// Article previews.
 
-.p10n--dynamic_full {
-  .field_id--field_description {
-    margin-bottom: $layout-pad*2;
+.p10n--article_preview {
+  .field_type--image {
+    text-align: center;
+
+    .img__border { // Overspecifying for winning over skin rules.
+      max-width: 11em;
+    }
+  }
+  @include breakpoint($bkp-narrow-mt-min) {
+    .field_type--image {
+      text-align: left;
+
+      .img__border { // Overspecifying for winning over skin rules.
+        max-width: 100%;
+      }
+    }
   }
 }
 
@@ -178,19 +178,36 @@ blockquote {
 }
 
 // -----------------------------------------------------------------------------
+// Entity type "dynamic", view mode full.
+
+.p10n--dynamic_full {
+  .field_id--field_description {
+    margin-bottom: $layout-pad*2;
+  }
+}
+
+// -----------------------------------------------------------------------------
 // "Feature highlight".
 
 .tpl--feature_highlight {
   @include display-flex;
   @include flex-direction(column);
-  @include align-items(stretch);
 
   text-align: center;
-  padding: $layout-pad*1.5 $layout-pad $layout-pad;
+  padding: $layout-pad*1.5 $layout-pad;
 
-  & > div {
+  // The bottom button can be sent to the bottom of the box by _not_ applying
+  // flex declaration on its wrapper, the .fh__actions. So the items above it
+  // will stretch in size (to fill the box as much as they can), while the
+  // .fl__actions will remain its original size, and it finds itself pushed to
+  // the very bottom.
+  // (I hope I won't hit a flexbox browser implementation difference or a bug
+  // with doing this.)
+  .fh__image,
+  .fh__text {
     @include flex(1 1 auto);
   }
+
   .slot--image {
     width: 100px;
     margin: 0 auto;
@@ -206,16 +223,40 @@ blockquote {
     margin: $layout-pad*0.5 0;
   }
   .slot--button {
-    @include display-flex;
-    @include align-items(flex-end);
-
-    .flex-pos {
-      @include flex(1 1 auto);
-    }
     a {
       @include button($color: nav);
 
       margin-top: $layout-pad;
+    }
+  }
+}
+
+
+// #############################################################################
+// (Flexi)list-related arrangements.
+
+.l--list-plain {
+  & > .item + .item {
+    margin-top: $layout-pad*2;
+  }
+  .field_id--field_title {
+    @include h4-style;
+    @include pseudo-heading-shared;
+
+    font-weight: 400;
+    margin-top: -0.15em;
+    margin-bottom: 0;
+
+  }
+  .field_id--field_preview_text {
+    font-size: 0.9em;
+  }
+}
+
+@include breakpoint($bkp-narrow-mt-min) {
+  .l--list-plain {
+    & > .item + .item {
+      margin-top: $layout-pad*2.2;
     }
   }
 }

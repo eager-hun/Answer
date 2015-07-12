@@ -10,7 +10,7 @@
 
 // This will be appended as a query argument in the links for .css and .js
 // assets.
-$config['theme']['version'] = '20150622-1';
+$config['theme']['version'] = '20150712-1';
 
 
 // #############################################################################
@@ -90,7 +90,10 @@ $config['ui']['js_body'][] = array(
 
 $config['theme']['head_additions'] = array(
   '<meta name="viewport" content="width=device-width, initial-scale=1">',
-  '<link href="http://fonts.googleapis.com/css?family=Roboto:400,300,700" rel="stylesheet" type="text/css">',
+  // https://validator.w3.org/mobile-alpha/ said that a placeholder favicon
+  // declaration can be done as follows:
+  '<link rel="icon" href="data:;base64,iVBORw0KGgo=">',
+  // '<link href="http://fonts.googleapis.com/css?family=Roboto:400,300,700" rel="stylesheet" type="text/css">',
   // This is for a new meta tag that Android browsers support. They adjust the
   // color of the native interface to the site's primary color provided here.
   // '<meta name="theme-color" content="#000000">',

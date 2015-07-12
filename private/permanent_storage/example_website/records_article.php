@@ -58,14 +58,10 @@ $article['article-1'] = [
   ],
 ];
 $article['article-1']['data']['field_preview_text']['locale_primary'] = <<<EOT
-Semi-long preview text for article 1.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque finibus porttitor ipsum non suscipit. Donec in ullamcorper quam. Morbi molestie dui nec auctor.
+_Semi-long preview text for article 1._ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque finibus porttitor ipsum non suscipit. Donec in ullamcorper quam. Morbi molestie dui nec auctor.
 EOT;
 $article['article-1']['data']['field_preview_text']['locale_secondary'] = <<<EOT
-Félhosszú előnézeti szöveg cikk 1 számára.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque finibus porttitor ipsum non suscipit. Donec in ullamcorper quam. Morbi molestie dui nec auctor.
+_Félhosszú előnézeti szöveg cikk 1 számára._ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque finibus porttitor ipsum non suscipit. Donec in ullamcorper quam. Morbi molestie dui nec auctor.
 EOT;
 
 // -----------------------------------------------------------------------------
@@ -103,14 +99,10 @@ $article['article-2'] = [
   ],
 ];
 $article['article-2']['data']['field_preview_text']['locale_primary'] = <<<EOT
-Semi-long preview text for article 2.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque finibus porttitor ipsum non suscipit. Donec in ullamcorper quam. Morbi molestie dui nec auctor.
+_Semi-long preview text for article 2._ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque finibus porttitor ipsum non suscipit. Donec in ullamcorper quam. Morbi molestie dui nec auctor.
 EOT;
 $article['article-2']['data']['field_preview_text']['locale_secondary'] = <<<EOT
-Félhosszú előnézeti szöveg cikk 2 számára.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque finibus porttitor ipsum non suscipit. Donec in ullamcorper quam. Morbi molestie dui nec auctor.
+_Félhosszú előnézeti szöveg cikk 2 számára._ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque finibus porttitor ipsum non suscipit. Donec in ullamcorper quam. Morbi molestie dui nec auctor.
 EOT;
 
 // -----------------------------------------------------------------------------

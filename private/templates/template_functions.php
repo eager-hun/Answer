@@ -147,7 +147,13 @@ function draw_langswitch_link($args) {
  * Draw image.
  */
 function draw_image($args) {
-  $output = '<img' . $args['variables']['attributes'] . ">\n";
+  $prefix = '';
+  $suffix = '';
+  if (array_key_exists('add_border_element', $args['wrapper_options'])) {
+    $prefix = '<div class="img__border">';
+    $suffix = '</div>';
+  }
+  $output = $prefix . '<img' . $args['variables']['attributes'] . '>' . $suffix . "\n";
   return $output;
 }
 

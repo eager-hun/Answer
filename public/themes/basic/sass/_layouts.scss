@@ -139,7 +139,7 @@
     }
   }
 }
-// CONTENT-IN-MID: Present on the page: both sidebars.
+// CONTENT-IN-MID: Present in the layout: both sidebars.
 .l--2sb.content-in-mid.has-2-sb {
   @include add-grid(6 18 at $bkp-wide-min);
   @include add-gutter(1.7 at $bkp-wide-min);
@@ -201,7 +201,7 @@
     }
   }
 }
-// CONTENT-LEFT: Present on the page: both sidebars.
+// CONTENT-LEFT: Present in the layout: both sidebars.
 .l--2sb.content-on-left.has-2-sb {
   @include add-grid(18 6 at $bkp-wide-min);
   @include add-gutter(1.7 at $bkp-wide-min);
@@ -263,7 +263,7 @@
     }
   }
 }
-// CONTENT-RIGHT: Present on the page: both sidebars.
+// CONTENT-RIGHT: Present in the layout: both sidebars.
 .l--2sb.content-on-right.has-2-sb {
   @include add-grid(6 18 at $bkp-wide-min);
   @include add-gutter(1.7 at $bkp-wide-min);
@@ -331,7 +331,7 @@
 
 .l--matrix--cols-3 {
   @include add-grid(2 at $bkp-narrow-ht-min);
-  @include add-gutter(0.1 at $bkp-narrow-ht-min);
+  @include add-gutter(0.085 at $bkp-narrow-ht-min);
   @include add-grid(3 at $bkp-wide-ht-min);
   @include add-gutter(0.1 at $bkp-wide-ht-min);
 
@@ -383,9 +383,9 @@
 
 .l--matrix--cols-4 {
   @include add-grid(2 at $bkp-narrow-mt-min);
-  @include add-gutter(0.15 at $bkp-narrow-mt-min);
+  @include add-gutter(0.085 at $bkp-narrow-mt-min);
   @include add-grid(3 at $bkp-wide-min);
-  @include add-gutter(0.15 at $bkp-wide-min);
+  @include add-gutter(0.125 at $bkp-wide-min);
   @include add-grid(4 at $bkp-wide-ht-min);
   @include add-gutter(0.15 at $bkp-wide-ht-min);
 
@@ -481,8 +481,12 @@
 
 $bkp-flexboxes-enable-default: $bkp-wide-ht-min;
 
+// Basic styles for every device.
 .l--flexbox {
   & > .item {
+    // We are mobile-first, and flexboxes typically apply at higher widths only,
+    // so we need some room between items on small screens, where they are
+    // below each other.
     margin-bottom: $layout-pad;
 
     &:last-child {
@@ -568,12 +572,7 @@ $bkp-flexboxes-enable-default: $bkp-wide-ht-min;
       }
     }
 
-    // If cols are declared, then items of a number that's a multiple of the
-    // col count, can be used, and they get wrapped to a new row after every nth
-    // (predefined) item.
-    // So e.g. a 3 col wrapped flexbox could have 3, 6, 9, 12, 15, etc. items.
-    // This restriction is coming from the way I implemented the gaps (margins)
-    // between the items.
+    // Flexbox that wraps after every 3rd item.
     .l--flexbox--cols-3 {
       @include flex-direction(row);
       @include flex-wrap(wrap);
@@ -586,18 +585,15 @@ $bkp-flexboxes-enable-default: $bkp-wide-ht-min;
 
         // https://bugzilla.mozilla.org/show_bug.cgi?id=958714
         // https://bugzilla.mozilla.org/show_bug.cgi?id=1110305
-        margin: 0 1.5% $layout-pad*1.25;
+        margin: $layout-pad*1.25 0 0 3%;
 
         &:nth-child(3n+1) {
           margin-left: 0;
         }
-        &:nth-child(3n+3) {
-          margin-right: 0;
-        }
-        &:last-child,
-        &:nth-last-child(2),
-        &:nth-last-child(3) {
-          margin-bottom: 0;
+        &:first-child,
+        &:nth-child(2),
+        &:nth-child(3) {
+          margin-top: 0;
         }
       }
     }
@@ -609,44 +605,45 @@ $bkp-flexboxes-enable-default: $bkp-wide-ht-min;
 // Predefined layout templates.
 
 .tpl--layout_2col_asm_combi {
-  @include n-clearfix;
+  @include add-grid(8 16 at $bkp-narrow-mt-min);
+  @include add-gutter(0.7 at $bkp-narrow-mt-min);
+  @include add-grid(5 19 at $bkp-wide-mt-min);
+  @include add-gutter(0.7 at $bkp-wide-mt-min);
 
   & > .slot {
-    // background: pink;
-    margin-bottom: $layout-pad;
+    margin-bottom: $layout-pad*0.75;
 
     &:last-child {
       margin-bottom: 0;
     }
   }
-}
-@include breakpoint($bkp-narrow-mt-min) {
-  .tpl--layout_2col_asm_combi {
-    .col--1 {
-      float: left;
-      width: 40%;
-    }
-    .col--1 + .col--2 {
-      padding-left: 45%;
-    }
-    & > .column {
+  .slot--bottom {
+    clear: both;
+  }
+
+  @include breakpoint($bkp-narrow-mt-min) {
+    &.has-no-slot-bottom .col--left {
       margin-bottom: 0;
     }
-    .slot--bottom {
-      clear: both;
+  }
+  @include breakpoint($bkp-narrow-mt-min $bkp-wide-lt-max) {
+    .col--left {
+      @include grid-span(1, 1);
     }
-    .slot + .slot--bottom {
-      margin-top: $layout-pad;
+    &.has_left_col {
+      .col--right {
+        @include grid-span(1, 2);
+      }
     }
   }
-}
-@include breakpoint($bkp-wide-ht-min) {
-  .tpl--layout_2col_asm_combi {
-    .col--1 {
-      width: 28%;
+  @include breakpoint($bkp-wide-mt-min) {
+    .col--left {
+      @include grid-span(1, 1);
     }
-    .col--1 + .col--2 {
-      padding-left: 33%;
+    &.has_left_col {
+      .col--right {
+        @include grid-span(1, 2);
+      }
     }
   }
 }

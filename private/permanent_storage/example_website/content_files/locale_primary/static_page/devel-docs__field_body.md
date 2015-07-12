@@ -48,7 +48,7 @@ See _Project 1._ in the developer's menu (available in the primary locale, in de
 
 ### Notes about the theme
 
-- Extend `smp_theme` (`/public/themes/smp_theme`) to your needs, or use a better
+- Expand `smp_theme` (`/public/themes/smp_theme`) to your needs, or use a better
   one instead of it.
 - Don't forget to start the themeing work with **copying the system's templates
   into the prototype theme**, and update the corresponding setting in

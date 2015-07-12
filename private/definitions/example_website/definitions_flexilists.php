@@ -124,26 +124,6 @@ $flexilists['images_all'] = array(
           'class' => array(
             'grid',
             'l--matrix',
-            'l--matrix--cols-3',
-          ),
-        ),
-      ),
-      'item_options' => array(
-        'attributes' => array(
-          'class' => array(
-            'item',
-          ),
-        ),
-      ),
-    ),
-    'matrix-cards' => array(
-      'list_HTML_markup' => 'div', // Unimplemented.
-      'present_items_as' => 'automatic_inventory',
-      'list_options' => array(
-        'attributes' => array(
-          'class' => array(
-            'grid',
-            'l--matrix',
             'l--matrix--cols-4',
           ),
         ),
@@ -152,18 +132,16 @@ $flexilists['images_all'] = array(
         'attributes' => array(
           'class' => array(
             'item',
-            'card',
           ),
         ),
       ),
     ),
-    'test' => array(
+    '3-cols' => array(
       'list_HTML_markup' => 'div', // Unimplemented.
-      'present_items_as' => 'automatic_inventory',
+      'present_items_as' => 'image_display_preview',
       'list_options' => array(
         'attributes' => array(
           'class' => array(
-            'testing-prez',
             'grid',
             'l--matrix',
             'l--matrix--cols-3',
@@ -173,7 +151,6 @@ $flexilists['images_all'] = array(
       'item_options' => array(
         'attributes' => array(
           'class' => array(
-            'testing-prez',
             'item',
           ),
         ),

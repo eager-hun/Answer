@@ -185,7 +185,7 @@ function _decd_typography() {
 </body>
 EOT;
 
-  $pre = '<pre><code>' . htmlspecialchars($example_code) . '</code></pre>';
+  $code = '<pre><code>' . htmlspecialchars($example_code) . '</code></pre>';
 
   $text = <<<EOT
 
@@ -248,6 +248,8 @@ Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus convallis 
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam pretium accumsan neque sit amet aliquam. Curabitur a purus euismod nibh laoreet commodo. Etiam tincidunt felis posuere, tincidunt nisl pretium, congue ligula. Fusce nunc est, aliquet eu ipsum vitae, finibus laoreet ex.
 
+<p id="id-test">HTML id test.</p>
+
  Integer nec tortor in erat semper tincidunt nec at nibh. Curabitur fermentum tellus nec dui sagittis semper. Nullam tristique aliquet odio. Integer sagittis purus turpis, in sodales lectus ullamcorper vitae.
 
 ${definitions_list}
@@ -294,7 +296,7 @@ Pellentesque ut augue nisi. Quisque sit amet lorem sem. Vivamus vestibulum sem l
 
 ### Code
 
-${pre}
+${code}
 
 EOT;
 
@@ -356,6 +358,25 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
 <!--/LINKS-->
 
+### Splitter
+
+<p class="description">
+  (It is deprecated, needs to be refactored into either flexbox or CSS columns.)
+</p>
+
+<!--SPLITTER-->
+<!--ITEM-->
+
+Nulla scelerisque euismod ex, vel eleifend libero hendrerit non. Morbi cursus, lacus at gravida dignissim, mauris magna tincidunt odio, at hendrerit nisl elit at leo. Proin euismod purus eget sapien cursus volutpat.
+
+<!--/ITEM-->
+<!--ITEM-->
+
+Proin elementum ex ante, sit amet blandit leo dictum et. Duis non ex iaculis, tincidunt mi et, egestas augue. Phasellus tempor interdum nisl, quis bibendum risus. Suspendisse vel sollicitudin sem.
+
+<!--/ITEM-->
+<!--/SPLITTER-->
+
 EOT;
 
   // Text filter.
@@ -368,7 +389,7 @@ EOT;
   $output = array(
     'name'        => 'in-text',
     'title'       => '<span class="anchor" id="anchor--in-text"></span>In-text components',
-    'description' => 'E.g. textboxes, splitters.<br>These already are, or can be made available as "short tags" (configured in `config.php`)',
+    'description' => 'E.g. textboxes, splitters.<br>Many of these already are, or can be made available as "short tags" (configured in `config.php`).',
     'demo'        => $demo,
   );
   return _decd_template($output);
@@ -397,15 +418,15 @@ function _decd_grids() {
     'order_id' => 'images_all',
   );
   $list_2_opts = array(
-    'list_properties_preset' => 'matrix-cards',
-    'presentation_preset'    => 'matrix-cards',
+    'list_properties_preset' => 'default',
+    'presentation_preset'    => '3-cols',
   );
   $list_2 = dh_flexilist($list_2_args, $list_2_opts);
 
   // Fabricating "Feature highlight"s.
   $feature_highlight_template = $registry['app_current']['templates']
     . '/layouts/layout_feature_highlight/layout_feature_highlight.template.php';
-  $image_style = '1_1-270w';
+  $image_style = '1_1-280w';
   $image_path_base = $registry['app_externals']['document_files']
                    . '/images/' . $image_style . '/';
 
@@ -424,7 +445,7 @@ function _decd_grids() {
       ),
     );
     $link_attributes = array(
-      'href' => $item['button_url'],
+      'href' => $item['button_action'],
     );
     $link_template = array(
       'template_name' => 'link',
@@ -452,24 +473,28 @@ function _decd_grids() {
   }
   unset($item);
 
-  $fh_list_all_items = implode("\n", $fh_list__rendered_items);
+  // $fh_list_all_items = implode("\n", $fh_list__rendered_items);
   $fh_list_2_items   = implode("\n", array_slice($fh_list__rendered_items, 0, 2));
+  $fh_list_5_items   = implode("\n", array_slice($fh_list__rendered_items, 0, 5));
 
   $list_3 = '<div class="l--flexbox l--flexbox--auto-row">';
   $list_3 .= $fh_list_2_items;
   $list_3 .= '</div>';
 
   $list_4 = '<div class="l--flexbox l--flexbox--cols-3">';
-  $list_4 .= $fh_list_all_items;
+  $list_4 .= $fh_list_5_items;
   $list_4 .= '</div>';
 
-  $demo = '<h3>Matrix, float, 3 col</h3>' . $list_1
-        . '<h3>Matrix, float, 4 col, card style</h3>' . $list_2
+  $demo = '<h3>Matrix, float, 4 columns</h3>' . $list_1
+        . '<h3>Matrix, float, 3 columns</h3>' . $list_2
         . '<h3>Flexbox single row "auto stuffer", with <code>display: table;</code> fallback</h3>'
-        . '<p class="description">Listed items are "Feature highlight" components.</p>'
+        . '<p class="description">The listed items in this demo are "Feature highlight" components.</p>'
         . $list_3
         . '<h3>Flexbox 3-col multi row, with floated grid fallback</h3>'
-        . '<p class="description">Listed items are "Feature highlight" components.</p>'
+        . '<ul class="description">'
+        . '<li>If the number of items and the number of columns are not divisible without remainder, then the items in the last row will distribute automatically to use all room.</li>'
+        . '<li>The listed items in this demo are "Feature highlight" components.</li>'
+        . '</ul>'
         . $list_4;
 
   $output = array(
@@ -504,7 +529,8 @@ function _decd_carousels() {
          . $car_1_image_path_base . ensafe_string($slide['image'], 'file_name') . '">';
     $car_2_img = '<img src="'
          . $car_2_image_path_base . ensafe_string($slide['image'], 'file_name') . '">';
-    $button = '<a class="button" href="' . ensafe_string($slide['button_url']) . '">'
+    $button = '<a class="button" href="'
+            . ensafe_string($slide['button_action'], 'href') . '">'
             . ensafe_string($slide['button_text']) . '</a>';
     $index = ensafe_string($index, 'attribute_value');
     $car_1_rendered_item = <<<EOT

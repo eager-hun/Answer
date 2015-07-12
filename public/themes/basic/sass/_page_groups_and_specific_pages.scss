@@ -21,6 +21,10 @@
   }
   .l--list-plain {
     padding-top: $layout-pad*0.75;
+
+    // & > .item + .item {
+    //   margin-top: $layout-pad*1.25;
+    // }
   }
 }
 

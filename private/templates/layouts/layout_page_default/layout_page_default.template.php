@@ -30,7 +30,7 @@
     <?php endif; ?>
 
     <div id="footer-push"></div>
-  </div><!-- /#main-screen (Useful for sticky footer.) -->
+  </div><?php /* /#main-screen (Useful for sticky footer.) */ ?>
 
   <?php if (!empty($variables['slot_footer_level'])): ?>
     <div class="page-level page-level--footer">

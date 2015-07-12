@@ -21,7 +21,7 @@ function _dhde_create_dummy_list() {
       'short_text'  => 'Aliquam convallis odio ligula, a faucibus velit sodales et.',
       'long_text'   => $standard_long_text,
       'button_text' => 'Duis nec purus',
-      'button_url'  => '#',
+      'button_action' => '#',
     ),
     array(
       'image'       => 'sample-image.png',
@@ -29,7 +29,7 @@ function _dhde_create_dummy_list() {
       'short_text'  => 'Aliquam convallis odio ligula, a faucibus velit sodales et. Pellentesque urna risus, viverra in aliquam sed.',
       'long_text'   => $standard_long_text,
       'button_text' => 'Duis nec purus',
-      'button_url'  => '#',
+      'button_action' => '#',
     ),
     array(
       'image'       => 'sample-image.png',
@@ -37,7 +37,7 @@ function _dhde_create_dummy_list() {
       'short_text'  => '<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p><p>Aliquam convallis odio ligula, a faucibus velit sodales et.</p>',
       'long_text'   => $standard_long_text,
       'button_text' => 'Duis nec purus',
-      'button_url'  => '#',
+      'button_action' => '#',
     ),
     array(
       'image'       => 'sample-image.png',
@@ -45,7 +45,7 @@ function _dhde_create_dummy_list() {
       'short_text'  => 'Aliquam convallis odio ligula, a faucibus velit sodales et. Pellentesque urna risus, viverra in aliquam sed.',
       'long_text'   => $standard_long_text,
       'button_text' => 'Duis nec purus',
-      'button_url'  => '#',
+      'button_action' => '#',
     ),
     array(
       'image'       => 'sample-image.png',
@@ -53,7 +53,7 @@ function _dhde_create_dummy_list() {
       'short_text'  => 'Fusce tristique elit vel mi varius vulputate. Phasellus auctor ullamcorper ultrices sed.',
       'long_text'   => $standard_long_text,
       'button_text' => 'Duis nec purus',
-      'button_url'  => '#',
+      'button_action' => '#',
     ),
     array(
       'image'       => 'sample-image.png',
@@ -61,7 +61,7 @@ function _dhde_create_dummy_list() {
       'short_text'  => 'Aliquam convallis odio ligula, a faucibus velit sodales et. Pellentesque urna risus, viverra in aliquam sed.',
       'long_text'   => $standard_long_text,
       'button_text' => 'Duis nec purus',
-      'button_url'  => '#',
+      'button_action' => '#',
     ),
   );
 

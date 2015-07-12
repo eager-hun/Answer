@@ -69,11 +69,13 @@ function pa_article_preview(&$args) {
   // Slot assingments.
   $args['variable_dispatcher_options'] = array(
     'assignments' => array(
-      'slot_col_1' => array(
+      'slot_left' => array(
         'field_preview_image' => array(),
       ),
-      'slot_col_2' => array(
+      'slot_right_top' => array(
         'field_title' => array(),
+      ),
+      'slot_right_bottom' => array(
         'field_preview_text' => array(),
       ),
     ),

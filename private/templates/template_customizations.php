@@ -36,3 +36,10 @@ function template_customize_block(&$args) {
   $args['variables']['title_attributes'] =
     templateutils_render_html_attributes($args['title_attributes']);
 }
+
+/**
+ * Customize images.
+ */
+function template_customize_image(&$args) {
+  $args['wrapper_options']['add_border_element'] = TRUE;
+}

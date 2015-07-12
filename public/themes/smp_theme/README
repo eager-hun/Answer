@@ -1,7 +1,8 @@
 SMP stands for "Single Mock Page".
 
-The example_website site instance has a so-called single_mock_page definition,
-that is a placeholder/kickstarter structure for quick prototyping activities.
+The example_website site instance has a so-called single_mock_page page
+definition, that is a placeholder/kickstarter structure for quick prototyping
+activities.
 
-This is a theme accompanying this prototyping initiative. It really is a
-placeholder, just to demonstrate how the prototyping toolkit comes together.
+This is a theme accompanying that prototyping initiative. It really is just a
+placeholder, to demonstrate how the prototyping toolkit comes together.

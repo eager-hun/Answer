@@ -63,22 +63,20 @@
  *
  * NOTES on basic syntax:
  * @code
+ *   @mixin test-mixin--box($bg: gold, $padding: 1em) {
+ *     background: $bg;
+ *     padding: $padding;
  *
- * @mixin test-mixin--box($bg: gold, $padding: 1em) {
- *   background: $bg;
- *   padding: $padding;
- *
- *   @if $bg == (gold) and $padding == (1em) {
- *     border: 1px solid red;
+ *     @if $bg == (gold) and $padding == (1em) {
+ *       border: 1px solid red;
+ *     }
+ *     @else if $bg == (gold) and $padding != (1em) {
+ *       border: 5px solid red;
+ *     }
+ *     @else {
+ *       border: 3px solid black;
+ *     }
  *   }
- *   @else if $bg == (gold) and $padding != (1em) {
- *     border: 5px solid red;
- *   }
- *   @else {
- *     border: 3px solid black;
- *   }
- * }
- *
  * @endcode
  */
 /**

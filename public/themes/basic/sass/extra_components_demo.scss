@@ -16,14 +16,7 @@
     margin-top: $layout-pad*2;
     margin-bottom: $layout-pad*3;
   }
-  .entity--image_display.card {
-    text-align: center;
-
-    .field_type--image {
-      max-width: none;
-    }
-  }
-  p.description,
+  .description,
   .cd__description {
     @include description-style;
   }
@@ -155,8 +148,8 @@
       @include background-image(
         linear-gradient(
           to bottom right,
-          rgba(#ddd, 0.2),
-          #ddd
+          #ddd,
+          rgba(#ddd, 0.1)
         )
       );
       content: '';

@@ -5,10 +5,8 @@
  * Usage:
  *
  * @code
- *
- * // .some-class items will be highlighted with the passed color.
- * visualDebug('.some-class', 'green');
- *
+ *   // .some-class items will be highlighted with the passed color.
+ *   visualDebug('.some-class', 'green');
  * @endcode
  */
 (function ($, window, document, undefined) {

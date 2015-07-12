@@ -1,20 +1,9 @@
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sollicitudin orci ac quam pellentesque vehicula. In tincidunt hendrerit tellus. Sed in suscipit nulla. Nulla dignissim nisi vitae magna ultrices tristique. Cras vel dictum dui, vitae rhoncus dui. Phasellus erat purus, rutrum ut leo a, porta sodales risus. Duis suscipit, odio ut dignissim ullamcorper, risus dui rhoncus justo, id accumsan felis lacus ut mauris. Integer posuere sapien quis est porta, ut placerat dolor placerat. Morbi feugiat maximus vehicula. Aliquam maximus mi in ante vehicula ultrices. Quisque sed nisl congue ex molestie hendrerit.
 
-<!--SPLITTER-->
-<!--ITEM-->
-
 Nulla scelerisque euismod ex, vel eleifend libero hendrerit non. Morbi cursus, lacus at gravida dignissim, mauris magna tincidunt odio, at hendrerit nisl elit at leo. Phasellus tempor interdum nisl, quis bibendum risus. Nulla ullamcorper congue tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam massa urna, lobortis eget sollicitudin eu, elementum ut erat.
-
-<!--/ITEM-->
-<!--ITEM-->
 
 Proin elementum ex ante, sit amet blandit leo dictum et. Duis non ex iaculis, tincidunt mi et, egestas augue. Proin euismod purus eget sapien cursus volutpat. Suspendisse vel sollicitudin sem. Nullam aliquet, nunc eget molestie commodo, massa sapien fermentum urna, sed efficitur dui velit sit amet augue. Praesent eget pulvinar velit, nec malesuada erat. Duis tincidunt finibus est, ut porta nunc varius at.
 
-<!--/ITEM-->
-<!--/SPLITTER-->
-
 Nulla augue sapien, accumsan ut tincidunt sit amet, ullamcorper ut lorem. Etiam massa nisi, efficitur nec venenatis sed, ultricies malesuada metus. In non quam sollicitudin, varius ante a, egestas leo. Integer ac sodales odio. Mauris quis lorem ac libero consequat pharetra ut in ligula.
-
-<p id="id-test">HTML id test.</p>
 
 Phasellus scelerisque consequat auctor. Donec eu pellentesque erat, eget ultricies erat. In hac habitasse platea dictumst. Proin quis lectus tempor, tristique sem elementum, fringilla risus. Integer posuere mauris vel porttitor porta. Fusce et porta urna. Nam a lobortis est. Maecenas laoreet vehicula finibus. Fusce blandit ante in nisl laoreet, a molestie risus tempus. Suspendisse eu fermentum nibh, pellentesque tempor risus. Ut vitae nulla feugiat, laoreet sem et, tincidunt justo.

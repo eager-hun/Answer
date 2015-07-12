@@ -130,7 +130,7 @@ $structure['entity_definitions']['article'] = array(
     'field_preview_image' => array(
       'role' => 'meta',
       'type' => 'field_image',
-      'style' => '4_3-400w',
+      'style' => '1_1-400w',
       'translatable' => FALSE,
       'label' => loc('fl--preview-image'),
     ),
@@ -233,7 +233,7 @@ $structure['entity_definitions']['image_display'] = array(
     'field_preview_image' => array(
       'role' => 'meta',
       'type' => 'field_image',
-      'style' => '4_3-400w',
+      'style' => '1_1-400w',
       'translatable' => FALSE,
       'label' => loc('fl--preview-image'),
     ),

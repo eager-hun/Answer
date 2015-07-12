@@ -469,17 +469,13 @@ function apputils_disable_htmlpurifier() {
  * Quick usage; drop it inside the inspected func:
  *
  * @code
- *
- * apputils_explore_arguments($args, $output = 'keys');
- *
+ *   apputils_explore_arguments($args, $output = 'keys');
  * @endcode
  *
  * To see the results (at the bottom of the page), do
  *
  * @code
- *
- * print '<pre>'; var_dump($temp['arguments_explorer']); print '</pre>';
- *
+ *   print '<pre>'; var_dump($temp['arguments_explorer']); print '</pre>';
  * @endcode
  *
  * near the end of director.php.
@@ -487,13 +483,11 @@ function apputils_disable_htmlpurifier() {
  * Alternative: selective usage; drop it like this inside the inspected func:
  *
  * @code
- *
- * $call_trace = debug_backtrace();
- * $inspected_function = $call_trace[1]['function'];
- * if ($inspected_function == 'foo') {
- *   apputils_explore_arguments($args, $output = 'keys');
- * }
- *
+ *   $call_trace = debug_backtrace();
+ *   $inspected_function = $call_trace[1]['function'];
+ *   if ($inspected_function == 'foo') {
+ *     apputils_explore_arguments($args, $output = 'keys');
+ *   }
  * @endcode
  */
 function apputils_explore_arguments($args_to_inspect, $output = 'keys') {
