@@ -54,7 +54,7 @@ want just anybody to be able to access the admin tasks).
 
 <!--/HIGH-->
 
-<!--DEFS-->
+<!--TICKETS-->
 
 - Creating a new entity
 
@@ -93,7 +93,7 @@ want just anybody to be able to access the admin tasks).
        deploy,
   - deploy changes onto live server.
 
-<!--/DEFS-->
+<!--/TICKETS-->
 
 **NOTE:** Any time a page is created, or an existing page's `page_id` or `paths`
 values are changed, it is neccessary to **rebuild the path&nbsp;cache** (the task
@@ -147,7 +147,7 @@ is accessible via the _admin interface_).
 
 ## <span class="anchor" id="anchor--deploying-changes"></span>Deploying local changes onto public server using FTP
 
-<!--DEFS-->
+<!--TICKETS-->
 
 - To update content and settings:
 
@@ -176,7 +176,7 @@ is accessible via the _admin interface_).
       - `templates` &larr; Watch out for if the theme's or the system's template dir is being used.
       - `theme_settings.php` &larr; **NOTE:** don't forget to **bump the theme&nbsp;version** in it!
 
-<!--/DEFS-->
+<!--/TICKETS-->
 
 ### Note: "what to do if I uploaded the local config.php"?
 
