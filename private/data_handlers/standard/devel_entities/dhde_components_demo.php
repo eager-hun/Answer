@@ -358,6 +358,77 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
 <!--/LINKS-->
 
+### Defs
+
+<p class="description">
+  They are actually <code>&lt;ul&gt;</code>s, but they are disguied to emulate <code>&lt;dl&gt;</code>s - for texts parsed with 'classic' Markdown (which has no support for <code>&lt;dl&gt;</code>).
+</p>
+
+<!--DEFS-->
+
+- Pseudo definition term
+
+  - Description for this thing. Sed fringilla nunc ultricies risus porttitor, a mattis tellus pulvinar.
+      - In eu venenatis risus, egestas tincidunt erat.
+      - Fusce sed metus felis. Ut quis ultricies massa.
+      - Suspendisse potenti. Ut ut eleifend eros, a porttitor eros. Aliquam erat volutpat. Nulla luctus purus non sodales tristique.
+
+- Another "definition term", has some `code` in it
+
+  - Pseudo definition description.
+      - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla risus turpis, dapibus sed purus sit amet, malesuada porta odio.
+          - Nam dictum nisi quam, `function()` eget finibus dui pellentesque vel. Morbi porttitor velit diam, sit amet ultrices mi luctus non.
+              - Quisque a convallis arcu, sit amet porttitor turpis. Phasellus nec metus a orci mollis dignissim id ac purus.
+
+- Pseudo def term numero tre
+
+  - Stuff here. Duis eu lorem a massa condimentum molestie vel sed diam. Aliquam eleifend fringilla nulla, eget sagittis enim luctus non.
+
+      I try to trigger a paragraph here. Fusce suscipit sodales arcu non auctor. Curabitur nisi tellus, faucibus quis vestibulum ut, pharetra quis ipsum.
+
+      - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed ligula in lorem ultricies porta et sed nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+          I try to trigger a paragraph here. Eget imperdiet quam egestas luctus. Nam libero nulla, fringilla sollicitudin metus pellentesque, fermentum mollis massa.
+
+<!--/DEFS-->
+
+### Tickets
+
+<p class="description">
+  <code>&lt;ul&gt;</code> List items with specific formatting.
+</p>
+
+<!--TICKETS-->
+
+- List item with ticket-like appearance
+
+  - Description for this ticket. Sed fringilla nunc ultricies risus porttitor, a mattis tellus pulvinar.
+      - In eu venenatis risus, egestas tincidunt erat.
+      - Fusce sed metus felis. Ut quis ultricies massa.
+      - Suspendisse potenti. Ut ut eleifend eros, a porttitor eros. Aliquam erat volutpat. Nulla luctus purus non sodales tristique.
+
+- Another ticketlike ticket: has some `code` in its title
+
+  - Ticket content expansion.
+      - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla risus turpis, dapibus sed purus sit amet, malesuada porta odio.
+          - Nam dictum nisi quam, `function()` eget finibus dui pellentesque vel. Morbi porttitor velit diam, sit amet ultrices mi luctus non.
+              - Quisque a convallis arcu, sit amet porttitor turpis. Phasellus nec metus a orci mollis dignissim id ac purus.
+
+- This has got a longer top-level list item. Curabitur nisi tellus, faucibus quis vestibulum ut, pharetra quis ipsum. Morbi accumsan sapien ut lacus facilisis interdum.
+
+  - Stuff here. Duis eu lorem a massa condimentum molestie vel sed diam. Aliquam eleifend fringilla nulla, eget sagittis enim luctus non.
+
+      I try to trigger a paragraph here. Fusce suscipit sodales arcu non auctor. Curabitur nisi tellus, faucibus quis vestibulum ut, pharetra quis ipsum.
+      - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sed ligula in lorem ultricies porta et sed nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+          I try to trigger a paragraph here. Eget imperdiet quam egestas luctus. Nam libero nulla, fringilla sollicitudin metus pellentesque, fermentum mollis massa.
+
+- Only-title-having ticket
+
+- Another only-title-having ticket
+
+<!--/TICKETS-->
+
 ### Splitter
 
 <p class="description">

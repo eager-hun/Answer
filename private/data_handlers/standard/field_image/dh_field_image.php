@@ -32,6 +32,9 @@ function dh_field_image($args) {
 
 /**
  * Field content prerender.
+ *
+ * templateutils_prerender_fields() will look for and will call this function
+ * when it deals with image fields.
  */
 function field_content_prerender_image($field_data) {
   $img_template = array(

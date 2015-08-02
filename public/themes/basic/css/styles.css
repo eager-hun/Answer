@@ -247,7 +247,7 @@ h6,
 }
 
 ul {
-  padding-left: 1em;
+  padding-left: 1.1em;
 }
 
 ol {
@@ -1420,7 +1420,7 @@ blockquote:before {
 }
 
 .textbox--note {
-  padding-left: 4em;
+  padding-left: 3.25em;
 }
 .textbox--note:before {
   background-color: #4d4d4d;
@@ -1429,7 +1429,7 @@ blockquote:before {
 }
 
 .textbox--links {
-  padding-left: 4em;
+  padding-left: 3.25em;
 }
 .textbox--links:before {
   background-color: #4d4d4d;
@@ -1438,7 +1438,7 @@ blockquote:before {
 }
 
 blockquote {
-  padding-left: 4em;
+  padding-left: 3.25em;
 }
 blockquote:before {
   background-color: #4d4d4d;
@@ -1446,27 +1446,48 @@ blockquote:before {
   content: ' ';
 }
 
-.defs > ul {
+.list-style--defs > ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
-.defs > ul > li > p, .defs > ul > li > div {
-  margin-left: 1em;
-}
-.defs > ul > li > p:first-of-type {
+.list-style--defs > ul > li > p:first-of-type {
   font-style: italic;
   font-weight: 700;
+  margin: 0;
+  padding: 0;
 }
-.defs > ul ul {
+.list-style--defs > ul > li > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-left: 1em;
+}
+.list-style--defs > ul > li + li {
+  margin-top: 0.3em;
+}
+.list-style--defs ul ul ul {
   list-style-type: disc;
-  padding-left: 2em;
 }
-.defs > ul ul ul {
+.list-style--defs ul ul ul ul {
   list-style-type: circle;
-  padding-left: 1.5em;
 }
-.defs > ul ul ul ul {
+.list-style--defs ul ul ul ul ul {
+  list-style-type: square;
+}
+
+.list-style--tickets > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.list-style--tickets ul ul {
+  list-style-type: disc;
+}
+.list-style--tickets ul ul ul {
+  list-style-type: circle;
+}
+.list-style--tickets ul ul ul ul {
   list-style-type: square;
 }
 
@@ -2158,11 +2179,11 @@ a {
   -o-transition-duration: 0.1s, 0.1s, 0.1s, 0.1s;
   -webkit-transition-duration: 0.1s, 0.1s, 0.1s, 0.1s;
   transition-duration: 0.1s, 0.1s, 0.1s, 0.1s;
-  color: #4e4ecb;
+  color: #5959c0;
   text-decoration: none;
 }
 a:focus {
-  outline: 1px dotted #4e4ecb;
+  outline: 1px dotted #5959c0;
 }
 a:visited {
   color: #a73fa7;
@@ -2218,6 +2239,30 @@ pre {
   border-radius: 3px;
   background: white;
   border: 1px solid #ccc;
+}
+
+.list-style--tickets > ul > li {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border-left: 3px solid #ccc;
+  padding: 0 0 0 1em;
+}
+.list-style--tickets > ul > li > p:first-of-type {
+  font-weight: 700;
+  margin-bottom: 0.75em;
+}
+.list-style--tickets > ul > li > p:last-of-type {
+  margin-bottom: 0;
+}
+.list-style--tickets > ul > li > ul {
+  margin-top: 0.5em;
+}
+.list-style--tickets > ul > li + li {
+  margin-top: 1.75em;
+}
+.list-style--tickets p {
+  margin: 0.5em 0;
 }
 
 .images--bordered a:hover, .images--bordered a:focus {
@@ -2398,7 +2443,7 @@ a.locale:focus .flag {
   border-bottom: 1px solid #ccc;
 }
 .nav-format--regular.variant--light .menu__button, .nav-format--regular.variant--light .menu__button:hover, .nav-format--regular.variant--light .menu__button:visited:hover {
-  color: #4e4ecb;
+  color: #5959c0;
 }
 .nav-format--regular.variant--light .menu__link {
   text-shadow: 0 0 4px rgba(255, 255, 255, 0.7);
@@ -2407,7 +2452,7 @@ a.locale:focus .flag {
   background: rgba(255, 255, 255, 0.75);
 }
 .nav-format--regular.variant--light .menu__link:focus > span {
-  border-color: rgba(78, 78, 203, 0.75);
+  border-color: rgba(89, 89, 192, 0.75);
 }
 .nav-format--regular.variant--light .menu__link:hover {
   background-color: rgba(0, 0, 0, 0.05);
@@ -2524,13 +2569,6 @@ a.menu-trigger.fixed {
   background: #5a5aa6;
   border-color: white;
   color: white;
-}
-
-.defs > ul > li > p:first-of-type {
-  border-bottom: 1px dotted #888;
-  color: #4d4d4d;
-  margin: 1em 0 0.5em;
-  padding: 0.25em 0;
 }
 
 .jump-links {

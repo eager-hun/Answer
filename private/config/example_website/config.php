@@ -331,6 +331,8 @@ $config['content']['short_tags'] = array(
     13 => '#<!--SPLITTER-->#',
     14 => '#<!--/SPLITTER-->#',
     15 => '#<!--(CONTENT) ID=([0-9]+)-->#',
+    16 => '#<!--TICKETS-->#',
+    17 => '#<!--/TICKETS-->#',
   ),
   'replacements' => array(
     1  => '<div class="textbox textbox--hero">',
@@ -341,13 +343,15 @@ $config['content']['short_tags'] = array(
     6  => '</div>',
     7  => '<div class="textbox textbox--links">',
     8  => '</div>',
-    9  => '<div class="defs">',
+    9  => '<div class="list-style--defs">',
     10 => '</div>',
     11 => '<div class="item">',
     12 => '</div>',
     13 => '<div class="splitter__fit"><div class="splitter__wrap"><div class="splitter">',
     14 => '</div></div></div>',
     15 => 'dynamic replacement from function',
+    16 => '<div class="list-style--tickets">',
+    17 => '</div>',
   ),
 );
 

@@ -65,35 +65,58 @@ blockquote {
 //    that has a '.defs' class.
 //    4a. Yes, default Markdown implementations don't do much inside divs
 //        either.
-//    4b. That's why I use custom ==DEFS== and ==/DEFS== strings in the text
-//        that I preg_replace into the div.defs after parsing with Markdown.
+//    4b. That's why I use 'short tags' to insert them (see config.php).
 
-.defs {
+.list-style--defs {
   // Making it look more definitions-list-y.
   & > ul {
     @include bare-list;
 
     & > li {
-      & > p,
-      & > div {
-        margin-left: 1em;
-      }
       & > p:first-of-type {
         font-style: italic;
         font-weight: 700;
+        margin: 0;
+        padding: 0;
+      }
+      & > ul {
+        @include bare-list;
+
+        margin-left: 1em;
+
       }
     }
+    & > li + li {
+      // Same as whitespace added above dd + dt.
+      margin-top: 0.3em;
+    }
+  }
+  ul ul ul {
+    list-style-type: disc;
+
     ul {
-      list-style-type: disc;
-      padding-left: $layout-pad*2;
+      list-style-type: circle;
 
       ul {
-        list-style-type: circle;
-        padding-left: $layout-pad*1.5;
+        list-style-type: square;
+      }
+    }
+  }
+}
 
-        ul {
-          list-style-type: square;
-        }
+// Ticket-like list items of <ul>s.
+.list-style--tickets {
+  & > ul {
+    @include bare-list;
+  }
+  ul ul {
+    list-style-type: disc;
+
+    ul {
+      list-style-type: circle;
+
+      ul {
+        list-style-type: square;
       }
     }
   }
