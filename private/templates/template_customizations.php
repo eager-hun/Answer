@@ -16,10 +16,16 @@ function template_customize_entity_instance_field_list(&$args) {
  * Customize fields.
  */
 function template_customize_field(&$args) {
-  // var_dump($args);
-  if (!empty($args['for_field_handler']['field_id'])
-      && $args['for_field_handler']['field_id'] == 'title') {
-    $args['variables']['wrapper_attributes']['class'][] = 'yay-title-field!!!';
+  // Some manually invoked field render calls don't provide 'field_meta'.
+  // TODO: all field render calls could be refactored to go through
+  // templateutils_prerender_fields(), so that we always had a normalized set of
+  // args.
+  if (array_key_exists('field_meta', $args)) {
+    // Adding image borders: the enabler class on the wrapper around the
+    // to-be-bordered images.
+    if ($args['field_meta']['field_type'] == 'image') {
+      $args['variables']['wrapper_attributes']['class'][] = 'images--bordered';
+    }
   }
 }
 
@@ -41,5 +47,6 @@ function template_customize_block(&$args) {
  * Customize images.
  */
 function template_customize_image(&$args) {
+  // Adding image borders: providing an extra span.img__border around the img.
   $args['wrapper_options']['add_border_element'] = TRUE;
 }

@@ -168,7 +168,7 @@ function ensafe_string($string, $usage = 'display') {
     case 'http_status':
       $processed = preg_replace('#[^-_a-z0-9/]#', '', $string);
       break;
-    case 'inline_css':
+    case 'css':
       // WARNING!
       // Bear in mind that CSS seems to be among the most unsafe things ever.
       // See:

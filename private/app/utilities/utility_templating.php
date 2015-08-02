@@ -403,7 +403,11 @@ function templateutils_prerender_fields($args) {
       // Leave this, jump to next field.
       continue;
     }
-    // Resetting these on every iteration.
+    // Info for the template.
+    $template_args['field_meta'] = array(
+      'field_id'   => $field_id,
+      'field_type' => $field_data['field_type'],
+    );
     $template_args['wrapper_options'] = array(
       'attributes' => array(
         'class' => array(
@@ -520,6 +524,9 @@ function templateutils_render_html_attributes($attribs_array) {
       }
       elseif ($attrib_name == 'src') {
         $output .= '="' . ensafe_string($attrib_val, 'href') . '"';
+      }
+      elseif ($attrib_name == 'style') {
+        $output .= '="' . ensafe_string($attrib_val, 'css') . '"';
       }
       else {
         $output .= '="' . ensafe_string($attrib_val, 'attribute_value') . '"';

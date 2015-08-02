@@ -150,8 +150,8 @@ function draw_image($args) {
   $prefix = '';
   $suffix = '';
   if (!empty($args['wrapper_options']['add_border_element'])) {
-    $prefix = '<div class="img__border">';
-    $suffix = '</div>';
+    $prefix = '<span class="img__border">';
+    $suffix = '</span>';
   }
   $output = $prefix . '<img' . $args['variables']['attributes'] . '>' . $suffix . "\n";
   return $output;

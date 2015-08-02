@@ -1477,30 +1477,6 @@ blockquote:before {
   margin-bottom: 0;
 }
 
-.field_type--image a,
-.field_type--image img {
-  display: inline-block;
-  line-height: 1;
-  margin: 0;
-  vertical-align: bottom;
-  max-width: 100%;
-}
-.field_type--image .img__border {
-  display: inline-block;
-  max-width: 100%;
-  line-height: 1;
-  vertical-align: bottom;
-}
-.field_type--image .img__border:before, .field_type--image .img__border:after {
-  content: ' ';
-  display: table;
-}
-.field_type--image .img__border:after {
-  clear: both;
-}
-.field_type--image .img__border img {
-  float: left;
-}
 .tpl--field + .field_type--image, .field_type--image + .tpl--field {
   margin-top: 2em;
 }
@@ -1631,6 +1607,31 @@ blockquote:before {
     margin-top: 2.2em;
   }
 }
+.images--bordered a,
+.images--bordered img {
+  display: inline-block;
+  line-height: 1;
+  margin: 0;
+  vertical-align: bottom;
+  max-width: 100%;
+}
+.images--bordered .img__border {
+  display: inline-block;
+  max-width: 100%;
+  line-height: 1;
+  vertical-align: bottom;
+}
+.images--bordered .img__border:before, .images--bordered .img__border:after {
+  content: ' ';
+  display: table;
+}
+.images--bordered .img__border:after {
+  clear: both;
+}
+.images--bordered .img__border img {
+  float: left;
+}
+
 /**
  * @file
  * Rules for web form items.
@@ -2211,10 +2212,18 @@ pre {
   color: white;
 }
 
-.field_type--image a:hover, .field_type--image a:focus {
+.tpl--feature_highlight {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background: white;
+  border: 1px solid #ccc;
+}
+
+.images--bordered a:hover, .images--bordered a:focus {
   outline: none;
 }
-.field_type--image .img__border {
+.images--bordered .img__border {
   -moz-transition-property: color, background-color, border-color, background-image;
   -o-transition-property: color, background-color, border-color, background-image;
   -webkit-transition-property: color, background-color, border-color, background-image;
@@ -2230,8 +2239,8 @@ pre {
   border: 1px solid #ccc;
   padding: 4px;
 }
-.field_type--image a:focus .img__border,
-.field_type--image a:hover .img__border {
+.images--bordered a:focus .img__border,
+.images--bordered a:hover .img__border {
   -moz-transition-property: color, background-color, border-color, background-image;
   -o-transition-property: color, background-color, border-color, background-image;
   -webkit-transition-property: color, background-color, border-color, background-image;
@@ -2246,14 +2255,6 @@ pre {
   background-color: #5a5aa6;
   border: 1px solid #ccc;
   padding: 4px;
-}
-
-.tpl--feature_highlight {
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  background: white;
-  border: 1px solid #ccc;
 }
 
 .messages {

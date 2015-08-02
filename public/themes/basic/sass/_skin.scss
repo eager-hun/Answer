@@ -127,7 +127,20 @@ pre {
 // -----------------------------------------------------------------------------
 // Fields.
 
-.field_type--image {
+// -----------------------------------------------------------------------------
+// Boxes, cards.
+
+.tpl--feature_highlight  {
+  @include border-radius;
+
+  background: color(bg-light);
+  border: 1px solid color(border-light);
+}
+
+// -----------------------------------------------------------------------------
+// Misc components.
+
+.images--bordered {
   a {
     &:hover,
     &:focus {
@@ -145,19 +158,6 @@ pre {
     }
   }
 }
-
-// -----------------------------------------------------------------------------
-// Boxes, cards.
-
-.tpl--feature_highlight  {
-  @include border-radius;
-
-  background: color(bg-light);
-  border: 1px solid color(border-light);
-}
-
-// -----------------------------------------------------------------------------
-// Misc components.
 
 .messages {
   @include border-radius;

@@ -112,26 +112,6 @@ blockquote {
 }
 
 .field_type--image {
-  a,
-  img {
-    @include image-fit;
-
-    max-width: 100%;
-  }
-  .img__border {
-    @include n-clearfix;
-    
-    display: inline-block; // Because it can be placed inside an <a> tag.
-    max-width: 100%;
-    line-height: 1;
-    vertical-align: bottom;
-
-    img {
-      // That's against a Chrome glitch of positioning the inline-block image
-      // 1px too high. This solves that.
-      float: left;
-    }
-  }
   .tpl--field + &,
   & + .tpl--field {
     margin-top: $layout-pad*2;
@@ -257,6 +237,34 @@ blockquote {
   .l--list-plain {
     & > .item + .item {
       margin-top: $layout-pad*2.2;
+    }
+  }
+}
+
+
+// #############################################################################
+// Misc.
+
+// Images can be bordered inside image fields and inside non-image fields too.
+.images--bordered {
+  a,
+  img {
+    @include image-fit;
+
+    max-width: 100%;
+  }
+  .img__border {
+    @include n-clearfix;
+
+    display: inline-block; // Because it can be placed inside an <a> tag.
+    max-width: 100%;
+    line-height: 1;
+    vertical-align: bottom;
+
+    img {
+      // That's against a Chrome glitch of positioning the inline-block image
+      // 1px too high. This solves that.
+      float: left;
     }
   }
 }
