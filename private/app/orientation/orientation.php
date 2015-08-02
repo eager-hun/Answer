@@ -61,7 +61,7 @@ else {
       $working_dir_items = explode('/', $config['env']['working_dir']);
       $pivotal_key = count($working_dir_items);
       $special_task =
-        array_search($request['uri_path_items'][$pivotal_key] ,$config['app']['reserved_paths']);
+        array_search($request['uri_path_items'][$pivotal_key], $config['app']['reserved_paths']);
     }
     else {
       $special_task =

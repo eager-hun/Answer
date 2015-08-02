@@ -44,3 +44,6 @@ modernizr.custom.*.js
 # /public/document_files/*
 # !/public/document_files/.htaccess
 # !/public/document_files/README
+
+# Testing-related
+/subdir-test

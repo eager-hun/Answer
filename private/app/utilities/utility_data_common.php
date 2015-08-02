@@ -341,6 +341,14 @@ function should_content_show($args) {
 function datautils_filter($params) {
   global $temp;
 
+  // Allowing to use [[base_path]] token in text fields that we replace to
+  // the installation's actual base path. Useful for in-site links placed in
+  // text-type fields.
+  // This could one day be extracted into something configurable, like the
+  // 'short tags' concept.
+  $base_path = base_path();
+  $params['data'] = preg_replace('#\[\[base_path\]\]#', $base_path, $params['data']);
+
   if ($params['text_format'] == 'md') {
     apputils_wake_resource('class', 'php-markdown');
 

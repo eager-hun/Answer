@@ -34,9 +34,9 @@ The bare data mode operates by and is expecting HTTP GET parameters:
 
 **NOTE:** The following links will work only on a site that is running on a server (not on GitHub), and is serving the `example_website` site instance, and the `bare_data` mode is enabled for the given environment (see in the config.php's _Config presets_ section).
 
-- [a binder](/bare-data?data_type=binder&amp;instance_id=footer_default)
-- [an article with all of its defined data](/bare-data?data_type=entity&amp;entity_type=article&amp;instance_id=article-1)
-- [same article's preview presentation mode](/bare-data?data_type=entity&amp;entity_type=article&amp;instance_id=article-1&amp;present_as=article_preview)
+- [a binder]([[base_path]]bare-data?data_type=binder&amp;instance_id=footer_default)
+- [an article with all of its defined data]([[base_path]]bare-data?data_type=entity&amp;entity_type=article&amp;instance_id=article-1)
+- [same article's preview presentation mode]([[base_path]]bare-data?data_type=entity&amp;entity_type=article&amp;instance_id=article-1&amp;present_as=article_preview)
 
 
 ## <span class="anchor" id="anchor--adding-new-content"></span>Adding new content
