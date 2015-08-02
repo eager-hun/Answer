@@ -10,109 +10,106 @@
 // #############################################################################
 // Config Presets (for various instances that may run in various environments).
 
-// -----------------------------------------------------------------------------
+/**
+ * IMPORTANT NOTES FOR CONFIG PRESETS:
+ *
+ * 1. HTTP protocol.
+ *
+ *    This substring will be used in generating URLs (iirc).
+ *    (This is one of the parts where I don't know what I'm doing).
+ *
+ *    Possible values: 'http' || 'https'.
+ *
+ * 2. Domain names.
+ *
+ *    You can get multiple domain names (alternative HTTP_HOSTs) by setting
+ *    up multiple virtual hosts to point to the directory of this installation.
+ *
+ *    Possible values: should match the HTTP_HOST value shown by phpinfo().
+ *
+ * 3. Working dir.
+ *
+ *    Provide it, if your site is not operating from the document root (if the
+ *    index.php is in a subdirectory).
+ *    NOTE: don't use slashes at the beginning or at the end.
+ *
+ *    If your index.php is in the document root however, provide FALSE as value,
+ *    or an empty string.
+ *
+ * 4. Bare data.
+ *
+ *    The bare-data mode currently returns content without authenticating
+ *    requests. This - at least theoretically - opens up the possibility for
+ *    other websites to "borrow" your content.
+ *
+ *    Possible values: 0 || 1 .
+ *
+ * 5. Dev mode.
+ *
+ *    The dev_mode may do things that are risky to do on a public server!
+ *    NEVER enable dev_mode on public instances!
+ *
+ *    Possible values: 0 || 1 || 'verbose' .
+ *
+ * 6. Admin mode.
+ *
+ *    WARNING: __DO NOT__ set admin_mode to TRUE if this installation is located
+ *             on any other server than your isolated home developer machine.
+ *
+ *             Why? Because this application does not have any ways of checking
+ *             authorization on the web-requests it receives. Anyone who sees
+ *             this website can trigger any action on it. Even if it is an admin
+ *             action.
+ *
+ *             Therefore admin functionality should be disabled on installations
+ *             that are publicly accessible.
+ *
+ *    a) At the current level of development (less than basic) the gist is that
+ *       ALL changes to content and content-related caches should be done on an
+ *       isolated development instance, and, if things are needed on a public
+ *       server, then the updated files could be deployed to live, either
+ *       through git or rsync or FTP or by a CD sent over a parcel delivery
+ *       service.
+ *
+ *    b) FURTHER NOTE: if the isolated developer instance is indeed set up and
+ *       also the chosen deploy path proves to be a viable way of updating
+ *       content, then - as a security precaution - the admin data-handler
+ *       'dh_admin' could be entirely deleted from the public instance; thus
+ *       ensuring the impossibility of unwanted access to admin functions.
+ *
+ *    Possible values: 0 || 1 .
+ *
+ * 7. Disabling security.
+ *
+ *    The give_up_security switch allows unsafe setting combinations to be used.
+ *    (This may be desired only while completing some development tasks.)
+ *
+ *    NEVER enable give_up_security on public instances!
+ *
+ *    Possible values: 0 || 1 .
+ */
+
+
 // Local dev-site presets.
-// (Also introduction to the pre-set items).
-
-/**
- * HTTP protocol.
- *
- * This substring will be used in generating URLs (iirc).
- * (This is one of the parts where I don't know what I'm doing).
- *
- * Possible values: 'http' || 'https'.
- */
-$config['presets']['dev']['http_protocol'] = 'http';
-
-/**
- * Domain names.
- *
- * You can get multiple domain names (alternative HTTP_HOSTs) by setting
- * up multiple virtual hosts to point to the directory of this installation.
- *
- * Possible values: should match the HTTP_HOST value shown by phpinfo().
- */
-$config['presets']['dev']['domain'] = [
-  'primary'   => 'your-dev-envs-HTTP_HOST-here',
-  'secondary' => 'your-dev-envs-alternative-HTTP_HOST-here',
+$config['presets']['dev'] = [
+  /* NOTES 1. */
+  'http_protocol'    => 'http',
+  /* NOTES 2. */
+  'domain' => [
+    'primary'   => 'your-dev-envs-HTTP_HOST-here',
+    'secondary' => 'your-dev-envs-alternative-HTTP_HOST-here',
+  ],
+  /* NOTES 3. */
+  'working_dir'      => '',
+  /* NOTES 4. */
+  'serve_bare_data'  => 1,
+  /* NOTES 5. */
+  'dev_mode'         => 1,
+  /* NOTES 6. */
+  'admin_mode'       => 1,
+  /* NOTES 7. */
+  'give_up_security' => 0,
 ];
-
-/**
- * Working dir.
- *
- * Provide it, if your site is not operating from the document root (if the
- * index.php is in a subdirectory).
- * NOTE: don't use slashes at the beginning or at the end.
- *
- * If your index.php is in the document root however, provide FALSE as value,
- * or an empty string.
- */
-$config['presets']['dev']['working_dir'] = '';
-
-/**
- * Bare data.
- *
- * The bare-data mode currently returns content without authenticating requests.
- * This - at least theoretically - opens up the possibility for other websites
- * to "borrow" your content.
- *
- * Possible values: 0 || 1 .
- */
-$config['presets']['dev']['serve_bare_data'] = 1;
-
-/**
- * Dev mode.
- *
- * The dev_mode may do things that are risky to do on a public server!
- * NEVER enable dev_mode on public instances!
- *
- * Possible values: 0 || 1 || 'verbose' .
- */
-$config['presets']['dev']['dev_mode'] = 1;
-
-/**
- * Admin mode.
- *
- * WARNING: __DO NOT__ set admin_mode to TRUE if this installation is located on
- *          any other server than your isolated home developer machine.
- *
- *          Why? Because this application does not have any ways of checking
- *          authorization on the web-requests it receives. Anyone who sees this
- *          website can trigger any action on it. Even if it is an admin action.
- *          Therefore admin functionality should be disabled on installations
- *          that are publicly accessible.
- *
- * 1. At the current level of development (less than basic) the gist is that
- *    ALL changes to content and content-related caches should be done on an
- *    isolated development instance, and, if things are needed on a public
- *    server, then the updated files could be deployed to live, either through
- *    git or rsync or FTP or by a CD sent over a parcel delivery service.
- *
- * 2. FURTHER NOTE: if the isolated developer instance is indeed set up and also
- *    the chosen deploy path proves to be a viable way of updating content, then
- *    - as a security precaution - the admin data-handler 'dh_admin' could be
- *    entirely deleted from the public instance; thus ensuring the
- *    impossibility of unwanted access to admin functions.
- *
- * Possible values: 0 || 1 .
- */
-$config['presets']['dev']['admin_mode'] = 1;
-
-/**
- * Disabling security.
- *
- * The give_up_security switch allows unsafe setting combinations to be used.
- * (This may be desired only while completing some development tasks.)
- *
- * NEVER enable give_up_security on public instances!
- *
- * Possible values: 0 || 1 .
- */
-$config['presets']['dev']['give_up_security'] = 0;
-
-
-// -----------------------------------------------------------------------------
-// Presets for public environments.
 
 // Stage site presets.
 $config['presets']['stage'] = [
@@ -166,7 +163,7 @@ $config['document']['locale']['secondary']['php_locale'] = 'hu-HU.utf8';
  *
  * Format: YYYY-MM-DD .
  */
-$config['document']['global_lastmod'] = '2015-07-12';
+$config['document']['global_lastmod'] = '2015-08-02';
 
 
 // #############################################################################
@@ -204,7 +201,7 @@ $config['app']['dependencies']['htmlpurifier'] =
 $config['app']['dependencies']['php-markdown'] =
   $registry['app_internals']['libraries_backend']
   . '/michelf/php-markdown/Michelf/Markdown.inc.php';
-*/
+// */
 
 // $config['app']['suppress_warnings'][] = 'dependency_htmlpurifier';
 // $config['app']['suppress_warnings'][] = 'dependency_php-markdown';
