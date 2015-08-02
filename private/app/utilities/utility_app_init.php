@@ -20,17 +20,26 @@
 function base_path($options = array()) {
   global $config, $request;
 
-  // For current installation, whichever it is.
+  // No environment specified: return base path for the current installation.
   if (empty($options['environment'])) {
+    $working_dir = ensafe_string($config['env']['working_dir'], 'path_fragment');
     if (empty($options['for_locale'])) {
       $domain = $request['domain'];
     }
     else {
-      $domain = ensafe_string($config['env']['domain']['locale'][$options['for_locale']], 'domain');
+      $domain = ensafe_string(
+        $config['env']['domain']['locale'][$options['for_locale']],
+        'domain'
+      );
     }
   }
-  // Return domain names for a specified environment.
+  // Environment was specified: return a base path that works on that
+  // installation.
   else {
+    $working_dir = ensafe_string(
+      $config['presets'][$options['environment']]['working_dir'],
+      'path_fragment'
+    );
     if (empty($options['for_locale'])) {
       $domain = ensafe_string(
         $config['presets'][$options['environment']]['domain'][LOCALE_KEY],
@@ -44,15 +53,13 @@ function base_path($options = array()) {
       );
     }
   }
-  if (empty($config['env']['working_dir'])) {
+  if (empty($working_dir)) {
     $output = ensafe_string($config['env']['http_protocol'], 'attribute_value')
       . '://' . $domain . '/';
   }
   else {
     $output = ensafe_string($config['env']['http_protocol'], 'attribute_value')
-      . '://' . $domain . '/'
-      . ensafe_string($config['env']['working_dir'], 'path_fragment')
-      . '/';
+      . '://' . $domain . '/' . $working_dir . '/';
   }
   return $output;
 }
