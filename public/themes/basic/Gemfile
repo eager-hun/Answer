@@ -1,5 +1,5 @@
 # Gemfile
-# See http://guides.rubygems.org/patterns/#pessimistic_version_constraint
+# About installation, see ./vendor/README.md
 
 source "https://rubygems.org"
 

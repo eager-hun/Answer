@@ -2158,21 +2158,21 @@ a {
   -o-transition-duration: 0.1s, 0.1s, 0.1s, 0.1s;
   -webkit-transition-duration: 0.1s, 0.1s, 0.1s, 0.1s;
   transition-duration: 0.1s, 0.1s, 0.1s, 0.1s;
-  color: #4646b9;
+  color: #4e4ecb;
   text-decoration: none;
 }
 a:focus {
-  outline: 1px dotted #4646b9;
+  outline: 1px dotted #4e4ecb;
 }
 a:visited {
-  color: purple;
+  color: #a73fa7;
 }
 a:hover {
-  color: #313182;
+  color: #3a3ac6;
   text-decoration: underline;
 }
 a:visited:hover {
-  color: purple;
+  color: #a73fa7;
 }
 
 .label {
@@ -2398,7 +2398,7 @@ a.locale:focus .flag {
   border-bottom: 1px solid #ccc;
 }
 .nav-format--regular.variant--light .menu__button, .nav-format--regular.variant--light .menu__button:hover, .nav-format--regular.variant--light .menu__button:visited:hover {
-  color: #4646b9;
+  color: #4e4ecb;
 }
 .nav-format--regular.variant--light .menu__link {
   text-shadow: 0 0 4px rgba(255, 255, 255, 0.7);
@@ -2407,7 +2407,7 @@ a.locale:focus .flag {
   background: rgba(255, 255, 255, 0.75);
 }
 .nav-format--regular.variant--light .menu__link:focus > span {
-  border-color: rgba(70, 70, 185, 0.75);
+  border-color: rgba(78, 78, 203, 0.75);
 }
 .nav-format--regular.variant--light .menu__link:hover {
   background-color: rgba(0, 0, 0, 0.05);

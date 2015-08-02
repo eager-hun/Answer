@@ -136,9 +136,9 @@ $colors: (
   bg:                     $temp-color-blockfill,
   bg-dark:                 #333,
   blockfill:              $temp-color-blockfill,
-  link:                   saturate($temp-color-prim, 15%),
-  link-visited:           purple, // TODO.
-  link-hover:             darken(saturate($temp-color-prim, 15%), 15%),
+  link:                   lighten(saturate($temp-color-prim, 25%), 5%),
+  link-visited:           desaturate(lighten(purple, 20%), 55%),
+  link-hover:             saturate($temp-color-prim, 25%),
   link-invert:            white,
   link-invert-visited:    white,
   border-mid:             $temp-color-border-base,
