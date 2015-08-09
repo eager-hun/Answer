@@ -111,6 +111,9 @@ pre {
 .messages .code {
   background: rgba(color(text-invert), 0.5);
 }
+h2 + .description {
+  margin: -1em 0 2em;
+}
 ::selection {
   background: color(prim);
   color: color(text-invert);
@@ -145,32 +148,60 @@ pre {
   & > ul {
     & > li {
       @include border-radius;
+      @include background-image(
+        linear-gradient(
+          to right,
+          color(blockfill),
+          transparent 2em
+        )
+      );
 
       border-left: 3px solid color(border-light);
-      padding: 0 0 0 $layout-pad;
+      padding: $layout-pad 0 $layout-pad $layout-pad;
+      position: relative;
 
       & > p:first-of-type {
         font-weight: 700;
+        margin-top: 0;
         margin-bottom: 0.75em;
       }
       & > p:last-of-type {
         margin-bottom: 0;
       }
-      // & > p:only-child {
-      //   font-weight: 400;
-      // }
       & > ul {
         margin-top: 0.5em;
       }
-    }
-    & > li + li {
-      margin-top: $layout-pad*1.75;
+
+      &::before,
+      &::after {
+        @include background-image(
+          linear-gradient(
+            to right,
+            color(border-light),
+            transparent 2em
+          )
+        );
+
+        content: '';
+        display: block;
+        height: 1px;
+        position: absolute;
+        width: 100%;
+        left: 0;
+      }
+      &::before {
+        top: 0;
+      }
+      &::after {
+        bottom: 0;
+      }
     }
   }
-  p {
-    margin: 0.5em 0;
+  h2 + & {
+    padding-top: $layout-pad;
   }
 }
+
 
 // The appearance (e.g. (bg-)colors) of textboxes could be amended here.
 

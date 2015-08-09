@@ -61,33 +61,20 @@ function devel_entities_components_demo($args) {
  * Return a template for each component/group.
  */
 function _decd_template($variables) {
-
-  // Preparing for rendering inputs that were received as markdown.
-  $title       = NULL;
-  $description = NULL;
+  $name = ensafe_string($variables['name'], 'attribute_value');
+  $output = '<div class="component-demo cd--' . $name . '">';
   if (!empty($variables['title'])) {
-    $parse_title = array(
-      'text_format' => 'md',
-      'data' => $variables['title'],
-    );
-    $title = datautils_filter($parse_title);
+    $output .= '<h2>'
+             . datautils_process_markdown($variables['title']) . '</h2>';
   }
   if (!empty($variables['description'])) {
-    $parse_description = array(
-      'text_format' => 'md',
-      'data' => $variables['description'],
-    );
-    $description = datautils_filter($parse_description);
+    $output .= '<div class="description">'
+             . datautils_process_markdown($variables['description']) . '</div>';
   }
-  $name        = ensafe_string($variables['name'], 'attribute_value');
-  $demo        = $variables['demo'];
-
-  $output = '<div class="component-demo cd--' . $name . '">';
-  $output .= '<h2 class="cd__title">' . $title . '</h2>';
-  $output .= '<div class="description cd__description">' . $description . '</div>';
-  $output .= '<div class="cd__demo">' . $demo . '</div>';
+  if (!empty($variables['demo'])) {
+    $output .= '<div class="cd__demo">' . $variables['demo'] . '</div>';
+  }
   $output .= '</div>';
-
   return $output;
 }
 
@@ -360,9 +347,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
 ### Defs
 
-<p class="description">
-  They are actually <code>&lt;ul&gt;</code>s, but they are disguied to emulate <code>&lt;dl&gt;</code>s - for texts parsed with 'classic' Markdown (which has no support for <code>&lt;dl&gt;</code>).
-</p>
+<!--DESCRIPTION-->
+
+They are actually `<ul>`s, but they are disguied to emulate `<dl>`s - for texts parsed with 'classic' Markdown (which has no support for `<dl>`).
+
+<!--/DESCRIPTION-->
 
 <!--DEFS-->
 
@@ -394,9 +383,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
 ### Tickets
 
-<p class="description">
-  <code>&lt;ul&gt;</code> List items with specific formatting.
-</p>
+<!--DESCRIPTION-->
+
+`<ul>` list items with specific formatting.
+
+<!--/DESCRIPTION-->
 
 <!--TICKETS-->
 
@@ -430,10 +421,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 <!--/TICKETS-->
 
 ### Splitter
-
-<p class="description">
-  (It is deprecated, needs to be refactored into either flexbox or CSS columns.)
-</p>
 
 <!--SPLITTER-->
 <!--ITEM-->

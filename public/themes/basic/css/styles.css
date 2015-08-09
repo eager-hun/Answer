@@ -455,6 +455,15 @@ video {
   border: none;
 }
 
+.description {
+  color: #777;
+  font-style: italic;
+  margin: 1em 0;
+}
+.description em {
+  font-style: normal;
+}
+
 .jump-links {
   background: #333;
   height: 0;
@@ -1132,31 +1141,16 @@ span.anchor {
   }
 }
 
-.splitter > .item {
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-
-@media (min-width: 51.25em) {
-  .splitter__fit {
-    overflow-x: hidden;
+@media (min-width: 60em) {
+  .mdz-flexbox .splitter > .item {
+    margin-left: 1em;
+    margin-right: 1em;
   }
-
-  .splitter__wrap {
-    margin-left: -2em;
-    margin-right: -2em;
+  .mdz-flexbox .splitter > .item:first-child {
+    margin-left: 0;
   }
-
-  .splitter {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-  }
-  .splitter > .item {
-    display: table-cell;
-    margin: 0;
-    padding-left: 2em;
-    padding-right: 2em;
+  .mdz-flexbox .splitter > .item:last-child {
+    margin-right: 0;
   }
 }
 /**
@@ -1480,6 +1474,13 @@ blockquote:before {
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+.list-style--tickets > ul > li + li {
+  margin-top: 1em;
+}
+.list-style--tickets p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 .list-style--tickets ul ul {
   list-style-type: disc;
@@ -2223,6 +2224,10 @@ pre {
   background: rgba(255, 255, 255, 0.5);
 }
 
+h2 + .description {
+  margin: -1em 0 2em;
+}
+
 ::selection {
   background: #5a5aa6;
   color: white;
@@ -2245,11 +2250,19 @@ pre {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuNSIgeDI9IjEuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VlZWVlZSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #eeeeee), color-stop(100%, rgba(0, 0, 0, 0)));
+  background-image: -moz-linear-gradient(left, #eeeeee, rgba(0, 0, 0, 0) 2em);
+  background-image: -webkit-linear-gradient(left, #eeeeee, rgba(0, 0, 0, 0) 2em);
+  background-image: linear-gradient(to right, #eeeeee, rgba(0, 0, 0, 0) 2em);
   border-left: 3px solid #ccc;
-  padding: 0 0 0 1em;
+  padding: 1em 0 1em 1em;
+  position: relative;
 }
 .list-style--tickets > ul > li > p:first-of-type {
   font-weight: 700;
+  margin-top: 0;
   margin-bottom: 0.75em;
 }
 .list-style--tickets > ul > li > p:last-of-type {
@@ -2258,11 +2271,28 @@ pre {
 .list-style--tickets > ul > li > ul {
   margin-top: 0.5em;
 }
-.list-style--tickets > ul > li + li {
-  margin-top: 1.75em;
+.list-style--tickets > ul > li::before, .list-style--tickets > ul > li::after {
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuNSIgeDI9IjEuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2NjY2NjYyIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #cccccc), color-stop(100%, rgba(0, 0, 0, 0)));
+  background-image: -moz-linear-gradient(left, #cccccc, rgba(0, 0, 0, 0) 2em);
+  background-image: -webkit-linear-gradient(left, #cccccc, rgba(0, 0, 0, 0) 2em);
+  background-image: linear-gradient(to right, #cccccc, rgba(0, 0, 0, 0) 2em);
+  content: '';
+  display: block;
+  height: 1px;
+  position: absolute;
+  width: 100%;
+  left: 0;
 }
-.list-style--tickets p {
-  margin: 0.5em 0;
+.list-style--tickets > ul > li::before {
+  top: 0;
+}
+.list-style--tickets > ul > li::after {
+  bottom: 0;
+}
+h2 + .list-style--tickets {
+  padding-top: 1em;
 }
 
 .images--bordered a:hover, .images--bordered a:focus {

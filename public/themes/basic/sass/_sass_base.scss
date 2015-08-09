@@ -87,6 +87,8 @@ $bkp-wide-ht-min:           960px;
 $bkp-wide-ht-max: $layout-page-max-width - 1;
 // For above highthird max, you can use 'min-width: $layout-page-max-width';
 
+$bkp-flexboxes-enable-default: $bkp-wide-ht-min;
+
 // -----------------------------------------------------------------------------
 // Typography.
 

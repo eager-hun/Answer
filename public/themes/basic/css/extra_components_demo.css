@@ -91,17 +91,12 @@
 .component-demo + .component-demo {
   margin-top: 3.5em;
 }
-.component-demo .l--flexbox {
+.component-demo .l--flexbox:not(.splitter) {
   margin-top: 2em;
   margin-bottom: 3em;
 }
-.component-demo .description,
-.component-demo .cd__description {
-  color: #777;
-  font-style: italic;
-}
-.component-demo .cd__description {
-  margin-bottom: 2em;
+.component-demo h2 + .cd__demo {
+  margin-top: 2em;
 }
 
 .cd__title {
@@ -167,6 +162,18 @@
   position: absolute;
   text-align: center;
   z-index: 100;
+}
+
+.slick-prev::before {
+  content: '\2190';
+}
+
+.slick-next::before {
+  content: '\2192';
+}
+
+.slick-dots li button:before {
+  content: '\2022';
 }
 
 .crsl--single .slick-prev {

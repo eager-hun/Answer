@@ -479,8 +479,6 @@
 //      somewhere around 1%(?)), items will have full width instead of showing
 //      as columns.
 
-$bkp-flexboxes-enable-default: $bkp-wide-ht-min;
-
 // Basic styles for every device.
 .l--flexbox {
   & > .item {
@@ -651,31 +649,23 @@ $bkp-flexboxes-enable-default: $bkp-wide-ht-min;
 
 // #############################################################################
 // Splitters.
+// Note: splitters are currently implemented via the .l--flexbox layout.
+// (See config.php's "short tags" section.)
 
-.splitter > .item {
-  margin-top: $layout-pad;
-  margin-bottom: $layout-pad;
-}
+@include breakpoint($bkp-flexboxes-enable-default) {
+  .mdz-flexbox {
+    .splitter {
+      & > .item {
+        margin-left: $layout-pad;
+        margin-right: $layout-pad;
 
-@include breakpoint($bkp-wide-mt-min) {
-  .splitter__fit {
-    overflow-x: hidden;
-  }
-  .splitter__wrap {
-    margin-left: -$layout-pad*2;
-    margin-right: -$layout-pad*2;
-  }
-  .splitter {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-
-    & > .item {
-      display: table-cell;
-      margin: 0;
-      padding-left: $layout-pad*2;
-      padding-right: $layout-pad*2;
+        &:first-child {
+          margin-left: 0;
+        }
+        &:last-child {
+          margin-right: 0;
+        }
+      }
     }
   }
 }
-

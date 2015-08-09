@@ -188,6 +188,7 @@ hr {
   border-top: 1px solid color(border-light);
 }
 
+
 // #############################################################################
 // Media.
 
@@ -231,6 +232,11 @@ video {
 }
 .button--nav {
   @include button($color: nav);
+}
+.description {
+  @include description-style;
+
+  margin: 1em 0;
 }
 
 

@@ -452,6 +452,17 @@ function _short_tags_replacements($matches) {
 }
 
 /**
+ * Convenient wrapper to process markdown strings (e.g. during prototyping).
+ */
+function datautils_process_markdown($text) {
+  $filter_args = array(
+    'text_format' => 'md',
+    'data' => $text,
+  );
+  return datautils_filter($filter_args);
+}
+
+/**
  * Providing localized strings.
  */
 function loc($desired_key, $for_locale = '') {

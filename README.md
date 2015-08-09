@@ -2,14 +2,19 @@
 # Answer project
 
 Website operating script study - written mainly in PHP - for simple and small
-things that definitely won't need to scale.
+websites and prototypes.
 
 
 ## What to expect from the code
 
-- Inconsistent, experimental material.
-- Extensively unfinished.
-- It is in the need of a complete rewrite.
+- On occassion, you might be able spot signs of the fact that I am an autodidact
+  learner of coding and programming.
+- The project's state is not much more than a living inventory of such features
+  and concepts that were high on my priority list.
+- There are a lot of unfinished features in it.
+- It's an early mashup of ideas that evolved on the go, so, its way towards
+  maturity mitht possibly lead - instead of via refactors - via ground-up
+  redesign(s) and rewrite(s).
 
 
 ### Should you use it for anything?
@@ -17,7 +22,8 @@ things that definitely won't need to scale.
 It's likely that you wouldn't want to; this project is so early in its
 development process that:
 
-- it yet contains a range of suboptimalities that restrain productive usage,
+- it yet contains a range of suboptimalities that restrain productive usage
+  (doing anything with it is pretty labour-intensive, actually),
 - fixes and improvements might be added in a non-backward-compatible manner:
   - any effort based on an early instance of this codebase might end up isolated
     from future improvements, and thus possibly become deprecated very quickly.
@@ -25,22 +31,24 @@ development process that:
 
 ## Maintenance and development
 
-- Details about future maintenance and development can not be known.
-  - Note: suggestions and dialogue are always preferred over out-of-the-blue
-    pull requests.
+- No promises on the future maintenance and development of this project.
+  - Note however: suggestions and dialogue are always preferred over
+    out-of-the-blue pull requests.
 - Consider it a development snapshot; expect non-backward compatible changes any
   time.
 
 
 ## Documentation
 
+
 ### Operating manuals
 
 - [Installation guide][doc-install]
-- [Operating manual][doc-basic-ops] (jump-links to anchors don't work when viewed on
-  GitHub.)
+- [Operating manual][doc-basic-ops] (jump-links to anchors don't work when
+  viewed on GitHub.)
 - [Developer docs][doc-4-devs] (jump-links to anchors don't work when viewed on
   GitHub.)
+
 
 ### Project handling
 

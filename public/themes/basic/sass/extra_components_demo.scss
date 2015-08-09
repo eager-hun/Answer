@@ -12,16 +12,12 @@
   .component-demo + & {
     margin-top: $layout-pad*3.5;
   }
-  .l--flexbox {
+  .l--flexbox:not(.splitter) {
     margin-top: $layout-pad*2;
     margin-bottom: $layout-pad*3;
   }
-  .description,
-  .cd__description {
-    @include description-style;
-  }
-  .cd__description {
-    margin-bottom: $layout-pad*2;
+  h2 + .cd__demo {
+    margin-top: $layout-pad*2;
   }
 }
 .cd__title {
@@ -104,6 +100,15 @@
     text-align: center;
     z-index: 100;
   }
+}
+.slick-prev::before {
+  content: '\2190';
+}
+.slick-next::before {
+  content: '\2192';
+}
+.slick-dots li button:before { // Matching slick-theme.css selector.
+  content: '\2022';
 }
 
 // -----------------------------------------------------------------------------

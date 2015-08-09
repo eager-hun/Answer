@@ -166,6 +166,10 @@
 @mixin description-style {
   color: color(minor);
   font-style: italic;
+
+  em {
+    font-style: normal;
+  }
 }
 
 

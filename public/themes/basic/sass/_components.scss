@@ -108,6 +108,14 @@ blockquote {
 .list-style--tickets {
   & > ul {
     @include bare-list;
+
+    & > li + li {
+      margin-top: $layout-pad;
+    }
+  }
+  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
   }
   ul ul {
     list-style-type: disc;

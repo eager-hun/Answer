@@ -19,10 +19,7 @@ function pa_mosaic_homepage(&$args) {
         'articles-top' => array(),
       ),
       'sidebar_1' => array(
-        'main-menu' => array(),
-        'mission-control-menu' => array(),
-        'developers-menu' => array(),
-        'menu-developer-menu' => array(), // Only for when doing development.
+        'sidebar_1_default' => array(),
       ),
     ),
   );

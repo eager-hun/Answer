@@ -163,7 +163,7 @@ $config['document']['locale']['secondary']['php_locale'] = 'hu-HU.utf8';
  *
  * Format: YYYY-MM-DD .
  */
-$config['document']['global_lastmod'] = '2015-08-02';
+$config['document']['global_lastmod'] = '2015-08-09';
 
 
 // #############################################################################
@@ -333,6 +333,8 @@ $config['content']['short_tags'] = array(
     15 => '#<!--(CONTENT) ID=([0-9]+)-->#',
     16 => '#<!--TICKETS-->#',
     17 => '#<!--/TICKETS-->#',
+    18 => '#<!--DESCRIPTION-->#',
+    19 => '#<!--/DESCRIPTION-->#',
   ),
   'replacements' => array(
     1  => '<div class="textbox textbox--hero">',
@@ -347,11 +349,13 @@ $config['content']['short_tags'] = array(
     10 => '</div>',
     11 => '<div class="item">',
     12 => '</div>',
-    13 => '<div class="splitter__fit"><div class="splitter__wrap"><div class="splitter">',
-    14 => '</div></div></div>',
+    13 => '<div class="splitter l--flexbox l--flexbox--auto-row">',
+    14 => '</div>',
     15 => 'dynamic replacement from function',
     16 => '<div class="list-style--tickets">',
     17 => '</div>',
+    18 => '<div class="description">',
+    19 => '</div>',
   ),
 );
 

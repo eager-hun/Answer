@@ -332,27 +332,15 @@ $binders['mosaic_homepage'] = array(
   ),
   'items' => array(
     array(
-      'data_type'   => 'entity',
-      'entity_type' => 'dynamic',
-      'instance_id' => 'content_meta',
-      'present_as'  => 'block',
+      'data_type'   => 'binder',
+      'instance_id' => 'sidebar_1_default',
+      'present_as'  => 'plain',
     ),
     array(
       'data_type'   => 'entity',
       'entity_type' => 'dynamic',
-      'instance_id' => 'main-menu',
+      'instance_id' => 'content_meta',
       'present_as'  => 'block',
-      'wrapper_options' => array(
-        'attributes' => array(
-          'id'       => 'navigation',
-          'class'    => array(
-            'block--menu',
-            'is--title-hidden',
-            'indications--on-right',
-          ),
-          'tabindex' => '-1',
-        ),
-      ),
     ),
     array(
       'data_type'   => 'entity',
@@ -365,44 +353,6 @@ $binders['mosaic_homepage'] = array(
       'entity_type' => 'dynamic',
       'instance_id' => 'articles-top',
       'present_as'  => 'block',
-    ),
-    array(
-      'data_type'   => 'entity',
-      'entity_type' => 'dynamic',
-      'instance_id' => 'mission-control-menu',
-      'present_as'  => 'block',
-      'wrapper_options' => array(
-        'attributes' => array(
-          'class'    => array(
-            'block--menu',
-            'indications--on-right',
-          ),
-        ),
-      ),
-      'presence' => array(
-        'variable'  => 'context',
-        'condition' => 'is',
-        'value'     => 'admin',
-      ),
-    ),
-    array(
-      'data_type'   => 'entity',
-      'entity_type' => 'dynamic',
-      'instance_id' => 'developers-menu',
-      'present_as'  => 'block',
-      'wrapper_options' => array(
-        'attributes' => array(
-          'class'    => array(
-            'block--menu',
-            'indications--on-right',
-          ),
-        ),
-      ),
-      'presence' => array(
-        'variable'  => 'context',
-        'condition' => 'is',
-        'value'     => 'admin',
-      ),
     ),
   ),
 );
