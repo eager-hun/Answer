@@ -14,6 +14,19 @@ $config['theme']['version'] = '20150809-1';
 
 
 // #############################################################################
+// Additions by the theme to the <head>.
+
+$config['theme']['head_additions'] = array(
+  '<meta name="viewport" content="width=device-width, initial-scale=1">',
+  // https://validator.w3.org/mobile-alpha/ said that a placeholder favicon
+  // declaration can be done as follows:
+  '<link rel="icon" href="data:;base64,iVBORw0KGgo=">',
+  // I still have to learn loading Google fonts in a non-render-blocking way.
+  // '<link href="http://fonts.googleapis.com/css?family=Roboto:400,300,700" rel="stylesheet" type="text/css">',
+);
+
+
+// #############################################################################
 // STYLESHEETS.
 
 // NOTE: each item's 'source' may be one of the following:
@@ -22,79 +35,81 @@ $config['theme']['version'] = '20150809-1';
 // - theme_generated,
 // - theme_static.
 
-$config['ui']['css_external'][] = array(
-  'source' => 'frontend_library',
-  'file'   => 'normalize.css/normalize.css',
+// Optional: < style > tag in the < head >.
+$config['ui']['css_inline'][] = array(
+  'source'     => 'theme_generated',
+  'file'       => 'extra_styles_inline.css',
+  'is_enabled' => 0,
 );
 
+// Normalize.css has a prepared setup in styles.scss to include it into
+// styles.css with SASS/Compass.
 $config['ui']['css_external'][] = array(
-  'source' => 'theme_generated',
-  'file'   => 'styles.css',
+  'source'     => 'frontend_library',
+  'file'       => 'normalize.css/normalize.css',
+  'is_enabled' => 1,
 );
 
-// Emergency vanilla .css file.
-// $config['ui']['css_external'][] = array(
-//   'source' => 'theme_static',
-//   'file'   => 'static.css',
-// );
+// The custom theme's styles.
+$config['ui']['css_external'][] = array(
+  'source'     => 'theme_generated',
+  'file'       => 'styles.css',
+  'is_enabled' => 1,
+);
 
-// < style > tag in the < head >.
-// $config['ui']['css_inline'][] = array(
-//   'source' => 'theme_generated',
-//   'file'   => 'extra_styles_inline.css',
-// );
-
+// Optional: vanilla .css file.
+$config['ui']['css_external'][] = array(
+  'source'     => 'theme_static',
+  'file'       => 'static.css',
+  'is_enabled' => 0,
+);
 
 // #############################################################################
 // JS.
 
 // NOTE: each item's 'source' may be one of the following:
+// - inline,
+// - cdn,
 // - frontend_library,
 // - frontend_assset,
 // - theme.
 
 // -----------------------------------------------------------------------------
-// JS files for the HTML head.
-
-// custom-feature-detects.js and modernizr.js should be concatenated together,
-// so that this custom pack of feature detects are the only one js file that is
-// loaded in the < head >.
-
-$config['ui']['js_head_dependency'][] = array(
-  'source'  => 'theme',
-  'file'    => 'custom-feature-detects.js',
-);
-
-// http://modernizr.com/download/#-backgroundsize-flexbox-inlinesvg-svg-touch-cssclasses-teststyles-testprop-testallprops-domprefixes-cssclassprefix:mdz!
-$config['ui']['js_head_dependency'][] = array(
-  'source'  => 'theme',
-  'file'    => 'modernizr.custom.80541.js',
-);
-
-// -----------------------------------------------------------------------------
 // JS files for the HTML body.
 
-$config['ui']['js_body'][] = array(
-  'source'  => 'theme',
-  'file'    => 'theme.js',
+// Custom theme behaviors.
+$config['ui']['js_body_regular'][] = array(
+  'source'     => 'theme',
+  'file'       => 'theme.js',
+  'async'      => 1,
+  'is_enabled' => 1,
 );
 
-// $config['ui']['js_body'][] = array(
-//   'source'  => 'frontend_asset',
-//   'file'    => 'visual-debug.js',
-// );
+// Optional: visualises page structure.
+$config['ui']['js_body_regular'][] = array(
+  'source'     => 'frontend_asset',
+  'file'       => 'visual-debug.js',
+  'async'      => 1,
+  'is_enabled' => 0,
+);
 
+// Mandatory script for elementary UI behaviors.
+$config['ui']['js_body_late'][] = array(
+  'source'     => 'theme',
+  'file'       => 'custom-feature-detects.js',
+  'is_enabled' => 1,
+);
 
-// #############################################################################
-// Further additions to the <head>.
+// A note about modernizr being loaded with async: I recently started having
+// this bug: https://code.google.com/p/chromium/issues/detail?id=263304
+// Asyncing modernizr seems to solve it. This is very far from being very good,
+// but those flickers on Chrome were a total disaster.
 
-$config['theme']['head_additions'] = array(
-  '<meta name="viewport" content="width=device-width, initial-scale=1">',
-  // https://validator.w3.org/mobile-alpha/ said that a placeholder favicon
-  // declaration can be done as follows:
-  '<link rel="icon" href="data:;base64,iVBORw0KGgo=">',
-  // '<link href="http://fonts.googleapis.com/css?family=Roboto:400,300,700" rel="stylesheet" type="text/css">',
-  // This is for a new meta tag that Android browsers support. They adjust the
-  // color of the native interface to the site's primary color provided here.
-  // '<meta name="theme-color" content="#000000">',
+// Have it generated, then download the customized Modernizr build from here:
+// http://modernizr.com/download/#-backgroundsize-flexbox-inlinesvg-svg-touch-cssclasses-teststyles-testprop-testallprops-domprefixes-cssclassprefix:mdz!
+$config['ui']['js_body_late'][] = array(
+  'source'     => 'theme',
+  'file'       => 'modernizr.custom.80541.js',
+  'async'      => 1,
+  'is_enabled' => 1,
 );

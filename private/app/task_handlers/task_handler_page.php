@@ -215,7 +215,7 @@ $html_doc_args = array(
   'variables' => array(
     'html_attributes' => templateutils_render_html_attributes($temp['raw_attributes']['html']),
     'head_attributes' => templateutils_render_html_attributes($temp['raw_attributes']['head']),
-    'head_content'    => pageutils_html_head($config, $request, $definitions),
+    'head_content'    => pageutils_html_head(),
     'body'            => $html_body,
   ),
 );

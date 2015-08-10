@@ -1832,7 +1832,7 @@ a.menu-trigger.fixed {
   z-index: 9000;
 }
 
-.has-js .col--sidebar .block--menu {
+.external-js .col--sidebar .block--menu {
   display: none;
 }
 
@@ -1857,7 +1857,7 @@ a.menu-trigger.fixed {
 }
 
 @media (min-width: 43.75em) {
-  .has-js .col--sidebar .block--menu {
+  .external-js .col--sidebar .block--menu {
     display: block;
   }
 

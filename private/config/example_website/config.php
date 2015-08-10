@@ -248,36 +248,6 @@ $config['app']['fast_404'] = FALSE;
 
 
 // #############################################################################
-// User interface.
-
-// -----------------------------------------------------------------------------
-// Theme-agnostic javascripts that the system counts/relies on.
-
-/**
- * The place where the HTML page will contain the JS settings object.
- *
- * Possible values: 'head' || 'body' .
- */
-$config['ui']['js_settings_insertion'] = 'body';
-
-/**
- * JS files for the bottom of the <body>.
- */
-$config['ui']['js_body'][] = array(
-  // 'source'     => 'frontend_library',
-  // 'file'       => 'jquery/dist/jquery.min.js',
-  'source'     => 'cdn',
-  'file'       => '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
-  'attributes' => array(),
-);
-$config['ui']['js_body'][] = array(
-  'source'     => 'frontend_asset',
-  'file'       => 'system.js',
-  'attributes' => array(),
-);
-
-
-// #############################################################################
 // Theme config.
 
 // Important note: after changing these theme settings, it is neccessary to
@@ -296,6 +266,43 @@ $config['theme']['name'] = 'basic';
  * Possible values: 'system' || 'theme' .
  */
 $config['theme']['templates_source'] = 'system';
+
+
+// #############################################################################
+// Document foreign affairs.
+
+/**
+ * The place where the HTML page will contain the JS settings object.
+ *
+ * Possible values: 'head' || 'body' .
+ */
+$config['ui']['js_settings_insertion'] = 'body';
+
+/**
+ * Additions by the app to the <head>.
+ *
+ * See https://gist.github.com/kevinSuttle/1997924
+ */
+$config['app']['head_additions'] = array(
+  // Just testing.
+  // '<meta name="topic" content="interesting things">',
+);
+
+/**
+ * JS files for the bottom of the <body>.
+ */
+$config['ui']['js_body_early'][] = array(
+  // 'source'     => 'frontend_library',
+  // 'file'       => 'jquery/dist/jquery.min.js',
+  'source'     => 'cdn',
+  'file'       => '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
+  'is_enabled' => 1,
+);
+$config['ui']['js_body_regular'][] = array(
+  'source'     => 'frontend_asset',
+  'file'       => 'system.js',
+  'is_enabled' => 1,
+);
 
 
 // #############################################################################

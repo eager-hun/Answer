@@ -100,23 +100,34 @@ function pageutils_document_assets($return_type) {
     $theme_version = '';
   }
 
+  // ---------------------------------------------------------------------------
   // CSS.
+
   if ($return_type == 'head_css') {
     if (!empty($config['ui']['css_inline'])) {
-      $output .= "<style>\n";
+      $inline_css_buffer = '';
       foreach ($config['ui']['css_inline'] as $inline) {
+        if (empty($inline['is_enabled'])) {
+          continue;
+        }
         if ($inline['source'] == 'theme_generated') {
           $file = $registry['app_internals']['theme'] . '/css/'
             . ensafe_string($inline['file'], 'path_with_file_name');
         }
         if (!empty($file) && file_exists($file)) {
-          $output .= ensafe_string(file_get_contents($file), 'inline_css');
+          $inline_css_buffer .= ensafe_string(file_get_contents($file), 'css');
         }
       }
-      $output .= "\n</style>\n";
+      unset($inline);
+      if (!empty($inline_css_buffer)) {
+        $output .= "<style>\n" . $inline_css_buffer . "\n</style>\n";
+      }
     }
     if (!empty($config['ui']['css_external'])) {
       foreach ($config['ui']['css_external'] as $external) {
+        if (empty($external['is_enabled'])) {
+          continue;
+        }
         $path = ''; // Being reset for each file.
         if ($external['source'] == 'frontend_library') {
           $path = $registry['app_externals']['libraries_frontend'] . '/';
@@ -136,47 +147,97 @@ function pageutils_document_assets($return_type) {
             . $theme_version . '">' . "\n";
         }
       }
+      unset($external);
     }
     return $output;
   }
+
+  // ---------------------------------------------------------------------------
   // JS.
-  elseif ($return_type == 'head_js') {
-    if (!empty($config['ui']['js_head_dependency'])) {
-      foreach ($config['ui']['js_head_dependency'] as $resource) {
+
+  elseif ($return_type == 'head_js_pre_styles') {
+    if (!empty($config['ui']['js_head_pre_styles'])) {
+      foreach ($config['ui']['js_head_pre_styles'] as $resource) {
+        if (empty($resource['is_enabled'])) {
+          continue;
+        }
         $output .= _include_script($resource, $theme_version);
       }
+      unset($resource);
+    }
+    return $output;
+  }
+  elseif ($return_type == 'head_js') {
+    if (!empty($config['ui']['js_head_early'])) {
+      foreach ($config['ui']['js_head_early'] as $resource) {
+        if (empty($resource['is_enabled'])) {
+          continue;
+        }
+        $output .= _include_script($resource, $theme_version);
+      }
+      unset($resource);
     }
     if (!empty($config['ui']['js_settings_insertion'])
         && $config['ui']['js_settings_insertion'] == 'head') {
       $output .= _create_js_settings();
     }
-    if (!empty($config['ui']['js_head'])) {
-      foreach ($config['ui']['js_head'] as $resource) {
+    if (!empty($config['ui']['js_head_regular'])) {
+      foreach ($config['ui']['js_head_regular'] as $resource) {
+        if (empty($resource['is_enabled'])) {
+          continue;
+        }
         $output .= _include_script($resource, $theme_version);
       }
+      unset($resource);
+    }
+    if (!empty($config['ui']['js_head_late'])) {
+      foreach ($config['ui']['js_head_late'] as $resource) {
+        if (empty($resource['is_enabled'])) {
+          continue;
+        }
+        $output .= _include_script($resource, $theme_version);
+      }
+      unset($resource);
     }
     return $output;
   }
   elseif ($return_type == 'body_js') {
-    if (!empty($config['ui']['js_body_dependency'])) {
-      foreach ($config['ui']['js_body_dependency'] as $resource) {
+    if (!empty($config['ui']['js_body_early'])) {
+      foreach ($config['ui']['js_body_early'] as $resource) {
+        if (empty($resource['is_enabled'])) {
+          continue;
+        }
         $output .= _include_script($resource, $theme_version);
       }
+      unset($resource);
     }
     if (!empty($config['ui']['js_settings_insertion'])
         && $config['ui']['js_settings_insertion'] == 'body') {
       $output .= _create_js_settings();
     }
-    if (!empty($config['ui']['js_body'])) {
-      foreach ($config['ui']['js_body'] as $resource) {
+    if (!empty($config['ui']['js_body_regular'])) {
+      foreach ($config['ui']['js_body_regular'] as $resource) {
+        if (empty($resource['is_enabled'])) {
+          continue;
+        }
         $output .= _include_script($resource, $theme_version);
       }
+      unset($resource);
+    }
+    if (!empty($config['ui']['js_body_late'])) {
+      foreach ($config['ui']['js_body_late'] as $resource) {
+        if (empty($resource['is_enabled'])) {
+          continue;
+        }
+        $output .= _include_script($resource, $theme_version);
+      }
+      unset($resource);
     }
     return $output;
   }
   else {
-    $message = 'Unrecognized return_type parameter for pageutils_document_assets(): <em>'
-             . ensafe_string($return_type) . '</em>';
+    $message = 'Error: Unrecognized return_type parameter for '
+      . 'pageutils_document_assets(): <em>' . ensafe_string($return_type) . '</em>';
     sys_notify($message, 'warning');
   }
 }
@@ -187,10 +248,18 @@ function pageutils_document_assets($return_type) {
 function _include_script($script_data, $theme_version) {
   global $config, $registry;
 
-  // TODO: support attributes.
-  if ($script_data['source'] == 'cdn') {
+  if (!empty($script_data['file']) && !empty($script_data['async'])) {
+    $async = ' async="async"';
+  }
+  else {
+    $async = '';
+  }
+  if ($script_data['source'] == 'inline') {
+    $output = '<script>' . $script_data['script'] . "</script>\n";
+  }
+  elseif ($script_data['source'] == 'cdn') {
     $output = '<script src="' . ensafe_string($script_data['file'], 'path_with_file_name')
-            . '"></script>' . "\n";
+            . '"' . $async . '></script>' . "\n";
   }
   else {
     if ($script_data['source'] == 'frontend_library') {
@@ -209,7 +278,7 @@ function _include_script($script_data, $theme_version) {
     }
     $output = '<script src="' . $path
             . ensafe_string($script_data['file'], 'path_with_file_name')
-            . $theme_version . '"></script>' . "\n";
+            . $theme_version . '"' . $async . '></script>' . "\n";
   }
   return $output;
 }
@@ -254,13 +323,14 @@ function pageutils_html_head() {
     $title = loc('site-name');
   }
 
-  $output = '';
-  $output .= '<meta charset="utf-8">' . "\n";
+  $output = '<meta charset="utf-8">' . "\n";
   $output .= '<title>' . strip_tags($title) . "</title>\n";
+
   if (!empty($request['page_data']['meta_descriptions'][LOCALE_KEY])) {
     $output .= '<meta name="description" content="'
       . ensafe_string($request['page_data']['meta_descriptions'][LOCALE_KEY]) . "\">\n";
   }
+
   if (!empty($request['contexts'])
       && in_array('noindex', $request['contexts'])) {
     $output .= '<meta name="robots" content="noindex">' . "\n";
@@ -269,24 +339,13 @@ function pageutils_html_head() {
   if (!empty($config['app']['head_additions'])) {
     $output .= implode("\n", $config['app']['head_additions']) . "\n";
   }
+
   if (!empty($config['theme']['head_additions'])) {
     $output .= implode("\n", $config['theme']['head_additions']) . "\n";
   }
 
+  $output .= pageutils_document_assets('head_js_pre_styles');
   $output .= pageutils_document_assets('head_css');
-
-  $html5shiv = $GLOBALS['registry']['app_externals']['libraries_frontend']
-        . '/html5shiv/dist/html5shiv.min.js';
-  $respondjs = $GLOBALS['registry']['app_externals']['libraries_frontend']
-        . '/respond-minmax/dest/respond.min.js';
-  $output .= implode("\n", array(
-    "<!--[if lt IE 9]>",
-    "<script>document.documentElement.className += ' lt-ie9';</script>",
-    "<script src='" . $html5shiv . "'></script>",
-    "<script src='" . $respondjs . "'></script>",
-    "<![endif]-->",
-  )) . "\n";
-
   $output .= pageutils_document_assets('head_js');
 
   return $output;

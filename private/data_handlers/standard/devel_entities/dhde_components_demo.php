@@ -17,25 +17,30 @@ if (function_exists('_dhde_create_dummy_list')) {
 
 // Assets.
 // @ingroup not_sophisticated, I know.
-$GLOBALS['config']['ui']['js_body'][] = array(
-  'source' => 'frontend_library',
-  'file'   => 'slick.js/slick/slick.min.js',
+$GLOBALS['config']['ui']['js_body_regular'][] = array(
+  'source'     => 'frontend_library',
+  'file'       => 'slick.js/slick/slick.min.js',
+  'is_enabled' => 1,
 );
-$GLOBALS['config']['ui']['js_body'][] = array(
-  'source' => 'theme',
-  'file'   => 'components-demo.js',
-);
-$GLOBALS['config']['ui']['css_external'][] = array(
-  'source' => 'frontend_library',
-  'file'   => 'slick.js/slick/slick.css',
+$GLOBALS['config']['ui']['js_body_regular'][] = array(
+  'source'     => 'theme',
+  'file'       => 'components-demo.js',
+  'is_enabled' => 1,
 );
 $GLOBALS['config']['ui']['css_external'][] = array(
-  'source' => 'frontend_library',
-  'file'   => 'slick.js/slick/slick-theme.css',
+  'source'     => 'frontend_library',
+  'file'       => 'slick.js/slick/slick.css',
+  'is_enabled' => 1,
 );
 $GLOBALS['config']['ui']['css_external'][] = array(
-  'source' => 'theme_generated',
-  'file'   => 'extra_components_demo.css',
+  'source'     => 'frontend_library',
+  'file'       => 'slick.js/slick/slick-theme.css',
+  'is_enabled' => 1,
+);
+$GLOBALS['config']['ui']['css_external'][] = array(
+  'source'     => 'theme_generated',
+  'file'       => 'extra_components_demo.css',
+  'is_enabled' => 1,
 );
 
 
