@@ -292,32 +292,6 @@ $pages['mc-planning-taxonomy'] = [
   'in_context'        => 'noindex',
 ];
 
-// -----------------------------------------------------------------------------
-$pages['mc-app-mods'] = [
-  'data_type'         => 'entity',
-  'entity_type'       => 'static_page',
-  'instance_id'       => 'mc-app-mods',
-  'has_translations'  => 0,
-  'paths' => [
-    'primary'   => 'mission-control/desired-application-modifications',
-  ],
-  'in_section'        => 'mission_control',
-  'in_context'        => 'noindex',
-];
-
-// -----------------------------------------------------------------------------
-$pages['mc-article-ideas'] = [
-  'data_type'         => 'entity',
-  'entity_type'       => 'static_page',
-  'instance_id'       => 'mc-article-ideas',
-  'has_translations'  => 0,
-  'paths' => [
-    'primary'   => 'mission-control/article-ideas',
-  ],
-  'in_section'        => 'mission_control',
-  'in_context'        => 'noindex',
-];
-
 
 // #############################################################################
 // DEVELOPER CONTENT.

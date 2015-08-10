@@ -130,56 +130,6 @@ $static_page['mc-planning-taxonomy'] = [
   ],
 ];
 
-// -----------------------------------------------------------------------------
-$static_page['mc-app-mods'] = [
-  'meta' => [
-    'is_published' => 0,
-    'text_formats' => [
-      'field_title'        => 'html',
-      'field_subtitle'     => 'html',
-      'field_body'         => 'md',
-    ],
-  ],
-  'data' => [
-    'field_date_created'  => NULL, // Format: YYYY-MM-DD.
-    'field_date_lastmod'  => NULL, // Format: YYYY-MM-DD.
-    'field_title' => [
-      'locale_primary'   => 'List of desired application modifications',
-    ],
-    'field_subtitle' => [
-      'locale_primary'   => NULL,
-    ],
-    'field_body' => [
-      'locale_primary'   => '[[external-file]]',
-    ],
-  ],
-];
-
-// -----------------------------------------------------------------------------
-$static_page['mc-article-ideas'] = [
-  'meta' => [
-    'is_published' => 0,
-    'text_formats' => [
-      'field_title'        => 'html',
-      'field_subtitle'     => 'html',
-      'field_body'         => 'md',
-    ],
-  ],
-  'data' => [
-    'field_date_created'  => NULL, // Format: YYYY-MM-DD.
-    'field_date_lastmod'  => NULL, // Format: YYYY-MM-DD.
-    'field_title' => [
-      'locale_primary'   => 'Article ideas',
-    ],
-    'field_subtitle' => [
-      'locale_primary'   => NULL,
-    ],
-    'field_body' => [
-      'locale_primary'   => '[[external-file]]',
-    ],
-  ],
-];
-
 
 // #############################################################################
 // DEVELOPER PAGES.

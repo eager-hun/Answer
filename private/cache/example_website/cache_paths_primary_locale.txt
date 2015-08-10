@@ -11,8 +11,6 @@ example-gone-contents-path:gone-example
 mission-control/operating-manual:mc-operating-manual
 mission-control/site-outline-planning:mc-planning-outline
 mission-control/taxonomy-planning:mc-planning-taxonomy
-mission-control/desired-application-modifications:mc-app-mods
-mission-control/article-ideas:mc-article-ideas
 devel/documentation-for-developers:devel-docs
 devel/project-1:devel-project-1
 devel/components-demo:devel-comp-demo

@@ -145,20 +145,6 @@ $menus['mission_control_menu'] = array(
       'path'   => 'mission-control/taxonomy-planning',
       'text'   => 'Planning: taxonomy',
     ),
-    'mc-app-mods' => array(
-      'depth'  => 1,
-      'parent' => FALSE,
-      'type'   => 'link',
-      'path'   => 'mission-control/desired-application-modifications',
-      'text'   => 'Desired app modifications',
-    ),
-    'mc-article-ideas' => array(
-      'depth'  => 1,
-      'parent' => FALSE,
-      'type'   => 'link',
-      'path'   => 'mission-control/article-ideas',
-      'text'   => 'Article ideas',
-    ),
   ),
 );
 
