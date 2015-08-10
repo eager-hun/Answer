@@ -358,7 +358,7 @@ function pageutils_html_head() {
  */
 function pageutils_reset_styles($mode = 'all') {
   if ($mode == 'all') {
-    $GLOBALS['config']['ui']['css_inline'] = array();
+    $GLOBALS['config']['ui']['css_inline']   = array();
     $GLOBALS['config']['ui']['css_external'] = array();
   }
 }
@@ -370,7 +370,11 @@ function pageutils_reset_styles($mode = 'all') {
  */
 function pageutils_reset_javascripts($mode = 'all') {
   if ($mode == 'all') {
-    $GLOBALS['config']['ui']['js_head'] = array();
-    $GLOBALS['config']['ui']['js_body'] = array();
+    $GLOBALS['config']['ui']['js_head_early']   = array();
+    $GLOBALS['config']['ui']['js_head_regular'] = array();
+    $GLOBALS['config']['ui']['js_head_late']    = array();
+    $GLOBALS['config']['ui']['js_body_early']   = array();
+    $GLOBALS['config']['ui']['js_body_regular'] = array();
+    $GLOBALS['config']['ui']['js_body_late']    = array();
   }
 }

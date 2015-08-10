@@ -31,12 +31,9 @@ function post_dispatch_layout_page_plain(&$args) {
   pageutils_reset_javascripts();
 
   // Applying the custom plain-page stylesheet.
-  $GLOBALS['config']['ui'] = array(
-    'css_external' => array(
-      array(
-        'source' => 'theme_generated',
-        'file'   => 'extra_styles_plain_output.css',
-      ),
-    ),
+  $GLOBALS['config']['ui']['css_external'][] = array(
+    'source'     => 'theme_generated',
+    'file'       => 'extra_styles_plain_output.css',
+    'is_enabled' => 1,
   );
 }

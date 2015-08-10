@@ -109,7 +109,7 @@ a {
 }
 
 code {
-  font-size: 0.8em;
+  font-size: 0.85em;
   word-wrap: break-word;
 }
 .messages .code {
@@ -196,18 +196,6 @@ img,
 video {
   max-width: 100%;
   height: auto;
-}
-
-.lt-ie9 {
-  img {
-    // Fixing 'responsive images' not showing in ie8.
-    // Note that after this, image sizes were needed to be declared manually.
-    // (If you supported ie8.)
-    max-width: none;
-
-    // Remove border when inside `a` element in IE 8/9.
-    // border: 0; // TODO: check it out.
-  }
 }
 
 

@@ -171,6 +171,10 @@ body {
   padding: 0.5em;
 }
 
+.messages-container {
+  margin-bottom: 3em;
+}
+
 h1 {
   font-weight: normal;
 }
@@ -180,10 +184,56 @@ h1 {
   margin: 1em 0;
 }
 
+.tpl--field {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+.tpl--field:last-child {
+  margin-bottom: 0;
+}
+
 img,
 video {
   max-width: 100%;
   height: auto;
+}
+
+table {
+  font-size: 0.9em;
+  width: 100%;
+}
+
+th {
+  text-align: left;
+  vertical-align: top;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 0.25em 0.35em;
+}
+
+.table__wrap {
+  max-width: 100%;
+  overflow: auto;
+}
+
+code {
+  font-size: 0.85em;
+  word-wrap: break-word;
+}
+
+.messages .code {
+  font-size: 0.9em;
+}
+
+pre code {
+  word-wrap: normal;
+  display: block;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1em;
 }
 
 @media (min-width: 43.75em) {
