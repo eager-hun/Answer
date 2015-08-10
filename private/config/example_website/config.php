@@ -154,17 +154,6 @@ $config['document']['locale']['primary']['php_locale']   = 'en-GB.utf8';
 $config['document']['locale']['secondary']['langcode']   = 'hu';
 $config['document']['locale']['secondary']['php_locale'] = 'hu-HU.utf8';
 
-/**
- * Most recent modification to this website (or its contents).
- *
- * The intention is giving the visitor a hint on the 'abandonedness' of the
- * website. IMO, abandoned websites with outdated content can cause real
- * inconvenience for people in a number of situations.
- *
- * Format: YYYY-MM-DD .
- */
-$config['document']['global_lastmod'] = '2015-08-09';
-
 
 // #############################################################################
 // Dependencies: external php libraries.

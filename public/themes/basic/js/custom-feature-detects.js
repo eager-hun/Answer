@@ -12,7 +12,7 @@
   "use strict";
 
   // Modernizr removes the .no-js class, so we need to prepare for if that
-  // happens (althougn modernizr is loaded async now, but that may change
+  // happens (although modernizr is loaded async now, but that may change
   // later).
   if (document.documentElement.className.match(/no-js/)) {
     document.documentElement.className =

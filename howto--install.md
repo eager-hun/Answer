@@ -17,7 +17,7 @@
       - (For the ease of downloading frontend libraries.)
 - [Ruby execution environment][ruby]
   - [Bundler package manager][bundler]
-      - (Installer and task runner for Ruby gems - these are used only for theme
+      - (Installer and execution manager for Ruby gems - these are used only for theme
         development.)
 
 
@@ -28,21 +28,23 @@ a publicly accessible server; instead, familiarize yourself with
 security-related procedures on an isolated developer machine.
 
 Obligatory **WARNING 2**: If you don't know what you are doing, then don't
-continue: learn first about Apache, PHP, and - especially - about node.js (with
-extra focus on how it behaves the operating system that you want to use it on).
+continue:
+- learn first about Apache, PHP, and - especially - about node.js (with extra
+  focus on how it behaves the operating system that you want to use it on).
+- and make sure you understand the basic concepts of web security.
 
 This is NOT an exhaustive instruction, and guaranteeing your system's safety is
 out of its scope.
 
 ### To the first valid response
 
-- Place the working tree into an Apache virtual slot:
+- Place the working tree into an Apache virtualhost.
 - Check in browser: you should see a warning about an
   "unrecognized domain name".
 - Edit config.php (/private/config/example_website/config.php):
   - In the 'Config Presets' section, edit the domain names for your various
-    environments (`HTTP_HOST` in `phpinfo()`'s output) (initial emphasis is on the
-    'dev' preset).
+    environments (`HTTP_HOST` in `phpinfo()`'s output) (initial emphasis is on
+    the 'dev' preset).
 - Check in browser: a webpage should start forming by now.
 
 ### Installing dependencies

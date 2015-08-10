@@ -1,4 +1,4 @@
-# IDE
+# IDEs
 nbproject
 
 # PHP libs handled by Composer.
@@ -47,3 +47,7 @@ modernizr.custom.*.js
 
 # Testing-related
 /subdir-test
+
+# Practical usage related
+/private/trunk/*
+!/private/trunk/README.md

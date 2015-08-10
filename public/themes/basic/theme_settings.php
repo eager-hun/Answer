@@ -35,10 +35,16 @@ $config['theme']['head_additions'] = array(
 // - theme_generated,
 // - theme_static.
 
-// Optional: < style > tag in the < head >.
+// Optional: styles inlined into a < style > tag in the < head >.
 $config['ui']['css_inline'][] = array(
   'source'     => 'theme_generated',
   'file'       => 'extra_styles_inline.css',
+  'is_enabled' => 0,
+);
+// We could inline the contents of static .css files too.
+$config['ui']['css_inline'][] = array(
+  'source'     => 'theme_static',
+  'file'       => 'static.css',
   'is_enabled' => 0,
 );
 
@@ -77,6 +83,13 @@ $config['ui']['css_external'][] = array(
 // -----------------------------------------------------------------------------
 // JS files for the HTML body.
 
+// Mandatory script for elementary UI behaviors.
+$config['ui']['js_body_regular'][] = array(
+  'source'     => 'theme',
+  'file'       => 'custom-feature-detects.js',
+  'is_enabled' => 1,
+);
+
 // Custom theme behaviors.
 $config['ui']['js_body_regular'][] = array(
   'source'     => 'theme',
@@ -91,13 +104,6 @@ $config['ui']['js_body_regular'][] = array(
   'file'       => 'visual-debug.js',
   'async'      => 1,
   'is_enabled' => 0,
-);
-
-// Mandatory script for elementary UI behaviors.
-$config['ui']['js_body_late'][] = array(
-  'source'     => 'theme',
-  'file'       => 'custom-feature-detects.js',
-  'is_enabled' => 1,
 );
 
 // A note about modernizr being loaded with async: I recently started having

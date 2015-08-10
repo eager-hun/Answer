@@ -87,6 +87,8 @@ function pageutils_define_system_pages(&$definitions) {
  *   - body_js
  * @return string
  *   Rendered <style>, <link> and <script> tags.
+ *
+ * TODO: a nice reduction of redundancies in here.
  */
 function pageutils_document_assets($return_type) {
   global $registry, $config, $request;
@@ -104,25 +106,6 @@ function pageutils_document_assets($return_type) {
   // CSS.
 
   if ($return_type == 'head_css') {
-    if (!empty($config['ui']['css_inline'])) {
-      $inline_css_buffer = '';
-      foreach ($config['ui']['css_inline'] as $inline) {
-        if (empty($inline['is_enabled'])) {
-          continue;
-        }
-        if ($inline['source'] == 'theme_generated') {
-          $file = $registry['app_internals']['theme'] . '/css/'
-            . ensafe_string($inline['file'], 'path_with_file_name');
-        }
-        if (!empty($file) && file_exists($file)) {
-          $inline_css_buffer .= ensafe_string(file_get_contents($file), 'css');
-        }
-      }
-      unset($inline);
-      if (!empty($inline_css_buffer)) {
-        $output .= "<style>\n" . $inline_css_buffer . "\n</style>\n";
-      }
-    }
     if (!empty($config['ui']['css_external'])) {
       foreach ($config['ui']['css_external'] as $external) {
         if (empty($external['is_enabled'])) {
@@ -148,6 +131,29 @@ function pageutils_document_assets($return_type) {
         }
       }
       unset($external);
+    }
+    if (!empty($config['ui']['css_inline'])) {
+      $inline_css_buffer = '';
+      foreach ($config['ui']['css_inline'] as $inline) {
+        if (empty($inline['is_enabled'])) {
+          continue;
+        }
+        if ($inline['source'] == 'theme_generated') {
+          $file = $registry['app_internals']['theme'] . '/css/'
+            . ensafe_string($inline['file'], 'path_with_file_name');
+        }
+        elseif ($inline['source'] == 'theme_static') {
+          $file = $registry['app_internals']['theme'] . '/css-static/'
+            . ensafe_string($inline['file'], 'path_with_file_name');
+        }
+        if (!empty($file) && file_exists($file)) {
+          $inline_css_buffer .= ensafe_string(file_get_contents($file), 'css');
+        }
+      }
+      unset($inline);
+      if (!empty($inline_css_buffer)) {
+        $output .= "<style>\n" . $inline_css_buffer . "\n</style>\n";
+      }
     }
     return $output;
   }

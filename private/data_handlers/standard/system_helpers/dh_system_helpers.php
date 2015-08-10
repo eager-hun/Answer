@@ -274,12 +274,11 @@ function _content_meta($args) {
  * Site lastmod.
  */
 function _site_lastmod($args) {
-  if (!empty($GLOBALS['config']['document']['global_lastmod'])) {
-    $lastmod = $GLOBALS['config']['document']['global_lastmod'];
+  if (!empty($GLOBALS['config']['site_global_lastmod'])) {
     apputils_wake_resource('data_handler', 'field_date');
     $date_args = array(
       'order' => array(
-        'data' => $lastmod,
+        'data' => $GLOBALS['config']['site_global_lastmod'],
       ),
     );
     $output = '<div class="label">' . loc('website-lastmod') . "</div>\n";

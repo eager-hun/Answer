@@ -12,6 +12,8 @@
 
 define('DIRECTOR_DIR', dirname(__FILE__) . '/');
 
+$config = array();
+
 // Registry is being used to describe internal properties of the app.
 // Here in director.php, on a number of occassions we append directory names and
 // path fragments to it that allocate the app's resources in the file system.
@@ -57,6 +59,13 @@ $registry['app_externals']['path_root'] = 'public';
 // instance in e.g. the config, definitions and permanent_strorage directories.
 $registry['app_internals']['website_instance'] = 'example_website';
 
+// Most recent modification to this website (or its contents).
+// The intention is giving the visitor a hint on the 'abandonedness' of the
+// website. IMO, abandoned websites with outdated content can cause real
+// inconvenience for people in a number of situations.
+// Format: YYYY-MM-DD .
+$config['site_global_lastmod'] = '2015-08-10';
+
 // Configuration ends.
 // -----------------------------------------------------------------------------
 
@@ -93,7 +102,6 @@ $registry['app_current']['config'] =
 // Initiate global variables.
 // (And ones that are likely to receive appended data straight away.)
 
-$config                                                = array();
 $config['presets']                                     = array();
 $config['presets']['dev']                              = array();
 $config['presets']['stage']                            = array();
