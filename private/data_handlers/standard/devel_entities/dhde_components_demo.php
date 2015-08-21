@@ -519,7 +519,6 @@ function _decd_grids() {
     );
     $item_attributes = array(
       'class' => array(
-        'item',
         'tpl--feature_highlight',
       ),
     );
@@ -532,7 +531,7 @@ function _decd_grids() {
     );
     ob_start();
     include $feature_highlight_template;
-    $fh_list__rendered_items[] = ob_get_clean();
+    $fh_list__rendered_items[] = '<div class="item">' . ob_get_clean() . '</div>';
   }
   unset($item);
 
@@ -548,17 +547,23 @@ function _decd_grids() {
   $list_4 .= $fh_list_5_items;
   $list_4 .= '</div>';
 
+  $list_5 = '<div class="l--flexbox l--flexbox--cols-3 flexbox--equal-width">';
+  $list_5 .= $fh_list_5_items;
+  $list_5 .= '</div>';
+
   $demo = '<h3>Matrix, float, 4 columns</h3>' . $list_1
         . '<h3>Matrix, float, 3 columns</h3>' . $list_2
         . '<h3>Flexbox single row "auto stuffer", with <code>display: table;</code> fallback</h3>'
         . '<p class="description">The listed items in this demo are "Feature highlight" components.</p>'
         . $list_3
-        . '<h3>Flexbox 3-col multi row, with floated grid fallback</h3>'
+        . '<h3><span class="anchor" id="anchor--flexbox-multirow"></span>Flexbox 3-col multi row, with floated grid fallback</h3>'
         . '<ul class="description">'
         . '<li>If the number of items and the number of columns are not divisible without remainder, then the items in the last row will distribute automatically to use all room.</li>'
         . '<li>The listed items in this demo are "Feature highlight" components.</li>'
         . '</ul>'
-        . $list_4;
+        . $list_4
+        . '<h4><span class="anchor" id="anchor--flexbox-multirow--equal-width"></span>Flexbox 3-col multi row variant: equal-width columns</h4>'
+        . $list_5;
 
   $output = array(
     'name'        => 'grids',

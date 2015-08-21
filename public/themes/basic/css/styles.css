@@ -1056,6 +1056,14 @@ span.anchor {
     display: -webkit-flex;
     display: flex;
   }
+  .mdz-flexbox .l--flexbox > .item {
+    display: -webkit-flex;
+    display: flex;
+  }
+  .mdz-flexbox .l--flexbox > .item > div {
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+  }
   .mdz-flexbox .l--flexbox--auto-row {
     -webkit-flex-direction: row;
     flex-direction: row;
@@ -1088,6 +1096,24 @@ span.anchor {
   }
   .mdz-flexbox .l--flexbox--cols-3 > .item:first-child, .mdz-flexbox .l--flexbox--cols-3 > .item:nth-child(2), .mdz-flexbox .l--flexbox--cols-3 > .item:nth-child(3) {
     margin-top: 0;
+  }
+  .mdz-flexbox .l--flexbox--cols-3.flexbox--equal-width > .item {
+    -webkit-flex: 0 0 auto;
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 1.35em 0.45em 0;
+    width: 33.3333%;
+  }
+  .mdz-flexbox .l--flexbox--cols-3.flexbox--equal-width > .item:first-child, .mdz-flexbox .l--flexbox--cols-3.flexbox--equal-width > .item:nth-child(3n+1) {
+    padding-left: 0;
+    padding-right: 0.9em;
+  }
+  .mdz-flexbox .l--flexbox--cols-3.flexbox--equal-width > .item:nth-child(3n+3) {
+    padding-left: 0.9em;
+    padding-right: 0;
+  }
+  .mdz-flexbox .l--flexbox--cols-3.flexbox--equal-width > .item:first-child, .mdz-flexbox .l--flexbox--cols-3.flexbox--equal-width > .item:nth-child(2), .mdz-flexbox .l--flexbox--cols-3.flexbox--equal-width > .item:nth-child(3) {
+    padding-top: 0;
   }
 }
 .tpl--layout_2col_asm_combi > .slot {

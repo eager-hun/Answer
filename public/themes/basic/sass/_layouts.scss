@@ -547,6 +547,18 @@
     // Common styles.
     .l--flexbox {
       @include display-flex;
+
+      & > .item {
+        // These items' flex property will be set later, as per variants.
+        // Items will be flex-parents too.
+        @include display-flex;
+
+        // If the child element will be other than a div (e.g. an ul) then
+        // that's flex property will have to be set ad-hoc.
+        & > div {
+          @include flex(1 1 auto);
+        }
+      }
     }
 
     // .l--flexbox--auto-row is always a single, non-wrapping row.
@@ -595,8 +607,34 @@
         }
       }
     }
+    // Equal column-width variant; overrides.
+    .l--flexbox--cols-3.flexbox--equal-width {
+      & > .item {
+        @include flex(0 0 auto);
+
+        margin: 0;
+        padding: $layout-pad*1.35 $layout-pad*0.45 0;
+        width: 33.3333%;
+
+        &:first-child,
+        &:nth-child(3n+1) {
+          padding-left: 0;
+          padding-right: $layout-pad*0.9;
+        }
+        &:nth-child(3n+3) {
+          padding-left: $layout-pad*0.9;
+          padding-right: 0;
+        }
+        &:first-child,
+        &:nth-child(2),
+        &:nth-child(3) {
+          padding-top: 0;
+        }
+      }
+    }
   }
 }
+
 
 
 // #############################################################################
