@@ -82,8 +82,12 @@ function _header_branding($args) {
  */
 function _header_widgets($args) {
   // Preparing the widgets in the header.
-  $output = '<a class="menu-trigger" href="#navigation">' . loc('Menu') . '</a>'
-            . _language_switcher('');
+  $output = '<a class="menu-trigger" href="#navigation">' . loc('Menu') . '</a>';
+
+  if (!empty($GLOBALS['config']['ui']['enable_langswitchers'])) {
+    $output .= _language_switcher('');
+  }
+
   // Sending the screen-fixed menu button out to the base of the DOM tree.
   $GLOBALS['temp']['layout_elements']['body_end'][] =
     '<a class="menu-trigger fixed" href="#navigation">' . loc('Menu') . '</a>';

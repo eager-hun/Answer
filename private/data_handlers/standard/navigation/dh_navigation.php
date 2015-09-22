@@ -28,7 +28,10 @@ datautils_prepare_menus(
 // Standard function.
 
 function dh_navigation($args) {
-  if ($args['order_id'] == 'main_menu') {
+  $output = '';
+
+  if (!empty($GLOBALS['config']['ui']['enable_langswitchers'])
+      && $args['order_id'] == 'main_menu') {
     apputils_wake_resource('data_handler', 'system_helpers');
     $order = array(
       'order_id' => 'language_switcher',
@@ -37,13 +40,11 @@ function dh_navigation($args) {
         'class' => array('langswitch--nav'),
       ),
     );
-    $output = dh_system_helpers($order);
-    $output .= _fetch_menu_from_temp($args);
-    return $output;
+    $output .= dh_system_helpers($order);
   }
-  else {
-    return _fetch_menu_from_temp($args);
-  }
+
+  $output .= _fetch_menu_from_temp($args);
+  return $output;
 }
 
 function _fetch_menu_from_temp($args) {
