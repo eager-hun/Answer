@@ -84,7 +84,7 @@ $config['ui']['css_external'][] = array(
 // JS files for the HTML body.
 
 // Mandatory script for elementary UI behaviors.
-$config['ui']['js_body_regular'][] = array(
+$config['ui']['js_head_early'][] = array(
   'source'     => 'theme',
   'file'       => 'custom-feature-detects.js',
   'is_enabled' => 1,

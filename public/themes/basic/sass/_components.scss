@@ -80,10 +80,8 @@ blockquote {
         padding: 0;
       }
       & > ul {
-        @include bare-list;
-
-        margin-left: 1em;
-
+        margin-left: 1em; // To provide the extra indent mimicking <dl>s.
+        padding-left: 1.1em; // As the original style in _base.scss.
       }
     }
     & > li + li {
@@ -91,7 +89,7 @@ blockquote {
       margin-top: 0.3em;
     }
   }
-  ul ul ul {
+  ul ul {
     list-style-type: disc;
 
     ul {

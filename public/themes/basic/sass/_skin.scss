@@ -151,8 +151,8 @@ h2 + .description {
       @include background-image(
         linear-gradient(
           to right,
-          color(blockfill),
-          transparent 2em
+          color(blockfill) 0%,
+          rgba(white, 0) 9%
         )
       );
 
@@ -177,8 +177,8 @@ h2 + .description {
         @include background-image(
           linear-gradient(
             to right,
-            color(border-light),
-            transparent 2em
+            color(border-light) 0%,
+            rgba(white, 0) 9%
           )
         );
 
@@ -199,6 +199,32 @@ h2 + .description {
   }
   h2 + & {
     padding-top: $layout-pad;
+  }
+}
+// Growing screens.
+@include breakpoint($bkp-narrow-mt-min) {
+  .list-style--tickets {
+    & > ul {
+      & > li {
+        @include background-image(
+          linear-gradient(
+            to right,
+            color(blockfill) 0%,
+            rgba(white, 0) 4%
+          )
+        );
+        &::before,
+        &::after {
+          @include background-image(
+            linear-gradient(
+              to right,
+              color(border-light) 0%,
+              rgba(white, 0) 4%
+            )
+          );
+        }
+      }
+    }
   }
 }
 

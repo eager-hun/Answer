@@ -75,7 +75,7 @@
     display: block; // It was hidden before.
   }
 }
-@include breakpoint($bkp-wide-ht-min) {
+@include breakpoint($bkp-wide-min) {
   .page-level--header {
     .page-center {
       padding-top: $layout-pad*0.75;
@@ -149,7 +149,7 @@ h1.page__title { // Overspecifying to override other h1 rule.
 }
 @include breakpoint($layout-page-max-width) {
   .content-level {
-    min-height: 24em;
+    min-height: 20em;
   }
 }
 

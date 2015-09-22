@@ -294,6 +294,7 @@
   vertical-align: bottom;
 }
 
+
 // #############################################################################
 // Skin.
 
@@ -488,6 +489,7 @@ $image-default-border-color: color(border-light);
     &:visited {
       color: darken(color(minor), 10%);
     }
+    &.active,
     &:hover,
     &:visited:hover,
     &:focus {

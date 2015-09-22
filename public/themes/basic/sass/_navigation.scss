@@ -212,7 +212,8 @@ $_light-color: color(blockfill);
 
 .nav-format--button-row {
   .menu__item {
-    float: left;
+    float: none;
+    display: inline-block;
     margin: 0 $layout-pad*0.25 $layout-pad*0.5;
     white-space: nowrap;
   }
