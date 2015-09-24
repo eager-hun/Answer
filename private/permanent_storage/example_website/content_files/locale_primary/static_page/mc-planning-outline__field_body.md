@@ -10,6 +10,7 @@ Privately accessible page, where site admins could keep their thoughts of this c
 
 - `articles_all`
 - `images_all`
+- `components_demo`
 - `devel`
 - `mission_control`
 
@@ -28,5 +29,7 @@ Privately accessible page, where site admins could keep their thoughts of this c
   - `/articles/[article-title]`
 - `/images/` (index page)
   - `/images/[image-title]`
+- `/components-demo/` (index page)
+  - `/components-demo/[demo-title]`
 - `/devel/[page-title]`
 - `/mission-control/[page-title]`

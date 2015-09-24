@@ -88,7 +88,7 @@ $pages['articles-all'] = [
     'primary'   => 'articles/',
     'secondary' => 'cikkek/',
   ],
-  'in_section'        => '',
+  'in_section'        => 'articles_all',
   'in_context'        => '',
 ];
 
@@ -164,7 +164,7 @@ $pages['images-all'] = [
     'primary'   => 'images/',
     'secondary' => 'kepek/',
   ],
-  'in_section'        => '',
+  'in_section'        => 'images_all',
   'in_context'        => '',
   'xml_sitemap_include' => 1,
 ];
@@ -220,6 +220,7 @@ $pages['301-articles'] = [
 ];
 
 // -----------------------------------------------------------------------------
+// Redirecting the slash-less 'images' path to the slashed one.
 $pages['301-images'] = [
   'data_type'         => 'entity',
   'entity_type'       => 'dynamic',
@@ -231,6 +232,22 @@ $pages['301-images'] = [
   'new_locations' => [
     'primary'   => base_path(array('for_locale' => 'primary')) . 'images/',
     'secondary' => base_path(array('for_locale' => 'secondary')) . 'kepek/',
+  ],
+];
+
+// -----------------------------------------------------------------------------
+// Redirecting the slash-less 'components-demo' path to the slashed one.
+$pages['301-cd'] = [
+  'data_type'         => 'entity',
+  'entity_type'       => 'dynamic',
+  'instance_id'       => 'http-301',
+  'paths' => [
+    'primary'   => 'components-demo',
+    'secondary' => NULL,
+  ],
+  'new_locations' => [
+    'primary'   => base_path(array('for_locale' => 'primary')) . 'components-demo/',
+    'secondary' => NULL,
   ],
 ];
 
@@ -294,6 +311,108 @@ $pages['mc-planning-taxonomy'] = [
 
 
 // #############################################################################
+// COMPONENTS DEMOS.
+
+// -----------------------------------------------------------------------------
+$pages['cd_index'] = [
+  'data_type'         => 'entity',
+  'entity_type'       => 'dynamic_page',
+  'instance_id'       => 'cd_index',
+  'has_translations'  => 0,
+  'paths' => [
+    'primary'   => 'components-demo/',
+    'secondary' => NULL,
+  ],
+  'in_section'        => 'components_demo',
+  'in_context'        => '',
+];
+
+// -----------------------------------------------------------------------------
+$pages['cd_typography'] = [
+  'data_type'         => 'entity',
+  'entity_type'       => 'dynamic_page',
+  'instance_id'       => 'cd_typography',
+  'has_translations'  => 0,
+  'paths' => [
+    'primary'   => 'components-demo/typography',
+    'secondary' => NULL,
+  ],
+  'in_section'        => 'components_demo',
+  'in_context'        => '',
+];
+
+// -----------------------------------------------------------------------------
+$pages['cd_in_text'] = [
+  'data_type'         => 'entity',
+  'entity_type'       => 'dynamic_page',
+  'instance_id'       => 'cd_in_text',
+  'has_translations'  => 0,
+  'paths' => [
+    'primary'   => 'components-demo/in-text-features',
+    'secondary' => NULL,
+  ],
+  'in_section'        => 'components_demo',
+  'in_context'        => '',
+];
+
+// -----------------------------------------------------------------------------
+$pages['cd_forms'] = [
+  'data_type'         => 'entity',
+  'entity_type'       => 'dynamic_page',
+  'instance_id'       => 'cd_forms',
+  'has_translations'  => 0,
+  'paths' => [
+    'primary'   => 'components-demo/forms',
+    'secondary' => NULL,
+  ],
+  'in_section'        => 'components_demo',
+  'in_context'        => '',
+];
+
+// -----------------------------------------------------------------------------
+$pages['cd_grids_fbs'] = [
+  'data_type'         => 'entity',
+  'entity_type'       => 'dynamic_page',
+  'instance_id'       => 'cd_grids_fbs',
+  'has_translations'  => 0,
+  'paths' => [
+    'primary'   => 'components-demo/grids-and-flexboxes',
+    'secondary' => NULL,
+  ],
+  'in_section'        => 'components_demo',
+  'in_context'        => '',
+];
+
+// -----------------------------------------------------------------------------
+$pages['cd_content_widgets'] = [
+  'data_type'         => 'entity',
+  'entity_type'       => 'dynamic_page',
+  'instance_id'       => 'cd_content_widgets',
+  'has_translations'  => 0,
+  'paths' => [
+    'primary'   => 'components-demo/content-widgets',
+    'secondary' => NULL,
+  ],
+  'in_section'        => 'components_demo',
+  'in_context'        => '',
+];
+
+// -----------------------------------------------------------------------------
+$pages['cd_ajax_modals'] = [
+  'data_type'         => 'entity',
+  'entity_type'       => 'dynamic_page',
+  'instance_id'       => 'cd_ajax_modals',
+  'has_translations'  => 0,
+  'paths' => [
+    'primary'   => 'components-demo/ajax-and-modals',
+    'secondary' => NULL,
+  ],
+  'in_section'        => 'components_demo',
+  'in_context'        => '',
+];
+
+
+// #############################################################################
 // DEVELOPER CONTENT.
 
 // -----------------------------------------------------------------------------
@@ -318,20 +437,6 @@ $pages['devel-project-1'] = [
   'paths' => [
     'primary'   => 'devel/project-1',
     'secondary' => 'devel/projekt-1',
-  ],
-  'in_section'        => 'devel',
-  'in_context'        => 'noindex',
-];
-
-// -----------------------------------------------------------------------------
-$pages['devel-comp-demo'] = [
-  'data_type'         => 'entity',
-  'entity_type'       => 'dynamic',
-  'instance_id'       => 'devel-comp-demo',
-  'has_translations'  => 0,
-  'paths' => [
-    'primary'   => 'devel/components-demo',
-    'secondary' => NULL,
   ],
   'in_section'        => 'devel',
   'in_context'        => 'noindex',

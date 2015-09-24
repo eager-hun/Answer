@@ -2568,7 +2568,7 @@ a.locale:focus .flag {
 .nav-format--button-row .menu__link, .nav-format--button-row .menu__link:visited {
   color: #5e5e5e;
 }
-.nav-format--button-row .menu__link.active, .nav-format--button-row .menu__link:hover, .nav-format--button-row .menu__link:visited:hover, .nav-format--button-row .menu__link:focus {
+.nav-format--button-row .menu__link.active, .nav-format--button-row .menu__link.active-trail, .nav-format--button-row .menu__link:hover, .nav-format--button-row .menu__link:visited:hover, .nav-format--button-row .menu__link:focus {
   background-color: #5a5aa6;
   border: none;
   color: #eee;

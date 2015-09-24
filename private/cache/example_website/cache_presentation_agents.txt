@@ -4,6 +4,7 @@ automatic_inventory
 block
 content_level_default
 dynamic_full
+dynamic_page_full
 generic_full
 image_display_full
 image_display_preview

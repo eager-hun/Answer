@@ -7,21 +7,16 @@
 @import "sass_mixins";
 
 
-// Various elements on the components demo page.
-.component-demo {
-  .component-demo + & {
-    margin-top: $layout-pad*3.5;
+
+h2.cd {
+  @include h3-style;
+
+  border-bottom: none;
+  padding-bottom: 0;
+
+  & + .description {
+    margin: 1em 0 1.85em;
   }
-  .l--flexbox:not(.splitter) {
-    margin-top: $layout-pad*2;
-    margin-bottom: $layout-pad*3;
-  }
-  h2 + .cd__demo {
-    margin-top: $layout-pad*2;
-  }
-}
-.cd__title {
-  margin-bottom: 0.15em;
 }
 
 

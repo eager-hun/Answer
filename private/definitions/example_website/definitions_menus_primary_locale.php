@@ -80,6 +80,11 @@ $menus['footer_menu'] = array(
       'path'   => 'articles/',
       'text'   => 'Articles',
       // 'title'  => 'Articles',
+      'item_options' => array(
+        'active_trail_when' => array(
+          'section' => 'articles_all',
+        ),
+      ),
     ),
     'images-all' => array(
       'depth'  => 1,
@@ -94,12 +99,85 @@ $menus['footer_menu'] = array(
         ),
       ),
     ),
+    'components_demo' => array(
+      'depth'  => 1,
+      'parent' => FALSE,
+      'type'   => 'link',
+      'path'   => 'components-demo/',
+      'text'   => 'Components demo',
+      // 'title'  => 'Components demo',
+      'item_options' => array(
+        'active_trail_when' => array(
+          'section' => 'components_demo',
+        ),
+      ),
+    ),
   ),
 );
 
 
 // #############################################################################
-// Admin and deveoper's menus.
+// Admin and developer's menus.
+
+// Components demo.
+$menus['components_demo_menu'] = array(
+  'menu_options' => array(
+    'attributes' => array(
+      'class' => array(
+        'nav-format--regular',
+        'variant--light',
+      ),
+    ),
+  ),
+  'items' => array(
+    'cd_typography' => array(
+      'depth'  => 1,
+      'parent' => FALSE,
+      'type'   => 'link',
+      'path'   => 'components-demo/typography',
+      'text'   => 'Typography',
+    ),
+    'cd_in_text' => array(
+      'depth'  => 1,
+      'parent' => FALSE,
+      'type'   => 'link',
+      'path'   => 'components-demo/in-text-features',
+      'text'   => 'In-text features',
+    ),
+    /*
+    'cd_forms' => array(
+      'depth'  => 1,
+      'parent' => FALSE,
+      'type'   => 'link',
+      'path'   => 'components-demo/forms',
+      'text'   => 'Forms',
+    ),
+    */
+    'cd_grids_fbs' => array(
+      'depth'  => 1,
+      'parent' => FALSE,
+      'type'   => 'link',
+      'path'   => 'components-demo/grids-and-flexboxes',
+      'text'   => 'Grids & flexboxes',
+    ),
+    'cd_content_widgets' => array(
+      'depth'  => 1,
+      'parent' => FALSE,
+      'type'   => 'link',
+      'path'   => 'components-demo/content-widgets',
+      'text'   => 'Content-widgets',
+    ),
+    /*
+    'cd_ajax_modals' => array(
+      'depth'  => 1,
+      'parent' => FALSE,
+      'type'   => 'link',
+      'path'   => 'components-demo/ajax-and-modals',
+      'text'   => 'Ajax and modals',
+    ),
+    */
+  ),
+);
 
 // Mission control.
 $menus['mission_control_menu'] = array(
@@ -165,13 +243,6 @@ $menus['developers-menu'] = array(
       'type'   => 'link',
       'path'   => 'devel/documentation-for-developers',
       'text'   => 'Developer documentation',
-    ),
-    'devel-comp-demo' => array(
-      'depth'  => 1,
-      'parent' => FALSE,
-      'type'   => 'link',
-      'path'   => 'devel/components-demo',
-      'text'   => 'Components demo',
     ),
     'development' => array(
       'depth'  => 1,

@@ -173,6 +173,20 @@ $binders['sidebar_1_default'] = array(
     array(
       'data_type'   => 'entity',
       'entity_type' => 'dynamic',
+      'instance_id' => 'components_demo_menu',
+      'present_as'  => 'block',
+      'wrapper_options' => array(
+        'attributes' => array(
+          'class'    => array(
+            'block--menu',
+            'indications--on-right',
+          ),
+        ),
+      ),
+    ),
+    array(
+      'data_type'   => 'entity',
+      'entity_type' => 'dynamic',
       'instance_id' => 'mission-control-menu',
       'present_as'  => 'block',
       'wrapper_options' => array(

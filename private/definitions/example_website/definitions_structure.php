@@ -83,6 +83,48 @@ $structure['entity_definitions']['static_page'] = array(
 );
 
 // -----------------------------------------------------------------------------
+// DYNAMIC_PAGE entity type.
+$structure['entity_definitions']['dynamic_page'] = array(
+  'properties' => array(
+    'is_published',
+  ),
+  'fields' => array(
+    // Fields with role: meta.
+    'field_date_created' => array(
+      'role' => 'meta',
+      'type' => 'field_date',
+      'translatable' => FALSE,
+      'label' => loc('fl--date-published'),
+    ),
+    'field_date_lastmod' => array(
+      'role' => 'meta',
+      'type' => 'field_date',
+      'translatable' => FALSE,
+      'label' => loc('fl--date-lastmod'),
+    ),
+    // Fields with role: data.
+    'field_title' => array(
+      'role' => 'data',
+      'type' => 'field_text',
+      'translatable' => TRUE,
+      'label' => loc('fl--title'),
+    ),
+    'field_subtitle' => array(
+      'role' => 'data',
+      'type' => 'field_text',
+      'translatable' => TRUE,
+      'label' => loc('fl--subtitle'),
+    ),
+    'field_body' => array(
+      'role' => 'data',
+      'type' => 'field_php',
+      'translatable' => FALSE,
+      'label' => loc('fl--body'),
+    ),
+  ),
+);
+
+// -----------------------------------------------------------------------------
 // ARTICLE entity type.
 /**
  * Concerning author_id and author_name fields: you should use only one of them.

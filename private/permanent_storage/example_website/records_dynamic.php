@@ -328,6 +328,32 @@ $dynamic['footer-menu'] = [
 ];
 
 // -----------------------------------------------------------------------------
+$dynamic['components_demo_menu'] = [
+  'meta' => [
+    'is_published' => 1,
+    'text_formats' => [
+      'field_title'       => 'html',
+      'field_description' => 'html',
+    ],
+    'data_handlers' => [
+      'field_body' => 'navigation',
+    ],
+  ],
+  'data' => [
+    'field_title' => [
+      'locale_primary'   => 'Components demo',
+      'locale_secondary' => NULL,
+    ],
+    // The field_body is instructions for the specified data-handler.
+    'field_body' => [
+      'args' => [
+        'order_id' => 'components_demo_menu',
+      ],
+    ],
+  ],
+];
+
+// -----------------------------------------------------------------------------
 $dynamic['mission-control-menu'] = [
   'meta' => [
     'is_published' => 0,

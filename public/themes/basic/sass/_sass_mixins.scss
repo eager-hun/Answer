@@ -490,6 +490,7 @@ $image-default-border-color: color(border-light);
       color: darken(color(minor), 10%);
     }
     &.active,
+    &.active-trail,
     &:hover,
     &:visited:hover,
     &:focus {
