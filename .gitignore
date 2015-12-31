@@ -35,7 +35,8 @@ composer.lock
 *.css.map
 
 # I don't know if I may include a generated modernizr.js instance, so I don't.
-# I'll put the custom-build's download link in the theme_settings.php where I declare it.
+# I'll put the custom-build's download link in the theme_settings.php where
+# I declare it.
 modernizr.custom.*.js
 
 # Content-related
@@ -49,5 +50,5 @@ modernizr.custom.*.js
 /subdir-test
 
 # Practical usage related
-/private/trunk/*
-!/private/trunk/README.md
+/private/website_instances/*/trunk/*
+!/private/website_instances/*/trunk/README.md

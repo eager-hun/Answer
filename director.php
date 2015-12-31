@@ -57,45 +57,44 @@ $registry['app_externals']['path_root'] = 'public';
 // The website instance to be used.
 // This should be the name of the directory that will represent the site
 // instance in e.g. the config, definitions and permanent_strorage directories.
-$registry['app_internals']['website_instance'] = 'example_website';
+$registry['app_internals']['website_instance'] = 'example-website';
 
-// Most recent modification to this website (or its contents).
-// The intention is giving the visitor a hint on the 'abandonedness' of the
-// website. IMO, abandoned websites with outdated content can cause real
-// inconvenience for people in a number of situations.
-// Format: YYYY-MM-DD .
-$config['site_global_lastmod'] = '2015-08-10';
-
-// Configuration ends.
+// Configuration ends here.
 // -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// Mapping internal resource locations.
 
 $registry['app_internals']['app'] =
   $registry['app_internals']['private_assets'] . '/app';
 
-$registry['app_internals']['utilities'] =
-  $registry['app_internals']['app'] . '/utilities';
-
-$registry['app_internals']['config'] =
-  $registry['app_internals']['private_assets'] . '/config';
-
-$registry['app_internals']['definitions'] =
-  $registry['app_internals']['private_assets'] . '/definitions';
+$registry['app_internals']['libraries_backend'] =
+  $registry['app_internals']['private_assets'] . '/libraries_backend';
 
 $registry['app_internals']['data_handlers'] =
   $registry['app_internals']['private_assets'] . '/data_handlers';
 
-$registry['app_internals']['storage'] =
-  $registry['app_internals']['private_assets'] . '/permanent_storage';
+$registry['app_internals']['utilities'] =
+  $registry['app_internals']['app'] . '/utilities';
 
-$registry['app_internals']['libraries_backend'] =
-  $registry['app_internals']['private_assets'] . '/libraries_backend';
+$registry['app_current']['instance'] =
+  $registry['app_internals']['private_assets'] . '/website_instances/'
+  . $registry['app_internals']['website_instance'];
 
-$registry['app_internals']['cache'] =
-  $registry['app_internals']['private_assets'] . '/cache';
+// -----------------------------------------------------------------------------
+// Website-instance-specific resources.
 
 $registry['app_current']['config'] =
-  $registry['app_internals']['config']
-  . '/' . $registry['app_internals']['website_instance'];
+  $registry['app_current']['instance'] . '/config';
+
+$registry['app_current']['definitions'] =
+  $registry['app_current']['instance'] . '/definitions';
+
+$registry['app_current']['storage'] =
+  $registry['app_current']['instance'] . '/permanent_storage';
+
+$registry['app_current']['cache'] =
+  $registry['app_current']['instance'] . '/cache';
 
 
 // #############################################################################
@@ -161,11 +160,23 @@ $temp['layout_elements']['body_end']                   = array();
 
 
 // #############################################################################
-// App progress: initial declarations + reading config.
+// App progress: getting the app into reading the config.
 
 require_once($registry['app_internals']['utilities'] . '/utility_security.php');
 require_once($registry['app_internals']['utilities'] . '/utility_app_init.php');
-require_once($registry['app_current']['config'] . '/config.php');
+
+if (!file_exists($registry['app_current']['instance'])
+    || !is_dir($registry['app_current']['instance'])) {
+  sys_notify("Error: the application could not find the current website-instance's resources.", 'alert');
+  apputils_exit_nicely();
+}
+
+$config_file = $registry['app_current']['config'] . '/config.php';
+if (!file_exists($config_file)) {
+  sys_notify("Error: the application could not find the website-instance's config.", 'alert');
+  apputils_exit_nicely();
+}
+require_once($config_file);
 
 // Introducing config preset values to the application.
 $config['env']['http_protocol'] =
@@ -184,19 +195,6 @@ $config['app']['admin_mode'] =
   $config['presets'][CONFIG_PRESET]['admin_mode'];
 $config['app']['give_up_security'] =
   $config['presets'][CONFIG_PRESET]['give_up_security'];
-
-// Site-instance-dependent locations.
-$registry['app_current']['definitions'] =
-  $registry['app_internals']['definitions']
-    . '/' . $registry['app_internals']['website_instance'];
-
-$registry['app_current']['storage'] =
-  $registry['app_internals']['storage']
-    . '/' . $registry['app_internals']['website_instance'];
-
-$registry['app_current']['cache'] =
-  $registry['app_internals']['cache']
-    . '/' . $registry['app_internals']['website_instance'];
 
 // -----------------------------------------------------------------------------
 // Post-config adjustments.
@@ -217,11 +215,11 @@ implement_security_policies();
 require_once($registry['app_internals']['app'] . '/orientation/orientation.php');
 
 // -----------------------------------------------------------------------------
-// Task handler stage.
 // Registering theme and templating setup.
+
 $registry['app_internals']['theme'] =
-  $registry['app_internals']['public_assets']
-  . '/themes/' . ensafe_string($config['theme']['name'], 'path_fragment');
+  $registry['app_internals']['public_assets'] . '/themes/'
+  . ensafe_string($config['theme']['name'], 'path_fragment');
 
 // Templates' and present agents' source.
 if ($config['theme']['templates_source'] == 'theme') {
@@ -255,7 +253,9 @@ $registry['app_externals']['assets_frontend'] =
 $registry['app_externals']['document_files'] =
   $registry['app_externals']['path_root'] . '/document_files';
 
-// Handling the current task.
+// -----------------------------------------------------------------------------
+// Task handling stage.
+
 $non_content_tasks = array(
   'session'
 );

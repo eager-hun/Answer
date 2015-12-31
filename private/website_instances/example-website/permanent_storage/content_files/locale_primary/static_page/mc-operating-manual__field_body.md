@@ -3,21 +3,47 @@
 
 **_Topics:_**
 
+- [Working with website instances](#anchor--website-instances)
 - [Using the bare data mode](#anchor--bare-data-mode)
 - [Adding new content](#anchor--adding-new-content)
-- [Adding new website instance](#anchor--new-website)
 - [Initial deploy to public server](#anchor--initial-deploy)
 - [Deploying changes to public server](#anchor--deploying-changes)
 
 <!--/HIGH-->
 
+
+## <span class="anchor" id="anchor--website-instances"></span> Working with "website instances"
+
+This application can hold definitions and content for multiple websites at the same time.
+
+Out of the website definitions, only one can be used at a time: the chosen instance's name needs to be set in the app configuration. At the time of writing, the app cannot behave as a true multisite installation; in other words, regardless of any request parameter, the website instance being served will always be the one selected in the configuration.
+
+This repository contains only one website instance, called "**example-website**".
+
+### Adding a new website instance to an installation
+
+Website definitions and contents - by default - are located in the `/private/website_instances/` directory.
+
+Each instance's directory needs to contain specific subdirectories and files, whose being missing could trigger errors of various severity.
+
+While the documentation of the mandatory structure/content of website instance definitions is missing, a pragmatic approach is to "clone" the one existing example instance, and modify that one:
+
+1. Duplicate (copy) the `example-website` directory, renaming the duplicate directory's name to the desired name of your new site instance,
+2. Update the new instance's `config.php` with the new site's configuration.
+3. Set the active `website_instance` in `director.php`'s `@ingroup configuration`.
+4. Check if everything works, and you have a working 'clone' of the
+   `example-website`.
+5. You can start modifying the definition- and content-related files of your
+   instance to reflect your wishes.
+
+
 ## <span class="anchor" id="anchor--bare-data-mode"></span>Using the bare data mode
 
 Bare data mode can return a single entity or a binder (a set of entities) without the page and the theme around it. It is a potentially valuable capability for the future, but is also useful in checking/debugging the setup of binders/entities at their most core level.
 
-By default, bare data mode can be accessed on the `/bare-data` path (this value can be overridden from config).
+By default, the bare data mode can be accessed on the `/bare-data` path (this value can be overridden from config).
 
-The bare data mode operates by and is expecting HTTP GET parameters:
+The bare data mode operates by, and is expecting HTTP GET parameters:
 
 - `data_type` (mandatory)
   - Valid values are: `entity` or `binder`.
@@ -30,9 +56,9 @@ The bare data mode operates by and is expecting HTTP GET parameters:
   - Defaults to `html`, the other valid option would be `json`, which, though,
     doesn't do much, as this feature is not finished yet.
 
-### Bare data mode examples:
+### Bare data mode examples
 
-**NOTE:** The following links will work only on a site that is running on a server (not on GitHub), and is serving the `example_website` site instance, and the `bare_data` mode is enabled for the given environment (see in the config.php's _Config presets_ section).
+**NOTE:** The following links will work only on a site that is running on a server (not on GitHub), and is serving the `example-website` site instance, and the `bare_data` mode is enabled for the given environment (see the _Config presets_ section in the active website instance's config.php).
 
 - [a binder]([[base_path]]bare-data?data_type=binder&amp;instance_id=footer_default)
 - [an article with all of its defined data]([[base_path]]bare-data?data_type=entity&amp;entity_type=article&amp;instance_id=article-1)
@@ -53,6 +79,12 @@ want just anybody to be able to access the admin tasks).
 [ Make changes safely on isolated instance ] &rArr; [ Deploy files to public server ]
 
 <!--/HIGH-->
+
+<!--NOTE-->
+
+The following steps need to be carried out in the corresponding `website_instance`'s directory (See [Working with website instances](#anchor--website-instances) section).
+
+<!--/NOTE-->
 
 <!--TICKETS-->
 
@@ -100,22 +132,6 @@ values are changed, it is neccessary to **rebuild the path&nbsp;cache** (the tas
 is accessible via the _admin interface_).
 
 
-## <span class="anchor" id="anchor--new-website"></span>Adding a new website instance to an installation
-
-1. Duplicate the `example_website`'s directories, renaming the duplicate
-   directories' names to the desired name of your new site instance (`cp -r example_website new_instance_name`), in the following locations:
-  - `private/cache/`
-  - `private/config/`
-  - `private/definitions/`
-  - `private/permanent_storage/`
-2. Update the new instance's `config.php` with the new site's configuration.
-3. Then set the active instance in `director.php`'s `@ingroup configuration`.
-4. Check if everything works, and you have a working 'clone' of the
-   `example_website`.
-5. You can start modifying the definition- and content-related files of your
-   instance to reflect your wishes.
-
-
 ## <span class="anchor" id="anchor--initial-deploy"></span>Steps for initial deploy onto public server over FTP
 
 1. place the unpacked installation into the _staging_ directory on server,
@@ -153,7 +169,7 @@ is accessible via the _admin interface_).
 
   - Upload from **_public_** (if you have new items here, start with this):
       - `document_files`
-  - Upload from **_private_**:
+  - Upload from **_private->website\_instance_**:
       - `cache`
       - `definitions`
       - `permanent_storage`
@@ -163,7 +179,7 @@ is accessible via the _admin interface_).
 
 - To update theme:
 
-  - Upload from **_private_**:
+  - Upload from **_private->website\_instance_**:
       - `cache` (There are theme-related caches.)
   - Upload from **_public_**:
       - `shared_assets`

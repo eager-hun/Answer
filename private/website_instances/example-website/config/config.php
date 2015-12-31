@@ -6,6 +6,13 @@
  * @ingroup configuration.
  */
 
+// Most recent modification to this website (or its contents).
+// The intention is giving the visitor a hint on the 'abandonedness' of the
+// website. IMO, abandoned websites with outdated content can cause real
+// inconvenience for people in a number of situations.
+// Format: YYYY-MM-DD .
+$config['site_global_lastmod'] = '2015-12-31';
+
 
 // #############################################################################
 // Config Presets (for various instances that may run in various environments).

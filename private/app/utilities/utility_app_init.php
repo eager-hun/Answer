@@ -155,15 +155,23 @@ function process_sys_notifications(&$sys_notifications_pool, $severity_level = '
 function apputils_exit_nicely($header = '') {
   global $request, $sys_notifications_pool;
 
-  if (empty($header) && !empty($request['server_protocol'])) {
-    header($request['server_protocol'] . ' 500 (script failed)');
+  // This safer value was produced by orientation.php via distrust_input(),
+  // and is available as soon as orientation.php had been parsed.
+  if (!empty($request['server_protocol'])) {
+    $protocol = $request['server_protocol'];
+  }
+  // Else we create a 'second-best' alternative here.
+  else {
+    $protocol = htmlspecialchars($_SERVER["SERVER_PROTOCOL"], ENT_QUOTES, "utf-8");
+  }
+  if (empty($header)) {
+    header($protocol . ' 500');
   }
   else {
-    header($header);
+    header($protocol . ' ' . $header);
   }
-  $output = process_sys_notifications($sys_notifications_pool);
-  print $output;
-  exit;
+  print process_sys_notifications($sys_notifications_pool);
+  exit();
 }
 
 /**
@@ -281,7 +289,7 @@ function apputils_wake_resource($resource_type, $resource_id, $options = array()
         $temp['initiated_resources']['definitions'][] = $resource_id;
       }
       else {
-        _loader_failure($resource_type, $resource_id);
+        _loader_failure($resource_type, $resource_id, TRUE);
       }
     }
   }
@@ -327,8 +335,7 @@ function apputils_wake_resource($resource_type, $resource_id, $options = array()
         $temp['initiated_resources']['permanent_data_storage'][] = $resource_id;
       }
       else {
-        sys_notify("The specified data storage doesn't exist", 'warning');
-        _loader_failure($resource_type, $resource_id);
+        _loader_failure($resource_type, $resource_id, TRUE);
       }
     }
   }
@@ -372,7 +379,7 @@ function apputils_wake_resource($resource_type, $resource_id, $options = array()
   }
 }
 
-function _loader_failure($resource_type, $resource_id) {
+function _loader_failure($resource_type, $resource_id, $shutdown = FALSE) {
   if (is_dev_mode()) {
     $message = 'Error: resource <em>'
       . ensafe_string($resource_id, 'attribute_value')
@@ -383,7 +390,14 @@ function _loader_failure($resource_type, $resource_id) {
   else {
     $message = 'Error: an internal resource was not found. Dev mode may have more info.';
   }
-  sys_notify($message, 'warning');
+
+  if (empty($shutdown)) {
+    sys_notify($message, 'warning');
+  }
+  else {
+    sys_notify($message, 'alert');
+    apputils_exit_nicely();
+  }
 }
 
 /**

@@ -22,7 +22,7 @@ function pageutils_import_paths_from_cache($registry, $request, &$temp, &$datapo
     unset($raw_path, $substrings);
   }
   else {
-    sys_notify('Error: the application could not find the list of paths.', 'alert');
+    sys_notify('Error: the application could not find the path-cache.', 'alert');
     apputils_exit_nicely();
   }
 }

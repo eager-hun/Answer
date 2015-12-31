@@ -12,12 +12,13 @@
  * The path for these fields' external content files should be:
  *
  * registry[private_assets]/
- *   permanent-storage/
+ *   website_instances/
  *     [website_instance_name]/
- *       content_files/
- *         locale_[locale-key]/
- *           [entity_type]/
- *             [entity_id]__[field_name].[extension]
+ *       permanent-storage/
+ *         content_files/
+ *           locale_[locale-key]/
+ *             [entity_type]/
+ *               [entity_id]__[field_name].[extension]
  *
  * (...where the file extension should match the value supplied in the record's
  * ['meta']['text_formats'] array for the given field.)

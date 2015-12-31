@@ -21,5 +21,4 @@ components-demo/content-widgets:cd_content_widgets
 components-demo/ajax-and-modals:cd_ajax_modals
 devel/documentation-for-developers:devel-docs
 devel/project-1:devel-project-1
-devel/components-demo:devel-comp-demo
 for-example-this:admin-interface
