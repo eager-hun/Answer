@@ -41,13 +41,12 @@ modernizr.custom.*.js
 
 # Content-related
 # (It's possible you wouldn't want to version-control large media-file blobs.)
-# (They are not ignored this time, for they are being needed in this demo.)
-# /public/document_files/*
-# !/public/document_files/.htaccess
-# !/public/document_files/README
-
-# Testing-related
-/subdir-test
+# (example-website's assets (housed in configurable_subdir) however are not
+# ignored, for they are being needed to be included for demo purposes.)
+/public/document_files/*
+!/public/document_files/.htaccess
+!/public/document_files/README
+!/public/document_files/configurable_subdir/
 
 # Practical usage related
 /private/website_instances/*/trunk/*

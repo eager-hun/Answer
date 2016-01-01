@@ -373,6 +373,14 @@ $config['content']['short_tags'] = array(
 // #############################################################################
 // MISC.
 
+// -----------------------------------------------------------------------------
+// Content-assets related.
+
+$config['content']['document_files_assigned_subdir'] = 'configurable-subdir';
+
+// -----------------------------------------------------------------------------
+// XML sitemaps related.
+
 /**
  * Domain-names that the XML sitemap will contain.
  */
@@ -385,6 +393,9 @@ $config['xml_sitemap_generator']['domain']['secondary'] =
  * Custom substring used for prefixing the XML sitemap filename.
  */
 $config['xml_sitemap_generator']['sitemap_name'] = 'sitemap';
+
+// -----------------------------------------------------------------------------
+// Security-related.
 
 /**
  * Custom substring for prefixing HTML id attributes that go through

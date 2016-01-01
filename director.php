@@ -254,7 +254,8 @@ $registry['app_externals']['assets_frontend'] =
   $registry['app_externals']['path_root'] . '/shared_assets';
 
 $registry['app_externals']['document_files'] =
-  $registry['app_externals']['path_root'] . '/document_files';
+  $registry['app_externals']['path_root'] . '/document_files/'
+  . escape_value($config['content']['document_files_assigned_subdir'], 'path_fragment');
 
 // -----------------------------------------------------------------------------
 // Task handling stage.
