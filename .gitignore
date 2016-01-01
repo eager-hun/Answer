@@ -19,16 +19,9 @@ composer.lock
 # XML sitemaps.
 /sitemap_*.xml
 
-# Site instances other than the example_website instance.
-/private/cache/*
-!/private/cache/example_website
-/private/config/*
-!/private/config/example_website
-/private/definitions/*
-!/private/definitions/example_website
-/private/permanent_storage/*
-!/private/permanent_storage/example_website
-!/private/permanent_storage/README.md
+# Website instances other than example-website.
+/private/website_instances/*
+!/private/website_instances/example-website
 
 # SASS- and CSS-related.
 /public/themes/*/.sass-cache
