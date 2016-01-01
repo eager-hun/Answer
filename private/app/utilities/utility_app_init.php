@@ -22,12 +22,12 @@ function base_path($options = array()) {
 
   // No environment specified: return base path for the current installation.
   if (empty($options['environment'])) {
-    $working_dir = ensafe_string($config['env']['working_dir'], 'path_fragment');
+    $working_dir = escape_value($config['env']['working_dir'], 'path_fragment');
     if (empty($options['for_locale'])) {
       $domain = $request['domain'];
     }
     else {
-      $domain = ensafe_string(
+      $domain = escape_value(
         $config['env']['domain']['locale'][$options['for_locale']],
         'domain'
       );
@@ -36,29 +36,29 @@ function base_path($options = array()) {
   // Environment was specified: return a base path that works on that
   // installation.
   else {
-    $working_dir = ensafe_string(
+    $working_dir = escape_value(
       $config['presets'][$options['environment']]['working_dir'],
       'path_fragment'
     );
     if (empty($options['for_locale'])) {
-      $domain = ensafe_string(
+      $domain = escape_value(
         $config['presets'][$options['environment']]['domain'][LOCALE_KEY],
         'domain'
       );
     }
     else {
-      $domain = ensafe_string(
+      $domain = escape_value(
         $config['presets'][$options['environment']]['domain'][$options['for_locale']],
         'domain'
       );
     }
   }
   if (empty($working_dir)) {
-    $output = ensafe_string($config['env']['http_protocol'], 'attribute_value')
+    $output = escape_value($config['env']['http_protocol'], 'attribute_value')
       . '://' . $domain . '/';
   }
   else {
-    $output = ensafe_string($config['env']['http_protocol'], 'attribute_value')
+    $output = escape_value($config['env']['http_protocol'], 'attribute_value')
       . '://' . $domain . '/' . $working_dir . '/';
   }
   return $output;
@@ -132,7 +132,7 @@ function process_sys_notifications(&$sys_notifications_pool, $severity_level = '
 
       $output .= '<div class="messages-container">';
       $output  .= "\n<div class=\"messages "
-        . ensafe_string($severity_level, 'attribute_value') . "\"><ul>\n  <li>";
+        . escape_value($severity_level, 'attribute_value') . "\"><ul>\n  <li>";
       $output  .= $messages;
       $output  .= "</li>\n</ul></div>";
       $output .= "\n</div><!-- /.messages-container -->\n";
@@ -370,7 +370,7 @@ function apputils_wake_resource($resource_type, $resource_id, $options = array()
   else {
     if (is_dev_mode()) {
       $message = 'Unknown resource type has been passed to resource loader: <em>'
-        . ensafe_string($resource_type, 'attribute_value') . '</em>.';
+        . escape_value($resource_type, 'attribute_value') . '</em>.';
     }
     else {
       $message = 'Unknown resource type has been passed to resource loader.';
@@ -382,9 +382,9 @@ function apputils_wake_resource($resource_type, $resource_id, $options = array()
 function _loader_failure($resource_type, $resource_id, $shutdown = FALSE) {
   if (is_dev_mode()) {
     $message = 'Error: resource <em>'
-      . ensafe_string($resource_id, 'attribute_value')
+      . escape_value($resource_id, 'attribute_value')
       . '</em> of type <em>'
-      . ensafe_string($resource_type, 'attribute_value')
+      . escape_value($resource_type, 'attribute_value')
       . '</em> was not found.';
   }
   else {
@@ -411,7 +411,7 @@ function _loader_failure($resource_type, $resource_id, $shutdown = FALSE) {
  */
 function _init_purifier() {
   $appconfig_purifier = $GLOBALS['config']['htmlpurifier'];
-  $id_prefix = ensafe_string($appconfig_purifier['id_prefix'], 'attribute_value');
+  $id_prefix = escape_value($appconfig_purifier['id_prefix'], 'attribute_value');
 
   $purifier_config = HTMLPurifier_Config::createDefault();
   $purifier_config->set('HTML.DefinitionID', 'answer-project-setup');

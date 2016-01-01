@@ -14,7 +14,7 @@ function dh_system_helpers($args) {
   }
   elseif (is_dev_mode()) {
     $message = 'Unrecognized task was encountered by dh_system_helpers: <code>'
-      . ensafe_string($args['order_id'], 'attribute_value') . '</code>';
+      . escape_value($args['order_id'], 'attribute_value') . '</code>';
     sys_notify($message, 'warning');
     return FALSE;
   }
@@ -26,7 +26,7 @@ function dh_system_helpers($args) {
 function _response_301($args) {
   if (!empty($GLOBALS['request']['page_data']['new_locations'][LOCALE_KEY])) {
     $new_location =
-      ensafe_string($GLOBALS['request']['page_data']['new_locations'][LOCALE_KEY], 'href');
+      escape_value($GLOBALS['request']['page_data']['new_locations'][LOCALE_KEY], 'href');
     header($GLOBALS['request']['server_protocol'] . " 301 Moved Permanently");
     header("Location: " . $new_location);
     exit();
@@ -237,15 +237,15 @@ function _content_meta($args) {
 
   if (!empty($content_fields['field_title']['field_content'])) {
     $template_args['variables']['page_title'] =
-      ensafe_string($content_fields['field_title']['field_content'], 'html');
+      escape_value($content_fields['field_title']['field_content'], 'html');
   }
   if (!empty($content_defs['binder_options']['title'][LOCALE_ID])) {
     $template_args['variables']['page_title'] =
-      ensafe_string($content_defs['binder_options']['title'][LOCALE_ID], 'html');
+      escape_value($content_defs['binder_options']['title'][LOCALE_ID], 'html');
   }
   if (!empty($content_fields['field_subtitle']['field_content'])) {
     $template_args['variables']['page_subtitle'] =
-      ensafe_string($content_fields['field_subtitle']['field_content'], 'html');
+      escape_value($content_fields['field_subtitle']['field_content'], 'html');
   }
   if (!empty($GLOBALS['request']['page_id'])) {
     if (!empty($content_fields['field_date_created']['field_content'])) {

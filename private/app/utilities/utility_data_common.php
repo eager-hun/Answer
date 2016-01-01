@@ -82,7 +82,7 @@ function _fetch_entity_raw($args, $fetch_options) {
   if (!in_array($entity_type, $GLOBALS['registry']['managed_entity_types'])) {
     if (is_dev_mode()) {
       $message = 'The requested entity type <em>'
-        . ensafe_string($entity_type, 'attribute_value')
+        . escape_value($entity_type, 'attribute_value')
         . '</em> is not detectable in the system.';
     }
     else {
@@ -101,9 +101,9 @@ function _fetch_entity_raw($args, $fetch_options) {
   if (!array_key_exists($instance_id, $GLOBALS['datapool']['permanent_data_storage'][$entity_type])) {
     if (is_dev_mode()) {
       $message = 'Requested instance_id <em>'
-        . ensafe_string($instance_id, 'attribute_value')
+        . escape_value($instance_id, 'attribute_value')
         . '</em> cannot be found on storage in requested entity type <em>'
-        . ensafe_string($entity_type, 'attribute_value') . '</em>.';
+        . escape_value($entity_type, 'attribute_value') . '</em>.';
     }
     else {
       $message = 'Requested instance_id is not found. Dev mode may have more.';
@@ -151,7 +151,7 @@ function _fetch_entity_raw($args, $fetch_options) {
     }
     elseif (is_dev_mode('verbose')) {
       $message = 'Unpublished entity on display: <code>'
-        . ensafe_string($instance_id, 'attribute_value') . '</code>.';
+        . escape_value($instance_id, 'attribute_value') . '</code>.';
       sys_notify($message);
     }
   }
@@ -238,7 +238,7 @@ function _fetch_binder($args, $fetch_options) {
   else {
     if (is_dev_mode()) {
       $message = 'Data fetcher could not find the definitions for the requested binder: <em>'
-        . ensafe_string($args['instance_id'], 'attribute_value') . '</em>.';
+        . escape_value($args['instance_id'], 'attribute_value') . '</em>.';
     }
     else {
       $message = 'Data fetcher could not find the definitions for the requested binder.';
@@ -361,13 +361,13 @@ function datautils_filter($params) {
       $parsed = $params['data'];
     }
     _translate_short_tags($parsed);
-    $output = ensafe_string($parsed, 'html');
+    $output = escape_value($parsed, 'html');
   }
   elseif ($params['text_format'] == 'html') {
-    $output = ensafe_string($params['data'], 'html');
+    $output = escape_value($params['data'], 'html');
   }
   elseif ($params['text_format'] == 'txt') {
-    $output = ensafe_string($params['data']);
+    $output = escape_value($params['data']);
   }
   else {
     if (is_dev_mode()) {
@@ -470,24 +470,24 @@ function loc($desired_key, $for_locale = '') {
 
   if (empty($for_locale)) {
     if (!empty($definitions['string_translations'][LOCALE_KEY][$desired_key])) {
-      return ensafe_string($definitions['string_translations'][LOCALE_KEY][$desired_key], 'html');
+      return escape_value($definitions['string_translations'][LOCALE_KEY][$desired_key], 'html');
     }
     elseif (is_dev_mode()) {
-      return '<em><strong>MISSING L10N:</strong> ' . ensafe_string($desired_key, 'html') . '</em>';
+      return '<em><strong>MISSING L10N:</strong> ' . escape_value($desired_key, 'html') . '</em>';
     }
     else {
-      return ensafe_string($desired_key);
+      return escape_value($desired_key);
     }
   }
   else {
     if (!empty($definitions['string_translations'][$for_locale][$desired_key])) {
-      return ensafe_string($definitions['string_translations'][$for_locale][$desired_key], 'html');
+      return escape_value($definitions['string_translations'][$for_locale][$desired_key], 'html');
     }
     elseif (is_dev_mode()) {
-      return '<em><strong>MISSING L10N:</strong> ' . ensafe_string($desired_key, 'html') . '</em>';
+      return '<em><strong>MISSING L10N:</strong> ' . escape_value($desired_key, 'html') . '</em>';
     }
     else {
-      return ensafe_string($desired_key, 'html');
+      return escape_value($desired_key, 'html');
     }
   }
 }
@@ -633,7 +633,7 @@ function _render_menu_level($menu_id, $depth, $menu_level_data) {
       $wrapper_attributes = array(
         'class' => array(
           'menu__item',
-          'depth--' . ensafe_string($depth),
+          'depth--' . escape_value($depth),
         ),
       );
       if (!empty($item_data['link_options']['attributes'])) {
@@ -670,7 +670,7 @@ function _render_menu_level($menu_id, $depth, $menu_level_data) {
       $menu_item['wrapper_options']['attributes'] = $wrapper_attributes;
       $menu_item['variables']['link_attributes'] =
         templateutils_render_html_attributes($link_attributes);
-      $menu_item['variables']['link_text'] = ensafe_string($item_data['text']);
+      $menu_item['variables']['link_text'] = escape_value($item_data['text']);
 
       if (!empty($temp['menu_parent_items'][$menu_id][$item_id])) {
         $menu_item['variables']['element_children'] =
@@ -690,7 +690,7 @@ function _render_menu_level($menu_id, $depth, $menu_level_data) {
         'class' => array(
           'menu__item',
           'menu__item--static',
-          'depth--' . ensafe_string($depth),
+          'depth--' . escape_value($depth),
         ),
       );
       if (!empty($place_in_trail)) {
@@ -711,7 +711,7 @@ function _render_menu_level($menu_id, $depth, $menu_level_data) {
       }
       $menu_item['template_name'] = 'static_menu_item';
       $menu_item['wrapper_options']['attributes'] = $wrapper_attributes;
-      $menu_item['variables']['item_text'] = ensafe_string($item_data['text']);
+      $menu_item['variables']['item_text'] = escape_value($item_data['text']);
       $output .= templateutils_present($menu_item);
     }
   }

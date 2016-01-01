@@ -27,7 +27,7 @@ if (empty($request['locale']['key'])) {
 $request['locale']['langcode'] =
   $config['document']['locale'][$request['locale']['key']]['langcode'];
 $request['locale']['key'] =
-  ensafe_string($request['locale']['key'], 'attribute_value');
+  escape_value($request['locale']['key'], 'attribute_value');
 
 // Constants for convenience.
 define('LOCALE_KEY', $request['locale']['key']);

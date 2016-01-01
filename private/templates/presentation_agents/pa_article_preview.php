@@ -30,7 +30,7 @@ function pa_article_preview(&$args) {
       // Link on the title.
       if (!empty($args['raw_data']['field_title'])) {
         $field_link['title'] = loc('Jump to the following') . ': '
-          . ensafe_string($args['raw_data']['field_title']['field_content']);
+          . escape_value($args['raw_data']['field_title']['field_content']);
         $img_alt = loc('Preview image for') . ': '
           . $args['raw_data']['field_title']['field_content'];
         $args['raw_data']['field_title']['link_to'] = $field_link;

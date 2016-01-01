@@ -77,15 +77,15 @@ function _decd_carousels() {
   $car_2_slides_rendered = array();
 
   foreach ($slides_raw as $index => $slide) {
-    $text = ensafe_string($slide['short_text'], 'html');
+    $text = escape_value($slide['short_text'], 'html');
     $car_1_img = '<img src="'
-         . $car_1_image_path_base . ensafe_string($slide['image'], 'file_name') . '">';
+         . $car_1_image_path_base . escape_value($slide['image'], 'file_name') . '">';
     $car_2_img = '<img src="'
-         . $car_2_image_path_base . ensafe_string($slide['image'], 'file_name') . '">';
+         . $car_2_image_path_base . escape_value($slide['image'], 'file_name') . '">';
     $button = '<a class="button" href="'
-            . ensafe_string($slide['button_action'], 'href') . '">'
-            . ensafe_string($slide['button_text']) . '</a>';
-    $index = ensafe_string($index, 'attribute_value');
+            . escape_value($slide['button_action'], 'href') . '">'
+            . escape_value($slide['button_text']) . '</a>';
+    $index = escape_value($index, 'attribute_value');
     $car_1_rendered_item = <<<EOT
 <div class="slide" data-slide-number="${index}">
   <div class="slot--image">${car_1_img}</div>

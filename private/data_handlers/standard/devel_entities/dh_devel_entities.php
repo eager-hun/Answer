@@ -22,7 +22,7 @@ $GLOBALS['temp']['dh_devel_entities'] = array();
  */
 function dh_devel_entities($args) {
   $file_name      = dirname(__FILE__) . '/dhde_'
-                  . ensafe_string($args['order_id'], 'file_name') . '.php';
+                  . escape_value($args['order_id'], 'file_name') . '.php';
   $function_name  = 'devel_entities_' . $args['order_id'];
 
   if (file_exists($file_name)) {

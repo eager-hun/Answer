@@ -53,7 +53,7 @@ function _fetch_menu_from_temp($args) {
   }
   elseif (is_dev_mode('verbose')) {
     $message = "Note: dh_navigation couldn't find the ordered menu: <code>"
-      . ensafe_string($args['order_id'], 'attribute_value') . '</code>.';
+      . escape_value($args['order_id'], 'attribute_value') . '</code>.';
     sys_notify($message);
   }
 }

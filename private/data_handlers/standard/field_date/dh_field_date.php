@@ -51,7 +51,7 @@ function _get_date_safely($raw_value, $format, $options = array()) {
     }
     // Else date_create() refused to work with the string.
     else {
-      return ensafe_string($raw_value);
+      return escape_value($raw_value);
     }
   }
 }

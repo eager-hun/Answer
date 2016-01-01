@@ -126,7 +126,7 @@ function pageutils_document_assets($return_type) {
         }
         if (!empty($path)) {
           $output .= '<link rel="stylesheet" type="text/css" href="'
-            . $path . ensafe_string($external['file'], 'path_with_file_name')
+            . $path . escape_value($external['file'], 'path_with_file_name')
             . $theme_version . '">' . "\n";
         }
       }
@@ -140,14 +140,14 @@ function pageutils_document_assets($return_type) {
         }
         if ($inline['source'] == 'theme_generated') {
           $file = $registry['app_internals']['theme'] . '/css/'
-            . ensafe_string($inline['file'], 'path_with_file_name');
+            . escape_value($inline['file'], 'path_with_file_name');
         }
         elseif ($inline['source'] == 'theme_static') {
           $file = $registry['app_internals']['theme'] . '/css-static/'
-            . ensafe_string($inline['file'], 'path_with_file_name');
+            . escape_value($inline['file'], 'path_with_file_name');
         }
         if (!empty($file) && file_exists($file)) {
-          $inline_css_buffer .= ensafe_string(file_get_contents($file), 'css');
+          $inline_css_buffer .= escape_value(file_get_contents($file), 'css');
         }
       }
       unset($inline);
@@ -243,7 +243,7 @@ function pageutils_document_assets($return_type) {
   }
   else {
     $message = 'Error: Unrecognized return_type parameter for '
-      . 'pageutils_document_assets(): <em>' . ensafe_string($return_type) . '</em>';
+      . 'pageutils_document_assets(): <em>' . escape_value($return_type) . '</em>';
     sys_notify($message, 'warning');
   }
 }
@@ -264,7 +264,7 @@ function _include_script($script_data, $theme_version) {
     $output = '<script>' . $script_data['script'] . "</script>\n";
   }
   elseif ($script_data['source'] == 'cdn') {
-    $output = '<script src="' . ensafe_string($script_data['file'], 'path_with_file_name')
+    $output = '<script src="' . escape_value($script_data['file'], 'path_with_file_name')
             . '"' . $async . '></script>' . "\n";
   }
   else {
@@ -279,11 +279,11 @@ function _include_script($script_data, $theme_version) {
     }
     elseif (!empty($config['app']['dev_mode'])) {
       $message = 'Unrecognized script source type: <em>'
-               . ensafe_string($script_data['source']) . '</em>.';
+               . escape_value($script_data['source']) . '</em>.';
       sys_notify($message);
     }
     $output = '<script src="' . $path
-            . ensafe_string($script_data['file'], 'path_with_file_name')
+            . escape_value($script_data['file'], 'path_with_file_name')
             . $theme_version . '"' . $async . '></script>' . "\n";
   }
   return $output;
@@ -298,10 +298,10 @@ function _create_js_settings() {
   $settings_items = array();
   $settings_items['basePath'] = base_path();
   if (!empty($request['page_id'])) {
-    $settings_items['pageId'] = ensafe_string($request['page_id'], 'attribute_value');
+    $settings_items['pageId'] = escape_value($request['page_id'], 'attribute_value');
   }
   $settings_items['enableDialogBoxes'] =
-    ensafe_string($GLOBALS['config']['ui']['enable_dialog_boxes'], 'config_boolean');
+    escape_value($GLOBALS['config']['ui']['enable_dialog_boxes'], 'config_boolean');
 
   $settings = json_encode($settings_items, JSON_FORCE_OBJECT);
   $script = "<script>\n"
@@ -321,7 +321,7 @@ function pageutils_html_head() {
 
   if (!empty($request['page_data']['page_title'])
       && $request['page_id'] != 'home') {
-    $title = ensafe_string($request['page_data']['page_title'])
+    $title = escape_value($request['page_data']['page_title'])
            . ' | ' . loc('site-name');
   }
   elseif ($request['page_id'] == 'home'
@@ -337,7 +337,7 @@ function pageutils_html_head() {
 
   if (!empty($request['page_data']['meta_descriptions'][LOCALE_KEY])) {
     $output .= '<meta name="description" content="'
-      . ensafe_string($request['page_data']['meta_descriptions'][LOCALE_KEY]) . "\">\n";
+      . escape_value($request['page_data']['meta_descriptions'][LOCALE_KEY]) . "\">\n";
   }
 
   if (!empty($request['contexts'])

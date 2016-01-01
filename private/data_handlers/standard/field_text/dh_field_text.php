@@ -55,9 +55,9 @@ function dh_field_text($args) {
         $text = FALSE;
         if (is_dev_mode()) {
           $message = 'Could not find content file for <em>'
-            . ensafe_string($entity_type, 'attribute_value') . ': '
-            . ensafe_string($instance_id, 'attribute_value') . '</em> at location'
-            . ' <em>' . ensafe_string($external_file, 'href') . '</em>.';
+            . escape_value($entity_type, 'attribute_value') . ': '
+            . escape_value($instance_id, 'attribute_value') . '</em> at location'
+            . ' <em>' . escape_value($external_file, 'href') . '</em>.';
         }
         else {
           $message = 'Could not find content file. Dev mode may have more info.';

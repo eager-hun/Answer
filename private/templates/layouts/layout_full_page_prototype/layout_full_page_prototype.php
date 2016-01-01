@@ -31,7 +31,7 @@ function post_dispatch_layout_full_page_prototype(&$args) {
 
   // Preparing body start. (Would there be a better place for these actions?)
   $body_start_pipeline =
-    ensafe_string(implode("\n", $GLOBALS['temp']['layout_elements']['body_start']), 'html');
+    escape_value(implode("\n", $GLOBALS['temp']['layout_elements']['body_start']), 'html');
   if (array_key_exists('slot_body_start', $args['variables'])) {
     $args['variables']['slot_body_start'] =
       $body_start_pipeline . "\n" . $args['variables']['slot_body_start'];
@@ -41,7 +41,7 @@ function post_dispatch_layout_full_page_prototype(&$args) {
   }
   // Preparing body end. (Would there be a better place for these actions?)
   $body_end_pipeline =
-    ensafe_string(implode("\n", $GLOBALS['temp']['layout_elements']['body_end']), 'html');
+    escape_value(implode("\n", $GLOBALS['temp']['layout_elements']['body_end']), 'html');
   if (array_key_exists('slot_body_end', $args['variables'])) {
     $args['variables']['slot_body_end'] =
       $body_end_pipeline . "\n" . $args['variables']['slot_body_end'];

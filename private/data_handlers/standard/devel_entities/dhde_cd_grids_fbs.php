@@ -76,8 +76,8 @@ function _decd_grids_fbs() {
 
   foreach ($fh_list__items as $item) {
     $image_attributes = array(
-      'src' => $image_path_base . ensafe_string($item['image'], 'file_name'),
-      'title' => ensafe_string($item['title']),
+      'src' => $image_path_base . escape_value($item['image'], 'file_name'),
+      'title' => escape_value($item['title']),
     );
     $image_template = array(
       'template_name' => 'image',
@@ -92,7 +92,7 @@ function _decd_grids_fbs() {
       'template_name' => 'link',
       'variables' => array(
         'link_attributes' => templateutils_render_html_attributes($link_attributes),
-        'link_text'       => ensafe_string($item['button_text']),
+        'link_text'       => escape_value($item['button_text']),
       ),
     );
     $item_attributes = array(
@@ -103,8 +103,8 @@ function _decd_grids_fbs() {
     $variables = array(
       'wrapper_attributes' => templateutils_render_html_attributes($item_attributes),
       'slot_image'  => templateutils_present($image_template),
-      'slot_title'  => ensafe_string($item['title'], 'html'),
-      'slot_text'   => ensafe_string($item['short_text'], 'html'),
+      'slot_title'  => escape_value($item['title'], 'html'),
+      'slot_text'   => escape_value($item['short_text'], 'html'),
       'slot_button' => templateutils_present($link_template),
     );
     ob_start();

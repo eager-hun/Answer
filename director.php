@@ -219,7 +219,7 @@ require_once($registry['app_internals']['app'] . '/orientation/orientation.php')
 
 $registry['app_internals']['theme'] =
   $registry['app_internals']['public_assets'] . '/themes/'
-  . ensafe_string($config['theme']['name'], 'path_fragment');
+  . escape_value($config['theme']['name'], 'path_fragment');
 
 // Templates' and present agents' source.
 if ($config['theme']['templates_source'] == 'theme') {
@@ -242,7 +242,7 @@ $registry['app_externals']['path_root'] =
   base_path() . $registry['app_externals']['path_root'];
 
 $registry['app_externals']['theme'] = $registry['app_externals']['path_root']
-  . '/themes/' . ensafe_string($config['theme']['name'], 'path_fragment');
+  . '/themes/' . escape_value($config['theme']['name'], 'path_fragment');
 
 $registry['app_externals']['libraries_frontend'] =
   $registry['app_externals']['path_root'] . '/libraries_frontend';

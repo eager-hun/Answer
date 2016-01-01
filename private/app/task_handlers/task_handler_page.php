@@ -46,7 +46,7 @@ require_once($registry['app_internals']['theme'] . '/theme_settings.php');
 
 // if (is_dev_mode('verbose')) {
 //   $message = 'page_id is <code>'
-//     . ensafe_string($request['page_id'], 'attribute_value') . '</code>.';
+//     . escape_value($request['page_id'], 'attribute_value') . '</code>.';
 //   sys_notify($message);
 //
 //   apputils_wake_resource('data_handler', 'content_generator');
@@ -174,11 +174,11 @@ elseif ($request['page_data']['data_type'] == 'binder'
 // Updating <body> attributes.
 foreach ($request['sections'] as $section) {
   $temp['raw_attributes']['body']['class'][] =
-    'section--' . ensafe_string($section, 'attribute_value');
+    'section--' . escape_value($section, 'attribute_value');
 }
 foreach ($request['contexts'] as $context) {
   $temp['raw_attributes']['body']['class'][] =
-    'context--' . ensafe_string($context, 'attribute_value');
+    'context--' . escape_value($context, 'attribute_value');
 }
 
 // Decide wich page template variant to use.

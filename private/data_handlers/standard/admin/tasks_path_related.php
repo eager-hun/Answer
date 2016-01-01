@@ -51,7 +51,7 @@ function rebuild_path_cache() {
 
     $number_of_paths = count($collected_paths[$locale_key]);
     $message = 'Had written <em>' . $number_of_paths . '</em> paths into the <em>'
-      . ensafe_string($locale_key, 'attribute_name') . ' locale</em> path cache.';
+      . escape_value($locale_key, 'attribute_name') . ' locale</em> path cache.';
     sys_notify($message);
   }
   unset($page_id, $page_data);
@@ -119,8 +119,8 @@ function regenerate_xml_sitemaps() {
 
   // Write the contents of the collections into files as per locale.
   foreach ($locale_keys as $locale_key) {
-    $filename = ensafe_string($sitemap_config['sitemap_name'], 'attribute_value')
-      . '_' . str_replace('.', '_', ensafe_string($sitemap_config['domain'][$locale_key], 'file_name'))
+    $filename = escape_value($sitemap_config['sitemap_name'], 'attribute_value')
+      . '_' . str_replace('.', '_', escape_value($sitemap_config['domain'][$locale_key], 'file_name'))
       . '.xml';
     // Finding out where our sitemaps should be.
     // Assuming this script will run in 'dev' environment, and we want sitemaps

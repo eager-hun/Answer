@@ -15,7 +15,7 @@ $GLOBALS['temp']['dh_fpp_helper'] = array();
  */
 function dh_fpp_helper($args) {
   $file_name      = dirname(__FILE__) . '/dhfpp_'
-                  . ensafe_string($args['order_id'], 'file_name') . '.php';
+                  . escape_value($args['order_id'], 'file_name') . '.php';
   $function_name  = 'fpp_' . $args['order_id'];
 
   if (file_exists($file_name)) {

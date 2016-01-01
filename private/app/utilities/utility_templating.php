@@ -42,7 +42,7 @@ function templateutils_data_dresser($args, $advanced_opts = array()) {
     else {
       if (is_dev_mode()) {
         $message = 'Inexistent entity <em>'
-          . ensafe_string($args['instance_id'], 'attribute_value')
+          . escape_value($args['instance_id'], 'attribute_value')
           . '</em> was passed in for dressing up.';
       }
       else {
@@ -206,15 +206,15 @@ function templateutils_present($args) {
   // Item signatures (a.k.a. HTML classes for the wrapper tag).
   if (!empty($args['presentation_subject'])) {
     $args['wrapper_options']['attributes']['class'][] =
-      ensafe_string($args['presentation_subject'], 'attribute_value');
+      escape_value($args['presentation_subject'], 'attribute_value');
     if ($args['presentation_subject'] == 'entity') {
       $item_signature_type = $args['presentation_subject'] . '--' . $args['entity_type'];
       $args['wrapper_options']['attributes']['class'][] =
-        ensafe_string($item_signature_type, 'attribute_value');
+        escape_value($item_signature_type, 'attribute_value');
     }
     $item_signature_id = $args['presentation_subject'] . '--' . $args['instance_id'];
     $args['wrapper_options']['attributes']['class'][] =
-      ensafe_string($item_signature_id, 'attribute_value');
+      escape_value($item_signature_id, 'attribute_value');
   }
 
   // This is the time for the presentation agent, if one was appointed.
@@ -249,7 +249,7 @@ function templateutils_present($args) {
 
     // p10n HTML class.
     $args['wrapper_options']['attributes']['class'][] = 'p10n--'
-      . ensafe_string($args['present_as'], 'attribute_value');
+      . escape_value($args['present_as'], 'attribute_value');
 
     // Some after-effects to the template .
     $post_dispatch_func = 'post_dispatch_' . $args['template_name'];
@@ -260,7 +260,7 @@ function templateutils_present($args) {
 
   // More HTML class.
   $args['wrapper_options']['attributes']['class'][] = 'tpl--' .
-    ensafe_string($args['template_name'], 'attribute_value');
+    escape_value($args['template_name'], 'attribute_value');
 
   // Producing output.
   if (empty($args['variables'])) {
@@ -270,7 +270,7 @@ function templateutils_present($args) {
     $output = '';
     if (is_dev_mode('verbose')) {
       $message = 'No result was returned for <em>'
-        . ensafe_string($args['instance_id'], 'attribute_name') . '</em> because it did not have any variables to put out.';
+        . escape_value($args['instance_id'], 'attribute_name') . '</em> because it did not have any variables to put out.';
       sys_notify($message, 'warning');
     }
   }
@@ -342,7 +342,7 @@ function _templatize_html($args) {
       $output = FALSE;
       if (is_dev_mode()) {
         $message = 'Did not find the specified template function: <em>'
-          . ensafe_string($args['template_name'], 'attribute_value') . '</em>.';
+          . escape_value($args['template_name'], 'attribute_value') . '</em>.';
       }
       else {
         $message = 'Did not find the specified template function.';
@@ -412,8 +412,8 @@ function templateutils_prerender_fields($args) {
       'attributes' => array(
         'class' => array(
           // Do we need to sanitize these? Could we spare doing it?
-          'field_id--' . ensafe_string($field_id, 'attribute_value'),
-          'field_type--' . ensafe_string($field_data['field_type'], 'attribute_value'),
+          'field_id--' . escape_value($field_id, 'attribute_value'),
+          'field_type--' . escape_value($field_data['field_type'], 'attribute_value'),
         ),
       ),
     );
@@ -423,7 +423,7 @@ function templateutils_prerender_fields($args) {
     // already escaped, but there is no guarantee that it was defined via
     // loc().
     $template_args['variables']['field_label'] =
-      ensafe_string($field_data['field_label'], 'html');
+      escape_value($field_data['field_label'], 'html');
 
     // Checking for field_content_prerenders.
     $helper_func = 'field_content_prerender_' . $field_data['field_type'];
@@ -505,31 +505,31 @@ function templateutils_render_html_attributes($attribs_array) {
   foreach ($attribs_array as $attrib_name => $attrib_val) {
     if (is_array($attrib_val)) {
       if (count($attrib_val) > 0) {
-        $output .= ' ' . ensafe_string($attrib_name, 'attribute_name');
+        $output .= ' ' . escape_value($attrib_name, 'attribute_name');
 
         array_walk($attrib_val, 'ensafe_array_vals', 'attribute_value');
         $output .= '="' . implode(' ', $attrib_val) . '"';
       }
     }
     else {
-      $output .= ' ' . ensafe_string($attrib_name, 'attribute_name');
+      $output .= ' ' . escape_value($attrib_name, 'attribute_name');
       if ($attrib_name == 'title') {
-        $output .= '="' . ensafe_string($attrib_val) . '"';
+        $output .= '="' . escape_value($attrib_val) . '"';
       }
       elseif ($attrib_name == 'alt') {
-        $output .= '="' . ensafe_string($attrib_val) . '"';
+        $output .= '="' . escape_value($attrib_val) . '"';
       }
       elseif ($attrib_name == 'href') {
-        $output .= '="' . ensafe_string($attrib_val, 'href') . '"';
+        $output .= '="' . escape_value($attrib_val, 'href') . '"';
       }
       elseif ($attrib_name == 'src') {
-        $output .= '="' . ensafe_string($attrib_val, 'href') . '"';
+        $output .= '="' . escape_value($attrib_val, 'href') . '"';
       }
       elseif ($attrib_name == 'style') {
-        $output .= '="' . ensafe_string($attrib_val, 'css') . '"';
+        $output .= '="' . escape_value($attrib_val, 'css') . '"';
       }
       else {
-        $output .= '="' . ensafe_string($attrib_val, 'attribute_value') . '"';
+        $output .= '="' . escape_value($attrib_val, 'attribute_value') . '"';
       }
     }
   }

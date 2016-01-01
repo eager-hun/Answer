@@ -43,7 +43,7 @@ if (!empty($request['get_data']['data_type'])
       sys_notify('Forbidden.');
     }
     $header = $request['server_protocol'] . ' '
-      . ensafe_string($temp['data_statuses'][$instance_id], 'http_status');
+      . escape_value($temp['data_statuses'][$instance_id], 'http_status');
     header($header);
     $response = process_sys_notifications($sys_notifications_pool);
   }

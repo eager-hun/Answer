@@ -67,7 +67,7 @@ function distrust_input($input, $from) {
       $domain_index = array_search($input, $config['env']['domain']['locale']);
       if ($domain_index !== FALSE) {
         // The resulting string is coming from our own $config array.
-        return ensafe_string($config['env']['domain']['locale'][$domain_index], 'domain');
+        return escape_value($config['env']['domain']['locale'][$domain_index], 'domain');
       }
       else {
         sys_notify("Unrecognized domain name. (Consult your config file's _Config presets_ section.)", 'warning');
@@ -106,9 +106,9 @@ function distrust_input($input, $from) {
 }
 
 /**
- * Ensafe string. FIXME.
+ * Escape value. FIXME.
  */
-function ensafe_string($value, $usage = 'display') {
+function escape_value($value, $usage = 'display') {
   switch ($usage) {
     case 'html':
       apputils_wake_resource('class', 'htmlpurifier');
@@ -183,8 +183,8 @@ function ensafe_string($value, $usage = 'display') {
     default:
       // Warning about typos or wrong usage.
       if (!empty($usage) && $usage !== 'display') {
-        $message = 'Warning: unrecognized ensafe_string() argument <em>'
-          . ensafe_string($usage) . '</em>. See ensafe_string() function '
+        $message = 'Warning: unrecognized escape_value() argument <em>'
+          . escape_value($usage) . '</em>. See escape_value() function '
           . 'declaration for more info.';
         sys_notify($message, 'alert');
       }
@@ -200,11 +200,11 @@ function ensafe_string($value, $usage = 'display') {
  * Helper: escaping strings in an array. Implemented as array_walk() callback.
  *
  * @param string $usage
- *   Optional. Defaults to 'attribute'. Valid values are ensafe_string()'s
+ *   Optional. Defaults to 'attribute'. Valid values are escape_value()'s
  *   parameters.
  */
 function ensafe_array_vals(&$val, $key, $usage = 'attribute_value') {
-  $val = ensafe_string($val, $usage);
+  $val = escape_value($val, $usage);
 }
 
 /**

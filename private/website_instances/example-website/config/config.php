@@ -11,7 +11,7 @@
 // website. IMO, abandoned websites with outdated content can cause real
 // inconvenience for people in a number of situations.
 // Format: YYYY-MM-DD .
-$config['site_global_lastmod'] = '2015-12-31';
+$config['site_global_lastmod'] = '2016-01-01';
 
 
 // #############################################################################

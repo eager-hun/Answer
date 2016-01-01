@@ -15,8 +15,8 @@ function dh_field_image($args) {
 
   // HTML 4 <img>, for a start.
   $src = $GLOBALS['registry']['app_externals']['document_files']
-    . '/images/' . ensafe_string($style, 'path_fragment') . '/'
-    . ensafe_string($args['field_data'], 'file_name');
+    . '/images/' . escape_value($style, 'path_fragment') . '/'
+    . escape_value($args['field_data'], 'file_name');
   $image_definition = array(
     'attributes' => array(
       'src'   => $src,

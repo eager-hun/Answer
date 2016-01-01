@@ -93,11 +93,11 @@ function _admin_links($admin_tasks) {
   foreach ($admin_tasks as $task_id => $task_data) {
     $link_attributes = array(
       'href' => base_path()
-        . ensafe_string($GLOBALS['config']['app']['admin_path'], 'path_fragment')
-        . '?task=' . ensafe_string($task_id, 'attribute_value'),
+        . escape_value($GLOBALS['config']['app']['admin_path'], 'path_fragment')
+        . '?task=' . escape_value($task_id, 'attribute_value'),
     );
     $link_text =
-      ensafe_string($task_data['human_name'][LOCALE_KEY]);
+      escape_value($task_data['human_name'][LOCALE_KEY]);
     $args = array(
       'variables' => array(
         'link_attributes' => templateutils_render_html_attributes($link_attributes),
