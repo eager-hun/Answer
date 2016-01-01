@@ -301,10 +301,10 @@ function apputils_wake_resource($resource_type, $resource_id, $options = array()
       // custom ones. Cheap.
       // This implies that you cannot have a custom data handler with a name
       // that's identical to one among the standard ones. Room to improve.
-      $resource_file_standard = $registry['app_internals']['data_handlers']
-        . '/standard/' . $resource_id . '/dh_' . $resource_id . '.php';
-      $resource_file_custom = $registry['app_internals']['data_handlers']
-        . '/custom/' . $resource_id . '/dh_' . $resource_id . '.php';
+      $resource_file_standard = $registry['app_internals']['data_handlers_standard']
+        . '/' . $resource_id . '/dh_' . $resource_id . '.php';
+      $resource_file_custom = $registry['app_current']['data_handlers_custom']
+        . '/' . $resource_id . '/dh_' . $resource_id . '.php';
 
       if (file_exists($resource_file_standard)) {
         require_once($resource_file_standard);

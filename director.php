@@ -71,7 +71,7 @@ $registry['app_internals']['app'] =
 $registry['app_internals']['libraries_backend'] =
   $registry['app_internals']['private_assets'] . '/libraries_backend';
 
-$registry['app_internals']['data_handlers'] =
+$registry['app_internals']['data_handlers_standard'] =
   $registry['app_internals']['private_assets'] . '/data_handlers';
 
 $registry['app_internals']['utilities'] =
@@ -89,6 +89,9 @@ $registry['app_current']['config'] =
 
 $registry['app_current']['definitions'] =
   $registry['app_current']['instance'] . '/definitions';
+
+$registry['app_current']['data_handlers_custom'] =
+  $registry['app_current']['instance'] . '/data_handlers';
 
 $registry['app_current']['storage'] =
   $registry['app_current']['instance'] . '/permanent_storage';
