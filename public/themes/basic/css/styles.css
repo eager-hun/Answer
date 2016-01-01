@@ -587,20 +587,30 @@ span.anchor {
   clear: both;
 }
 
-.binder--single_mock_page .l--2sb {
-  margin-bottom: 0.5em;
+.fpp-layouts-demo {
+  text-align: center;
 }
-.binder--single_mock_page .l--2sb .col--main {
+.fpp-layouts-demo .l--2sb {
+  margin-bottom: 2em;
+}
+.fpp-layouts-demo .l--2sb .col--main {
   background: rgba(30, 144, 255, 0.3);
 }
-.binder--single_mock_page .l--2sb .col--sb_1 {
+.fpp-layouts-demo .l--2sb .col--sb_1 {
   background: rgba(255, 0, 0, 0.3);
 }
-.binder--single_mock_page .l--2sb .col--sb_2 {
+.fpp-layouts-demo .l--2sb .col--sb_2 {
   background: rgba(0, 255, 0, 0.4);
 }
-.binder--single_mock_page .l--2sb .dummy-content {
+.fpp-layouts-demo .l--2sb .dummy-content {
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid white;
+  margin: 0 0 1em;
   min-height: 100px;
+}
+.fpp-layouts-demo h3 + .l--2sb,
+.fpp-layouts-demo h4 + .l--2sb {
+  margin-top: 2em;
 }
 
 @media (min-width: 43.75em) {

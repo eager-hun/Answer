@@ -300,6 +300,9 @@ function _create_js_settings() {
   if (!empty($request['page_id'])) {
     $settings_items['pageId'] = ensafe_string($request['page_id'], 'attribute_value');
   }
+  $settings_items['enableDialogBoxes'] =
+    ensafe_string($GLOBALS['config']['ui']['enable_dialog_boxes'], 'config_boolean');
+
   $settings = json_encode($settings_items, JSON_FORCE_OBJECT);
   $script = "<script>\n"
           . 'window.awrS = ' . $settings . ";\n"

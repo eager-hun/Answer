@@ -16,84 +16,88 @@
 
   awrA.orientation = {/*TODO*/};
   awrA.ajaxSuite = {/*TODO*/};
-  awrA.modalSuite = {
-    'modalTemplate': [
-      '<div id="overlay--common"></div>',
-      '<div id="modal--common" tabindex="-1">',
-        '<div id="modal__content">',
-          '<button id="modal__close" class="modal__close" tabindex="0"></button>',
-        '</div>',
-      '</div>'
-    ].join(''),
-    'createModal': function () {
-      if (!document.getElementById('overlay--common')) {
-        $(this.modalTemplate).appendTo("body");
-        this.overlay = $('#overlay--common');
-        this.modal = $('#modal--common');
-        this.modalContent = $('#modal__content');
-      }
-    },
-    'clearModal': function() {
-      this.modalContent.children().not('#modal__close').remove();
-      this.overlay.removeClass();
-      this.modal.removeClass();
-    },
-    'populateModal': function(newContent) {
-      this.clearModal();
-      this.modalContent.append(newContent);
-    },
-    'showModalTimeout': '',
-    'showModal': function(delay) {
-      if (typeof delay === 'undefined') {
-        delay = 50; // Animations have a problem without it.
-      }
-      else if (delay > 500) {
-        awrA.utility.throbber.add($('body'), 'throbber--modal');
-      }
-      this.modal.css('top', window.pageYOffset + 'px');
-      $('body').attr('data-modal-init', 'true');
-      this.showModalTimeout = window.setTimeout(function() {
-        $('body').attr('data-modal-show', 'true');
+
+  if (awrS.enableDialogBoxes) {
+    awrA.modalSuite = {
+      'modalTemplate': [
+        '<div id="overlay--common"></div>',
+        '<div id="modal--common" tabindex="-1">',
+          '<div id="modal__content">',
+            '<button id="modal__close" class="modal__close" tabindex="0"></button>',
+          '</div>',
+        '</div>'
+      ].join(''),
+      'createModal': function () {
+        if (!document.getElementById('overlay--common')) {
+          $(this.modalTemplate).appendTo("body");
+          this.overlay = $('#overlay--common');
+          this.modal = $('#modal--common');
+          this.modalContent = $('#modal__content');
+        }
+      },
+      'clearModal': function() {
+        this.modalContent.children().not('#modal__close').remove();
+        this.overlay.removeClass();
+        this.modal.removeClass();
+      },
+      'populateModal': function(newContent) {
+        this.clearModal();
+        this.modalContent.append(newContent);
+      },
+      'showModalTimeout': '',
+      'showModal': function(delay) {
+        if (typeof delay === 'undefined') {
+          delay = 50; // Animations have a problem without it.
+        }
+        else if (delay > 500) {
+          awrA.utility.throbber.add($('body'), 'throbber--modal');
+        }
+        this.modal.css('top', window.pageYOffset + 'px');
+        $('body').attr('data-modal-init', 'true');
+        this.showModalTimeout = window.setTimeout(function() {
+          $('body').attr('data-modal-show', 'true');
+          awrA.utility.throbber.hide('throbber--modal');
+          awrA.modalSuite.modal.focus();
+        }, delay);
+      },
+      'hideModal': function() {
+        // Trigger the fadeout.
+        $('body').attr('data-modal-show', 'false');
+        // If modal is closed before loading.
+        window.clearTimeout(this.showModalTimeout);
         awrA.utility.throbber.hide('throbber--modal');
-        awrA.modalSuite.modal.focus();
-      }, delay);
-    },
-    'hideModal': function() {
-      // Trigger the fadeout.
-      $('body').attr('data-modal-show', 'false');
-      // If modal is closed before loading.
-      window.clearTimeout(this.showModalTimeout);
-      awrA.utility.throbber.hide('throbber--modal');
-      window.setTimeout(function() {
-        $('body').attr('data-modal-init', 'false');
-      }, 700); // Allow the fadeout effect to finish before hiding.
-    },
-    'specifyVariant': function(variant) {
-      this.overlay.addClass('overlay--' + variant);
-      this.modal.addClass('modal--' + variant);
-    },
-    'keyControls': function(event) {
-      event.keyCode ? event.keyCode : event.charCode;
-      // Escape key.
-      if (event.keyCode == 27) {
-        this.hideModal();
+        window.setTimeout(function() {
+          $('body').attr('data-modal-init', 'false');
+        }, 700); // Allow the fadeout effect to finish before hiding.
+      },
+      'specifyVariant': function(variant) {
+        this.overlay.addClass('overlay--' + variant);
+        this.modal.addClass('modal--' + variant);
+      },
+      'keyControls': function(event) {
+        event.keyCode ? event.keyCode : event.charCode;
+        // Escape key.
+        if (event.keyCode == 27) {
+          this.hideModal();
+        }
+      },
+      'registerEListeners': function() {
+        this.modalContent.on('click', function(event) {
+          event.stopPropagation();
+        });
+        this.overlay.on('click', function() {
+          awrA.modalSuite.hideModal();
+        });
+        $('.modal__close').on('click', function() {
+          awrA.modalSuite.hideModal();
+        });
+        $(document).on('keydown', function(event) {
+          awrA.modalSuite.keyControls(event);
+        });
       }
-    },
-    'registerEListeners': function() {
-      this.modalContent.on('click', function(event) {
-        event.stopPropagation();
-      });
-      this.overlay.on('click', function() {
-        awrA.modalSuite.hideModal();
-      });
-      $('.modal__close').on('click', function() {
-        awrA.modalSuite.hideModal();
-      });
-      $(document).on('keydown', function(event) {
-        awrA.modalSuite.keyControls(event);
-      });
-    }
-  };
+    };
+  }
+
   awrA.utility = {
     'scrollWatcher': function() {
       if (window.pageYOffset > 0) {
@@ -129,8 +133,10 @@
   };
 
   // Initializing assets.
-  awrA.modalSuite.createModal();
-  awrA.modalSuite.registerEListeners();
+  if (awrS.enableDialogBoxes) {
+    awrA.modalSuite.createModal();
+    awrA.modalSuite.registerEListeners();
+  }
   awrA.utility.registerEListeners();
 
 })(jQuery, this, this.document);

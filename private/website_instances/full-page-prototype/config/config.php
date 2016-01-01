@@ -103,11 +103,12 @@ $config['presets']['dev'] = [
   'http_protocol'    => 'http',
   /* NOTES 2. */
   'domain' => [
-    'primary'   => 'your-dev-envs-HTTP_HOST-here',
-    'secondary' => 'your-dev-envs-alternative-HTTP_HOST-here',
+//    'primary'   => 'your-dev-envs-HTTP_HOST-here',
+//    'secondary' => 'your-dev-envs-alternative-HTTP_HOST-here',
+    'primary'   => 'alpha',
   ],
   /* NOTES 3. */
-  'working_dir'      => '',
+  'working_dir'      => 'answer-github',
   /* NOTES 4. */
   'serve_bare_data'  => 1,
   /* NOTES 5. */
@@ -123,7 +124,6 @@ $config['presets']['stage'] = [
   'http_protocol'    => 'http',
   'domain' => [
     'primary'   => 'stage.yourdomain.tld',
-    'secondary' => 'stage-alt.yourdomain.tld',
   ],
   'working_dir'      => '',
   'serve_bare_data'  => 0,
@@ -137,7 +137,6 @@ $config['presets']['live'] = [
   'http_protocol'    => 'http',
   'domain' => [
     'primary'   => 'yourdomain.tld',
-    'secondary' => 'alt.yourdomain.tld',
   ],
   'working_dir'      => '',
   'serve_bare_data'  => 0,
@@ -158,8 +157,6 @@ define('CONFIG_PRESET', 'dev');
 
 $config['document']['locale']['primary']['langcode']     = 'en';
 $config['document']['locale']['primary']['php_locale']   = 'en-GB.utf8';
-$config['document']['locale']['secondary']['langcode']   = 'hu';
-$config['document']['locale']['secondary']['php_locale'] = 'hu-HU.utf8';
 
 
 // #############################################################################
@@ -190,7 +187,7 @@ $config['app']['dependencies']['php-markdown'] = FALSE;
  *
  * If you have used these locations, then you only need to uncomment these.
  */
-/*
+/**/
 $config['app']['dependencies']['htmlpurifier'] =
   $registry['app_internals']['libraries_backend']
   . '/ezyang/htmlpurifier/library/HTMLPurifier.auto.php';
@@ -252,7 +249,7 @@ $config['app']['fast_404'] = FALSE;
 /**
  * The theme name is the name of its directory.
  */
-$config['theme']['name'] = 'basic';
+$config['theme']['name'] = 'fpp-theme';
 
 /**
  * Practical tip: ALWAYS copy the whole templating directory into your theme and
@@ -267,9 +264,9 @@ $config['theme']['templates_source'] = 'system';
 // #############################################################################
 // UI settings.
 
-$config['ui']['enable_jump_links']    = 1;
-$config['ui']['enable_langswitchers'] = 1;
-$config['ui']['enable_dialog_boxes']  = 1;
+$config['ui']['enable_jump_links']    = 0;
+$config['ui']['enable_langswitchers'] = 0;
+$config['ui']['enable_dialog_boxes']  = 0;
 
 // -----------------------------------------------------------------------------
 // Document foreign affairs.
@@ -304,6 +301,11 @@ $config['ui']['js_body_early'][] = array(
 $config['ui']['js_body_regular'][] = array(
   'source'     => 'frontend_asset',
   'file'       => 'system.js',
+  'is_enabled' => 1,
+);
+$config['ui']['js_body_regular'][] = array(
+  'source'     => 'frontend_asset',
+  'file'       => 'fpp.js',
   'is_enabled' => 1,
 );
 
@@ -378,8 +380,6 @@ $config['content']['short_tags'] = array(
  */
 $config['xml_sitemap_generator']['domain']['primary'] =
   $config['presets']['live']['domain']['primary'];
-$config['xml_sitemap_generator']['domain']['secondary'] =
-  $config['presets']['live']['domain']['secondary'];
 
 /**
  * Custom substring used for prefixing the XML sitemap filename.

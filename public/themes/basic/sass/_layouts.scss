@@ -64,10 +64,15 @@
 // #############################################################################
 // .l--2sb: a layout with 2 sidebars.
 
+// -----------------------------------------------------------------------------
 // .l--2sb debug helper.
-.binder--single_mock_page {
+// The content this part styles is coming from the website instance currently
+// called "full-page-prototype".
+.fpp-layouts-demo {
+  text-align: center;
+
   .l--2sb {
-    margin-bottom: 0.5em;
+    margin-bottom: 2em;
 
     .col--main {
       background: rgba(dodgerblue, 0.3);
@@ -79,11 +84,15 @@
       background: rgba(lime, 0.4);
     }
     .dummy-content {
-      // background: rgba(#000, 0.2);
-      // border: 1px solid white;
-      // margin: 1em 0;
+      background: rgba(#000, 0.1);
+      border: 1px solid white;
+      margin: 0 0 1em;
       min-height: 100px;
     }
+  }
+  h3 + .l--2sb,
+  h4 + .l--2sb {
+   margin-top: 2em;
   }
 }
 

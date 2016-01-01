@@ -1,0 +1,2 @@
+layouts-demo:fpp-layouts-demo
+for-example-this:admin-interface

@@ -59,7 +59,7 @@ $registry['app_externals']['path_root'] = 'public';
 // instance in e.g. the config, definitions and permanent_strorage directories.
 $registry['app_internals']['website_instance'] = 'example-website';
 
-// Configuration ends here.
+// CONFIGURATION ENDS HERE.
 // -----------------------------------------------------------------------------
 
 // -----------------------------------------------------------------------------
@@ -181,10 +181,6 @@ require_once($config_file);
 // Introducing config preset values to the application.
 $config['env']['http_protocol'] =
   $config['presets'][CONFIG_PRESET]['http_protocol'];
-$config['env']['domain']['locale']['primary'] =
-  $config['presets'][CONFIG_PRESET]['domain']['primary'];
-$config['env']['domain']['locale']['secondary'] =
-  $config['presets'][CONFIG_PRESET]['domain']['secondary'];
 $config['env']['working_dir'] =
   $config['presets'][CONFIG_PRESET]['working_dir'];
 $config['app']['serve_bare_data'] =
@@ -195,6 +191,10 @@ $config['app']['admin_mode'] =
   $config['presets'][CONFIG_PRESET]['admin_mode'];
 $config['app']['give_up_security'] =
   $config['presets'][CONFIG_PRESET]['give_up_security'];
+
+foreach ($config['presets'][CONFIG_PRESET]['domain'] as $key => $val) {
+  $config['env']['domain']['locale'][$key] = $val;
+}
 
 // -----------------------------------------------------------------------------
 // Post-config adjustments.

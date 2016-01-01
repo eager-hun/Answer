@@ -14,6 +14,8 @@ function pa_page_homepage(&$args) {
     'assignments' => array(
       'slot_header_level' => array(
         'header_default' => array(),
+      ),
+      'slot_header_suffix_level' => array(
         'header_suffix_default' => array(),
       ),
       'slot_main_level' => array(

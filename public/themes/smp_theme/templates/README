@@ -1,9 +1,0 @@
-This directory here is optional.
-
-The templates are read by default from /private/templates. They are also
-referred to as (default) system templates.
-
-To be able to "fork" the system's default 'templates' directory, copy its
-contents into this one (but the README), then update the config.php's
-corresponding value, signalling that you want to use the templates defined here,
-in the theme.

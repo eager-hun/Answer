@@ -21,6 +21,14 @@
       </div>
     <?php endif; ?>
 
+    <?php if (!empty($variables['slot_header_suffix_level'])): ?>
+      <div class="page-level page-level--header-suffix">
+        <div class="page-center">
+          <?php print $variables['slot_header_suffix_level']; ?>
+        </div>
+      </div>
+    <?php endif; ?>
+
     <?php if (!empty($variables['slot_main_level']) || !empty($variables['slot_notifications'])): ?>
       <div class="page-level page-level--main">
         <div class="page-center">
@@ -32,7 +40,7 @@
           <?php if (!empty($variables['slot_main_level'])): ?>
             <?php print $variables['slot_main_level']; ?>
           <?php endif; ?>
-          
+
         </div>
       </div>
     <?php endif; ?>

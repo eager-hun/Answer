@@ -18,7 +18,7 @@ This application can hold definitions and content for multiple websites at the s
 
 Out of the website definitions, only one can be used at a time: the chosen instance's name needs to be set in the app configuration. At the time of writing, the app cannot behave as a true multisite installation; in other words, regardless of any request parameter, the website instance being served will always be the one selected in the configuration.
 
-This repository contains only one website instance, called "**example-website**".
+This repository contains only one website instance, called "**example-website**". (Update: there is a prototyping-related site instance in the making.)
 
 ### Adding a new website instance to an installation
 
@@ -26,7 +26,7 @@ Website definitions and contents - by default - are located in the `/private/web
 
 Each instance's directory needs to contain specific subdirectories and files, whose being missing could trigger errors of various severity.
 
-While the documentation of the mandatory structure/content of website instance definitions is missing, a pragmatic approach is to "clone" the one existing example instance, and modify that one:
+While the documentation of the mandatory structure/content of website instance definitions is missing, a practical approach can be to "clone" an existing example instance, and modify that one:
 
 1. Duplicate (copy) the `example-website` directory, renaming the duplicate directory's name to the desired name of your new site instance,
 2. Update the new instance's `config.php` with the new site's configuration.

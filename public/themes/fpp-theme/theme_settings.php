@@ -10,20 +10,7 @@
 
 // This will be appended as a query argument in the links for .css and .js
 // assets.
-$config['theme']['version'] = '20150809-1';
-
-
-// #############################################################################
-// Additions by the theme to the <head>.
-
-$config['theme']['head_additions'] = array(
-  '<meta name="viewport" content="width=device-width, initial-scale=1">',
-  // https://validator.w3.org/mobile-alpha/ said that a placeholder favicon
-  // declaration can be done as follows:
-  '<link rel="icon" href="data:;base64,iVBORw0KGgo=">',
-  // I still have to learn loading Google fonts in a non-render-blocking way.
-  // '<link href="http://fonts.googleapis.com/css?family=Roboto:400,300,700" rel="stylesheet" type="text/css">',
-);
+$config['theme']['version'] = '20150608-1';
 
 
 // #############################################################################
@@ -35,40 +22,18 @@ $config['theme']['head_additions'] = array(
 // - theme_generated,
 // - theme_static.
 
-// Optional: styles inlined into a < style > tag in the < head >.
-$config['ui']['css_inline'][] = array(
-  'source'     => 'theme_generated',
-  'file'       => 'extra_styles_inline.css',
-  'is_enabled' => 0,
-);
-// We could inline the contents of static .css files too.
-$config['ui']['css_inline'][] = array(
-  'source'     => 'theme_static',
-  'file'       => 'static.css',
-  'is_enabled' => 0,
-);
-
-// Normalize.css has a prepared setup in styles.scss to include it into
-// styles.css with SASS/Compass.
 $config['ui']['css_external'][] = array(
-  'source'     => 'frontend_library',
-  'file'       => 'normalize.css/normalize.css',
+  'source' => 'frontend_library',
+  'file'   => 'normalize.css/normalize.css',
   'is_enabled' => 1,
 );
 
-// The custom theme's styles.
 $config['ui']['css_external'][] = array(
-  'source'     => 'theme_generated',
-  'file'       => 'styles.css',
+  'source' => 'theme_static',
+  'file'   => 'static.css',
   'is_enabled' => 1,
 );
 
-// Optional: vanilla .css file.
-$config['ui']['css_external'][] = array(
-  'source'     => 'theme_static',
-  'file'       => 'static.css',
-  'is_enabled' => 0,
-);
 
 // #############################################################################
 // JS.
@@ -120,5 +85,5 @@ $config['ui']['js_body_late'][] = array(
   'source'     => 'theme',
   'file'       => 'modernizr.custom.80541.js',
   'async'      => 1,
-  'is_enabled' => 1,
+  'is_enabled' => 0,
 );

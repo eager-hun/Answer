@@ -108,12 +108,12 @@ function distrust_input($input, $from) {
 /**
  * Ensafe string. FIXME.
  */
-function ensafe_string($string, $usage = 'display') {
+function ensafe_string($value, $usage = 'display') {
   switch ($usage) {
     case 'html':
       apputils_wake_resource('class', 'htmlpurifier');
       if (!empty($GLOBALS['purifier'])) {
-        $processed = $GLOBALS['purifier']->purify($string);
+        $processed = $GLOBALS['purifier']->purify($value);
       }
       else {
         // WARNING:
@@ -127,46 +127,49 @@ function ensafe_string($string, $usage = 'display') {
             && $GLOBALS['config']['app']['give_up_security'] === 1) {
           // You can get unescaped HTML output only if you explicitly disabled
           // security.
-          $processed = $string;
+          $processed = $value;
         }
         else {
-          $processed = htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+          $processed = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
         }
       }
       break;
     case 'domain':
-      $processed = preg_replace('#[^-_\.a-z0-9]#', '', $string);
+      $processed = preg_replace('#[^-_\.a-z0-9]#', '', $value);
       break;
     case 'post_value':
       // Make me not have to do these senseless things.
-      $processed = preg_replace('#[^-_a-z0-9]#', '', trim($string));
+      $processed = preg_replace('#[^-_a-z0-9]#', '', trim($value));
       break;
     case 'get_value':
       // Make me not have to do these senseless things.
-      $processed = preg_replace('#[^-_a-z0-9]#', '', trim($string));
+      $processed = preg_replace('#[^-_a-z0-9]#', '', trim($value));
       break;
     case 'href':
-      $processed = filter_var($string, FILTER_SANITIZE_URL);
+      $processed = filter_var($value, FILTER_SANITIZE_URL);
       break;
     case 'file_name':
-      $processed = preg_replace('#[^-_\.a-z0-9]#', '', $string);
+      $processed = preg_replace('#[^-_\.a-z0-9]#', '', $value);
       break;
     case 'path_fragment':
       // NOTE: don't allow upwards traversing.
-      $processed = preg_replace('#[^-_\.a-z0-9/]|[\.]{2}#', '', $string);
+      $processed = preg_replace('#[^-_\.a-z0-9/]|[\.]{2}#', '', $value);
       break;
     case 'path_with_file_name':
       // NOTE: don't allow upwards traversing.
-      $processed = preg_replace('#[^-_\.a-z0-9/]|[\.]{2}#', '', $string);
+      $processed = preg_replace('#[^-_\.a-z0-9/]|[\.]{2}#', '', $value);
       break;
     case 'attribute_name':
-      $processed = preg_replace('#[^-_a-z0-9]#', '', $string);
+      $processed = preg_replace('#[^-_a-z0-9]#', '', $value);
       break;
     case 'attribute_value':
-      $processed = preg_replace('#[^-_a-z0-9]#', '', $string);
+      $processed = preg_replace('#[^-_a-z0-9]#', '', $value);
       break;
     case 'http_status':
-      $processed = preg_replace('#[^-_a-z0-9/]#', '', $string);
+      $processed = preg_replace('#[^-_a-z0-9/]#', '', $value);
+      break;
+    case 'config_boolean':
+      $processed = (int) $value;
       break;
     case 'css':
       // WARNING!
@@ -174,7 +177,7 @@ function ensafe_string($string, $usage = 'display') {
       // See:
       // http://stackoverflow.com/questions/3241616/sanitize-user-defined-css-in-php#answer-5209050
       // This regexp gets CSS commens and newlines out.
-      $processed = preg_replace('#\/\*(.+?)\*\/|\r?\n|\r#s', '', $string);
+      $processed = preg_replace('#\/\*(.+?)\*\/|\r?\n|\r#s', '', $value);
       break;
     // Default is same as 'display'.
     default:
@@ -186,7 +189,7 @@ function ensafe_string($string, $usage = 'display') {
         sys_notify($message, 'alert');
       }
       // If no argument was supplied, or it was 'display'.
-      $processed = htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+      $processed = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
       break;
   }
 

@@ -8,6 +8,6 @@
   if (typeof console === "undefined") {
     this.console = { log: function() {} };
   }
-  console.log('smp_theme.');
+  console.log('fpp theme script.');
 
 })(jQuery, this, this.document);

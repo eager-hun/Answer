@@ -9,11 +9,12 @@
 $definitions['layouts']['layout_page_default'] = array(
   'template_source' => 'php_template',
   'slots' => array(
-    'slot_body_start'   => array(),
-    'slot_header_level' => array(),
-    'slot_main_level'   => array(),
-    'slot_footer_level' => array(),
-    'slot_body_end'     => array(),
+    'slot_body_start'          => array(),
+    'slot_header_level'        => array(),
+    'slot_header_suffix_level' => array(),
+    'slot_main_level'          => array(),
+    'slot_footer_level'        => array(),
+    'slot_body_end'            => array(),
   ),
 );
 
@@ -50,9 +51,11 @@ function post_dispatch_layout_page_default(&$args) {
   }
 
   // Adding jump-links.
-  apputils_wake_resource('data_handler', 'system_helpers');
-  $jump_links = dh_system_helpers(array('order_id' => 'page_jump_links'));
-  $args['variables']['slot_body_start'] .= $jump_links;
+  if (!empty($GLOBALS['config']['ui']['enable_jump_links'])) {
+    apputils_wake_resource('data_handler', 'system_helpers');
+    $jump_links = dh_system_helpers(array('order_id' => 'page_jump_links'));
+    $args['variables']['slot_body_start'] .= $jump_links;
+  }
 
   // Adding javascripts.
   $args['variables']['slot_body_end'] .= pageutils_document_assets('body_js');

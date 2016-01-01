@@ -4,6 +4,15 @@
  */
 
 /**
+ * Actions upon inclusion.
+ */
+$GLOBALS['config']['ui']['js_body_regular'][] = array(
+  'source'     => 'frontend_asset',
+  'file'       => 'devel-entities.js',
+  'is_enabled' => 1,
+);
+
+/**
  * Standard function.
  *
  * Make its name match the file-name.
