@@ -33,7 +33,7 @@
 @import "navigation";
 
 // Skin got to arranged into a separate .css file, allowing easier disabling it
-// (in theme_settings.php).
+// (or swapping it over to another one) (in theme_settings.php).
 // Should we need less .css files linked (issue with render-blocking), it could
 // be imported here.
 // @import "skin";

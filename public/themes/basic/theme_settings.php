@@ -69,7 +69,7 @@ $config['ui']['css_external'][] = array(
   'is_enabled' => 1,
 );
 
-// The custom theme's styles.
+// Skin styles.
 $config['ui']['css_external'][] = array(
   'source'     => 'theme_generated',
   'file'       => 'skin.css',
