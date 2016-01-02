@@ -10,7 +10,7 @@
 
 // This will be appended as a query argument in the links for .css and .js
 // assets.
-$config['theme']['version'] = '20150809-1';
+$config['theme']['version'] = '20150102-1';
 
 
 // #############################################################################
@@ -27,13 +27,16 @@ $config['theme']['head_additions'] = array(
 
 
 // #############################################################################
-// STYLESHEETS.
+// CSS.
 
 // NOTE: each item's 'source' may be one of the following:
 // - frontend_library,
 // - frontend_assset,
 // - theme_generated,
 // - theme_static.
+
+// -----------------------------------------------------------------------------
+// Inlined CSS.
 
 // Optional: styles inlined into a < style > tag in the < head >.
 $config['ui']['css_inline'][] = array(
@@ -48,6 +51,9 @@ $config['ui']['css_inline'][] = array(
   'is_enabled' => 0,
 );
 
+// -----------------------------------------------------------------------------
+// Linked CSS.
+
 // Normalize.css has a prepared setup in styles.scss to include it into
 // styles.css with SASS/Compass.
 $config['ui']['css_external'][] = array(
@@ -60,6 +66,13 @@ $config['ui']['css_external'][] = array(
 $config['ui']['css_external'][] = array(
   'source'     => 'theme_generated',
   'file'       => 'styles.css',
+  'is_enabled' => 1,
+);
+
+// The custom theme's styles.
+$config['ui']['css_external'][] = array(
+  'source'     => 'theme_generated',
+  'file'       => 'skin.css',
   'is_enabled' => 1,
 );
 

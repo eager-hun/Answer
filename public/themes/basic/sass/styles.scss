@@ -9,7 +9,7 @@
  * installed themes, so they should be handled with awareness of this fact.
  */
 
-@import "sass_base";
+@import "sass_setup";
 @import "sass_mixins";
 
 
@@ -31,6 +31,12 @@
 @import "components";
 @import "forms";
 @import "navigation";
-@import "skin";
+
+// Skin got to arranged into a separate .css file, allowing easier disabling it
+// (in theme_settings.php).
+// Should we need less .css files linked (issue with render-blocking), it could
+// be imported here.
+// @import "skin";
+
 @import "page_groups_and_specific_pages";
 @import "shame";

@@ -20,6 +20,9 @@
  * here then.
  */
 
+@import "sass_setup";
+@import "sass_mixins";
+
 
 // #############################################################################
 // Page definition - skin.
@@ -341,7 +344,7 @@ a.locale:focus .flag {
 .nav-format--regular {
   @include border-radius;
 
-  background: $_menu-color;
+  background: color(menu);
   // This is a bit risky setup, but with this very appearance, it might be
   // pulled off.
   overflow: hidden;
@@ -354,7 +357,7 @@ a.locale:focus .flag {
     @include transition-property(background-color);
     @include transition-duration($transitspeed-fast);
 
-    border: 1px solid $_menu-color;
+    border: 1px solid color(menu);
     border-top: 1px solid rgba(white,0.15);
     border-bottom: 1px solid rgba(black,0.15);
     padding: 5px $layout-pad*0.5;
@@ -422,7 +425,7 @@ a.locale:focus .flag {
 
 // Regular menu's color variants.
 .nav-format--regular.variant--light {
-  background: $_light-color;
+  background: color(menu-light);
 
   ul {
     // Overriding the nested menu levels' darkening, as it doesn't seem to
