@@ -1,6 +1,8 @@
 # IDEs
 nbproject
 
+# IGNORING EXTERNAL LIBRARIES:
+
 # PHP libs handled by Composer.
 composer.lock
 /private/libraries_backend/*
@@ -16,12 +18,50 @@ composer.lock
 /public/themes/*/vendor/*
 !/public/themes/*/vendor/README.md
 
-# XML sitemaps.
-/sitemap_*.xml
+# IGNORING EXTENSIONS - EXCEPT FOR THE ORIGINAL DEMONSTRATIVE ONES:
 
 # Website instances other than example-website.
 /private/website_instances/*
 !/private/website_instances/example-website
+
+# Themes other than "basic".
+/public/themes/*
+!/public/themes/basic
+
+# Content other than example-website's.
+# (It's possible you wouldn't want to version-control large media-file blobs.)
+# (example-website's assets (housed in configurable_subdir) however are not
+# ignored, for they are being needed to be included for demo purposes.)
+/public/document_files/*
+!/public/document_files/.htaccess
+!/public/document_files/README
+!/public/document_files/configurable_subdir/
+
+# Shared frontend assets other than specified here.
+/public/shared_assets/*
+!/public/shared_assets/README
+
+!/public/shared_assets/css
+/public/shared_assets/css/*
+!/public/shared_assets/css/README
+
+!/public/shared_assets/js
+/public/shared_assets/js/*
+!/public/shared_assets/js/devel-entities.js
+!/public/shared_assets/js/system.js
+!/public/shared_assets/js/visual-debug.js
+
+!/public/shared_assets/sass
+/public/shared_assets/sass/*
+!/public/shared_assets/sass/.htaccess
+!/public/shared_assets/sass/README
+!/public/shared_assets/sass/_sys_notification_styles_shared.scss
+!/public/shared_assets/sass/styles_plain_output.scss
+
+# IGNORING MISC STUFF:
+
+# XML sitemaps.
+/sitemap_*.xml
 
 # SASS- and CSS-related.
 /public/themes/*/.sass-cache
@@ -31,15 +71,6 @@ composer.lock
 # I'll put the custom-build's download link in the theme_settings.php where
 # I declare it.
 modernizr.custom.*.js
-
-# Content-related
-# (It's possible you wouldn't want to version-control large media-file blobs.)
-# (example-website's assets (housed in configurable_subdir) however are not
-# ignored, for they are being needed to be included for demo purposes.)
-/public/document_files/*
-!/public/document_files/.htaccess
-!/public/document_files/README
-!/public/document_files/configurable_subdir/
 
 # Practical usage related
 /private/website_instances/*/trunk/*
