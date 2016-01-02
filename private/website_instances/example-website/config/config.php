@@ -382,14 +382,6 @@ $config['content']['document_files_assigned_subdir'] = 'configurable-subdir';
 // XML sitemaps related.
 
 /**
- * Domain-names that the XML sitemap will contain.
- */
-$config['xml_sitemap_generator']['domain']['primary'] =
-  $config['presets']['live']['domain']['primary'];
-$config['xml_sitemap_generator']['domain']['secondary'] =
-  $config['presets']['live']['domain']['secondary'];
-
-/**
  * Custom substring used for prefixing the XML sitemap filename.
  */
 $config['xml_sitemap_generator']['sitemap_name'] = 'sitemap';

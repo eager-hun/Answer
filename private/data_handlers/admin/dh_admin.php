@@ -29,8 +29,9 @@ function dh_admin($args) {
       && array_key_exists($request['get_data']['task'], $admin_tasks)) {
 
     $current_task = $request['get_data']['task'];
-    $task_file = $registry['app_internals']['data_handlers']
-      . '/standard/admin/' . $admin_tasks[$current_task]['include'] . '.php';
+    $task_file = dirname(__FILE__) . '/'
+      . $admin_tasks[$current_task]['include'] . '.php';
+
     if (file_exists($task_file)) {
       include_once($task_file);
     }

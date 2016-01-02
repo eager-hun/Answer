@@ -181,7 +181,9 @@ if (!file_exists($config_file)) {
 }
 require_once($config_file);
 
-// Introducing config preset values to the application.
+// -----------------------------------------------------------------------------
+// Introducing config-preset-related values to the application.
+
 $config['env']['http_protocol'] =
   $config['presets'][CONFIG_PRESET]['http_protocol'];
 $config['env']['working_dir'] =
@@ -197,6 +199,10 @@ $config['app']['give_up_security'] =
 
 foreach ($config['presets'][CONFIG_PRESET]['domain'] as $key => $val) {
   $config['env']['domain']['locale'][$key] = $val;
+}
+// The XML sitemap will contain the live domain names.
+foreach ($config['presets']['live']['domain'] as $key => $val) {
+  $config['xml_sitemap_generator']['domain'][$key] = $val;
 }
 
 // -----------------------------------------------------------------------------
