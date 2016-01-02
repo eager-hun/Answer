@@ -65,7 +65,7 @@ development process that:
 
 
 [doc-install]: howto--install.md
-[doc-basic-ops]: private/permanent_storage/example_website/content_files/locale_primary/static_page/mc-operating-manual__field_body.md
-[doc-4-devs]: private/permanent_storage/example_website/content_files/locale_primary/static_page/devel-docs__field_body.md
+[doc-basic-ops]: private/website_instances/example-website/permanent_storage/content_files/locale_primary/static_page/mc-operating-manual__field_body.md
+[doc-4-devs]: private/website_instances/example-website/permanent_storage/content_files/locale_primary/static_page/devel-docs__field_body.md
 [dev-bkglog]: http://answer-demo.netcompass.eu/devel/answer-project-development-backlog
 [dev-next-v]: http://answer-demo.netcompass.eu/devel/answer-project-next-version-planning

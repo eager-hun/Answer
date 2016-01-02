@@ -40,6 +40,6 @@ See _Project 1._ in the developer's menu (available in the primary locale, in de
 
 ## <span class="anchor" id="anchor--prototyping-page"></span>Quick prototyping: a page
 
-There is a new `website_instance` in the making - called "full-page-prototype" - that aims to assist in this.
+There is a new "Full Page Prototype" repository (FPP-for-Answer) in my GitHub account that aims to assist in this.
 
-TODO: documenting.
+The "Operating manual" (found in the "Misson control" menu) provides further info on "Working with website instances".
