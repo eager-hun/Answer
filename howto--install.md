@@ -29,9 +29,12 @@ security-related procedures on an isolated developer machine.
 
 Obligatory **WARNING 2**: If you don't know what you are doing, then don't
 continue:
-- learn first about Apache, PHP, and - especially - about node.js (with extra
-  focus on how it behaves the operating system that you want to use it on).
-- and make sure you understand the basic concepts of web security.
+- learn first about Apache, PHP, and make sure you understand the basic concepts
+  of web security.
+- Also learn about node.js and npm-based projects; learn what kind of annoyances
+  they may cause on your operating system and how to overcome those.
+    - One such example is about the deleting of `node_modules` directories on
+      Windows machines: see http://stackoverflow.com/q/28175200
 
 This is NOT an exhaustive instruction, and guaranteeing your system's safety is
 out of its scope.
